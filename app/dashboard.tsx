@@ -19,7 +19,6 @@ export default function Dashboard() {
 
     useEffect(() => {
         if (isJobDataFetched) {
-            console.log(fetchedJobData)
             setJobData(fetchedJobData!)
         }
     }, [isJobDataFetched, fetchedJobData])

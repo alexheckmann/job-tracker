@@ -1,7 +1,7 @@
 "use client"
 
-import {ColumnDef} from "@tanstack/react-table"
-import {ArrowUpDown, CheckSquare, MoreHorizontal, XSquare} from "lucide-react";
+import {ColumnDef, Row} from "@tanstack/react-table"
+import {ArrowUpDown, CheckSquare, MoreHorizontal, Trash, XSquare} from "lucide-react";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -13,6 +13,9 @@ import {
 import {Button} from "@/components/ui/button";
 import {InsertedJobEntry} from "@/app/components/job-creation-dialog-content";
 import {format} from "date-fns";
+import axios from "axios";
+import {toast} from "@/components/ui/use-toast";
+import {useJobEntriesStore} from "@/app/data/job-data";
 
 export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     {
@@ -26,7 +29,17 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         accessorKey: "lastUpdate",
-        header: "Updated",
+        header: ({column}) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Updated
+                    <ArrowUpDown className="ml-2 h-4 w-4"/>
+                </Button>
+            )
+        },
         cell: ({row}) => {
             return format(row.getValue("lastUpdate"), "dd/MM/yy")
         },
@@ -114,29 +127,54 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     {
         id: "actions",
         cell: ({row}) => {
-            const job = row.original
+
 
             return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4"/>
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem
-                            onClick={() => console.log(job.id)}
-                        >
-                            Open link
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator/>
-                        <DropdownMenuItem>View customer</DropdownMenuItem>
-                        <DropdownMenuItem>View payment details</DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                <RowActions row={row}/>
             )
         },
     },
 ]
+
+function RowActions({row}: {row: Row<InsertedJobEntry>}) {
+    const job = row.original
+
+    const {data: jobData, setData: setJobData} = useJobEntriesStore()
+
+    return (
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-8 w-8 p-0">
+                    <span className="sr-only">Open menu</span>
+                    <MoreHorizontal className="h-4 w-4"/>
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuItem className={"gap-2"} color={"danger"}
+                    onClick={async () => {
+                        await axios.delete("/api/v1/jobs", {data: {id: job.id}})
+
+                        jobData.forEach((jobEntry, index) => {
+                            if (jobEntry.id === job.id) {
+                                jobData.splice(index, 1)
+                            }
+                        })
+
+                        setJobData([...jobData])
+
+                        toast({
+                            title: "Job deleted",
+                            description: "The job has been successfully deleted."
+                        })
+                    }}>
+                    <Trash className={"h-4 w-4"}/>
+                    Delete
+                </DropdownMenuItem>
+                <DropdownMenuSeparator/>
+                <DropdownMenuItem>View customer</DropdownMenuItem>
+                <DropdownMenuItem>View payment details</DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+    )
+}

@@ -3,6 +3,7 @@ import {drizzle} from "drizzle-orm/vercel-postgres";
 import {sql} from "@vercel/postgres";
 import {JobsTable} from "@/lib/db/schema";
 import * as schema from "@/lib/db/schema";
+import {eq} from "drizzle-orm";
 
 
 // Connect to Vercel Postgres
@@ -16,4 +17,8 @@ export function insertJob(job: NewJob) {
 
 export function getJobs() {
     return db.select().from(JobsTable)
+}
+
+export function deleteJob(id: number) {
+    return db.delete(JobsTable).where(eq(JobsTable.id, id))
 }
