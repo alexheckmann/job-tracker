@@ -1,8 +1,8 @@
-import "@/lib/config"
+import "@/lib/db/config"
 import {drizzle} from "drizzle-orm/vercel-postgres";
 import {sql} from "@vercel/postgres";
-import {JobsTable} from "@/lib/schema";
-import * as schema from "@/lib/schema";
+import {JobsTable} from "@/lib/db/schema";
+import * as schema from "@/lib/db/schema";
 
 
 // Connect to Vercel Postgres
