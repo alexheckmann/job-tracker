@@ -1,0 +1,48 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1712069336073,
+      "tag": "0000_little_george_stacy",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1712070821163,
+      "tag": "0001_first_micromax",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1712071900624,
+      "tag": "0002_romantic_masked_marvel",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1712236566856,
+      "tag": "0003_square_skrulls",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1712237306464,
+      "tag": "0004_icy_mandroid",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1712237455320,
+      "tag": "0005_wide_lightspeed",
+      "breakpoints": true
+    }
+  ]
+}
