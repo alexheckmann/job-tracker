@@ -20,12 +20,32 @@ import {useJobEntriesStore} from "@/app/data/job-data";
 export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     {
         accessorKey: "role",
-        header: "Role",
+        header: ({column}) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Role
+                    <ArrowUpDown className="ml-2 h-4 w-4"/>
+                </Button>
+            )
+        },
         size: 100
     },
     {
         accessorKey: "company",
-        header: "Company",
+        header: ({column}) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Company
+                    <ArrowUpDown className="ml-2 h-4 w-4"/>
+                </Button>
+            )
+        },
     },
     {
         accessorKey: "lastUpdate",
@@ -46,19 +66,59 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         accessorKey: "status",
-        header: "Status",
+        header: ({column}) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Status
+                    <ArrowUpDown className="ml-2 h-4 w-4"/>
+                </Button>
+            )
+        },
     },
     {
         accessorKey: "exactTitle",
-        header: "Job title",
+        header: ({column}) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Job title
+                    <ArrowUpDown className="ml-2 h-4 w-4"/>
+                </Button>
+            )
+        },
     },
     {
         accessorKey: "location",
-        header: "Location",
+        header: ({column}) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Location
+                    <ArrowUpDown className="ml-2 h-4 w-4"/>
+                </Button>
+            )
+        },
     },
     {
         accessorKey: "country",
-        header: "Country",
+        header: ({column}) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Country
+                    <ArrowUpDown className="ml-2 h-4 w-4"/>
+                </Button>
+            )
+        },
     },
     {
         accessorKey: "salary",
