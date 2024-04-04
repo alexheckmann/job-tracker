@@ -36,8 +36,8 @@ export async function DELETE(req: NextRequest) {
     const jobId = await req.json().then((data) => data.id)
 
     try {
-        const deletedJob = await deleteJob(jobId)
-        return NextResponse.json(deletedJob, {status: HttpStatusCode.Ok})
+        await deleteJob(jobId);
+        return NextResponse.json({status: HttpStatusCode.Ok})
     } catch (error) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
     }
