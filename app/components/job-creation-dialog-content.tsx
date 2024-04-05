@@ -19,14 +19,14 @@ import {toast} from "@/components/ui/use-toast";
 export type JobEntry = z.infer<typeof insertJobSchema>
 export type InsertedJobEntry = z.infer<typeof selectJobSchema>
 
-async function onSubmit(data: JobEntry, jobEntries: InsertedJobEntry[], setJobEntries: (entries: InsertedJobEntry[]) => void, setIsJobCreationDialogOpen: (isOpen: boolean) => void) {
+async function onSubmit(jobEntryToInsert: JobEntry, jobEntries: InsertedJobEntry[], setJobEntries: (entries: InsertedJobEntry[]) => void, setIsJobCreationDialogOpen: (isOpen: boolean) => void) {
     try {
-        const result = await axios.post<InsertedJobEntry>("/api/v1/jobs", data).then((res) => res.data)
+        const result = await axios.post<InsertedJobEntry>("/api/v1/jobs", jobEntryToInsert).then((res) => res.data)
         setJobEntries([...jobEntries, result])
 
         toast({
-            title: "Saved!",
-            description: "Your job has been added.",
+            title: "Job added",
+            description: `Your job at ${result.company} has been added.`,
         })
 
         setIsJobCreationDialogOpen(false)
@@ -34,7 +34,7 @@ async function onSubmit(data: JobEntry, jobEntries: InsertedJobEntry[], setJobEn
         console.error(error)
         toast({
             title: "Adding unsuccessful",
-            description: "Please try again."
+            description: `Please try again to add the job at ${jobEntryToInsert.company}.`
         })
     }
 }
@@ -133,7 +133,7 @@ export default function JobCreationDialogContent() {
                             )}/>
 
                             <FormField control={form.control} name={"isRecruiter"} render={({field}) => (
-                                <FormSwitch label={"Recruiter call"} checked={field.value}
+                                <FormSwitch label={"Approached by company"} checked={field.value}
                                             onCheckedChange={field.onChange}/>
                             )}/>
                         </div>
