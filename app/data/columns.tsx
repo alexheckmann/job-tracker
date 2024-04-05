@@ -220,7 +220,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Recruiter?
+                    Agency?
                     <ArrowUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
