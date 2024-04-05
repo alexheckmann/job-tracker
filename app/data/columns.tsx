@@ -1,7 +1,7 @@
 "use client"
 
 import {ColumnDef, Row} from "@tanstack/react-table"
-import {ArrowUpDown, CheckSquare, MoreHorizontal, Trash, XSquare} from "lucide-react";
+import {CheckSquare, ChevronDown, ChevronsUpDown, MoreHorizontal, Trash, XSquare} from "lucide-react";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -78,7 +78,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Role
-                    <ArrowUpDown className="ml-2 h-4 w-4"/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
@@ -93,7 +93,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Company
-                    <ArrowUpDown className="ml-2 h-4 w-4"/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
@@ -107,7 +107,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Updated
-                    <ArrowUpDown className="ml-2 h-4 w-4"/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
@@ -124,7 +124,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Status
-                    <ArrowUpDown className="ml-2 h-4 w-4"/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
@@ -142,7 +142,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Job title
-                    <ArrowUpDown className="ml-2 h-4 w-4"/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
@@ -156,7 +156,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Location
-                    <ArrowUpDown className="ml-2 h-4 w-4"/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
@@ -170,7 +170,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Country
-                    <ArrowUpDown className="ml-2 h-4 w-4"/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
@@ -184,7 +184,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Salary
-                    <ArrowUpDown className="ml-2 h-4 w-4"/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
@@ -198,7 +198,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Favorite?
-                    <ArrowUpDown className="ml-2 h-4 w-4"/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
@@ -221,7 +221,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Agency?
-                    <ArrowUpDown className="ml-2 h-4 w-4"/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
