@@ -15,6 +15,7 @@ import {ApplicationStatus, insertJobSchema, selectJobSchema} from "@/lib/db/sche
 import axios from "axios";
 import {Button} from "@/components/ui/button";
 import {toast} from "@/components/ui/use-toast";
+import {useEffect} from "react";
 
 export type JobEntry = z.infer<typeof insertJobSchema>
 export type InsertedJobEntry = z.infer<typeof selectJobSchema>
@@ -37,6 +38,22 @@ async function onSubmit(jobEntryToInsert: JobEntry, jobEntries: InsertedJobEntry
             description: `Please try again to add the job at ${jobEntryToInsert.company}.`
         })
     }
+}
+
+// @ts-ignore
+function SubmitButton({children}) {
+
+
+    return (
+        <Button type="submit" className={"gap-2"}>
+            <span>{children}</span>
+            <kbd
+                className="hidden pointer-events-none lg:inline-flex h-5 select-none text-[10px] font-sans items-center rounded border px-1.5 font-light opacity-100 gap-2">
+            <span className="text-xs">Ctrl</span>
+            <span className="text-xs">M</span>
+            </kbd>
+        </Button>
+    )
 }
 
 export default function JobCreationDialogContent() {
@@ -62,8 +79,23 @@ export default function JobCreationDialogContent() {
     })
 
 
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "m" && event.ctrlKey) {
+                form.handleSubmit((data: JobEntry) => onSubmit(data, jobData, setJobData, setIsJobCreationDialogOpen))();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [form, jobData, setJobData, setIsJobCreationDialogOpen]);
+
+
     return (
-        <DialogContent className="sm:max-w-[425px] max-h-[70vh] overflow-auto">
+        <DialogContent className="sm:max-w-[500px] max-h-[70vh] overflow-auto">
             <Form {...form}>
                 <form onSubmit={
                     form.handleSubmit((data: JobEntry) => onSubmit(data, jobData, setJobData, setIsJobCreationDialogOpen))
@@ -128,12 +160,12 @@ export default function JobCreationDialogContent() {
 
                         <div className={"grid grid-cols-2 gap-4 items-end"}>
                             <FormField control={form.control} name={"isFavorite"} render={({field}) => (
-                                <FormSwitch label={"Potential favorite"} checked={field.value}
+                                <FormSwitch label={"Favorite role"} checked={field.value}
                                             onCheckedChange={field.onChange}/>
                             )}/>
 
                             <FormField control={form.control} name={"isRecruiter"} render={({field}) => (
-                                <FormSwitch label={"Approached by company"} checked={field.value}
+                                <FormSwitch label={"Company reached out"} checked={field.value}
                                             onCheckedChange={field.onChange}/>
                             )}/>
                         </div>
@@ -141,7 +173,7 @@ export default function JobCreationDialogContent() {
 
                     </div>
                     <DialogFooter>
-                        <Button type="submit">Add to Job Tracker</Button>
+                        <SubmitButton>Add job</SubmitButton>
                     </DialogFooter>
                 </form>
             </Form>
