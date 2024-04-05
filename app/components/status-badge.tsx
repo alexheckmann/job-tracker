@@ -24,10 +24,6 @@ export default function StatusBadge({status}: StatusBadgeProps) {
         default:
             statusColor = "bg-gray-100 text-gray-800";
     }
-    // statusColor as switch statement
-    // switch (status) {
-    //     case "Saved":
-
 
     return (
         <Badge className={statusColor}>{status}</Badge>
