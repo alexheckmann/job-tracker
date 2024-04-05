@@ -12,28 +12,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
 import {InsertedJobEntry} from "@/app/components/job-creation-dialog-content";
-import {differenceInDays, format, formatDistanceToNowStrict, isToday, isYesterday} from "date-fns";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
 import {useJobEntriesStore} from "@/app/data/job-data";
 import StatusBadge from "@/app/components/status-badge";
-
-function formatDate(date: Date): string {
-    const now = new Date();
-    const diffInDays = differenceInDays(now, date);
-
-    if (diffInDays < 7) {
-        if (isToday(date)) {
-            return 'Today';
-        } else if (isYesterday(date)) {
-            return 'Yesterday';
-        } else {
-            return formatDistanceToNowStrict(date, {addSuffix: true});
-        }
-    } else {
-        return format(date, 'dd/MM/yy');
-    }
-}
+import {formatDate} from "@/lib/formatDate";
 
 function RowActions({row}: { row: Row<InsertedJobEntry> }) {
     const job = row.original
