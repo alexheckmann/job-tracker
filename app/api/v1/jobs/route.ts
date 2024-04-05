@@ -1,7 +1,7 @@
-import {deleteJob, getJobs, insertJob} from "@/lib/db/db";
+import {deleteJob, getJobs, insertJob, updateJob} from "@/lib/db/db";
 import {NextRequest, NextResponse} from "next/server";
 import {HttpStatusCode} from "axios";
-import {insertJobSchema} from "@/lib/db/schema";
+import {insertJobSchema, selectJobSchema} from "@/lib/db/schema";
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
@@ -16,9 +16,8 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-    const unvalidatedJob = await req.json()
-
-    const validatedJob = insertJobSchema.parse(unvalidatedJob)
+    const newJob = await req.json()
+    const validatedJob = insertJobSchema.parse(newJob)
 
     try {
         const createdJob = await insertJob(validatedJob)
@@ -28,9 +27,6 @@ export async function POST(req: NextRequest) {
     }
 }
 
-export async function PUT() {
-    return NextResponse.json(HttpStatusCode.NotImplemented)
-}
 
 export async function DELETE(req: NextRequest) {
     const jobId = await req.json().then((data) => data.id)
@@ -42,3 +38,5 @@ export async function DELETE(req: NextRequest) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
     }
 }
+
+

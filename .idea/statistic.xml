@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Statistic">
+    <option name="fileTypesIncluded" value="ts;tsx" />
+    <option name="excludedDirectories">
+      <list>
+        <option value="$PROJECT_DIR$/node_modules" />
+        <option value="$PROJECT_DIR$/.vercel" />
+        <option value="$PROJECT_DIR$/.idea" />
+        <option value="$PROJECT_DIR$/.next" />
+        <option value="$PROJECT_DIR$/components/ui" />
+      </list>
+    </option>
+  </component>
+</project>
