@@ -24,9 +24,9 @@ export default function Dashboard() {
     }, [isJobDataFetched, fetchedJobData])
 
     return (
-        <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-            <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3 bg-white">
-                <Card className="xl:col-span-3">
+        <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8 max-h-[calc(100vh-56px-16px-16px)]">
+            <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3 bg-white max-h-[calc(100vh-56px-16px-16px)]">
+                <Card className="xl:col-span-3 max-w-full max-h-[calc(100vh-56px-16px-16px)] overflow-auto">
                     <CardHeader className="flex flex-row items-center">
                         <div className="grid gap-2">
                             <CardTitle>Job Tracker</CardTitle>
@@ -41,7 +41,7 @@ export default function Dashboard() {
                             </Link>
                         </Button>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className={"max-h-fit overflow-auto"}>
                         {isLoadingJobData ? "Loading..." :
                             <DataTable data={jobData} columns={jobTrackerColumns}/>
                         }
