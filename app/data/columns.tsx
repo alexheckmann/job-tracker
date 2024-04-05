@@ -39,20 +39,29 @@ function RowActions({row}: { row: Row<InsertedJobEntry> }) {
                 <DropdownMenuSeparator/>
                 <DropdownMenuItem className={"gap-2"} color={"danger"}
                                   onClick={async () => {
-                                      await axios.delete("/api/v1/jobs", {data: {id: job.id}})
 
-                                      jobData.forEach((jobEntry, index) => {
-                                          if (jobEntry.id === job.id) {
-                                              jobData.splice(index, 1)
-                                          }
-                                      })
+                                      try {
+                                          await axios.delete("/api/v1/jobs", {data: {id: job.id}})
 
-                                      setJobData([...jobData])
+                                          jobData.forEach((jobEntry, index) => {
+                                              if (jobEntry.id === job.id) {
+                                                  jobData.splice(index, 1)
+                                              }
+                                          })
 
-                                      toast({
-                                          title: "Job deleted",
-                                          description: "The job has been successfully deleted."
-                                      })
+                                          setJobData([...jobData])
+
+                                          toast({
+                                              title: "Job deleted",
+                                              description: `The job at ${job.company} has been successfully deleted.`
+                                          })
+                                      } catch (error) {
+                                          console.error(error)
+                                          toast({
+                                              title: "Deleting unsuccessful",
+                                              description: `Please try again to delete the job at ${job.company}.`
+                                          })
+                                      }
                                   }}>
                     <Trash className={"h-4 w-4"}/>
                     Delete
