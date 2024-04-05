@@ -1,7 +1,7 @@
-import {deleteJob, getJobs, insertJob, updateJob} from "@/lib/db/db";
+import {deleteJob, getJobs, insertJob} from "@/lib/db/db";
 import {NextRequest, NextResponse} from "next/server";
 import {HttpStatusCode} from "axios";
-import {insertJobSchema, selectJobSchema} from "@/lib/db/schema";
+import {insertJobSchema} from "@/lib/db/schema";
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
