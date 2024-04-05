@@ -16,6 +16,7 @@ import {format} from "date-fns";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
 import {useJobEntriesStore} from "@/app/data/job-data";
+import StatusBadge from "@/app/components/status-badge";
 
 export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     {
@@ -76,6 +77,10 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     <ArrowUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
+        },
+
+        cell: ({row}) => {
+            return <StatusBadge status={row.getValue("status")}/>
         },
     },
     {
@@ -211,29 +216,30 @@ function RowActions({row}: {row: Row<InsertedJobEntry>}) {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
+
+                <DropdownMenuItem>Edit</DropdownMenuItem>
+                <DropdownMenuItem>View payment details</DropdownMenuItem>
+                <DropdownMenuSeparator/>
                 <DropdownMenuItem className={"gap-2"} color={"danger"}
-                    onClick={async () => {
-                        await axios.delete("/api/v1/jobs", {data: {id: job.id}})
+                                  onClick={async () => {
+                                      await axios.delete("/api/v1/jobs", {data: {id: job.id}})
 
-                        jobData.forEach((jobEntry, index) => {
-                            if (jobEntry.id === job.id) {
-                                jobData.splice(index, 1)
-                            }
-                        })
+                                      jobData.forEach((jobEntry, index) => {
+                                          if (jobEntry.id === job.id) {
+                                              jobData.splice(index, 1)
+                                          }
+                                      })
 
-                        setJobData([...jobData])
+                                      setJobData([...jobData])
 
-                        toast({
-                            title: "Job deleted",
-                            description: "The job has been successfully deleted."
-                        })
-                    }}>
+                                      toast({
+                                          title: "Job deleted",
+                                          description: "The job has been successfully deleted."
+                                      })
+                                  }}>
                     <Trash className={"h-4 w-4"}/>
                     Delete
                 </DropdownMenuItem>
-                <DropdownMenuSeparator/>
-                <DropdownMenuItem>View customer</DropdownMenuItem>
-                <DropdownMenuItem>View payment details</DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     )
