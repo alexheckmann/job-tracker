@@ -165,7 +165,7 @@ export default function JobCreationDialogContent() {
                             )}/>
 
                             <FormField control={form.control} name={"isRecruiter"} render={({field}) => (
-                                <FormSwitch label={"Company reached out"} checked={field.value}
+                                <FormSwitch label={"Recruitment agency"} checked={field.value}
                                             onCheckedChange={field.onChange}/>
                             )}/>
                         </div>
