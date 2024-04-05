@@ -6,10 +6,7 @@ const statusEnum = pgEnum("applicationStatus", [
     "Saved",
     "Applied",
     "Interviewed",
-    "Decided",
-    "Rejected",
     "Offered",
-    "Accepted",
     "Declined"
 ])
 
