@@ -1,13 +1,12 @@
 "use client"
 
 import {ColumnDef, Row} from "@tanstack/react-table"
-import {CheckSquare, ChevronDown, ChevronsUpDown, MoreHorizontal, Trash, XSquare} from "lucide-react";
+import {CheckSquare, ChevronsUpDown, MoreHorizontal, Trash, XSquare} from "lucide-react";
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuLabel,
-    DropdownMenuSeparator,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
@@ -15,8 +14,8 @@ import {InsertedJobEntry} from "@/app/components/job-creation-dialog-content";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
 import {useJobEntriesStore} from "@/app/data/job-data";
-import StatusBadge from "@/app/components/status-badge";
 import {formatDate} from "@/lib/formatDate";
+import {StatusDropdown} from "@/app/components/status-dropdown";
 
 function RowActions({row}: { row: Row<InsertedJobEntry> }) {
     const job = row.original
@@ -130,7 +129,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
         },
 
         cell: ({row}) => {
-            return <StatusBadge status={row.getValue("status")}/>
+            return <StatusDropdown row={row}/>;
         },
     },
     {
