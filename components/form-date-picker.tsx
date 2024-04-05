@@ -46,6 +46,7 @@ export function FormDatePicker({labelName, field}: FormDatePickerProps) {
                             onDayClick={() => setOpen(false)}
                             // today={undefined}
                             mode="single"
+                            weekStartsOn={1}
                             selected={field.value}
                             onSelect={field.onChange}
                             initialFocus
