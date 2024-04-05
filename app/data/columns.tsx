@@ -34,9 +34,6 @@ function RowActions({row}: { row: Row<InsertedJobEntry> }) {
             <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
-                <DropdownMenuItem>Edit</DropdownMenuItem>
-                <DropdownMenuItem>View payment details</DropdownMenuItem>
-                <DropdownMenuSeparator/>
                 <DropdownMenuItem className={"gap-2"} color={"danger"}
                                   onClick={async () => {
 
