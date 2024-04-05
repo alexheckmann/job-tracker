@@ -19,6 +19,26 @@ import {toast} from "@/components/ui/use-toast";
 export type JobEntry = z.infer<typeof insertJobSchema>
 export type InsertedJobEntry = z.infer<typeof selectJobSchema>
 
+async function onSubmit(data: JobEntry, jobEntries: InsertedJobEntry[], setJobEntries: (entries: InsertedJobEntry[]) => void, setIsJobCreationDialogOpen: (isOpen: boolean) => void) {
+    try {
+        const result = await axios.post<InsertedJobEntry>("/api/v1/jobs", data).then((res) => res.data)
+        setJobEntries([...jobEntries, result])
+
+        toast({
+            title: "Saved!",
+            description: "Your job has been added.",
+        })
+
+        setIsJobCreationDialogOpen(false)
+    } catch (error) {
+        console.error(error)
+        toast({
+            title: "Adding unsuccessful",
+            description: "Please try again."
+        })
+    }
+}
+
 export default function JobCreationDialogContent() {
 
     const {data: jobData, setData: setJobData} = useJobEntriesStore()
@@ -41,32 +61,14 @@ export default function JobCreationDialogContent() {
         }
     })
 
-    async function onSubmit(data: JobEntry) {
-        try {
-            const result = await axios.post<InsertedJobEntry>("/api/v1/jobs", data).then((res) => res.data)
-            setJobData([...jobData, result])
 
-            toast({
-                title: "Saved!",
-                description: "Your job has been added.",
-            })
-
-            setIsJobCreationDialogOpen(false)
-        } catch (error) {
-            console.error(error)
-            toast({
-                title: "Adding unsuccessful",
-                description: "Please try again."
-            })
-        }
-    }
 
 
     return (
         <DialogContent className="sm:max-w-[425px]">
             <Form {...form}>
                 <form onSubmit={
-                    form.handleSubmit((data: JobEntry) => onSubmit(data))
+                    form.handleSubmit((data: JobEntry) => onSubmit(data, jobData, setJobData, setIsJobCreationDialogOpen))
                 }>
 
                     <DialogHeader>
