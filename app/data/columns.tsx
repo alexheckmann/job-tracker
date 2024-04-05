@@ -12,11 +12,72 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
 import {InsertedJobEntry} from "@/app/components/job-creation-dialog-content";
-import {format} from "date-fns";
+import {differenceInDays, format, formatDistanceToNowStrict, isToday, isYesterday} from "date-fns";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
 import {useJobEntriesStore} from "@/app/data/job-data";
 import StatusBadge from "@/app/components/status-badge";
+
+function formatDate(date: Date): string {
+    const now = new Date();
+    const diffInDays = differenceInDays(now, date);
+
+    if (diffInDays < 7) {
+        if (isToday(date)) {
+            return 'Today';
+        } else if (isYesterday(date)) {
+            return 'Yesterday';
+        } else {
+            return formatDistanceToNowStrict(date, {addSuffix: true});
+        }
+    } else {
+        return format(date, 'dd/MM/yy');
+    }
+}
+
+function RowActions({row}: { row: Row<InsertedJobEntry> }) {
+    const job = row.original
+
+    const {data: jobData, setData: setJobData} = useJobEntriesStore()
+
+    return (
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-8 w-8 p-0">
+                    <span className="sr-only">Open menu</span>
+                    <MoreHorizontal className="h-4 w-4"/>
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+
+                <DropdownMenuItem>Edit</DropdownMenuItem>
+                <DropdownMenuItem>View payment details</DropdownMenuItem>
+                <DropdownMenuSeparator/>
+                <DropdownMenuItem className={"gap-2"} color={"danger"}
+                                  onClick={async () => {
+                                      await axios.delete("/api/v1/jobs", {data: {id: job.id}})
+
+                                      jobData.forEach((jobEntry, index) => {
+                                          if (jobEntry.id === job.id) {
+                                              jobData.splice(index, 1)
+                                          }
+                                      })
+
+                                      setJobData([...jobData])
+
+                                      toast({
+                                          title: "Job deleted",
+                                          description: "The job has been successfully deleted."
+                                      })
+                                  }}>
+                    <Trash className={"h-4 w-4"}/>
+                    Delete
+                </DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+    )
+}
 
 export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     {
@@ -62,7 +123,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
             )
         },
         cell: ({row}) => {
-            return format(row.getValue("lastUpdate"), "dd/MM/yy")
+            return formatDate(row.getValue("lastUpdate"))
         },
     },
     {
@@ -200,47 +261,3 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
         },
     },
 ]
-
-function RowActions({row}: {row: Row<InsertedJobEntry>}) {
-    const job = row.original
-
-    const {data: jobData, setData: setJobData} = useJobEntriesStore()
-
-    return (
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="h-8 w-8 p-0">
-                    <span className="sr-only">Open menu</span>
-                    <MoreHorizontal className="h-4 w-4"/>
-                </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Actions</DropdownMenuLabel>
-
-                <DropdownMenuItem>Edit</DropdownMenuItem>
-                <DropdownMenuItem>View payment details</DropdownMenuItem>
-                <DropdownMenuSeparator/>
-                <DropdownMenuItem className={"gap-2"} color={"danger"}
-                                  onClick={async () => {
-                                      await axios.delete("/api/v1/jobs", {data: {id: job.id}})
-
-                                      jobData.forEach((jobEntry, index) => {
-                                          if (jobEntry.id === job.id) {
-                                              jobData.splice(index, 1)
-                                          }
-                                      })
-
-                                      setJobData([...jobData])
-
-                                      toast({
-                                          title: "Job deleted",
-                                          description: "The job has been successfully deleted."
-                                      })
-                                  }}>
-                    <Trash className={"h-4 w-4"}/>
-                    Delete
-                </DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
-    )
-}
