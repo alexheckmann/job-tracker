@@ -48,10 +48,11 @@ export function StatusDropdown({row}: StatusDropdownProps) {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="center">
                 {ApplicationStatus.options.map((status) => (
-                    <DropdownMenuItem key={status} onClick={async () => {
-                        await handleStatusChange(row, status)
-                        setStatus(status)
-                    }}>
+                    <DropdownMenuItem key={status} className={"text-[13px]"}
+                                      onClick={async () => {
+                                          await handleStatusChange(row, status)
+                                          setStatus(status)
+                                      }}>
                         {status}
                     </DropdownMenuItem>
                 ))}
