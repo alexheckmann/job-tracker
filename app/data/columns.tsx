@@ -103,7 +103,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
             return (
                 <Button
                     variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
                 >
                     Updated
                     <ChevronsUpDown className="ml-2 h-4 w-4"/>
