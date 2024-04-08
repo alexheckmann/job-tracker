@@ -10,59 +10,16 @@ import {
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
-import axios from "axios";
-import {toast} from "@/components/ui/use-toast";
-import {useJobEntriesStore} from "@/app/data/job-data";
 import {formatDate} from "@/lib/formatDate";
 import {StatusDropdown} from "@/app/components/status-dropdown";
 import {useEffect} from "react";
-import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {ClientStateStore, InsertedJobEntry} from "@/lib/db/schema";
-import {StoreApi, UseBoundStore} from "zustand";
+import {InsertedJobEntry} from "@/lib/db/schema";
+import {useDeleteJob} from "@/app/data/use-delete-data";
 
 function RowActions({row}: { row: Row<InsertedJobEntry> }) {
     const job = row.original
 
-    const {data: jobData, setData: setJobData} = useJobEntriesStore()
-
-    const queryClient = useQueryClient()
-    const {mutate: mutateJobs} = useMutation({
-        mutationFn: async () => {
-
-            await axios.delete(`/api/v1/jobs/${job.id}`)
-        },
-        onMutate: async () => {
-            await queryClient.cancelQueries({queryKey: ["jobs"]})
-            const previousJobData = queryClient.getQueryData<InsertedJobEntry[]>(["jobs"])
-            queryClient.setQueryData(["jobs"], jobData)
-            return {previousJobData}
-        },
-        onSuccess: async () => {
-            await queryClient.invalidateQueries({queryKey: ["jobs"]})
-            jobData.forEach((jobEntry, index) => {
-                if (jobEntry.id === job.id) {
-                    jobData.splice(index, 1)
-                }
-            })
-
-            setJobData([...jobData])
-
-            toast({
-                title: "Job deleted",
-                description: `The job at ${job.company} has been successfully deleted.`,
-                variant: "default"
-            })
-        },
-        onError: async (_, __, context) => {
-            queryClient.setQueryData(["jobs"], context?.previousJobData)
-
-            toast({
-                title: "Deleting unsuccessful",
-                description: `Please try again to delete the job at ${job.company}.`,
-                variant: "destructive"
-            })
-        }
-    })
+    const mutateJobs = useDeleteJob(job);
 
     return (
         <DropdownMenu>
