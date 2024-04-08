@@ -29,6 +29,7 @@ export default function HoverableDropdownMenu({dropdownMenuTrigger, dropdownMenu
                 onMouseLeave={() => {
                     if (openOnHover) setOpenDropdown(false)
                 }}
+                onClick={() => setOpenDropdown(false)}
                 align="center"
             >
                 {dropdownMenuItems.map((item, index) => <DropdownMenuItem asChild key={index}>{item}</DropdownMenuItem>)}
