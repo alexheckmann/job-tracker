@@ -148,12 +148,12 @@ export default function JobCreationDialogContent() {
 
                         <div className={"grid grid-cols-2 gap-4 items-end"}>
                             <FormField control={form.control} name={"exactTitle"} render={({field}) => (
-                                <FormInput labelName={"Exact Title"} placeholder={"Exact Job Title"}
+                                <FormInput labelName={"Exact Title"} placeholder={"Exact title of position"}
                                            field={field}/>
                             )}/>
 
                             <FormField control={form.control} name={"salary"} render={({field}) => (
-                                <FormInput labelName={"Salary"} placeholder={"Salary"}
+                                <FormInput labelName={"Salary"} placeholder={"Expected or discussed salary"}
                                            field={field}/>
                             )}/>
                         </div>
