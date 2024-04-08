@@ -3,8 +3,6 @@ import {NextRequest, NextResponse} from "next/server";
 import {HttpStatusCode} from "axios";
 import {insertJobSchema} from "@/lib/db/schema";
 
-export const dynamic = 'force-dynamic'
-export const runtime = 'nodejs'
 
 export async function GET() {
     try {
