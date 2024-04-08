@@ -1,7 +1,6 @@
 "use client"
 
 import {DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
-import {z} from "zod"
 import {cityData, countryData, roleData, useJobCreationDialogStore, useJobEntriesStore} from "@/app/data/job-data";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
