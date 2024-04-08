@@ -10,7 +10,6 @@ import {
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
-import {InsertedJobEntry} from "@/app/components/job-creation-dialog-content";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
 import {useJobEntriesStore} from "@/app/data/job-data";
@@ -18,6 +17,8 @@ import {formatDate} from "@/lib/formatDate";
 import {StatusDropdown} from "@/app/components/status-dropdown";
 import {useEffect} from "react";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {ClientStateStore, InsertedJobEntry} from "@/lib/db/schema";
+import {StoreApi, UseBoundStore} from "zustand";
 
 function RowActions({row}: { row: Row<InsertedJobEntry> }) {
     const job = row.original

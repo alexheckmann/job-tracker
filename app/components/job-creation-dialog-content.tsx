@@ -11,14 +11,13 @@ import {FormInput} from "@/components/form-input";
 import {FormDatePicker} from "@/components/form-date-picker";
 import {FormSwitch} from "@/components/form-switch";
 import {FormTextarea} from "@/components/form-textarea";
-import {ApplicationStatus, insertJobSchema, selectJobSchema} from "@/lib/db/schema";
+import {ApplicationStatus, InsertedJobEntry, insertJobSchema, JobEntry} from "@/lib/db/schema";
 import axios from "axios";
 import {Button} from "@/components/ui/button";
 import {toast} from "@/components/ui/use-toast";
 import {useEffect} from "react";
 
-export type JobEntry = z.infer<typeof insertJobSchema>
-export type InsertedJobEntry = z.infer<typeof selectJobSchema>
+
 
 async function onSubmit(jobEntryToInsert: JobEntry, jobEntries: InsertedJobEntry[], setJobEntries: (entries: InsertedJobEntry[]) => void, setIsJobCreationDialogOpen: (isOpen: boolean) => void) {
     try {

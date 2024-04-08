@@ -3,9 +3,8 @@
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
 import StatusBadge from "@/app/components/status-badge";
 import {ChevronDown} from "lucide-react";
-import {ApplicationStatus} from "@/lib/db/schema";
 import {Row} from "@tanstack/react-table";
-import {InsertedJobEntry} from "@/app/components/job-creation-dialog-content";
+import {ApplicationStatus, InsertedJobEntry} from "@/lib/db/schema";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
 import {useState} from "react";

@@ -1,8 +1,7 @@
 import {useQuery} from "@tanstack/react-query";
 import axios from "axios";
-import {ClientStateStore} from "@/lib/models";
+import {ClientStateStore, InsertedJobEntry} from "@/lib/db/schema";
 import {create} from "zustand";
-import {InsertedJobEntry} from "@/app/components/job-creation-dialog-content";
 
 export function useJobData() {
     return useQuery({

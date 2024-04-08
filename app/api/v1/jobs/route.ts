@@ -1,4 +1,4 @@
-import {deleteJob, getJobs, insertJob} from "@/lib/db/db";
+import {getJobs, insertJob} from "@/lib/db/db";
 import {NextRequest, NextResponse} from "next/server";
 import {HttpStatusCode} from "axios";
 import {insertJobSchema} from "@/lib/db/schema";

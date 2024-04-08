@@ -40,3 +40,10 @@ export const insertJobSchema = createInsertSchema(JobsTable, {
 
 export const selectJobSchema = createSelectSchema(JobsTable)
 
+export type JobEntry = z.infer<typeof insertJobSchema>
+export type InsertedJobEntry = z.infer<typeof selectJobSchema>
+
+export interface ClientStateStore<T> {
+    data: T,
+    setData: (data: T) => void
+}

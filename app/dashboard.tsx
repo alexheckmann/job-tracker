@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import {ArrowUpRight} from "lucide-react"
-
 import {Button} from "@/components/ui/button"
 import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "@/components/ui/card"
 import {DataTable} from "@/components/data-table";
