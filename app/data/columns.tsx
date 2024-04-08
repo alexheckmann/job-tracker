@@ -16,6 +16,7 @@ import {toast} from "@/components/ui/use-toast";
 import {useJobEntriesStore} from "@/app/data/job-data";
 import {formatDate} from "@/lib/formatDate";
 import {StatusDropdown} from "@/app/components/status-dropdown";
+import {useEffect} from "react";
 
 function RowActions({row}: { row: Row<InsertedJobEntry> }) {
     const job = row.original
@@ -100,10 +101,14 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     {
         accessorKey: "lastUpdate",
         header: ({column}) => {
+            useEffect(() => {
+                column.toggleSorting(column.getIsSorted() !== "asc")
+            }, []);
+
             return (
                 <Button
                     variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
+                    onClick={() => column.toggleSorting(column.getIsSorted() !== "asc")}
                 >
                     Updated
                     <ChevronsUpDown className="ml-2 h-4 w-4"/>
@@ -241,8 +246,6 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     {
         id: "actions",
         cell: ({row}) => {
-
-
             return (
                 <RowActions row={row}/>
             )
