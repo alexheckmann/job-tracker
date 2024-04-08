@@ -27,16 +27,3 @@ export async function POST(req: NextRequest) {
     }
 }
 
-
-export async function DELETE(req: NextRequest) {
-    const jobId = await req.json().then((data) => data.id)
-
-    try {
-        await deleteJob(jobId);
-        return NextResponse.json({status: HttpStatusCode.NoContent})
-    } catch (error) {
-        return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
-    }
-}
-
-
