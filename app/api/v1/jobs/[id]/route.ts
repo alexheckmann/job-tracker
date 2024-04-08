@@ -8,7 +8,7 @@ export async function PUT(req: NextRequest, {params}: { params: { id: number } }
     const requestedJob = await req.json().then((data) => ({...data, lastUpdate: new Date(data.lastUpdate)}))
     const validatedJob = selectJobSchema.parse(requestedJob)
     const updatedJob = await updateJob(id, validatedJob)
-    return NextResponse.json({row: updatedJob}, {status: HttpStatusCode.Ok});
+    return NextResponse.json({data: updatedJob}, {status: HttpStatusCode.Ok});
 }
 
 export async function DELETE(req: NextRequest, {params}: { params: { id: number } }) {
