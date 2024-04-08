@@ -15,7 +15,9 @@ interface StatusDropdownProps {
 }
 
 export function StatusDropdown({row}: StatusDropdownProps) {
-    const [status, setStatus] = useState(row.original.status)
+    const job = row.original
+    const [status, setStatus] = useState(job.status)
+    const updateJobStatus = useUpdateJob({...job, status: status})
 
     return (
         <DropdownMenu>
