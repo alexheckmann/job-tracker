@@ -3,23 +3,14 @@ import {ClientStateStore, InsertedJobEntry} from "@/lib/db/schema";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
+import {ToastContent, TypeHasIdAndLastUpdate} from "@/app/data/use-delete-data";
 import {useJobEntriesStore} from "@/app/data/job-data";
 
-export interface ToastContent {
-    title: string
-    description: string
-    variant: "destructive" | "default"
-}
-
-export interface TypeHasIdAndLastUpdate {
-    id: any,
-    lastUpdate: any
-}
-
-export function useDeleteData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: string,
+export function useUpdateData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: string,
                                                                 dataKey: string[],
                                                                 useClientState: UseBoundStore<StoreApi<ClientStateStore<T[]>>>,
                                                                 id: any,
+                                                                dataToUpdate: T,
                                                                 successToastContent: ToastContent,
                                                                 errorToastContent: ToastContent) {
     const {data, setData} = useClientState();
@@ -27,23 +18,31 @@ export function useDeleteData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: str
 
     const {mutate: mutateData} = useMutation({
         mutationFn: async () => {
-            await axios.delete(`${apiEndpoint}/${id}`);
+            return await axios.put<T>(`${apiEndpoint}/${id}`, {...dataToUpdate})
+                .then((res) => {
+                    return {
+                        ...res.data,
+                        lastUpdate: new Date(res.data.lastUpdate)
+                    }
+                })
         },
         onMutate: async () => {
-            await queryClient.cancelQueries({queryKey: dataKey});
-            const previousData = queryClient.getQueryData<T[]>(dataKey);
-            queryClient.setQueryData(dataKey, data);
-            return {previousData};
+            await queryClient.cancelQueries({queryKey: dataKey})
+            const previousData = queryClient.getQueryData<T[]>(dataKey)
+            queryClient.setQueryData(dataKey, data)
+            return {previousData}
         },
         onSuccess: async () => {
             await queryClient.invalidateQueries({queryKey: dataKey});
-            data.forEach((entry, index) => {
-                if (entry.id === id) {
-                    data.splice(index, 1);
-                }
-            });
+            const index = data.findIndex(item => item.id === dataToUpdate.id);
 
-            setData([...data]);
+            if (index !== -1) {
+                setData([
+                    ...data.slice(0, index),
+                    dataToUpdate,
+                    ...data.slice(index + 1),
+                ]);
+            }
 
             toast({
                 title: successToastContent.title,
@@ -59,25 +58,25 @@ export function useDeleteData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: str
                 description: errorToastContent.description,
                 variant: errorToastContent.variant
             })
-        },
-    });
+        }
+    })
 
     return mutateData;
 }
 
-export function useDeleteJob(job: InsertedJobEntry) {
+export function useUpdateJob(job: InsertedJobEntry) {
 
     const successToastContent: ToastContent = {
-        title: "Job deleted",
-        description: `The job at ${job.company} has been successfully deleted.`,
+        title: "Job updated",
+        description: `The job at ${job.company} has been updated.`,
         variant: "default"
     }
 
     const errorToastContent: ToastContent = {
-        title: "Deleting unsuccessful",
-        description: `Please try again to delete the job at ${job.company}.`,
+        title: "Failed to update job",
+        description: `The job at ${job.company} could not be updated.`,
         variant: "destructive"
     }
 
-    return useDeleteData<InsertedJobEntry>("/api/v1/jobs", ["jobs"], useJobEntriesStore, job.id, successToastContent, errorToastContent);
+    return useUpdateData<InsertedJobEntry>('/api/v1/jobs', ['jobs'], useJobEntriesStore, job.id, job, successToastContent, errorToastContent)
 }

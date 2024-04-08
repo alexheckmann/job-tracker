@@ -5,33 +5,13 @@ import StatusBadge from "@/app/components/status-badge";
 import {ChevronDown} from "lucide-react";
 import {Row} from "@tanstack/react-table";
 import {ApplicationStatus, InsertedJobEntry} from "@/lib/db/schema";
-import axios from "axios";
-import {toast} from "@/components/ui/use-toast";
 import {useState} from "react";
-
-interface StatusDropdownProps {
-    row: Row<InsertedJobEntry>,
-}
+import {useUpdateJob} from "@/app/data/use-update-data";
 
 const statuses = ApplicationStatus["_type"]
 
-async function handleStatusChange(row: Row<InsertedJobEntry>, newStatus: typeof statuses) {
-    try {
-        const updatedJob = await axios.put<InsertedJobEntry>(`/api/v1/jobs/${row.original.id}`,
-            {...row.original, status: newStatus})
-            .then((res) => res.data)
-            .then((data) => ({...data, lastUpdate: new Date(data.lastUpdate)}));
-        toast({
-            title: "Status updated",
-            description: `The status of the job at ${row.getValue("company")} has been successfully updated to ${newStatus}.`
-        });
-    } catch (error) {
-        console.error(error);
-        toast({
-            title: "Updating status unsuccessful",
-            description: `Please try again to update the status of the job at ${row.getValue("company")} from ${row.getValue("status")} to ${newStatus}.`
-        });
-    }
+interface StatusDropdownProps {
+    row: Row<InsertedJobEntry>,
 }
 
 export function StatusDropdown({row}: StatusDropdownProps) {
@@ -48,8 +28,8 @@ export function StatusDropdown({row}: StatusDropdownProps) {
             <DropdownMenuContent align="center">
                 {ApplicationStatus.options.map((status) => (
                     <DropdownMenuItem key={status} className={"text-[13px]"}
-                                      onClick={async () => {
-                                          await handleStatusChange(row, status)
+                                      onClick={() => {
+                                          updateJobStatus()
                                           setStatus(status)
                                       }}>
                         {status}
