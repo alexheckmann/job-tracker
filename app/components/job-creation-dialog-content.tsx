@@ -68,7 +68,7 @@ export default function JobCreationDialogContent() {
             location: "London",
             country: "United Kingdom",
             lastUpdate: new Date(),
-            status: "Saved",
+            status: "Applied",
             exactTitle: "",
             salary: "",
             isFavorite: false,
