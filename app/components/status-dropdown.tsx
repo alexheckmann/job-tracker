@@ -24,7 +24,7 @@ export function StatusDropdown({row}: StatusDropdownProps) {
             <DropdownMenuTrigger
                 className={"inline-flex items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"}>
                 <StatusBadge status={status}>
-                    <ChevronDown className={"h-4 w-4"}/>
+                    <ChevronDown className={"h-4 w-4 ml-1"}/>
                 </StatusBadge>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="center">
