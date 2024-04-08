@@ -43,7 +43,6 @@ async function onSubmit(jobEntryToInsert: JobEntry, jobEntries: InsertedJobEntry
 // @ts-ignore
 function SubmitButton({children}) {
 
-
     return (
         <Button type="submit" className={"gap-2"}>
             <span>{children}</span>
@@ -110,7 +109,7 @@ export default function JobCreationDialogContent() {
 
                     <div className="grid gap-4 py-4">
                         <FormField control={form.control} name={"role"} render={({field}) => (
-                            <FormSelect entries={roleData} label={"Role"} defaultValue={"AI Engineer"}
+                            <FormSelect entries={roleData} label={"Role"} defaultValue={form.getValues("role")}
                                         onValueChange={field.onChange} isExpandable/>
                         )}/>
 
@@ -121,12 +120,12 @@ export default function JobCreationDialogContent() {
 
                         <div className={"grid grid-cols-2 gap-4 items-end"}>
                             <FormField control={form.control} name={"location"} render={({field}) => (
-                                <FormSelect entries={cityData} label={"Location"} defaultValue={"London"}
+                                <FormSelect entries={cityData} label={"Location"} defaultValue={form.getValues("location")}
                                             onValueChange={field.onChange} isExpandable/>
                             )}/>
 
                             <FormField control={form.control} name={"country"} render={({field}) => (
-                                <FormSelect entries={countryData} label={"Country"} defaultValue={"United Kingdom"}
+                                <FormSelect entries={countryData} label={"Country"} defaultValue={form.getValues("country")}
                                             onValueChange={field.onChange} isExpandable/>
                             )}/>
                         </div>
@@ -141,7 +140,7 @@ export default function JobCreationDialogContent() {
                             )}/>
 
                             <FormField control={form.control} name={"status"} render={({field}) => (
-                                <FormSelect entries={ApplicationStatus.options} label={"Status"} defaultValue={"Saved"}
+                                <FormSelect entries={ApplicationStatus.options} label={"Status"} defaultValue={form.getValues("status")}
                                             onValueChange={field.onChange}/>
                             )}/>
                         </div>
