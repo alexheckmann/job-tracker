@@ -121,10 +121,10 @@ export default function Navbar() {
                             <span className="sr-only">Toggle user menu</span>
                         </Button>
                     } dropdownMenuItems={[
-                    <span>My Account</span>,
-                    <span>Donate</span>,
-                    <span>Feedback</span>,
-                    <span>Logout</span>
+                    <span key={1}>My Account</span>,
+                    <span key={2}>Donate</span>,
+                    <span key={3}>Feedback</span>,
+                    <span key={4}>Logout</span>
                 ]}/>
             </div>
         </header>
