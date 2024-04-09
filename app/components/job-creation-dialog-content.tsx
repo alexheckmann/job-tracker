@@ -15,6 +15,7 @@ import axios from "axios";
 import {Button} from "@/components/ui/button";
 import {toast} from "@/components/ui/use-toast";
 import {useEffect} from "react";
+import {useCreateJob} from "@/app/data/use-create-data";
 
 
 
@@ -39,10 +40,10 @@ async function onSubmit(jobEntryToInsert: JobEntry, jobEntries: InsertedJobEntry
 }
 
 // @ts-ignore
-function SubmitButton({children}) {
+function SubmitButton({children, disabled = false}) {
 
     return (
-        <Button type="submit" className={"gap-2"}>
+        <Button type="submit" className={"gap-2"} disabled={disabled}>
             <span>{children}</span>
             <kbd
                 className="hidden pointer-events-none lg:inline-flex h-5 select-none text-[10px] font-sans items-center rounded border px-1.5 font-light opacity-100 gap-2">
@@ -75,11 +76,14 @@ export default function JobCreationDialogContent() {
         }
     })
 
+    const {mutateData: insertJob, isPending: isAddingJob} = useCreateJob(form.getValues(), setIsJobCreationDialogOpen)
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key === "m" && event.ctrlKey) {
-                form.handleSubmit((data: JobEntry) => onSubmit(data, jobData, setJobData, setIsJobCreationDialogOpen))();
+                form.handleSubmit((jobEntry: JobEntry) => {
+                    insertJob(jobEntry)
+                })();
             }
         };
 
@@ -95,7 +99,9 @@ export default function JobCreationDialogContent() {
         <DialogContent className="sm:max-w-[500px] max-h-[85svh] overflow-auto">
             <Form {...form}>
                 <form onSubmit={
-                    form.handleSubmit((data: JobEntry) => onSubmit(data, jobData, setJobData, setIsJobCreationDialogOpen))
+                    form.handleSubmit((jobEntry: JobEntry) => {
+                        insertJob(jobEntry)
+                    })
                 }>
 
                     <DialogHeader>
@@ -167,10 +173,9 @@ export default function JobCreationDialogContent() {
                             )}/>
                         </div>
 
-
                     </div>
                     <DialogFooter>
-                        <SubmitButton>Add job</SubmitButton>
+                        <SubmitButton disabled={isAddingJob}>Add job</SubmitButton>
                     </DialogFooter>
                 </form>
             </Form>
