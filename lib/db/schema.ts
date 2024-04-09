@@ -38,7 +38,13 @@ export const insertJobSchema = createInsertSchema(JobsTable, {
     lastUpdate: z.coerce.date()
 })
 
-export const selectJobSchema = createSelectSchema(JobsTable)
+export const selectJobSchema = createSelectSchema(JobsTable, {
+    role: z.string().min(1),
+    company: z.string().min(1),
+    location: z.string().min(1),
+    country: z.string().min(1),
+    lastUpdate: z.coerce.date()
+})
 
 export type JobEntry = z.infer<typeof insertJobSchema>
 export type InsertedJobEntry = z.infer<typeof selectJobSchema>
