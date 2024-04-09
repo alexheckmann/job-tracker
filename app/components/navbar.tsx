@@ -6,13 +6,12 @@ import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import HoverableDropdownMenu from "@/app/components/hoverable-dropdown-menu";
-import {Dialog, DialogTrigger} from "@/components/ui/dialog";
+import {DialogTrigger} from "@/components/ui/dialog";
 import JobCreationDialogContent from "@/app/components/job-creation-dialog-content";
 import Logo from "@/components/logo";
 
 export default function Navbar() {
 
-    const {data: isJobCreationDialogOpen, setData: setIsJobCreationDialogOpen} = useJobCreationDialogStore()
 
     return (
 
@@ -97,7 +96,6 @@ export default function Navbar() {
                         />
                     </div>
                 </form>
-                <Dialog open={isJobCreationDialogOpen} onOpenChange={setIsJobCreationDialogOpen}>
                     <HoverableDropdownMenu openOnHover={true}
                                            dropdownMenuTrigger={
                                                <Button className={"gap-1"} variant={"secondary"}>
@@ -113,7 +111,6 @@ export default function Navbar() {
                                                ]}
                     />
                     <JobCreationDialogContent/>
-                </Dialog>
                 <HoverableDropdownMenu
                     dropdownMenuTrigger={
                         <Button variant="secondary" size="icon" className="rounded-full">
