@@ -1,7 +1,7 @@
 "use client"
 
 import {ColumnDef, Row} from "@tanstack/react-table"
-import {CheckSquare, ChevronsUpDown, MoreHorizontal, Trash, XSquare} from "lucide-react";
+import {CheckSquare, ChevronsUpDown, MoreHorizontal, SquarePen, Trash, XSquare} from "lucide-react";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -32,11 +32,10 @@ function RowActions({row}: { row: Row<InsertedJobEntry> }) {
             <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
-                <DropdownMenuItem className={"gap-2"} color={"danger"}
-                                  onClick={async () => {
-
-                                      try {
-                                          await axios.delete("/api/v1/jobs", {data: {id: job.id}})
+                <DropdownMenuItem className={"gap-2"}>
+                    <SquarePen className={"h-4 w-4"}/>
+                    Edit
+                </DropdownMenuItem>
 
                 <DropdownMenuItem className={"gap-2"}
                                   onClick={() => mutateJobs()}>
