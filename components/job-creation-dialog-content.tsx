@@ -14,18 +14,21 @@ import {ApplicationStatus, insertJobSchema, JobEntry} from "@/lib/db/schema";
 import {Button} from "@/components/ui/button";
 import {useEffect} from "react";
 import {useCreateJob} from "@/app/data/use-create-data";
+import {Loader2} from "lucide-react";
 
 // @ts-ignore
 function SubmitButton({children, disabled = false}) {
 
     return (
-        <Button type="submit" className={"gap-2"} disabled={disabled}>
+        <Button type="submit" className={"gap-2 sm:w-[140px]"} disabled={disabled}>
             <span>{children}</span>
-            <kbd
-                className="hidden pointer-events-none lg:inline-flex h-5 select-none text-[10px] font-sans items-center rounded border px-1.5 font-light opacity-100 gap-2">
-            <span className="text-xs">Ctrl</span>
-            <span className="text-xs">M</span>
-            </kbd>
+            {disabled ?
+                <Loader2 className={"h-4 w-4 animate-spin"}/> :
+                <kbd
+                    className="hidden pointer-events-none lg:inline-flex h-5 select-none text-[10px] font-sans items-center rounded border px-1.5 font-light opacity-100 gap-2">
+                    <span className="text-xs">Ctrl</span>
+                    <span className="text-xs">M</span>
+                </kbd>}
         </Button>
     )
 }
@@ -100,12 +103,14 @@ export default function JobCreationDialogContent() {
 
                         <div className={"grid grid-cols-2 gap-4 items-end"}>
                             <FormField control={form.control} name={"location"} render={({field}) => (
-                                <FormSelect entries={cityData} label={"Location"} defaultValue={form.getValues("location")}
+                                <FormSelect entries={cityData} label={"Location"}
+                                            defaultValue={form.getValues("location")}
                                             onValueChange={field.onChange} isExpandable/>
                             )}/>
 
                             <FormField control={form.control} name={"country"} render={({field}) => (
-                                <FormSelect entries={countryData} label={"Country"} defaultValue={form.getValues("country")}
+                                <FormSelect entries={countryData} label={"Country"}
+                                            defaultValue={form.getValues("country")}
                                             onValueChange={field.onChange} isExpandable/>
                             )}/>
                         </div>
@@ -120,7 +125,8 @@ export default function JobCreationDialogContent() {
                             )}/>
 
                             <FormField control={form.control} name={"status"} render={({field}) => (
-                                <FormSelect entries={ApplicationStatus.options} label={"Status"} defaultValue={form.getValues("status")}
+                                <FormSelect entries={ApplicationStatus.options} label={"Status"}
+                                            defaultValue={form.getValues("status")}
                                             onValueChange={field.onChange}/>
                             )}/>
                         </div>

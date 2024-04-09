@@ -5,6 +5,7 @@ import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
 import {ToastContent, TypeHasIdAndLastUpdate} from "@/app/data/use-delete-data";
 import {useJobEntriesStore} from "@/app/data/job-data";
+import {ToastAction} from "@/components/ui/toast";
 
 export function useUpdateData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: string,
                                                                 dataKey: string[],
@@ -69,13 +70,19 @@ export function useUpdateJob(job: InsertedJobEntry) {
     const successToastContent: ToastContent = {
         title: "Job updated",
         description: `The job at ${job.company} has been updated.`,
-        variant: "default"
+        variant: "default",
+        action: (
+            <ToastAction altText="Retry">Retry</ToastAction>
+        )
     }
 
     const errorToastContent: ToastContent = {
         title: "Failed to update job",
         description: `The job at ${job.company} could not be updated.`,
-        variant: "destructive"
+        variant: "destructive",
+        action: (
+            <ToastAction altText="Retry">Retry</ToastAction>
+        )
     }
 
     return useUpdateData<InsertedJobEntry>('/api/v1/jobs', ['jobs'], useJobEntriesStore, job.id, job, successToastContent, errorToastContent)

@@ -4,11 +4,13 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
 import {useJobEntriesStore} from "@/app/data/job-data";
+import {ToastAction} from "@/components/ui/toast";
 
 export interface ToastContent {
     title: string
     description: string
-    variant: "destructive" | "default"
+    variant: "destructive" | "default",
+    action: any
 }
 
 export interface TypeHasIdAndLastUpdate {
@@ -25,7 +27,7 @@ export function useDeleteData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: str
     const {data, setData} = useClientState();
     const queryClient = useQueryClient();
 
-    const {mutate: mutateData} = useMutation({
+    const {mutate: mutateData, isPending} = useMutation({
         mutationFn: async () => {
             await axios.delete(`${apiEndpoint}/${id}`);
         },
@@ -62,7 +64,7 @@ export function useDeleteData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: str
         },
     });
 
-    return mutateData;
+    return {mutateData, isPending};
 }
 
 export function useDeleteJob(job: InsertedJobEntry) {
@@ -70,13 +72,19 @@ export function useDeleteJob(job: InsertedJobEntry) {
     const successToastContent: ToastContent = {
         title: "Job deleted",
         description: `The job at ${job.company} has been successfully deleted.`,
-        variant: "default"
+        variant: "default",
+        action: (
+            <ToastAction altText="Undo">Undo</ToastAction>
+        )
     }
 
     const errorToastContent: ToastContent = {
         title: "Deleting unsuccessful",
         description: `Please try again to delete the job at ${job.company}.`,
-        variant: "destructive"
+        variant: "destructive",
+        action: (
+            <ToastAction altText="Retry">Retry</ToastAction>
+        )
     }
 
     return useDeleteData<InsertedJobEntry>("/api/v1/jobs", ["jobs"], useJobEntriesStore, job.id, successToastContent, errorToastContent);

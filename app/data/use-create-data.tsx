@@ -5,6 +5,7 @@ import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
 import {ToastContent, TypeHasIdAndLastUpdate} from "@/app/data/use-delete-data";
 import {useJobEntriesStore} from "@/app/data/job-data";
+import {ToastAction} from "@/components/ui/toast";
 
 export function useCreateData<S, T extends TypeHasIdAndLastUpdate>(apiEndpoint: string,
                                                                    dataKey: string[],
@@ -19,12 +20,7 @@ export function useCreateData<S, T extends TypeHasIdAndLastUpdate>(apiEndpoint: 
     const {mutate: mutateData, isPending} = useMutation({
         mutationFn: async (dataToUpdate: S) => {
             return await axios.post<T>(`${apiEndpoint}`, {...dataToUpdate})
-                .then((res) => {
-                    return {
-                        ...res.data,
-                        lastUpdate: new Date(res.data.lastUpdate)
-                    }
-                })
+                .then((res) => res.data)
         },
         onMutate: async () => {
             await queryClient.cancelQueries({queryKey: dataKey})
@@ -34,6 +30,7 @@ export function useCreateData<S, T extends TypeHasIdAndLastUpdate>(apiEndpoint: 
         },
         onSuccess: async (data) => {
             await queryClient.invalidateQueries({queryKey: dataKey});
+
             setClientData([...clientData, data])
 
             if (!!setUiState) {
@@ -43,7 +40,8 @@ export function useCreateData<S, T extends TypeHasIdAndLastUpdate>(apiEndpoint: 
             toast({
                 title: successToastContent.title,
                 description: successToastContent.description,
-                variant: successToastContent.variant
+                variant: successToastContent.variant,
+                action: successToastContent.action
             })
         },
         onError: async (_, __, context) => {
@@ -65,13 +63,19 @@ export function useCreateJob(job: JobEntry, setUiState?: (data: any) => void) {
     const successToastContent: ToastContent = {
         title: "Job added",
         description: `The job at ${job.company} has been added.`,
-        variant: "default"
+        variant: "default",
+        action: (
+            <ToastAction altText={"Undo"}>Undo</ToastAction>
+        )
     }
 
     const errorToastContent: ToastContent = {
         title: "Failed to add job",
         description: `The job at ${job.company} could not be added; please retry.`,
-        variant: "destructive"
+        variant: "destructive",
+        action: (
+            <ToastAction altText={"Retry"}>Retry</ToastAction>
+        )
     }
 
     return useCreateData<JobEntry, InsertedJobEntry>('/api/v1/jobs', ['jobs'], useJobEntriesStore, successToastContent, errorToastContent, setUiState, false)
