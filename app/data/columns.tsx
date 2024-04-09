@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
 import {formatDate} from "@/lib/formatDate";
-import {StatusDropdown} from "@/app/components/status-dropdown";
+import {StatusDropdown} from "@/components/status-dropdown";
 import {useEffect} from "react";
 import {InsertedJobEntry} from "@/lib/db/schema";
 import {useDeleteJob} from "@/app/data/use-delete-data";

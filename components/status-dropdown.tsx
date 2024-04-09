@@ -1,7 +1,7 @@
 "use client"
 
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
-import StatusBadge from "@/app/components/status-badge";
+import StatusBadge from "@/components/status-badge";
 import {ChevronDown} from "lucide-react";
 import {Row} from "@tanstack/react-table";
 import {ApplicationStatus, InsertedJobEntry} from "@/lib/db/schema";

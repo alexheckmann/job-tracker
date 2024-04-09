@@ -1,7 +1,7 @@
 "use client"
 
 import Dashboard from "@/app/dashboard";
-import Navbar from "@/app/components/navbar";
+import Navbar from "@/components/navbar";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {useJobCreationDialogStore} from "@/app/data/job-data";
 import {Dialog} from "@/components/ui/dialog";

@@ -5,9 +5,9 @@ import {BriefcaseBusiness, CircleUser, Menu, Plus, Search} from "lucide-react";
 import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
-import HoverableDropdownMenu from "@/app/components/hoverable-dropdown-menu";
+import HoverableDropdownMenu from "@/components/hoverable-dropdown-menu";
 import {DialogTrigger} from "@/components/ui/dialog";
-import JobCreationDialogContent from "@/app/components/job-creation-dialog-content";
+import JobCreationDialogContent from "@/components/job-creation-dialog-content";
 import Logo from "@/components/logo";
 
 export default function Navbar() {
@@ -96,21 +96,21 @@ export default function Navbar() {
                         />
                     </div>
                 </form>
-                    <HoverableDropdownMenu openOnHover={true}
-                                           dropdownMenuTrigger={
-                                               <Button className={"gap-1"} variant={"secondary"}>
-                                                   <Plus className="h-4 w-4 rotate-0 scale-100 transition-all"/>
-                                                   <span>Add</span>
-                                               </Button>}
-                                           dropdownMenuItems=
-                                               {[
-                                                   <DialogTrigger key={1} className={"w-full gap-2"}>
-                                                       <BriefcaseBusiness className={"h-4 w-4"}/>
-                                                       <span>Job</span>
-                                                   </DialogTrigger>
-                                               ]}
-                    />
-                    <JobCreationDialogContent/>
+                <HoverableDropdownMenu openOnHover={true}
+                                       dropdownMenuTrigger={
+                                           <Button className={"gap-1"} variant={"secondary"}>
+                                               <Plus className="h-4 w-4 rotate-0 scale-100 transition-all"/>
+                                               <span>Add</span>
+                                           </Button>}
+                                       dropdownMenuItems=
+                                           {[
+                                               <DialogTrigger key={1} className={"w-full gap-2"}>
+                                                   <BriefcaseBusiness className={"h-4 w-4"}/>
+                                                   <span>Job</span>
+                                               </DialogTrigger>
+                                           ]}
+                />
+                <JobCreationDialogContent/>
                 <HoverableDropdownMenu
                     dropdownMenuTrigger={
                         <Button variant="secondary" size="icon" className="rounded-full">
