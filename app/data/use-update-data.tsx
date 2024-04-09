@@ -67,6 +67,7 @@ export function useUpdateData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: str
 
 export function useUpdateJob(job: InsertedJobEntry) {
 
+    // TODO implement success undo action
     const successToastContent: ToastContent = {
         title: "Job updated",
         description: `The job at ${job.company} has been updated.`,
@@ -76,6 +77,7 @@ export function useUpdateJob(job: InsertedJobEntry) {
         )
     }
 
+    // TODO implement error retry action
     const errorToastContent: ToastContent = {
         title: "Failed to update job",
         description: `The job at ${job.company} could not be updated.`,

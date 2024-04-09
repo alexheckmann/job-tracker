@@ -69,6 +69,7 @@ export function useDeleteData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: str
 
 export function useDeleteJob(job: InsertedJobEntry) {
 
+    // TODO implement success undo action
     const successToastContent: ToastContent = {
         title: "Job deleted",
         description: `The job at ${job.company} has been successfully deleted.`,
@@ -78,6 +79,7 @@ export function useDeleteJob(job: InsertedJobEntry) {
         )
     }
 
+    // TODO implement error retry action
     const errorToastContent: ToastContent = {
         title: "Deleting unsuccessful",
         description: `Please try again to delete the job at ${job.company}.`,

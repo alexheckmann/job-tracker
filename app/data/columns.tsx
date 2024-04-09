@@ -43,6 +43,7 @@ function RowActions({row}: { row: Row<InsertedJobEntry> }) {
             <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
+                {/* TODO implement edit dialog */}
                 <DropdownMenuItem className={"gap-2"}>
                     <SquarePen className={"h-4 w-4"}/>
                     Edit
@@ -190,6 +191,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     {
         accessorKey: "salary",
         header: ({column}) => {
+            // TODO format salary as 50,000 GBP / 50,000-60,000 GBP
             return (
                 <Button
                     variant="ghost"

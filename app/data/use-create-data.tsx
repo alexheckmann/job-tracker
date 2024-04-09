@@ -60,6 +60,7 @@ export function useCreateData<S, T extends TypeHasIdAndLastUpdate>(apiEndpoint: 
 
 export function useCreateJob(job: JobEntry, setUiState?: (data: any) => void) {
 
+    // TODO implement success undo action
     const successToastContent: ToastContent = {
         title: "Job added",
         description: `The job at ${job.company} has been added.`,
@@ -69,6 +70,7 @@ export function useCreateJob(job: JobEntry, setUiState?: (data: any) => void) {
         )
     }
 
+    // TODO implement error retry action
     const errorToastContent: ToastContent = {
         title: "Failed to add job",
         description: `The job at ${job.company} could not be added; please retry.`,
