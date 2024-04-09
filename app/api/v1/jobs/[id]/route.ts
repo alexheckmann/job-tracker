@@ -6,9 +6,14 @@ import {HttpStatusCode} from "axios";
 export async function PUT(req: NextRequest, {params}: { params: { id: number } }) {
     const {id} = params;
     const requestedJob = await req.json().then((data) => ({...data, lastUpdate: new Date(data.lastUpdate)}))
-    const validatedJob = selectJobSchema.parse(requestedJob)
-    const updatedJob = await updateJob(id, validatedJob)
-    return NextResponse.json({data: updatedJob}, {status: HttpStatusCode.Ok});
+
+    try {
+        const validatedJob = selectJobSchema.parse(requestedJob)
+        const updatedJob = await updateJob(id, validatedJob)
+        return NextResponse.json({data: updatedJob}, {status: HttpStatusCode.Ok});
+    } catch (error) {
+        return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
+    }
 }
 
 export async function DELETE(req: NextRequest, {params}: { params: { id: number } }) {
