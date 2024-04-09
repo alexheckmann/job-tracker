@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Pegasus Job Tracker
 
-## Getting Started
+Pegasus is designed to streamline the job search process. It provides a centralized platform where users can manage job entries, keeping track of important details such as the role, company, location, status, and more. 
 
-First, run the development server:
+The application aims to help users navigate their job search by providing an organized and efficient way to manage job applications. With features such as adding, deleting, and updating job entries, users can maintain an up-to-date overview of their job search progress. 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Whether you're actively applying for jobs or passively keeping an eye on the market, Pegasus Job Tracker can help you stay organized and on top of your job search.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Description
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This project is a full-stack application developed using TypeScript, Next.js, Zustand, Drizzle, drizzle-zod, shadcn-ui,
+and Tailwind. It is designed to manage job entries and provides features such as adding, deleting, and updating job
+entries.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Technologies Used
 
-## Learn More
+- **TypeScript**: The main programming language used in this project. It enhances productivity and reduces run-time bugs
+  by providing type safety.
+- **Next.js**: A full-stack framework used for its architectural simplicity.
+- **Zustand**: The main client-side state management library used for its simplicity.
+- **Drizzle and drizzle-zod**: Used as the ORM for their end-to-end type safety and simplicity.
+- **React**: The main library used for building the user interface.
+- **React Query**: Used for fetching data from the server and caching it.
+- **React Hook Form**: Used for form validation.
+- **shadcn-ui**: A component library used for its full-fledged accessibility and great design.
+- **Tailwind**: Used for styling as it reduces the need to write native CSS.
+- **Vercel**: The platform used for hosting the application because of its free tier. The API is built using serverless functions.
+- **PostgreSQL**: The database used for storing job entries. Used because of Vercel's free tier.
 
-To learn more about Next.js, take a look at the following resources:
+## Installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To install the project, follow these steps:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Clone the repository: `git clone <repository-url>`
+2. Navigate to the project directory: `cd <project-directory>`
+3. Install the dependencies: `npm install`
 
-## Deploy on Vercel
+## Usage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To run the project, use the command: `npm run build`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contributing
+
+Contributions are welcome. Please fork the repository and create a pull request with your changes.
