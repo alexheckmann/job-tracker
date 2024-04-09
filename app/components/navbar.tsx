@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link";
-import {BriefcaseBusiness, CircleUser, Menu, Plus, Sailboat, Search} from "lucide-react";
+import {BriefcaseBusiness, CircleUser, Menu, Plus, Search} from "lucide-react";
 import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
