@@ -8,7 +8,7 @@ import {Input} from "@/components/ui/input";
 import HoverableDropdownMenu from "@/app/components/hoverable-dropdown-menu";
 import {Dialog, DialogTrigger} from "@/components/ui/dialog";
 import JobCreationDialogContent from "@/app/components/job-creation-dialog-content";
-import {useJobCreationDialogStore} from "@/app/data/job-data";
+import Logo from "@/components/logo";
 
 export default function Navbar() {
 
@@ -23,8 +23,8 @@ export default function Navbar() {
                     href="#"
                     className="flex items-center gap-2 text-lg font-bold md:text-base"
                 >
-                    <Sailboat className="h-6 w-6"/>
-                    <span>Odyssey</span>
+                    <Logo className={"h-8 w-8"}/>
+                    <span>Pegasus</span>
                 </Link>
                 <Link
                     href="#"
@@ -62,8 +62,8 @@ export default function Navbar() {
                             href="#"
                             className="flex items-center gap-2 text-lg font-semibold"
                         >
-                            <Sailboat className="h-6 w-6"/>
-                            <span className="sr-only">Odyssey</span>
+                            <Logo className={"h-6 w-6"}/>
+                            <span className="sr-only">Pegasus</span>
                         </Link>
                         <Link
                             href="#"
