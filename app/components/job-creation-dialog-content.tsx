@@ -10,34 +10,10 @@ import {FormInput} from "@/components/form-input";
 import {FormDatePicker} from "@/components/form-date-picker";
 import {FormSwitch} from "@/components/form-switch";
 import {FormTextarea} from "@/components/form-textarea";
-import {ApplicationStatus, InsertedJobEntry, insertJobSchema, JobEntry} from "@/lib/db/schema";
-import axios from "axios";
+import {ApplicationStatus, insertJobSchema, JobEntry} from "@/lib/db/schema";
 import {Button} from "@/components/ui/button";
-import {toast} from "@/components/ui/use-toast";
 import {useEffect} from "react";
 import {useCreateJob} from "@/app/data/use-create-data";
-
-
-
-async function onSubmit(jobEntryToInsert: JobEntry, jobEntries: InsertedJobEntry[], setJobEntries: (entries: InsertedJobEntry[]) => void, setIsJobCreationDialogOpen: (isOpen: boolean) => void) {
-    try {
-        const result = await axios.post<InsertedJobEntry>("/api/v1/jobs", jobEntryToInsert).then((res) => res.data)
-        setJobEntries([...jobEntries, result])
-
-        toast({
-            title: "Job added",
-            description: `Your job at ${result.company} has been added.`,
-        })
-
-        setIsJobCreationDialogOpen(false)
-    } catch (error) {
-        console.error(error)
-        toast({
-            title: "Adding unsuccessful",
-            description: `Please try again to add the job at ${jobEntryToInsert.company}.`
-        })
-    }
-}
 
 // @ts-ignore
 function SubmitButton({children, disabled = false}) {
