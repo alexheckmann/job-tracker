@@ -22,5 +22,5 @@ export function deleteJob(id: number) {
 }
 
 export function updateJob(id: number, updatedJob: Partial<NewJob>) {
-    return db.update(JobsTable).set(updatedJob).where(eq(JobsTable.id, id)).returning({job: JobsTable})
+    return db.update(JobsTable).set(updatedJob).where(eq(JobsTable.id, id)).returning()
 }

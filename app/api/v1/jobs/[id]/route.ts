@@ -10,7 +10,7 @@ export async function PUT(req: NextRequest, {params}: { params: { id: number } }
     try {
         const validatedJob = selectJobSchema.parse(requestedJob)
         const updatedJob = await updateJob(id, validatedJob)
-        return NextResponse.json({data: updatedJob}, {status: HttpStatusCode.Ok});
+        return NextResponse.json(updatedJob[0], {status: HttpStatusCode.Ok});
     } catch (error) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
     }

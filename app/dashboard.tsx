@@ -42,7 +42,7 @@ export default function Dashboard() {
                     </CardHeader>
                     <CardContent className={"h-[calc(100vh-56px-200px)]"}>
                         {isLoadingJobData ? "Loading..." :
-                            <DataTable className={"h-[calc(100vh-56px-200px)] overflow-auto"} data={jobData} columns={jobTrackerColumns}/>
+                            <DataTable className={"h-[calc(100vh-56px-200px)] overflow-x-auto"} data={jobData} columns={jobTrackerColumns}/>
                         }
                     </CardContent>
                 </Card>

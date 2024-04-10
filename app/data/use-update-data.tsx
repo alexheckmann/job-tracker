@@ -13,12 +13,14 @@ export function useUpdateData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: str
                                                                 id: any,
                                                                 dataToUpdate: T,
                                                                 successToastContent: ToastContent,
-                                                                errorToastContent: ToastContent) {
-    const {data, setData} = useClientState();
+                                                                errorToastContent: ToastContent,
+                                                                setUiState?: (data: any) => void,
+                                                                uiStateToSet?: any) {
+    const {data: clientData, setData: setClientData} = useClientState();
     const queryClient = useQueryClient();
 
-    const {mutate: mutateData} = useMutation({
-        mutationFn: async () => {
+    const {mutate: mutateData, isPending} = useMutation({
+        mutationFn: async (dataToUpdate: T) => {
             return await axios.put<T>(`${apiEndpoint}/${id}`, {...dataToUpdate})
                 .then((res) => {
                     return {
@@ -30,19 +32,23 @@ export function useUpdateData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: str
         onMutate: async () => {
             await queryClient.cancelQueries({queryKey: dataKey})
             const previousData = queryClient.getQueryData<T[]>(dataKey)
-            queryClient.setQueryData(dataKey, data)
+            queryClient.setQueryData(dataKey, clientData)
             return {previousData}
         },
-        onSuccess: async () => {
+        onSuccess: async (data) => {
             await queryClient.invalidateQueries({queryKey: dataKey});
-            const index = data.findIndex(item => item.id === dataToUpdate.id);
+            const index = clientData.findIndex(item => item.id === dataToUpdate.id);
 
             if (index !== -1) {
-                setData([
-                    ...data.slice(0, index),
-                    dataToUpdate,
-                    ...data.slice(index + 1),
+                setClientData([
+                    data,
+                    ...clientData.slice(0, index),
+                    ...clientData.slice(index + 1),
                 ]);
+            }
+
+            if (!!setUiState) {
+                setUiState(uiStateToSet)
             }
 
             toast({
@@ -62,10 +68,10 @@ export function useUpdateData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: str
         }
     })
 
-    return mutateData;
+    return {mutateData, isPending};
 }
 
-export function useUpdateJob(job: InsertedJobEntry) {
+export function useUpdateJob(job: InsertedJobEntry, setUiState?: (data: any) => void, uiStateToSet?: any) {
 
     // TODO implement success undo action
     const successToastContent: ToastContent = {
@@ -87,5 +93,5 @@ export function useUpdateJob(job: InsertedJobEntry) {
         )
     }
 
-    return useUpdateData<InsertedJobEntry>('/api/v1/jobs', ['jobs'], useJobEntriesStore, job.id, job, successToastContent, errorToastContent)
+    return useUpdateData<InsertedJobEntry>('/api/v1/jobs', ['jobs'], useJobEntriesStore, job.id, job, successToastContent, errorToastContent, setUiState, uiStateToSet)
 }
