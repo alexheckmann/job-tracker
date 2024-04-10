@@ -1,9 +1,11 @@
 "use client"
 
 import {
-    ColumnDef, ColumnFiltersState,
+    ColumnDef,
+    ColumnFiltersState,
     flexRender,
-    getCoreRowModel, getFilteredRowModel,
+    getCoreRowModel,
+    getFilteredRowModel,
     getSortedRowModel,
     SortingState,
     useReactTable,
@@ -35,6 +37,11 @@ export function DataTable<TData, TValue>({
             sorting,
             columnFilters,
         },
+        defaultColumn: {
+            size: 5,
+            minSize: 5,
+            maxSize: 150
+        }
     })
 
     return (
@@ -45,7 +52,8 @@ export function DataTable<TData, TValue>({
                         <TableRow key={headerGroup.id}>
                             {headerGroup.headers.map((header) => {
                                 return (
-                                    <TableHead key={header.id} className={"px-0"}>
+                                    // @ts-ignore
+                                    <TableHead key={header.id} className={`px-0 w-[${header.getSize()}]`}>
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(
@@ -66,7 +74,7 @@ export function DataTable<TData, TValue>({
                                 data-state={row.getIsSelected() && "selected"}
                             >
                                 {row.getVisibleCells().map((cell) => (
-                                    <TableCell key={cell.id}>
+                                    <TableCell key={cell.id} style={{width: cell.column.getSize()}}>
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                     </TableCell>
                                 ))}

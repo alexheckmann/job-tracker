@@ -59,6 +59,14 @@ function RowActions({row}: { row: Row<InsertedJobEntry> }) {
     )
 }
 
+// function that returns the first n characters of a string
+function truncateString(str: string, num: number) {
+    if (str.length <= num) {
+        return str
+    }
+    return str.slice(0, num) + '...'
+}
+
 export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     {
         accessorKey: "role",
@@ -250,8 +258,36 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         accessorKey: "notes",
-        header: "Notes",
-        enableResizing: false
+        header: ({column}) => {
+            return (
+                <span
+                    //className={"w-[50px]"}
+                >
+                    Notes
+                </span>
+            )
+        },
+        cell: ({row}) => {
+            const cellIsNotEmpty = row.getValue("notes") !== "";
+            return (
+                cellIsNotEmpty &&
+                <HoverCard>
+                    <HoverCardTrigger asChild>
+                        <span className="whitespace-nowrap truncate max-w-[50px]">{truncateString(row.getValue("notes"), 15)}</span>
+                    </HoverCardTrigger>
+                    <HoverCardContent className="w-fit">
+                        <div className="flex justify-between space-x-4">
+                            <div className="space-y-1">
+                                <p className="text-sm whitespace-pre">
+                                    {row.getValue("notes")}
+                                </p>
+                            </div>
+                        </div>
+                    </HoverCardContent>
+                </HoverCard>
+            );
+        },
+        size: 20,
     },
     {
         id: "actions",
