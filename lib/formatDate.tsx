@@ -1,18 +1,27 @@
 import {differenceInDays, format, formatDistanceToNowStrict, isToday, isYesterday} from "date-fns";
 
-export function formatDate(date: Date): string {
+export function formatDate(date: Date): any {
     const now = new Date();
     const diffInDays = differenceInDays(now, date);
 
     if (diffInDays < 7) {
         if (isToday(date)) {
-            return 'Today';
+            return (
+                <>
+                    <span className={"text-primary text-xl select-none"}>• </span>
+                    <span className={""}>Today</span>
+                </>
+            );
         } else if (isYesterday(date)) {
-            return 'Yesterday';
+            return (
+                <span>
+                    Yesterday
+                </span>
+            );
         } else {
-            return formatDistanceToNowStrict(date, {addSuffix: true});
+            return <span>{formatDistanceToNowStrict(date, {addSuffix: true})}</span>;
         }
     } else {
-        return format(date, 'dd/MM/yy');
+        return <span>{format(date, 'dd/MM/yy')}</span>;
     }
 }
