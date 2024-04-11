@@ -1,7 +1,7 @@
 "use client"
 
 import {DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
-import {cityData, countryData, roleData, useJobCreationDialogStore, useJobEntriesStore} from "@/app/data/job-data";
+import {cityData, roleData, useJobCreationDialogStore, useJobEntriesStore} from "@/app/data/job-data";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormField} from "@/components/ui/form";
@@ -43,15 +43,15 @@ export default function JobCreationDialogContent() {
         defaultValues: {
             role: "AI Engineer",
             company: "",
-            location: "London",
-            country: "United Kingdom",
+            location: "London, United Kingdom",
             lastUpdate: new Date(),
             status: "Applied",
             exactTitle: "",
             salary: "",
             isFavorite: false,
             isRecruiter: false,
-            notes: ""
+            notes: "",
+            link: ""
         }
     })
 
@@ -108,10 +108,9 @@ export default function JobCreationDialogContent() {
                                             onValueChange={field.onChange} isExpandable/>
                             )}/>
 
-                            <FormField control={form.control} name={"country"} render={({field}) => (
-                                <FormSelect entries={countryData} label={"Country"}
-                                            defaultValue={form.getValues("country")}
-                                            onValueChange={field.onChange} isExpandable/>
+                            <FormField control={form.control} name={"salary"} render={({field}) => (
+                                <FormInput labelName={"Salary"} placeholder={"Expected or discussed salary"}
+                                           field={field}/>
                             )}/>
                         </div>
 
@@ -137,8 +136,8 @@ export default function JobCreationDialogContent() {
                                            field={field}/>
                             )}/>
 
-                            <FormField control={form.control} name={"salary"} render={({field}) => (
-                                <FormInput labelName={"Salary"} placeholder={"Expected or discussed salary"}
+                            <FormField control={form.control} name={"link"} render={({field}) => (
+                                <FormInput labelName={"Link"} placeholder={"Link to the job posting"}
                                            field={field}/>
                             )}/>
                         </div>

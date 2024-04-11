@@ -29,12 +29,10 @@ export const roleData = [
 ]
 
 export const cityData = [
-    "London",
-    "Remote"
+    "London, United Kingdom",
+    "Barcelona, Spain",
+    "Remote, United Kingdom",
+    "Remote, Spain",
+    "Remote, Germany",
 ]
 
-export const countryData = [
-    "United Kingdom",
-    "Germany",
-    "Spain"
-]

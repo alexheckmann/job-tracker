@@ -21,7 +21,7 @@ export const JobsTable = pgTable(
         status: text('applicationStatus', {enum: statusEnum.enumValues}).notNull(),
         exactTitle: text('exact_title').notNull(),
         location: text('location').notNull(),
-        country: text('country').notNull(),
+        link: text('link'),
         salary: text('salary'),
         isFavorite: boolean('is_favorite').notNull(),
         isRecruiter: boolean('is_recruiter').notNull(),
@@ -34,7 +34,6 @@ export const insertJobSchema = createInsertSchema(JobsTable, {
     role: z.string().min(1),
     company: z.string().min(1),
     location: z.string().min(1),
-    country: z.string().min(1),
     lastUpdate: z.coerce.date()
 })
 
@@ -42,7 +41,6 @@ export const selectJobSchema = createSelectSchema(JobsTable, {
     role: z.string().min(1),
     company: z.string().min(1),
     location: z.string().min(1),
-    country: z.string().min(1),
     lastUpdate: z.coerce.date()
 })
 

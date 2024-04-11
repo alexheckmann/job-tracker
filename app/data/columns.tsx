@@ -1,7 +1,16 @@
 "use client"
 
 import {ColumnDef, Row} from "@tanstack/react-table"
-import {CheckSquare, ChevronsUpDown, Loader2, MoreHorizontal, SquarePen, Trash, XSquare} from "lucide-react";
+import {
+    CheckSquare,
+    ChevronsUpDown,
+    Loader2,
+    MoreHorizontal,
+    SquareArrowOutUpRight,
+    SquarePen,
+    Trash,
+    XSquare
+} from "lucide-react";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -17,6 +26,7 @@ import {InsertedJobEntry} from "@/lib/db/schema";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
 import {format} from "date-fns";
 import {useDeleteJob} from "@/app/data/use-delete-data";
+import Link from "next/link";
 
 function RowActions({row}: { row: Row<InsertedJobEntry> }) {
     const job = row.original
@@ -183,17 +193,24 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
         },
     },
     {
-        accessorKey: "country",
-        header: ({column}) => {
+        accessorKey: "link",
+        header: () => {
             return (
-                <Button
-                    variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                >
-                    Country
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
-                </Button>
+                <span className={"px-4"}>
+                    Link
+                </span>
             )
+        },
+        cell: ({row}) => {
+            return row.getValue("link") ?
+                <Button variant={"link"} className={"px-0 gap-2"}>
+                    <Link href={row.getValue("link")} target={"_blank"}>
+                        see job posting
+                    </Link>
+                    <SquareArrowOutUpRight className={"h-3 w-3"}/>
+                </Button>
+                :
+                null
         },
     },
     {
@@ -258,11 +275,9 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         accessorKey: "notes",
-        header: ({column}) => {
+        header: () => {
             return (
-                <span
-                    //className={"w-[50px]"}
-                >
+                <span className={"px-4"}>
                     Notes
                 </span>
             )
@@ -273,7 +288,8 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                 cellIsNotEmpty &&
                 <HoverCard>
                     <HoverCardTrigger asChild>
-                        <span className="whitespace-nowrap truncate max-w-[50px]">{truncateString(row.getValue("notes"), 15)}</span>
+                        <span
+                            className="whitespace-nowrap truncate max-w-[50px]">{truncateString(row.getValue("notes"), 15)}</span>
                     </HoverCardTrigger>
                     <HoverCardContent className="w-fit max-w-[250px] md:max-w-[500px] max-h-[50svh] overflow-auto">
                         <div className="flex justify-between space-x-4">

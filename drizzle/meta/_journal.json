@@ -43,6 +43,13 @@
       "when": 1712237455320,
       "tag": "0005_wide_lightspeed",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1712837835644,
+      "tag": "0006_lean_mac_gargan",
+      "breakpoints": true
     }
   ]
 }
