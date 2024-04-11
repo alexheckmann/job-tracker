@@ -2,13 +2,15 @@
 
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import {ReactNode, useState} from "react";
+import {cn} from "@/lib/utils";
 
 interface HoverDropdownMenuProps {
     dropdownMenuTrigger: ReactNode,
     dropdownMenuItems: ReactNode[],
-    openOnHover?: boolean
+    openOnHover?: boolean,
+    className?: string
 }
-export default function HoverableDropdownMenu({dropdownMenuTrigger, dropdownMenuItems, openOnHover = false}: HoverDropdownMenuProps) {
+export default function HoverableDropdownMenu({dropdownMenuTrigger, dropdownMenuItems, openOnHover = false, className}: HoverDropdownMenuProps) {
     const [openDropdown, setOpenDropdown] = useState(false);
 
     return (
@@ -17,7 +19,7 @@ export default function HoverableDropdownMenu({dropdownMenuTrigger, dropdownMenu
             onOpenChange={() => {
                 if (openOnHover) setOpenDropdown(false)
             }}>
-            <DropdownMenuTrigger
+            <DropdownMenuTrigger className={cn(className)}
                 onMouseEnter={() => {
                     if (openOnHover) setOpenDropdown(true)
                 }}

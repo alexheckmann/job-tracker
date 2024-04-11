@@ -4,13 +4,15 @@ import Link from "next/link";
 import {BriefcaseBusiness, CircleUser, Menu, Plus, Search} from "lucide-react";
 import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
 import {Button} from "@/components/ui/button";
-import {Input} from "@/components/ui/input";
 import HoverableDropdownMenu from "@/components/hoverable-dropdown-menu";
-import {DialogTrigger} from "@/components/ui/dialog";
+import {Dialog, DialogTrigger} from "@/components/ui/dialog";
 import JobCreationDialogContent from "@/components/job-creation-dialog-content";
 import Logo from "@/components/logo";
+import {useJobCreationDialogStore} from "@/app/data/job-data";
 
 export default function Navbar() {
+
+    const {data: isJobCreationDialogOpen, setData: setIsJobCreationDialogOpen} = useJobCreationDialogStore()
 
 
     return (
@@ -86,31 +88,24 @@ export default function Navbar() {
                 </SheetContent>
             </Sheet>
             <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-                <form className="ml-auto flex-1 sm:flex-initial">
-                    <div className="relative">
-                        <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground"/>
-                        <Input
-                            type="search"
-                            placeholder="Search company..."
-                            className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
-                        />
-                    </div>
-                </form>
-                <HoverableDropdownMenu openOnHover={true}
-                                       dropdownMenuTrigger={
-                                           <Button className={"gap-1"} variant={"secondary"}>
-                                               <Plus className="h-4 w-4 rotate-0 scale-100 transition-all"/>
-                                               <span>Add</span>
-                                           </Button>}
-                                       dropdownMenuItems=
-                                           {[
-                                               <DialogTrigger key={1} className={"w-full gap-2"}>
-                                                   <BriefcaseBusiness className={"h-4 w-4"}/>
-                                                   <span>Job</span>
-                                               </DialogTrigger>
-                                           ]}
-                />
-                <JobCreationDialogContent/>
+                <Dialog open={isJobCreationDialogOpen}
+                        onOpenChange={setIsJobCreationDialogOpen}>
+                    <HoverableDropdownMenu openOnHover={true} className={"ml-auto"}
+                                           dropdownMenuTrigger={
+                                               <Button className={"gap-1"} variant={"secondary"}>
+                                                   <Plus className="h-4 w-4 rotate-0 scale-100 transition-all"/>
+                                                   <span>Add</span>
+                                               </Button>}
+                                           dropdownMenuItems=
+                                               {[
+                                                   <DialogTrigger key={1} className={"w-full gap-2"}>
+                                                       <BriefcaseBusiness className={"h-4 w-4"}/>
+                                                       <span>Job</span>
+                                                   </DialogTrigger>
+                                               ]}
+                    />
+                    <JobCreationDialogContent/>
+                </Dialog>
                 <HoverableDropdownMenu
                     dropdownMenuTrigger={
                         <Button variant="secondary" size="icon" className="rounded-full">

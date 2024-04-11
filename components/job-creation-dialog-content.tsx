@@ -75,7 +75,7 @@ export default function JobCreationDialogContent() {
 
 
     return (
-        <DialogContent className="sm:max-w-[500px] max-h-[85svh] overflow-auto">
+        <DialogContent className="sm:max-w-[500px] max-h-[85svh] overflow-x-auto">
             <Form {...form}>
                 <form onSubmit={
                     form.handleSubmit((jobEntry: JobEntry) => {
