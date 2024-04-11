@@ -1,9 +1,9 @@
 import {StoreApi, UseBoundStore} from "zustand";
-import {ClientStateStore, InsertedJobEntry} from "@/lib/db/schema";
+import {ClientStateStore, InsertedContactEntry, InsertedJobEntry} from "@/lib/db/schema";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
-import {useJobEntriesStore} from "@/app/data/job-data";
+import {useContactEntriesStore, useJobEntriesStore} from "@/app/data/job-data";
 import {ToastAction} from "@/components/ui/toast";
 
 export interface ToastContent {
@@ -90,4 +90,30 @@ export function useDeleteJob(job: InsertedJobEntry) {
     }
 
     return useDeleteData<InsertedJobEntry>("/api/v1/jobs", ["jobs"], useJobEntriesStore, job.id, successToastContent, errorToastContent);
+}
+
+
+export function useDeleteContact(contact: InsertedContactEntry) {
+
+    // TODO implement success undo action
+    const successToastContent: ToastContent = {
+        title: "Job deleted",
+        description: `The contact at ${contact.company} has been successfully deleted.`,
+        variant: "default",
+        action: (
+            <ToastAction altText="Undo">Undo</ToastAction>
+        )
+    }
+
+    // TODO implement error retry action
+    const errorToastContent: ToastContent = {
+        title: "Deleting unsuccessful",
+        description: `Please try again to delete the contact at ${contact.company}.`,
+        variant: "destructive",
+        action: (
+            <ToastAction altText="Retry">Retry</ToastAction>
+        )
+    }
+
+    return useDeleteData<InsertedContactEntry>("/api/v1/contacts", ["contacts"], useContactEntriesStore, contact.id, successToastContent, errorToastContent);
 }

@@ -1,6 +1,6 @@
 import {useQuery} from "@tanstack/react-query";
 import axios from "axios";
-import {ClientStateStore, InsertedJobEntry} from "@/lib/db/schema";
+import {ClientStateStore, InsertedContactEntry, InsertedJobEntry} from "@/lib/db/schema";
 import {create} from "zustand";
 
 export function useJobData() {
@@ -12,8 +12,22 @@ export function useJobData() {
     });
 }
 
+export function useContactData() {
+    return useQuery({
+        queryKey: ['contacts'],
+        queryFn: async () => {
+            return await axios.get<{contacts: InsertedContactEntry[]}>('/api/v1/contacts').then((res) => res.data.contacts)
+        }
+    });
+}
+
 export const useJobEntriesStore = create<ClientStateStore<InsertedJobEntry[]>>((set) => ({
     data: [] as InsertedJobEntry[],
+    setData: (data) => set({data: data})
+}))
+
+export const useContactEntriesStore = create<ClientStateStore<InsertedContactEntry[]>>((set) => ({
+    data: [] as InsertedContactEntry[],
     setData: (data) => set({data: data})
 }))
 
