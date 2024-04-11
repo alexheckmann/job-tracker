@@ -4,6 +4,7 @@ import "./globals.css";
 import {cn} from "@/lib/utils";
 import {Analytics} from "@vercel/analytics/react"
 import {SpeedInsights} from "@vercel/speed-insights/next"
+import Main from "@/app/main";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -30,7 +31,11 @@ export default function RootLayout({
     return (
         <html lang="en">
         <body className={cn("min-h-screen bg-background font-sans antialiased", inter.variable)}>
-        {children}
+        <div className="flex min-h-screen w-full flex-col">
+            <Main>
+                {children}
+            </Main>
+        </div>
         <Analytics/>
         <SpeedInsights/>
         </body>

@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link";
-import {BriefcaseBusiness, CircleUser, Menu, Plus, Search} from "lucide-react";
+import {BriefcaseBusiness, CircleUser, Menu, Plus} from "lucide-react";
 import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
 import {Button} from "@/components/ui/button";
 import HoverableDropdownMenu from "@/components/hoverable-dropdown-menu";
@@ -9,11 +9,19 @@ import {Dialog, DialogTrigger} from "@/components/ui/dialog";
 import JobCreationDialogContent from "@/components/job-creation-dialog-content";
 import Logo from "@/components/logo";
 import {useJobCreationDialogStore} from "@/app/data/job-data";
+import {usePathname} from "next/navigation";
+
+const navLinks = [
+    {path: "/", label: "Applications"},
+    {path: "/contacts", label: "Contacts"},
+    {path: "#", label: "Analytics"}
+]
+
 
 export default function Navbar() {
 
     const {data: isJobCreationDialogOpen, setData: setIsJobCreationDialogOpen} = useJobCreationDialogStore()
-
+    const pathname = usePathname();
 
     return (
 
@@ -21,30 +29,27 @@ export default function Navbar() {
             <nav
                 className="hidden bg-background flex-col gap-8 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
                 <Link
-                    href="#"
+                    href="/"
                     className="flex items-center gap-2 text-lg font-bold md:text-base"
                 >
                     <Logo className={"h-8 w-8"}/>
                     <span>Pegasus</span>
                 </Link>
-                <Link
-                    href="#"
-                    className="text-foreground transition-colors font-light hover:text-foreground"
-                >
-                    Applications
-                </Link>
-                <Link
-                    href="#"
-                    className="text-muted-foreground transition-colors font-light hover:text-foreground"
-                >
-                    Contacts
-                </Link>
-                <Link
-                    href="#"
-                    className="text-muted-foreground transition-colors font-light hover:text-foreground"
-                >
-                    Analytics
-                </Link>
+
+                {navLinks.map(({path, label}) => (
+                    <Link
+                        key={path}
+                        href={path}
+                        className={`${
+                            pathname === path
+                                ? "text-foreground font-semibold"
+                                : "text-muted-foreground"
+                        } text-foreground transition-colors font-light hover:text-foreground`}
+                    >
+                        {label}
+                    </Link>
+                ))}
+
             </nav>
             <Sheet>
                 <SheetTrigger asChild>
@@ -66,24 +71,20 @@ export default function Navbar() {
                             <Logo className={"h-6 w-6"}/>
                             <span className="sr-only">Pegasus</span>
                         </Link>
-                        <Link
-                            href="#"
-                            className="text-muted-foreground hover:text-foreground"
-                        >
-                            Applications
-                        </Link>
-                        <Link
-                            href="#"
-                            className="text-muted-foreground hover:text-foreground"
-                        >
-                            Contacts
-                        </Link>
-                        <Link
-                            href="#"
-                            className="text-muted-foreground hover:text-foreground"
-                        >
-                            Analytics
-                        </Link>
+
+                        {navLinks.map(({path, label}) => (
+                            <Link
+                                key={path}
+                                href={path}
+                                className={`${
+                                    pathname === path
+                                        ? "text-foreground font-semibold"
+                                        : "text-muted-foreground"
+                                } text-foreground transition-colors font-light hover:text-foreground`}
+                            >
+                                {label}
+                            </Link>
+                        ))}
                     </nav>
                 </SheetContent>
             </Sheet>
