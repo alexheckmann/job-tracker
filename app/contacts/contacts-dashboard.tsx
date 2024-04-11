@@ -47,7 +47,6 @@ export default function ContactsDashboard() {
                     </CardContent>
                 </Card>
             </div>
-            <Toaster/>
         </main>
     )
 }
