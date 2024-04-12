@@ -87,11 +87,6 @@ export default function ContactCreationDialogContent() {
                                        field={field}/>
                         )}/>
 
-                        <FormField control={form.control} name={"role"} render={({field}) => (
-                            <FormInput labelName={"Role"} placeholder={"Role"} isRequired
-                                       field={field}/>
-                        )}/>
-
                         <FormField control={form.control} name={"company"} render={({field}) => (
                             <FormInput labelName={"Company"} placeholder={"Company"} isRequired
                                        field={field}/>
@@ -103,8 +98,8 @@ export default function ContactCreationDialogContent() {
                                            field={field}/>
                             )}/>
 
-                            <FormField control={form.control} name={"linkedin"} render={({field}) => (
-                                <FormInput labelName={"LinkedIn"} placeholder={"LinkedIn profile"}
+                            <FormField control={form.control} name={"role"} render={({field}) => (
+                                <FormInput labelName={"Role"} placeholder={"Role"} isRequired
                                            field={field}/>
                             )}/>
                         </div>
@@ -120,19 +115,20 @@ export default function ContactCreationDialogContent() {
                             )}/>
 
                             <FormField control={form.control} name={"linkedin"} render={({field}) => (
-                                <FormInput labelName={"Link"} placeholder={"Link to the job posting"}
+                                <FormInput labelName={"LinkedIn"} placeholder={"LinkedIn profile"}
                                            field={field}/>
                             )}/>
+
                         </div>
 
                         <div className={"grid grid-cols-2 gap-4 items-end"}>
                             <FormField control={form.control} name={"email"} render={({field}) => (
-                                <FormInput labelName={"Link"} placeholder={"Link to the job posting"}
+                                <FormInput labelName={"Email"} placeholder={"Email address"}
                                            field={field}/>
                             )}/>
 
                             <FormField control={form.control} name={"phone"} render={({field}) => (
-                                <FormInput labelName={"Link"} placeholder={"Link to the job posting"}
+                                <FormInput labelName={"Phone"} placeholder={"Phone number"}
                                            field={field}/>
                             )}/>
                         </div>
