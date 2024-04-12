@@ -10,13 +10,12 @@ import {
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
-import {formatDate} from "@/lib/formatDate";
 import {useEffect} from "react";
 import {InsertedContactEntry} from "@/lib/db/schema";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
-import {format} from "date-fns";
 import {useDeleteContact} from "@/app/data/use-delete-data";
 import Link from "next/link";
+import {LastUpdatedTooltip} from "@/components/last-updated-tooltip";
 
 function RowActions({row}: { row: Row<InsertedContactEntry> }) {
     const contact = row.original
@@ -220,20 +219,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
         },
         cell: ({row}) => {
             return (
-                <HoverCard>
-                    <HoverCardTrigger asChild>
-                        <span>{formatDate(row.getValue("lastUpdate"))}</span>
-                    </HoverCardTrigger>
-                    <HoverCardContent className="w-fit">
-                        <div className="flex justify-between space-x-4">
-                            <div className="space-y-1">
-                                <p className="text-sm">
-                                    Last updated on {format(row.getValue("lastUpdate"), "dd/MM/yyyy")}.
-                                </p>
-                            </div>
-                        </div>
-                    </HoverCardContent>
-                </HoverCard>
+                <LastUpdatedTooltip date={row.getValue("lastUpdate")}/>
             );
         },
     },

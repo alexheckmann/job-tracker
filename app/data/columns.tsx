@@ -19,14 +19,13 @@ import {
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
-import {formatDate} from "@/lib/formatDate";
 import {StatusDropdown} from "@/components/status-dropdown";
 import {useEffect} from "react";
 import {InsertedJobEntry} from "@/lib/db/schema";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
-import {format} from "date-fns";
 import {useDeleteJob} from "@/app/data/use-delete-data";
 import Link from "next/link";
+import {LastUpdatedTooltip} from "@/components/last-updated-tooltip";
 
 function RowActions({row}: { row: Row<InsertedJobEntry> }) {
     const job = row.original
@@ -127,21 +126,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
         },
         cell: ({row}) => {
             return (
-                <HoverCard>
-                    <HoverCardTrigger asChild>
-                        <span>{formatDate(row.getValue("lastUpdate"))}</span>
-                    </HoverCardTrigger>
-                    <HoverCardContent className="w-fit">
-                        <div className="flex justify-between space-x-4">
-                            <div className="space-y-1">
-                                <p className="text-sm">
-                                    Last updated on {format(row.getValue("lastUpdate"), "dd/MM/yyyy")}.
-                                </p>
-                            </div>
-                        </div>
-                    </HoverCardContent>
-                </HoverCard>
-
+                <LastUpdatedTooltip date={row.getValue("lastUpdate")}/>
             );
 
         },
