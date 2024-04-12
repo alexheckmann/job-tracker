@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link";
-import {CircleUser, Menu} from "lucide-react";
+import {CircleUser, Menu, SquareArrowOutUpRight} from "lucide-react";
 import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
 import {Button} from "@/components/ui/button";
 import HoverableDropdownMenu from "@/components/hoverable-dropdown-menu";
@@ -71,17 +71,19 @@ export default function Navbar() {
                         </Link>
 
                         {navLinks.map(({path, label}) => (
-                            <Link
-                                key={path}
-                                href={path}
-                                className={`${
-                                    pathname === path
-                                        ? "text-foreground font-semibold"
-                                        : "text-muted-foreground"
-                                } text-foreground transition-colors font-light hover:text-foreground`}
-                            >
-                                {label}
-                            </Link>
+                            <Button variant={"link"} key={path}>
+                                <Link
+                                    href={path}
+                                    className={`${
+                                        pathname === path
+                                            ? "text-foreground font-semibold"
+                                            : "text-muted-foreground"
+                                    } text-foreground transition-colors font-light hover:text-foreground`}
+                                >
+                                    {label}
+                                </Link>
+                                <SquareArrowOutUpRight className={"h-3 w-3"}/>
+                            </Button>
                         ))}
                     </nav>
                 </SheetContent>
