@@ -25,7 +25,7 @@ export default function Navbar() {
 
         <header className="sticky top-0 flex h-14 items-center gap-4 border-b bg-background px-4 md:px-8">
             <nav
-                className="hidden bg-background flex-col gap-8 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+                className="hidden bg-background flex-col gap-3 text-lg font-medium md:flex md:flex-row md:items-center md:gap-2 md:text-sm lg:gap-2">
                 <Link
                     href="/"
                     className="flex items-center gap-2 text-lg font-bold md:text-base"
@@ -35,17 +35,19 @@ export default function Navbar() {
                 </Link>
 
                 {navLinks.map(({path, label}) => (
-                    <Link
-                        key={path}
-                        href={path}
-                        className={`${
-                            pathname === path
-                                ? "text-foreground font-semibold"
-                                : "text-muted-foreground"
-                        } text-foreground transition-colors font-light hover:text-foreground`}
-                    >
-                        {label}
-                    </Link>
+
+                    <Button variant={"link"} className={"hover:no-underline hover:text-muted-foreground px-2"} key={path}>
+                        <Link
+                            href={path}
+                            className={`${
+                                pathname === path
+                                    ? "text-foreground font-semibold"
+                                    : "text-muted-foreground"
+                            } text-foreground transition-colors font-light`}
+                        >
+                            {label}
+                        </Link>
+                    </Button>
                 ))}
 
             </nav>
@@ -61,7 +63,7 @@ export default function Navbar() {
                     </Button>
                 </SheetTrigger>
                 <SheetContent side="left">
-                    <nav className="grid gap-6 text-lg font-medium">
+                    <nav className="grid gap-2 text-lg font-medium">
                         <Link
                             href="#"
                             className="flex items-center gap-2 text-lg font-semibold"
@@ -71,14 +73,14 @@ export default function Navbar() {
                         </Link>
 
                         {navLinks.map(({path, label}) => (
-                            <Button variant={"link"} key={path}>
+                            <Button variant={"link"} key={path} className={"hover:no-underline hover:text-foreground"}>
                                 <Link
                                     href={path}
                                     className={`${
                                         pathname === path
                                             ? "text-foreground font-semibold"
                                             : "text-muted-foreground"
-                                    } text-foreground transition-colors font-light hover:text-foreground`}
+                                    } text-foreground transition-colors font-light`}
                                 >
                                     {label}
                                 </Link>
