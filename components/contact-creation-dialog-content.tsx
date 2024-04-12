@@ -1,19 +1,17 @@
 "use client"
 
 import {DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
-import {cityData, roleData, useJobCreationDialogStore} from "@/app/data/job-data";
+import {useContactCreationDialogStore} from "@/app/data/job-data";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormField} from "@/components/ui/form";
-import {FormSelect} from "@/components/form-select";
 import {FormInput} from "@/components/form-input";
 import {FormDatePicker} from "@/components/form-date-picker";
-import {FormSwitch} from "@/components/form-switch";
 import {FormTextarea} from "@/components/form-textarea";
-import {ApplicationStatus, insertJobSchema, JobEntry} from "@/lib/db/schema";
+import {ContactEntry, insertJobSchema} from "@/lib/db/schema";
 import {Button} from "@/components/ui/button";
-import {useCreateJob} from "@/app/data/use-create-data";
-import {ClipboardPlus, Loader2} from "lucide-react";
+import {useCreateContact} from "@/app/data/use-create-data";
+import {Loader2, UserRoundPlus} from "lucide-react";
 import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
 
 // @ts-ignore
@@ -33,32 +31,33 @@ function SubmitButton({children, disabled = false}) {
     )
 }
 
-export default function JobCreationDialogContent() {
+export default function ContactCreationDialogContent() {
 
-    const {setData: setIsJobCreationDialogOpen} = useJobCreationDialogStore()
+    const {setData: setIsContactCreationDialogOpen} = useContactCreationDialogStore()
 
-    const form = useForm<JobEntry>({
+    const form = useForm<ContactEntry>({
         resolver: zodResolver(insertJobSchema),
         defaultValues: {
-            role: "AI Engineer",
+            role: "Recruiter",
             company: "",
             location: "London, United Kingdom",
             lastUpdate: new Date(),
-            status: "Applied",
-            exactTitle: "",
-            salary: "",
-            isFavorite: false,
-            isRecruiter: false,
             notes: "",
-            link: ""
+            linkedin: "",
+            name: "",
+            email: "",
+            phone: ""
         }
     })
 
-    const {mutateData: insertJob, isPending: isAddingJob} = useCreateJob(form.getValues(), setIsJobCreationDialogOpen)
+    const {
+        mutateData: insertJob,
+        isPending: isAddingJob
+    } = useCreateContact(form.getValues(), setIsContactCreationDialogOpen)
 
     useCtrlKeyShortcut("m", () => {
-        form.handleSubmit((jobEntry: JobEntry) => {
-            insertJob(jobEntry)
+        form.handleSubmit((contact: ContactEntry) => {
+            insertJob(contact)
         })();
     })
 
@@ -67,15 +66,15 @@ export default function JobCreationDialogContent() {
         <DialogContent className="sm:max-w-[500px] max-h-[85svh] overflow-x-auto">
             <Form {...form}>
                 <form onSubmit={
-                    form.handleSubmit((jobEntry: JobEntry) => {
-                        insertJob(jobEntry)
+                    form.handleSubmit((contact: ContactEntry) => {
+                        insertJob(contact)
                     })
                 }>
 
                     <DialogHeader>
                         <DialogTitle className={"flex flex-row gap-2"}>
-                            <ClipboardPlus className={"h-4 w-4"}/>
-                            Add job
+                            <UserRoundPlus className={"h-4 w-4"}/>
+                            Add contact
                         </DialogTitle>
                         <DialogDescription>
                             Click save when you are done.
@@ -83,9 +82,14 @@ export default function JobCreationDialogContent() {
                     </DialogHeader>
 
                     <div className="grid gap-4 py-4">
+                        <FormField control={form.control} name={"name"} render={({field}) => (
+                            <FormInput labelName={"Name"} placeholder={"Name"} isRequired
+                                       field={field}/>
+                        )}/>
+
                         <FormField control={form.control} name={"role"} render={({field}) => (
-                            <FormSelect entries={roleData} label={"Role"} defaultValue={form.getValues("role")}
-                                        onValueChange={field.onChange} isExpandable/>
+                            <FormInput labelName={"Role"} placeholder={"Role"} isRequired
+                                       field={field}/>
                         )}/>
 
                         <FormField control={form.control} name={"company"} render={({field}) => (
@@ -95,16 +99,16 @@ export default function JobCreationDialogContent() {
 
                         <div className={"grid grid-cols-2 gap-4 items-end"}>
                             <FormField control={form.control} name={"location"} render={({field}) => (
-                                <FormSelect entries={cityData} label={"Location"}
-                                            defaultValue={form.getValues("location")}
-                                            onValueChange={field.onChange} isExpandable/>
+                                <FormInput labelName={"Location"} placeholder={"Location"} isRequired
+                                           field={field}/>
                             )}/>
 
-                            <FormField control={form.control} name={"salary"} render={({field}) => (
-                                <FormInput labelName={"Salary"} placeholder={"Expected or discussed salary"}
+                            <FormField control={form.control} name={"linkedin"} render={({field}) => (
+                                <FormInput labelName={"LinkedIn"} placeholder={"LinkedIn profile"}
                                            field={field}/>
                             )}/>
                         </div>
+
 
                         <FormField control={form.control} name={"notes"} render={({field}) => (
                             <FormTextarea label={"Notes"} placeholder={"Add your notes"} field={field}/>
@@ -115,34 +119,21 @@ export default function JobCreationDialogContent() {
                                 <FormDatePicker labelName={"Last update"} field={field}/>
                             )}/>
 
-                            <FormField control={form.control} name={"status"} render={({field}) => (
-                                <FormSelect entries={ApplicationStatus.options} label={"Status"}
-                                            defaultValue={form.getValues("status")}
-                                            onValueChange={field.onChange}/>
-                            )}/>
-                        </div>
-
-                        <div className={"grid grid-cols-2 gap-4 items-end"}>
-                            <FormField control={form.control} name={"exactTitle"} render={({field}) => (
-                                <FormInput labelName={"Exact Title"} placeholder={"Exact title of position"}
-                                           field={field}/>
-                            )}/>
-
-                            <FormField control={form.control} name={"link"} render={({field}) => (
+                            <FormField control={form.control} name={"linkedin"} render={({field}) => (
                                 <FormInput labelName={"Link"} placeholder={"Link to the job posting"}
                                            field={field}/>
                             )}/>
                         </div>
 
                         <div className={"grid grid-cols-2 gap-4 items-end"}>
-                            <FormField control={form.control} name={"isFavorite"} render={({field}) => (
-                                <FormSwitch label={"Favorite role"} checked={field.value}
-                                            onCheckedChange={field.onChange}/>
+                            <FormField control={form.control} name={"email"} render={({field}) => (
+                                <FormInput labelName={"Link"} placeholder={"Link to the job posting"}
+                                           field={field}/>
                             )}/>
 
-                            <FormField control={form.control} name={"isRecruiter"} render={({field}) => (
-                                <FormSwitch label={"Recruitment agency"} checked={field.value}
-                                            onCheckedChange={field.onChange}/>
+                            <FormField control={form.control} name={"phone"} render={({field}) => (
+                                <FormInput labelName={"Link"} placeholder={"Link to the job posting"}
+                                           field={field}/>
                             )}/>
                         </div>
 

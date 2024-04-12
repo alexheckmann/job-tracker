@@ -1,15 +1,14 @@
 "use client"
 
 import Link from "next/link";
-import {BriefcaseBusiness, CircleUser, Menu, Plus} from "lucide-react";
+import {CircleUser, Menu} from "lucide-react";
 import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
 import {Button} from "@/components/ui/button";
 import HoverableDropdownMenu from "@/components/hoverable-dropdown-menu";
-import {Dialog, DialogTrigger} from "@/components/ui/dialog";
-import JobCreationDialogContent from "@/components/job-creation-dialog-content";
 import Logo from "@/components/logo";
-import {useJobCreationDialogStore} from "@/app/data/job-data";
 import {usePathname} from "next/navigation";
+import {CreateJobButton} from "@/components/create-job-button";
+import {CreateContactButton} from "@/components/create-contact-button";
 
 const navLinks = [
     {path: "/", label: "Applications"},
@@ -20,7 +19,6 @@ const navLinks = [
 
 export default function Navbar() {
 
-    const {data: isJobCreationDialogOpen, setData: setIsJobCreationDialogOpen} = useJobCreationDialogStore()
     const pathname = usePathname();
 
     return (
@@ -88,25 +86,12 @@ export default function Navbar() {
                     </nav>
                 </SheetContent>
             </Sheet>
+
             <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-                <Dialog open={isJobCreationDialogOpen}
-                        onOpenChange={setIsJobCreationDialogOpen}>
-                    <HoverableDropdownMenu openOnHover={true} className={"ml-auto"}
-                                           dropdownMenuTrigger={
-                                               <Button className={"gap-1"} variant={"secondary"}>
-                                                   <Plus className="h-4 w-4 rotate-0 scale-100 transition-all"/>
-                                                   <span>Add</span>
-                                               </Button>}
-                                           dropdownMenuItems=
-                                               {[
-                                                   <DialogTrigger key={1} className={"w-full gap-2"}>
-                                                       <BriefcaseBusiness className={"h-4 w-4"}/>
-                                                       <span>Job</span>
-                                                   </DialogTrigger>
-                                               ]}
-                    />
-                    <JobCreationDialogContent/>
-                </Dialog>
+
+                <CreateJobButton/>
+                <CreateContactButton/>
+
                 <HoverableDropdownMenu
                     dropdownMenuTrigger={
                         <Button variant="secondary" size="icon" className="rounded-full">

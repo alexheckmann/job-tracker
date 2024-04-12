@@ -36,6 +36,11 @@ export const useJobCreationDialogStore = create<ClientStateStore<boolean>>(set =
     setData: (data) => set({data: data})
 }));
 
+export const useContactCreationDialogStore = create<ClientStateStore<boolean>>(set => ({
+    data: false,
+    setData: (data) => set({data: data})
+}));
+
 export const roleData = [
     "AI Engineer",
     "Data Engineer",
