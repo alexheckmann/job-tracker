@@ -131,9 +131,9 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
             )
         },
         cell: ({row}) => {
-            return row.getValue("link") ?
+            return row.getValue("linkedin") ?
                 <Button variant={"link"} className={"px-0 gap-2"}>
-                    <Link href={row.getValue("link")} target={"_blank"}>
+                    <Link href={row.getValue("linkedin")} target={"_blank"}>
                         Go to LinkedIn
                     </Link>
                     <SquareArrowOutUpRight className={"h-3 w-3"}/>

@@ -8,7 +8,7 @@ import {Form, FormField} from "@/components/ui/form";
 import {FormInput} from "@/components/form-input";
 import {FormDatePicker} from "@/components/form-date-picker";
 import {FormTextarea} from "@/components/form-textarea";
-import {ContactEntry, insertJobSchema} from "@/lib/db/schema";
+import {ContactEntry, insertContactSchema} from "@/lib/db/schema";
 import {Button} from "@/components/ui/button";
 import {useCreateContact} from "@/app/data/use-create-data";
 import {Loader2, UserRoundPlus} from "lucide-react";
@@ -36,7 +36,7 @@ export default function ContactCreationDialogContent() {
     const {setData: setIsContactCreationDialogOpen} = useContactCreationDialogStore()
 
     const form = useForm<ContactEntry>({
-        resolver: zodResolver(insertJobSchema),
+        resolver: zodResolver(insertContactSchema),
         defaultValues: {
             role: "Recruiter",
             company: "",
@@ -51,13 +51,13 @@ export default function ContactCreationDialogContent() {
     })
 
     const {
-        mutateData: insertJob,
-        isPending: isAddingJob
+        mutateData: insertContact,
+        isPending: isAddingContact
     } = useCreateContact(form.getValues(), setIsContactCreationDialogOpen)
 
     useCtrlKeyShortcut("m", () => {
         form.handleSubmit((contact: ContactEntry) => {
-            insertJob(contact)
+            insertContact(contact)
         })();
     })
 
@@ -67,7 +67,7 @@ export default function ContactCreationDialogContent() {
             <Form {...form}>
                 <form onSubmit={
                     form.handleSubmit((contact: ContactEntry) => {
-                        insertJob(contact)
+                        insertContact(contact)
                     })
                 }>
 
@@ -135,7 +135,7 @@ export default function ContactCreationDialogContent() {
 
                     </div>
                     <DialogFooter>
-                        <SubmitButton disabled={isAddingJob}>Add job</SubmitButton>
+                        <SubmitButton disabled={isAddingContact}>Add contact</SubmitButton>
                     </DialogFooter>
                 </form>
             </Form>
