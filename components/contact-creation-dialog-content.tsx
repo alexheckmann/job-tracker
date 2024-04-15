@@ -9,27 +9,10 @@ import {FormInput} from "@/components/form-input";
 import {FormDatePicker} from "@/components/form-date-picker";
 import {FormTextarea} from "@/components/form-textarea";
 import {ContactEntry, insertContactSchema} from "@/lib/db/schema";
-import {Button} from "@/components/ui/button";
 import {useCreateContact} from "@/app/data/use-create-data";
 import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
-import {NewContactIcon, LoadingIcon} from "@/components/icons";
-
-// @ts-ignore
-function SubmitButton({children, disabled = false}) {
-
-    return (
-        <Button type="submit" className={"gap-2 sm:w-[140px]"} disabled={disabled}>
-            <span>{children}</span>
-            {disabled ?
-                <LoadingIcon/> :
-                <kbd
-                    className="hidden pointer-events-none lg:inline-flex h-5 select-none text-[10px] font-sans items-center rounded border px-1.5 font-light opacity-100 gap-2">
-                    <span className="text-xs">Ctrl</span>
-                    <span className="text-xs">M</span>
-                </kbd>}
-        </Button>
-    )
-}
+import {NewContactIcon} from "@/components/icons";
+import {SubmitButton} from "@/components/submit-button";
 
 export default function ContactCreationDialogContent() {
 
