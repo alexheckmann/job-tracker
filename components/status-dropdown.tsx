@@ -2,11 +2,11 @@
 
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
 import StatusBadge from "@/components/status-badge";
-import {ChevronDown} from "lucide-react";
 import {Row} from "@tanstack/react-table";
 import {ApplicationStatus, InsertedJobEntry} from "@/lib/db/schema";
 import {useState} from "react";
 import {useUpdateJob} from "@/app/data/use-update-data";
+import {DropdownIcon} from "@/components/icons";
 
 const statuses = ApplicationStatus["_type"]
 
@@ -24,7 +24,7 @@ export function StatusDropdown({row}: StatusDropdownProps) {
             <DropdownMenuTrigger disabled={isUpdatingStatus}
                 className={"inline-flex items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"}>
                 <StatusBadge status={status} className={isUpdatingStatus ? "bg-background" : ""}>
-                    <ChevronDown className={"h-4 w-4 ml-1"}/>
+                    <DropdownIcon className={"ml-1"}/>
                 </StatusBadge>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="center">

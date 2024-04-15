@@ -11,8 +11,8 @@ import {FormTextarea} from "@/components/form-textarea";
 import {ContactEntry, insertContactSchema} from "@/lib/db/schema";
 import {Button} from "@/components/ui/button";
 import {useCreateContact} from "@/app/data/use-create-data";
-import {Loader2, UserRoundPlus} from "lucide-react";
 import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
+import {NewContactIcon, LoadingIcon} from "@/components/icons";
 
 // @ts-ignore
 function SubmitButton({children, disabled = false}) {
@@ -21,7 +21,7 @@ function SubmitButton({children, disabled = false}) {
         <Button type="submit" className={"gap-2 sm:w-[140px]"} disabled={disabled}>
             <span>{children}</span>
             {disabled ?
-                <Loader2 className={"h-4 w-4 animate-spin"}/> :
+                <LoadingIcon/> :
                 <kbd
                     className="hidden pointer-events-none lg:inline-flex h-5 select-none text-[10px] font-sans items-center rounded border px-1.5 font-light opacity-100 gap-2">
                     <span className="text-xs">Ctrl</span>
@@ -73,7 +73,7 @@ export default function ContactCreationDialogContent() {
 
                     <DialogHeader>
                         <DialogTitle className={"flex flex-row gap-2"}>
-                            <UserRoundPlus className={"h-4 w-4"}/>
+                            <NewContactIcon/>
                             Add contact
                         </DialogTitle>
                         <DialogDescription>

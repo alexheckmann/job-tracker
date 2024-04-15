@@ -5,9 +5,9 @@ import {FormControl, FormItem, FormLabel} from "@/components/ui/form";
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
-import {Calendar as CalendarIcon} from "lucide-react";
 import {format} from "date-fns";
 import {Calendar} from "@/components/ui/calendar";
+import {CalendarIcon} from "@/components/icons";
 
 interface FormDatePickerProps {
     labelName: string,
@@ -35,7 +35,7 @@ export function FormDatePicker({labelName, field}: FormDatePickerProps) {
                                     !field.value && "text-muted-foreground"
                                 )}
                             >
-                                <CalendarIcon className="mr-2 h-4 w-4"/>
+                                <CalendarIcon className="mr-2"/>
                                 {field.value ? format(field.value, "dd/MM/yy") : <span>Pick a date</span>}
                             </Button>
                         </FormControl>

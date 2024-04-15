@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link";
-import {CircleUser, Menu, SquareArrowOutUpRight} from "lucide-react";
 import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
 import {Button} from "@/components/ui/button";
 import HoverableDropdownMenu from "@/components/hoverable-dropdown-menu";
@@ -9,10 +8,12 @@ import Logo from "@/components/logo";
 import {usePathname} from "next/navigation";
 import {CreateJobButton} from "@/components/create-job-button";
 import {CreateContactButton} from "@/components/create-contact-button";
+import {MenuIcon, UserIcon} from "@/components/icons";
 
 const navLinks = [
     {path: "/", label: "Applications"},
     {path: "/contacts", label: "Contacts"},
+    {path: "/resources", label: "Resources"},
     {path: "#", label: "Analytics"}
 ]
 
@@ -58,7 +59,7 @@ export default function Navbar() {
                         size="icon"
                         className="shrink-0 md:hidden"
                     >
-                        <Menu className="h-5 w-5"/>
+                        <MenuIcon className="h-5 w-5"/>
                         <span className="sr-only">Toggle navigation menu</span>
                     </Button>
                 </SheetTrigger>
@@ -84,7 +85,6 @@ export default function Navbar() {
                                 >
                                     {label}
                                 </Link>
-                                <SquareArrowOutUpRight className={"h-3 w-3"}/>
                             </Button>
                         ))}
                     </nav>
@@ -99,7 +99,7 @@ export default function Navbar() {
                 <HoverableDropdownMenu
                     dropdownMenuTrigger={
                         <Button variant="secondary" size="icon" className="rounded-full">
-                            <CircleUser className="h-5 w-5"/>
+                            <UserIcon className="h-5 w-5"/>
                             <span className="sr-only">Toggle user menu</span>
                         </Button>
                     } dropdownMenuItems={[

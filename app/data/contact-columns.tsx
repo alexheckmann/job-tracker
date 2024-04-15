@@ -1,7 +1,6 @@
 "use client"
 
 import {ColumnDef, Row} from "@tanstack/react-table"
-import {ChevronsUpDown, Loader2, Mail, MoreHorizontal, SquareArrowOutUpRight, SquarePen, Trash} from "lucide-react";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -16,6 +15,7 @@ import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hov
 import {useDeleteContact} from "@/app/data/use-delete-data";
 import Link from "next/link";
 import {LastUpdatedTooltip} from "@/components/last-updated-tooltip";
+import {DeleteIcon, EditIcon, LoadingIcon, MailIcon, MoreIcon, OpenLinkIcon, SortIcon} from "@/components/icons";
 
 function RowActions({row}: { row: Row<InsertedContactEntry> }) {
     const contact = row.original
@@ -29,12 +29,12 @@ function RowActions({row}: { row: Row<InsertedContactEntry> }) {
                     {isDeletingContact ?
                         <>
                             <span className="sr-only">Deleting entry</span>
-                            <Loader2 className={"h-4 w-4 animate-spin"}/>
+                            <LoadingIcon/>
                         </>
                         :
                         <>
                             <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4"/>
+                            <MoreIcon/>
                         </>
                     }
                 </Button>
@@ -44,13 +44,13 @@ function RowActions({row}: { row: Row<InsertedContactEntry> }) {
 
                 {/* TODO implement edit dialog */}
                 <DropdownMenuItem className={"gap-2"}>
-                    <SquarePen className={"h-4 w-4"}/>
+                    <EditIcon/>
                     Edit
                 </DropdownMenuItem>
 
                 <DropdownMenuItem className={"gap-2"}
                                   onClick={() => mutateContacts()}>
-                    <Trash className={"h-4 w-4"}/>
+                    <DeleteIcon/>
                     Delete
                 </DropdownMenuItem>
             </DropdownMenuContent>
@@ -76,7 +76,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Name
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                    <SortIcon className="ml-2"/>
                 </Button>
             )
         },
@@ -91,7 +91,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Company
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                    <SortIcon className={"ml-2"}/>
                 </Button>
             )
         },
@@ -115,7 +115,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Location
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                    <SortIcon className={"ml-2"}/>
                 </Button>
             )
         },
@@ -135,7 +135,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
                     <Link href={row.getValue("linkedin")} target={"_blank"}>
                         Go to LinkedIn
                     </Link>
-                    <SquareArrowOutUpRight className={"h-3 w-3"}/>
+                    <OpenLinkIcon className={"h-3 w-3"}/>
                 </Button>
                 :
                 null
@@ -161,7 +161,8 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
             )
         },
         cell: ({row}) => {
-            return row.getValue("email") ? <Mail className={"h-4 w-4 text-muted-foreground"}/> :
+            return row.getValue("email") ?
+                <MailIcon/> :
                 null
         },
         size: 20,
@@ -213,7 +214,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Updated
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                    <SortIcon className={"ml-2"}/>
                 </Button>
             )
         },
