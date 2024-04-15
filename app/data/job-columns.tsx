@@ -2,6 +2,16 @@
 
 import {ColumnDef, Row} from "@tanstack/react-table"
 import {
+    CheckSquare,
+    ChevronsUpDown,
+    Loader2,
+    MoreHorizontal,
+    SquareArrowOutUpRight,
+    SquarePen,
+    Trash,
+    XSquare
+} from "lucide-react";
+import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
@@ -16,7 +26,6 @@ import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hov
 import {useDeleteJob} from "@/app/data/use-delete-data";
 import Link from "next/link";
 import {HoverTooltip} from "@/components/hover-tooltip";
-import {DeleteIcon, EditIcon, LoadingIcon, MoreIcon, NoIcon, OpenLinkIcon, SortIcon, YesIcon} from "@/components/icons";
 import {formatDate} from "@/lib/formatDate";
 import {format} from "date-fns";
 
@@ -32,12 +41,12 @@ function RowActions({row}: { row: Row<InsertedJobEntry> }) {
                     {isDeletingJob ?
                         <>
                             <span className="sr-only">Deleting entry</span>
-                            <LoadingIcon/>
+                            <Loader2 className={"h-4 w-4 animate-spin"}/>
                         </>
                         :
                         <>
                             <span className="sr-only">Open menu</span>
-                            <MoreIcon/>
+                            <MoreHorizontal className="h-4 w-4"/>
                         </>
                     }
                 </Button>
@@ -47,13 +56,13 @@ function RowActions({row}: { row: Row<InsertedJobEntry> }) {
 
                 {/* TODO implement edit dialog */}
                 <DropdownMenuItem className={"gap-2"}>
-                    <EditIcon/>
+                    <SquarePen className={"h-4 w-4"}/>
                     Edit
                 </DropdownMenuItem>
 
                 <DropdownMenuItem className={"gap-2"}
                                   onClick={() => mutateJobs()}>
-                    <DeleteIcon/>
+                    <Trash className={"h-4 w-4"}/>
                     Delete
                 </DropdownMenuItem>
             </DropdownMenuContent>
@@ -79,7 +88,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Role
-                    <SortIcon className={"ml-2"}/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
@@ -94,7 +103,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Company
-                    <SortIcon className={"ml-2"}/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
@@ -113,14 +122,15 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Updated
-                    <SortIcon className={"ml-2"}/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
         cell: ({row}) => {
             const date = row.getValue<Date>("lastUpdate")
             return (
-                <HoverTooltip displayText={formatDate(date)} hoverText={`Last updated on ${format(date, "dd/MM/yyyy")}.`}/>
+                <HoverTooltip displayText={formatDate(date)}
+                              hoverText={`Last updated on ${format(date, "dd/MM/yyyy")}`}/>
             );
 
         },
@@ -134,7 +144,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Status
-                    <SortIcon className={"ml-2"}/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
@@ -152,7 +162,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Job title
-                    <SortIcon className={"ml-2"}/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
@@ -166,7 +176,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Location
-                    <SortIcon className={"ml-2"}/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
@@ -186,7 +196,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     <Link href={row.getValue("link")} target={"_blank"}>
                         see job posting
                     </Link>
-                    <OpenLinkIcon className={"h-3 w-3"}/>
+                    <SquareArrowOutUpRight className={"h-3 w-3"}/>
                 </Button>
                 :
                 null
@@ -202,7 +212,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Salary
-                    <SortIcon className={"ml-2"}/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
@@ -216,15 +226,14 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Favorite?
-                    <SortIcon className={"ml-2"}/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
 
         cell: ({row}) => {
-            return row.getValue("isFavorite") ?
-                <YesIcon/> :
-                <NoIcon/>
+            return row.getValue("isFavorite") ? <CheckSquare className={"h-4 w-4 text-muted-foreground"}/> :
+                <XSquare className={"h-4 w-4 text-muted-foreground"}/>
         },
 
         size: 20,
@@ -240,15 +249,14 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Agency?
-                    <SortIcon className={"ml-2"}/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
 
         cell: ({row}) => {
-            return row.getValue("isRecruiter") ?
-                <YesIcon/> :
-                <NoIcon/>
+            return row.getValue("isRecruiter") ? <CheckSquare className={"h-4 w-4 text-muted-foreground"}/> :
+                <XSquare className={"h-4 w-4 text-muted-foreground"}/>
         },
 
         size: 20,

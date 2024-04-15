@@ -11,10 +11,27 @@ import {FormDatePicker} from "@/components/form-date-picker";
 import {FormSwitch} from "@/components/form-switch";
 import {FormTextarea} from "@/components/form-textarea";
 import {ApplicationStatus, insertJobSchema, JobEntry} from "@/lib/db/schema";
+import {Button} from "@/components/ui/button";
 import {useCreateJob} from "@/app/data/use-create-data";
+import {ClipboardPlus, Loader2} from "lucide-react";
 import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
-import {NewJobIcon} from "@/components/icons";
-import {SubmitButton} from "@/components/submit-button";
+
+// @ts-ignore
+function SubmitButton({children, disabled = false}) {
+
+    return (
+        <Button type="submit" className={"gap-2 sm:w-[140px]"} disabled={disabled}>
+            <span>{children}</span>
+            {disabled ?
+                <Loader2 className={"h-4 w-4 animate-spin"}/> :
+                <kbd
+                    className="hidden pointer-events-none lg:inline-flex h-5 select-none text-[10px] font-sans items-center rounded border px-1.5 font-light opacity-100 gap-2">
+                    <span className="text-xs">Ctrl</span>
+                    <span className="text-xs">M</span>
+                </kbd>}
+        </Button>
+    )
+}
 
 export default function JobCreationDialogContent() {
 
@@ -57,7 +74,7 @@ export default function JobCreationDialogContent() {
 
                     <DialogHeader>
                         <DialogTitle className={"flex flex-row gap-2"}>
-                            <NewJobIcon/>
+                            <ClipboardPlus className={"h-4 w-4"}/>
                             Add job
                         </DialogTitle>
                         <DialogDescription>

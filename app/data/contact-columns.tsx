@@ -1,6 +1,7 @@
 "use client"
 
 import {ColumnDef, Row} from "@tanstack/react-table"
+import {ChevronsUpDown, Loader2, Mail, MoreHorizontal, SquareArrowOutUpRight, SquarePen, Trash} from "lucide-react";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -15,9 +16,8 @@ import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hov
 import {useDeleteContact} from "@/app/data/use-delete-data";
 import Link from "next/link";
 import {HoverTooltip} from "@/components/hover-tooltip";
-import {DeleteIcon, EditIcon, LoadingIcon, MailIcon, MoreIcon, OpenLinkIcon, SortIcon} from "@/components/icons";
-import {formatDate} from "@/lib/formatDate";
 import {format} from "date-fns";
+import {formatDate} from "@/lib/formatDate";
 
 function RowActions({row}: { row: Row<InsertedContactEntry> }) {
     const contact = row.original
@@ -31,12 +31,12 @@ function RowActions({row}: { row: Row<InsertedContactEntry> }) {
                     {isDeletingContact ?
                         <>
                             <span className="sr-only">Deleting entry</span>
-                            <LoadingIcon/>
+                            <Loader2 className={"h-4 w-4 animate-spin"}/>
                         </>
                         :
                         <>
                             <span className="sr-only">Open menu</span>
-                            <MoreIcon/>
+                            <MoreHorizontal className="h-4 w-4"/>
                         </>
                     }
                 </Button>
@@ -46,13 +46,13 @@ function RowActions({row}: { row: Row<InsertedContactEntry> }) {
 
                 {/* TODO implement edit dialog */}
                 <DropdownMenuItem className={"gap-2"}>
-                    <EditIcon/>
+                    <SquarePen className={"h-4 w-4"}/>
                     Edit
                 </DropdownMenuItem>
 
                 <DropdownMenuItem className={"gap-2"}
                                   onClick={() => mutateContacts()}>
-                    <DeleteIcon/>
+                    <Trash className={"h-4 w-4"}/>
                     Delete
                 </DropdownMenuItem>
             </DropdownMenuContent>
@@ -78,7 +78,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Name
-                    <SortIcon className="ml-2"/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
@@ -93,7 +93,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Company
-                    <SortIcon className={"ml-2"}/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
@@ -117,7 +117,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Location
-                    <SortIcon className={"ml-2"}/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
@@ -137,7 +137,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
                     <Link href={row.getValue("linkedin")} target={"_blank"}>
                         Go to LinkedIn
                     </Link>
-                    <OpenLinkIcon className={"h-3 w-3"}/>
+                    <SquareArrowOutUpRight className={"h-3 w-3"}/>
                 </Button>
                 :
                 null
@@ -163,8 +163,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
             )
         },
         cell: ({row}) => {
-            return row.getValue("email") ?
-                <MailIcon/> :
+            return row.getValue("email") ? <Mail className={"h-4 w-4 text-muted-foreground"}/> :
                 null
         },
         size: 20,
@@ -216,14 +215,14 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Updated
-                    <SortIcon className={"ml-2"}/>
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
         },
         cell: ({row}) => {
             const date = row.getValue<Date>("lastUpdate")
             return (
-                <HoverTooltip displayText={formatDate(date)} hoverText={`Last updated on ${format(date, "dd/MM/yyyy")}.`}/>
+                <HoverTooltip hoverText={formatDate(date)} displayText={`Last updated on ${format(date, "dd/MM/yyyy")}`}/>
             );
         },
     },
