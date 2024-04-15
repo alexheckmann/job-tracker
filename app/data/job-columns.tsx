@@ -1,6 +1,6 @@
 "use client"
 
-import {ColumnDef, Row} from "@tanstack/react-table"
+import {Column, ColumnDef, Row} from "@tanstack/react-table"
 import {
     CheckSquare,
     ChevronsUpDown,
@@ -81,7 +81,7 @@ function truncateString(str: string, num: number) {
 export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     {
         accessorKey: "role",
-        header: ({column}) => {
+        header: ({column}: {column: Column<InsertedJobEntry>}) => {
             return (
                 <Button
                     variant="ghost"
@@ -96,7 +96,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         accessorKey: "company",
-        header: ({column}) => {
+        header: ({column}: {column: Column<InsertedJobEntry>}) => {
             return (
                 <Button
                     variant="ghost"
@@ -110,7 +110,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         accessorKey: "lastUpdate",
-        header: ({column}) => {
+        header: ({column}: {column: Column<InsertedJobEntry>}) => {
             // eslint-disable-next-line react-hooks/rules-of-hooks
             useEffect(() => {
                 column.toggleSorting(column.getIsSorted() !== "asc")
@@ -126,7 +126,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                 </Button>
             )
         },
-        cell: ({row}) => {
+        cell: ({row}: { row: Row<InsertedJobEntry> }) => {
             const date = row.getValue<Date>("lastUpdate")
             return (
                 <HoverTooltip displayText={formatDate(date)}
@@ -137,7 +137,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         accessorKey: "status",
-        header: ({column}) => {
+        header: ({column}: {column: Column<InsertedJobEntry>}) => {
             return (
                 <Button
                     variant="ghost"
@@ -149,13 +149,13 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
             )
         },
 
-        cell: ({row}) => {
+        cell: ({row}: { row: Row<InsertedJobEntry> }) => {
             return <StatusDropdown row={row}/>;
         },
     },
     {
         accessorKey: "exactTitle",
-        header: ({column}) => {
+        header: ({column}: {column: Column<InsertedJobEntry>}) => {
             return (
                 <Button
                     variant="ghost"
@@ -169,7 +169,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         accessorKey: "location",
-        header: ({column}) => {
+        header: ({column}: {column: Column<InsertedJobEntry>}) => {
             return (
                 <Button
                     variant="ghost"
@@ -190,7 +190,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                 </span>
             )
         },
-        cell: ({row}) => {
+        cell: ({row}: { row: Row<InsertedJobEntry> }) => {
             return row.getValue("link") ?
                 <Button variant={"link"} className={"px-0 gap-2"}>
                     <Link href={row.getValue("link")} target={"_blank"}>
@@ -204,7 +204,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         accessorKey: "salary",
-        header: ({column}) => {
+        header: ({column}: {column: Column<InsertedJobEntry>}) => {
             // TODO format salary as 50,000 GBP / 50,000-60,000 GBP
             return (
                 <Button
@@ -219,7 +219,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         accessorKey: "isFavorite",
-        header: ({column}) => {
+        header: ({column}: {column: Column<InsertedJobEntry>}) => {
             return (
                 <Button
                     variant="ghost"
@@ -231,7 +231,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
             )
         },
 
-        cell: ({row}) => {
+        cell: ({row}: { row: Row<InsertedJobEntry> }) => {
             return row.getValue("isFavorite") ? <CheckSquare className={"h-4 w-4 text-muted-foreground"}/> :
                 <XSquare className={"h-4 w-4 text-muted-foreground"}/>
         },
@@ -242,7 +242,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     {
         accessorKey: "isRecruiter",
 
-        header: ({column}) => {
+        header: ({column}: {column: Column<InsertedJobEntry>}) => {
             return (
                 <Button
                     variant="ghost"
@@ -254,7 +254,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
             )
         },
 
-        cell: ({row}) => {
+        cell: ({row}: { row: Row<InsertedJobEntry> }) => {
             return row.getValue("isRecruiter") ? <CheckSquare className={"h-4 w-4 text-muted-foreground"}/> :
                 <XSquare className={"h-4 w-4 text-muted-foreground"}/>
         },
@@ -271,7 +271,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                 </span>
             )
         },
-        cell: ({row}) => {
+        cell: ({row}: { row: Row<InsertedJobEntry> }) => {
             const cellIsNotEmpty = row.getValue("notes") !== "";
             return (
                 cellIsNotEmpty &&
@@ -296,7 +296,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         id: "actions",
-        cell: ({row}) => {
+        cell: ({row}: { row: Row<InsertedJobEntry> }) => {
             return (
                 <RowActions row={row}/>
             )

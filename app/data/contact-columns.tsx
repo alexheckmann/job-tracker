@@ -1,6 +1,6 @@
 "use client"
 
-import {ColumnDef, Row} from "@tanstack/react-table"
+import {Column, ColumnDef, Row} from "@tanstack/react-table"
 import {ChevronsUpDown, Loader2, Mail, MoreHorizontal, SquareArrowOutUpRight, SquarePen, Trash} from "lucide-react";
 import {
     DropdownMenu,
@@ -71,7 +71,7 @@ function truncateString(str: string, num: number) {
 export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
     {
         accessorKey: "name",
-        header: ({column}) => {
+        header: ({column}: {column: Column<InsertedContactEntry>}) => {
             return (
                 <Button
                     variant="ghost"
@@ -86,7 +86,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
     },
     {
         accessorKey: "company",
-        header: ({column}) => {
+        header: ({column}: {column: Column<InsertedContactEntry>}) => {
             return (
                 <Button
                     variant="ghost"
@@ -110,7 +110,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
     },
     {
         accessorKey: "location",
-        header: ({column}) => {
+        header: ({column}: {column: Column<InsertedContactEntry>}) => {
             return (
                 <Button
                     variant="ghost"
@@ -131,7 +131,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
                 </span>
             )
         },
-        cell: ({row}) => {
+        cell: ({row}: { row: Row<InsertedContactEntry> }) => {
             return row.getValue("linkedin") ?
                 <Button variant={"link"} className={"px-0 gap-2"}>
                     <Link href={row.getValue("linkedin")} target={"_blank"}>
@@ -162,7 +162,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
                 </span>
             )
         },
-        cell: ({row}) => {
+        cell: ({row}: { row: Row<InsertedContactEntry> }) => {
             return row.getValue("email") ? <Mail className={"h-4 w-4 text-muted-foreground"}/> :
                 null
         },
@@ -178,7 +178,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
                 </span>
             )
         },
-        cell: ({row}) => {
+        cell: ({row}: { row: Row<InsertedContactEntry> }) => {
             const cellIsNotEmpty = row.getValue("notes") !== "";
             return (
                 cellIsNotEmpty &&
@@ -203,7 +203,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
     },
     {
         accessorKey: "lastUpdate",
-        header: ({column}) => {
+        header: ({column}: {column: Column<InsertedContactEntry>}) => {
             // eslint-disable-next-line react-hooks/rules-of-hooks
             useEffect(() => {
                 column.toggleSorting(column.getIsSorted() !== "asc")
@@ -219,7 +219,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
                 </Button>
             )
         },
-        cell: ({row}) => {
+        cell: ({row}: { row: Row<InsertedContactEntry> }) => {
             const date = row.getValue<Date>("lastUpdate")
             return (
                 <HoverTooltip hoverText={formatDate(date)} displayText={`Last updated on ${format(date, "dd/MM/yyyy")}`}/>
@@ -228,7 +228,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
     },
     {
         id: "actions",
-        cell: ({row}) => {
+        cell: ({row}: { row: Row<InsertedContactEntry> }) => {
             return (
                 <RowActions row={row}/>
             )
