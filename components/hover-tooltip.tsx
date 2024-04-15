@@ -1,15 +1,18 @@
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
-import {formatDate} from "@/lib/formatDate";
-import {format} from "date-fns";
 
-export function LastUpdatedTooltip({date}: { date: Date }) {
+interface TooltipProps {
+    displayText: string,
+    hoverText: string
+}
+
+export function HoverTooltip({displayText, hoverText}: TooltipProps) {
     return (
         <Tooltip>
             <TooltipTrigger asChild>
-                <span>{formatDate(date)}</span>
+                <span>{displayText}</span>
             </TooltipTrigger>
             <TooltipContent>
-                <p>Last updated on {format(date, "dd/MM/yyyy")}.</p>
+                <p>{hoverText}</p>
             </TooltipContent>
         </Tooltip>
     );

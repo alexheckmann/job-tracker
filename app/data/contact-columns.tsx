@@ -14,8 +14,10 @@ import {InsertedContactEntry} from "@/lib/db/schema";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
 import {useDeleteContact} from "@/app/data/use-delete-data";
 import Link from "next/link";
-import {LastUpdatedTooltip} from "@/components/last-updated-tooltip";
+import {HoverTooltip} from "@/components/hover-tooltip";
 import {DeleteIcon, EditIcon, LoadingIcon, MailIcon, MoreIcon, OpenLinkIcon, SortIcon} from "@/components/icons";
+import {formatDate} from "@/lib/formatDate";
+import {format} from "date-fns";
 
 function RowActions({row}: { row: Row<InsertedContactEntry> }) {
     const contact = row.original
@@ -219,8 +221,9 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
             )
         },
         cell: ({row}) => {
+            const date = row.getValue<Date>("lastUpdate")
             return (
-                <LastUpdatedTooltip date={row.getValue("lastUpdate")}/>
+                <HoverTooltip displayText={formatDate(date)} hoverText={`Last updated on ${format(date, "dd/MM/yyyy")}.`}/>
             );
         },
     },
