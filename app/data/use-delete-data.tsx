@@ -24,7 +24,7 @@ export function useDeleteData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: str
                                                                 id: any,
                                                                 successToastContent: ToastContent,
                                                                 errorToastContent: ToastContent) {
-    const {data, setData} = useClientState();
+    const {data: clientData, setData: setClientData} = useClientState();
     const queryClient = useQueryClient();
 
     const {mutate: mutateData, isPending} = useMutation({
@@ -34,18 +34,18 @@ export function useDeleteData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: str
         onMutate: async () => {
             await queryClient.cancelQueries({queryKey: dataKey});
             const previousData = queryClient.getQueryData<T[]>(dataKey);
-            queryClient.setQueryData(dataKey, data);
+            queryClient.setQueryData(dataKey, clientData);
             return {previousData};
         },
         onSuccess: async () => {
             await queryClient.invalidateQueries({queryKey: dataKey});
-            data.forEach((entry, index) => {
-                if (entry.id === id) {
-                    data.splice(index, 1);
-                }
-            });
 
-            setData([...data]);
+            const index = clientData.findIndex(item => item.id === id);
+
+            if (index !== -1) {
+                const updatedClientData = clientData.toSpliced(index, 1)
+                setClientData(updatedClientData)
+            }
 
             toast({
                 title: successToastContent.title,
