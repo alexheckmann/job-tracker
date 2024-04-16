@@ -8,8 +8,6 @@ import {ApplicationStatus, InsertedJobEntry} from "@/lib/db/schema";
 import {useEffect, useState} from "react";
 import {useUpdateJob} from "@/app/data/use-update-data";
 
-const statuses = ApplicationStatus["_type"]
-
 interface StatusDropdownProps {
     row: Row<InsertedJobEntry>,
 }

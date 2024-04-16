@@ -222,7 +222,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
         cell: ({row}: { row: Row<InsertedContactEntry> }) => {
             const date = row.getValue<Date>("lastUpdate")
             return (
-                <HoverTooltip hoverText={formatDate(date)} displayText={`Last updated on ${format(date, "dd/MM/yyyy")}`}/>
+                <HoverTooltip displayText={formatDate(date)} hoverText={`Last updated on ${format(date, "dd/MM/yyyy")}`}/>
             );
         },
     },
