@@ -3,9 +3,6 @@
 import {useContactData, useContactEntriesStore} from "@/app/data/job-data";
 import {useEffect} from "react";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
-import {Button} from "@/components/ui/button";
-import Link from "next/link";
-import {ArrowUpRight} from "lucide-react";
 import {DataTable} from "@/components/data-table";
 import {contactColumns} from "@/app/data/contact-columns";
 
@@ -31,12 +28,6 @@ export default function ContactsPage() {
                                 Recent contacts relevant to your job search.
                             </CardDescription>
                         </div>
-                        <Button asChild size="sm" className="ml-auto gap-1">
-                            <Link href="#">
-                                <ArrowUpRight className="h-4 w-4"/>
-                                View Current
-                            </Link>
-                        </Button>
                     </CardHeader>
                     <CardContent className={"h-[75vh]"}>
                         {isLoadingJobData ? "Loading..." :

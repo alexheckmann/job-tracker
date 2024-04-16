@@ -10,7 +10,6 @@ import {ToastAction} from "@/components/ui/toast";
 export function useUpdateData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: string,
                                                                 dataKey: string[],
                                                                 useClientState: UseBoundStore<StoreApi<ClientStateStore<T[]>>>,
-                                                                id: any,
                                                                 dataToUpdate: T,
                                                                 successToastContent: ToastContent,
                                                                 errorToastContent: ToastContent,
@@ -21,6 +20,7 @@ export function useUpdateData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: str
 
     const {mutate: mutateData, isPending} = useMutation({
         mutationFn: async (dataToUpdate: T) => {
+            const id = dataToUpdate.id;
             return await axios.put<T>(`${apiEndpoint}/${id}`, {...dataToUpdate})
                 .then((res) => {
                     return {
@@ -40,11 +40,8 @@ export function useUpdateData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: str
             const index = clientData.findIndex(item => item.id === dataToUpdate.id);
 
             if (index !== -1) {
-                setClientData([
-                    data,
-                    ...clientData.slice(0, index),
-                    ...clientData.slice(index + 1),
-                ]);
+                const updatedClientData = clientData.toSpliced(index, 1, data)
+                setClientData(updatedClientData)
             }
 
             if (!!setUiState) {
@@ -93,5 +90,5 @@ export function useUpdateJob(job: InsertedJobEntry, setUiState?: (data: any) => 
         )
     }
 
-    return useUpdateData<InsertedJobEntry>('/api/v1/jobs', ['jobs'], useJobEntriesStore, job.id, job, successToastContent, errorToastContent, setUiState, uiStateToSet)
+    return useUpdateData<InsertedJobEntry>('/api/v1/jobs', ['jobs'], useJobEntriesStore, job, successToastContent, errorToastContent, setUiState, uiStateToSet)
 }
