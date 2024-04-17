@@ -1,10 +1,10 @@
 import {StoreApi, UseBoundStore} from "zustand";
-import {ClientStateStore, InsertedJobEntry} from "@/lib/db/schema";
+import {ClientStateStore, InsertedContactEntry, InsertedJobEntry} from "@/lib/db/schema";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
 import {ToastContent, TypeHasIdAndLastUpdate} from "@/app/data/use-delete-data";
-import {useJobEntriesStore} from "@/app/data/job-data";
+import {useContactEntriesStore, useJobEntriesStore} from "@/app/data/job-data";
 import {ToastAction} from "@/components/ui/toast";
 
 export function useUpdateData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: string,
@@ -91,4 +91,29 @@ export function useUpdateJob(job: InsertedJobEntry, setUiState?: (data: any) => 
     }
 
     return useUpdateData<InsertedJobEntry>('/api/v1/jobs', ['jobs'], useJobEntriesStore, job, successToastContent, errorToastContent, setUiState, uiStateToSet)
+}
+
+export function useUpdateContact(contact: InsertedContactEntry, setUiState?: (data: any) => void, uiStateToSet?: any) {
+
+    // TODO implement success undo action
+    const successToastContent: ToastContent = {
+        title: "Contact updated",
+        description: `The contact at ${contact.company} has been updated.`,
+        variant: "default",
+        action: (
+            <ToastAction altText="Retry">Retry</ToastAction>
+        )
+    }
+
+    // TODO implement error retry action
+    const errorToastContent: ToastContent = {
+        title: "Failed to update contact",
+        description: `The contact at ${contact.company} could not be updated.`,
+        variant: "destructive",
+        action: (
+            <ToastAction altText="Retry">Retry</ToastAction>
+        )
+    }
+
+    return useUpdateData<InsertedContactEntry>('/api/v1/contacts', ['contacts'], useContactEntriesStore, contact, successToastContent, errorToastContent, setUiState, uiStateToSet)
 }
