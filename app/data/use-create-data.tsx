@@ -31,7 +31,7 @@ export function useCreateData<S, T extends TypeHasIdAndLastUpdate>(apiEndpoint: 
         onSuccess: async (data) => {
             await queryClient.invalidateQueries({queryKey: dataKey});
 
-            setClientData([...clientData, data])
+            setClientData([data, ...clientData])
 
             if (!!setUiState) {
                 setUiState(uiStateToSet)
