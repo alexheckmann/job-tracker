@@ -3,7 +3,7 @@ import {selectContactSchema} from "@/lib/db/schema";
 import {deleteContact, updateContact} from "@/lib/db/db";
 import {HttpStatusCode} from "axios";
 
-export async function PUT(req: NextRequest, {params}: { params: { id: number } }) {
+export async function PUT(req: NextRequest, {params}: { params: { id: string } }) {
     const {id} = params;
     const requestedContact = await req.json().then((data) => ({...data, lastUpdate: new Date(data.lastUpdate)}))
 
@@ -16,7 +16,7 @@ export async function PUT(req: NextRequest, {params}: { params: { id: number } }
     }
 }
 
-export async function DELETE(req: NextRequest, {params}: { params: { id: number } }) {
+export async function DELETE(req: NextRequest, {params}: { params: { id: string } }) {
     const {id: contactId} = params;
     try {
         await deleteContact(contactId);
