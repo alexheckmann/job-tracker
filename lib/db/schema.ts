@@ -1,4 +1,4 @@
-import {boolean, pgEnum, pgTable, serial, timestamp, varchar} from 'drizzle-orm/pg-core'
+import {boolean, pgEnum, pgTable, serial, timestamp, uuid, varchar} from 'drizzle-orm/pg-core'
 import {z} from "zod";
 import {createInsertSchema, createSelectSchema} from "drizzle-zod";
 
@@ -30,7 +30,7 @@ const jobsMaxLengthConstraints = {
 export const JobsTable = pgTable(
     'jobs',
     {
-        id: serial('id').primaryKey(),
+        id: uuid('id').defaultRandom().primaryKey(),
         role: varchar('role', {length: jobsMaxLengthConstraints.role}).notNull(),
         company: varchar('company', {length: jobsMaxLengthConstraints.company}).notNull(),
         status: varchar('applicationStatus', {enum: statusEnum.enumValues}).notNull(),
@@ -84,7 +84,7 @@ const contactsMaxLengthConstraints = {
 export const ContactsTable = pgTable(
     'contacts',
     {
-        id: serial('id').primaryKey(),
+        id: uuid('id').defaultRandom().primaryKey(),
         name: varchar('name', {length: contactsMaxLengthConstraints.name}).notNull(),
         role: varchar('role', {length: contactsMaxLengthConstraints.role}).notNull(),
         company: varchar('company', {length: contactsMaxLengthConstraints.company}).notNull(),

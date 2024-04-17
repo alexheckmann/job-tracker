@@ -17,11 +17,11 @@ export function getJobs() {
     return db.select().from(JobsTable)
 }
 
-export function deleteJob(id: number) {
+export function deleteJob(id: string) {
     return db.delete(JobsTable).where(eq(JobsTable.id, id))
 }
 
-export function updateJob(id: number, updatedJob: Partial<NewJob>) {
+export function updateJob(id: string, updatedJob: Partial<NewJob>) {
     return db.update(JobsTable).set(updatedJob).where(eq(JobsTable.id, id)).returning()
 }
 
@@ -35,10 +35,10 @@ export function getContacts() {
     return db.select().from(ContactsTable)
 }
 
-export function deleteContact(id: number) {
+export function deleteContact(id: string) {
     return db.delete(ContactsTable).where(eq(ContactsTable.id, id))
 }
 
-export function updateContact(id: number, updatedContact: Partial<NewContact>) {
+export function updateContact(id: string, updatedContact: Partial<NewContact>) {
     return db.update(ContactsTable).set(updatedContact).where(eq(ContactsTable.id, id)).returning()
 }
