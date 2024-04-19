@@ -1,16 +1,7 @@
 "use client"
 
 import {Column, ColumnDef, Row} from "@tanstack/react-table"
-import {
-    CheckSquare,
-    ChevronsUpDown,
-    Loader2,
-    MoreHorizontal,
-    SquareArrowOutUpRight,
-    SquarePen,
-    Trash,
-    XSquare
-} from "lucide-react";
+import {ChevronsUpDown, Loader2, MoreHorizontal, SquarePen, Trash} from "lucide-react";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -24,10 +15,11 @@ import {useEffect} from "react";
 import {InsertedJobEntry} from "@/lib/db/schema";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
 import {useDeleteJob} from "@/app/data/use-delete-data";
-import Link from "next/link";
 import {HoverTooltip} from "@/components/hover-tooltip";
 import {formatDate} from "@/lib/formatDate";
 import {format} from "date-fns";
+import {BooleanStatusIcon} from "@/components/boolean-status-icon";
+import {OpenLinkButton} from "@/components/open-link-button";
 
 function RowActions({row}: { row: Row<InsertedJobEntry> }) {
     const job = row.original
@@ -81,7 +73,7 @@ function truncateString(str: string, num: number) {
 export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     {
         accessorKey: "role",
-        header: ({column}: {column: Column<InsertedJobEntry>}) => {
+        header: ({column}: { column: Column<InsertedJobEntry> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -96,7 +88,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         accessorKey: "company",
-        header: ({column}: {column: Column<InsertedJobEntry>}) => {
+        header: ({column}: { column: Column<InsertedJobEntry> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -110,7 +102,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         accessorKey: "lastUpdate",
-        header: ({column}: {column: Column<InsertedJobEntry>}) => {
+        header: ({column}: { column: Column<InsertedJobEntry> }) => {
             // eslint-disable-next-line react-hooks/rules-of-hooks
             useEffect(() => {
                 column.toggleSorting(column.getIsSorted() !== "asc")
@@ -137,7 +129,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         accessorKey: "status",
-        header: ({column}: {column: Column<InsertedJobEntry>}) => {
+        header: ({column}: { column: Column<InsertedJobEntry> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -155,7 +147,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         accessorKey: "exactTitle",
-        header: ({column}: {column: Column<InsertedJobEntry>}) => {
+        header: ({column}: { column: Column<InsertedJobEntry> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -169,7 +161,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         accessorKey: "location",
-        header: ({column}: {column: Column<InsertedJobEntry>}) => {
+        header: ({column}: { column: Column<InsertedJobEntry> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -191,20 +183,13 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
             )
         },
         cell: ({row}: { row: Row<InsertedJobEntry> }) => {
-            return row.getValue("link") ?
-                <Button variant={"link"} className={"px-0 gap-2"}>
-                    <Link href={row.getValue("link")} target={"_blank"}>
-                        see job posting
-                    </Link>
-                    <SquareArrowOutUpRight className={"h-3 w-3"}/>
-                </Button>
-                :
-                null
+            return row.getValue("link") &&
+                <OpenLinkButton href={row.getValue("link")} buttonText={"Job posting"}/>
         },
     },
     {
         accessorKey: "salary",
-        header: ({column}: {column: Column<InsertedJobEntry>}) => {
+        header: ({column}: { column: Column<InsertedJobEntry> }) => {
             // TODO format salary as 50,000 GBP / 50,000-60,000 GBP
             return (
                 <Button
@@ -219,7 +204,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         accessorKey: "isFavorite",
-        header: ({column}: {column: Column<InsertedJobEntry>}) => {
+        header: ({column}: { column: Column<InsertedJobEntry> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -232,8 +217,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
         },
 
         cell: ({row}: { row: Row<InsertedJobEntry> }) => {
-            return row.getValue("isFavorite") ? <CheckSquare className={"h-4 w-4 text-muted-foreground"}/> :
-                <XSquare className={"h-4 w-4 text-muted-foreground"}/>
+            return <BooleanStatusIcon bool={row.getValue<boolean>("isFavorite")}/>
         },
 
         size: 20,
@@ -242,7 +226,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     {
         accessorKey: "isReferral",
 
-        header: ({column}: {column: Column<InsertedJobEntry>}) => {
+        header: ({column}: { column: Column<InsertedJobEntry> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -255,8 +239,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
         },
 
         cell: ({row}: { row: Row<InsertedJobEntry> }) => {
-            return row.getValue("isReferral") ? <CheckSquare className={"h-4 w-4 text-muted-foreground"}/> :
-                <XSquare className={"h-4 w-4 text-muted-foreground"}/>
+            return <BooleanStatusIcon bool={row.getValue<boolean>("isReferral")}/>
         },
 
         size: 20,
@@ -265,7 +248,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     {
         accessorKey: "isRecruiter",
 
-        header: ({column}: {column: Column<InsertedJobEntry>}) => {
+        header: ({column}: { column: Column<InsertedJobEntry> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -278,8 +261,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
         },
 
         cell: ({row}: { row: Row<InsertedJobEntry> }) => {
-            return row.getValue("isRecruiter") ? <CheckSquare className={"h-4 w-4 text-muted-foreground"}/> :
-                <XSquare className={"h-4 w-4 text-muted-foreground"}/>
+            return <BooleanStatusIcon bool={row.getValue<boolean>("isRecruiter")}/>
         },
 
         size: 20,

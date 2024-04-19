@@ -1,7 +1,7 @@
 "use client"
 
 import {Column, ColumnDef, Row} from "@tanstack/react-table"
-import {ChevronsUpDown, Loader2, Mail, MoreHorizontal, SquareArrowOutUpRight, SquarePen, Trash} from "lucide-react";
+import {ChevronsUpDown, Loader2, Mail, MoreHorizontal, SquarePen, Trash} from "lucide-react";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -14,10 +14,10 @@ import {useEffect} from "react";
 import {InsertedContactEntry} from "@/lib/db/schema";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
 import {useDeleteContact} from "@/app/data/use-delete-data";
-import Link from "next/link";
 import {HoverTooltip} from "@/components/hover-tooltip";
 import {format} from "date-fns";
 import {formatDate} from "@/lib/formatDate";
+import {OpenLinkButton} from "@/components/open-link-button";
 
 function RowActions({row}: { row: Row<InsertedContactEntry> }) {
     const contact = row.original
@@ -60,7 +60,12 @@ function RowActions({row}: { row: Row<InsertedContactEntry> }) {
     )
 }
 
-// function that returns the first n characters of a string
+/**
+ * Truncate a string to a certain length. Used as a workaround for the lack of ellipsis support in the table.
+ * @param str the string to truncate
+ * @param num the number of characters to truncate to
+ * @returns the truncated string
+ */
 function truncateString(str: string, num: number) {
     if (str.length <= num) {
         return str
@@ -71,7 +76,7 @@ function truncateString(str: string, num: number) {
 export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
     {
         accessorKey: "name",
-        header: ({column}: {column: Column<InsertedContactEntry>}) => {
+        header: ({column}: { column: Column<InsertedContactEntry> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -86,7 +91,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
     },
     {
         accessorKey: "company",
-        header: ({column}: {column: Column<InsertedContactEntry>}) => {
+        header: ({column}: { column: Column<InsertedContactEntry> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -110,7 +115,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
     },
     {
         accessorKey: "location",
-        header: ({column}: {column: Column<InsertedContactEntry>}) => {
+        header: ({column}: { column: Column<InsertedContactEntry> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -132,15 +137,8 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
             )
         },
         cell: ({row}: { row: Row<InsertedContactEntry> }) => {
-            return row.getValue("linkedin") ?
-                <Button variant={"link"} className={"px-0 gap-2"}>
-                    <Link href={row.getValue("linkedin")} target={"_blank"}>
-                        Go to LinkedIn
-                    </Link>
-                    <SquareArrowOutUpRight className={"h-3 w-3"}/>
-                </Button>
-                :
-                null
+            return row.getValue("linkedin") &&
+                <OpenLinkButton href={row.getValue("linkedin")} buttonText={"Open profile"}/>
         },
     },
     {
@@ -163,8 +161,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
             )
         },
         cell: ({row}: { row: Row<InsertedContactEntry> }) => {
-            return row.getValue("email") ? <Mail className={"h-4 w-4 text-muted-foreground"}/> :
-                null
+            return row.getValue("email") && <Mail className={"h-4 w-4 text-muted-foreground"}/>
         },
         size: 20,
         enableResizing: false
@@ -180,6 +177,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
         },
         cell: ({row}: { row: Row<InsertedContactEntry> }) => {
             const cellIsNotEmpty = row.getValue("notes") !== "";
+
             return (
                 cellIsNotEmpty &&
                 <HoverCard>
@@ -203,7 +201,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
     },
     {
         accessorKey: "lastUpdate",
-        header: ({column}: {column: Column<InsertedContactEntry>}) => {
+        header: ({column}: { column: Column<InsertedContactEntry> }) => {
             // eslint-disable-next-line react-hooks/rules-of-hooks
             useEffect(() => {
                 column.toggleSorting(column.getIsSorted() !== "asc")
@@ -222,7 +220,8 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
         cell: ({row}: { row: Row<InsertedContactEntry> }) => {
             const date = row.getValue<Date>("lastUpdate")
             return (
-                <HoverTooltip displayText={formatDate(date)} hoverText={`Last updated on ${format(date, "dd/MM/yyyy")}`}/>
+                <HoverTooltip displayText={formatDate(date)}
+                              hoverText={`Last updated on ${format(date, "dd/MM/yyyy")}`}/>
             );
         },
     },
