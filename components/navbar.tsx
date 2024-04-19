@@ -7,8 +7,8 @@ import {Button} from "@/components/ui/button";
 import HoverableDropdownMenu from "@/components/hoverable-dropdown-menu";
 import Logo from "@/components/logo";
 import {usePathname} from "next/navigation";
-import {CreateJobButton} from "@/components/create-job-button";
-import {CreateContactButton} from "@/components/create-contact-button";
+import {JobCreationButton} from "@/components/job-creation-button";
+import {ContactCreationButton} from "@/components/contact-creation-button";
 
 const navLinks = [
     {path: "/", label: "Applications"},
@@ -93,8 +93,8 @@ export default function Navbar() {
 
             <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
 
-                <CreateJobButton/>
-                <CreateContactButton/>
+                <JobCreationButton/>
+                <ContactCreationButton/>
 
                 <HoverableDropdownMenu
                     dropdownMenuTrigger={

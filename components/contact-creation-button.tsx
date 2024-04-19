@@ -7,7 +7,7 @@ import {UserRoundPlus} from "lucide-react";
 import ContactCreationDialogContent from "@/components/contact-creation-dialog-content";
 import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
 
-export function CreateContactButton() {
+export function ContactCreationButton() {
     const {data: isContactCreationDialogOpen, setData: setIsContactCreationDialogOpen} = useContactCreationDialogStore()
 
     useCtrlKeyShortcut("i", () => {

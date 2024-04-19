@@ -7,7 +7,7 @@ import {ClipboardPlus, UserRoundPlus} from "lucide-react";
 import JobCreationDialogContent from "@/components/job-creation-dialog-content";
 import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
 
-export function CreateJobButton() {
+export function JobCreationButton() {
     const {data: isJobCreationDialogOpen, setData: setIsJobCreationDialogOpen} = useJobCreationDialogStore()
 
     useCtrlKeyShortcut("u", () => {

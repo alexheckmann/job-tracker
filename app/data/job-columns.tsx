@@ -240,6 +240,29 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
         enableResizing: false
     },
     {
+        accessorKey: "isReferral",
+
+        header: ({column}: {column: Column<InsertedJobEntry>}) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Referral?
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                </Button>
+            )
+        },
+
+        cell: ({row}: { row: Row<InsertedJobEntry> }) => {
+            return row.getValue("isReferral") ? <CheckSquare className={"h-4 w-4 text-muted-foreground"}/> :
+                <XSquare className={"h-4 w-4 text-muted-foreground"}/>
+        },
+
+        size: 20,
+        enableResizing: false
+    },
+    {
         accessorKey: "isRecruiter",
 
         header: ({column}: {column: Column<InsertedJobEntry>}) => {

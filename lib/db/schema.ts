@@ -1,4 +1,4 @@
-import {boolean, pgEnum, pgTable, serial, timestamp, uuid, varchar} from 'drizzle-orm/pg-core'
+import {boolean, pgEnum, pgTable, timestamp, uuid, varchar} from 'drizzle-orm/pg-core'
 import {z} from "zod";
 import {createInsertSchema, createSelectSchema} from "drizzle-zod";
 
@@ -40,6 +40,7 @@ export const JobsTable = pgTable(
         salary: varchar('salary', {length: jobsMaxLengthConstraints.salary}),
         isFavorite: boolean('is_favorite').notNull(),
         isRecruiter: boolean('is_recruiter').notNull(),
+        isReferral: boolean('is_referral').notNull(),
         notes: varchar('notes', {length: jobsMaxLengthConstraints.notes}),
         lastUpdate: timestamp('last_update').defaultNow().notNull(),
     }

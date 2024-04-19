@@ -5,10 +5,12 @@ interface FormInputProps {
     labelName: string,
     isRequired?: boolean,
     placeholder?: string,
-    field: any
+    field: any,
+    maxLength?: number,
+    minLength?: number
 }
 
-export function FormInput({labelName, isRequired = false, placeholder, field}: FormInputProps) {
+export function FormInput({labelName, isRequired = false, placeholder, field, minLength, maxLength}: FormInputProps) {
 
     return (
         <FormItem>
@@ -19,7 +21,7 @@ export function FormInput({labelName, isRequired = false, placeholder, field}: F
                         <span className={"select-none text-sm font-light"}>Required</span> : null}
                 </div>
                 <FormControl>
-                    <Input placeholder={placeholder} {...field}/>
+                    <Input placeholder={placeholder} {...field} maxLength={maxLength} minLength={minLength}/>
                 </FormControl>
             </div>
         </FormItem>

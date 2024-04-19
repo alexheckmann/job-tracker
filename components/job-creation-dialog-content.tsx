@@ -11,9 +11,8 @@ import {FormDatePicker} from "@/components/form-date-picker";
 import {FormSwitch} from "@/components/form-switch";
 import {FormTextarea} from "@/components/form-textarea";
 import {ApplicationStatus, insertJobSchema, JobEntry} from "@/lib/db/schema";
-import {Button} from "@/components/ui/button";
 import {useCreateJob} from "@/app/data/use-create-data";
-import {ClipboardPlus, Loader2} from "lucide-react";
+import {ClipboardPlus} from "lucide-react";
 import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
 import {SubmitButton} from "@/components/submit-button";
 
@@ -33,6 +32,7 @@ export default function JobCreationDialogContent() {
             salary: "",
             isFavorite: false,
             isRecruiter: false,
+            isReferral: false,
             notes: "",
             link: ""
         }
@@ -73,6 +73,7 @@ export default function JobCreationDialogContent() {
                         )}/>
 
                         <FormField control={form.control} name={"company"} render={({field}) => (
+                            /* TODO implement clientside validation*/
                             <FormInput labelName={"Company"} placeholder={"Company"} isRequired
                                        field={field}/>
                         )}/>
@@ -117,6 +118,20 @@ export default function JobCreationDialogContent() {
                                            field={field}/>
                             )}/>
                         </div>
+
+                        <div className={"grid grid-cols-2 gap-4 items-end"}>
+                            <FormField control={form.control} name={"status"} render={({field}) => (
+                                <FormSelect entries={ApplicationStatus.options} label={"Contact"}
+                                            defaultValue={form.getValues("status")}
+                                            onValueChange={field.onChange}/>
+                            )}/>
+
+                            <FormField control={form.control} name={"isReferral"} render={({field}) => (
+                                <FormSwitch label={"Got referral"} checked={field.value}
+                                            onCheckedChange={field.onChange}/>
+                            )}/>
+                        </div>
+
 
                         <div className={"grid grid-cols-2 gap-4 items-end"}>
                             <FormField control={form.control} name={"isFavorite"} render={({field}) => (
