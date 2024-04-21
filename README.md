@@ -8,9 +8,8 @@ Whether you're actively applying for jobs or passively keeping an eye on the mar
 
 ## Description
 
-This project is a full-stack application developed using TypeScript, Next.js, Zustand, Drizzle, drizzle-zod, shadcn-ui,
-and Tailwind. It is designed to manage job entries and provides features such as adding, deleting, and updating job
-entries.
+This project is a full-stack application developed using TypeScript, Next.js, MongoDB, Zustand, shadcn-ui,
+and Tailwind. It is designed to easily manage an overview over applications, contacts and other job search-related notes.
 
 ## Technologies Used
 
@@ -25,7 +24,7 @@ entries.
 - **shadcn-ui**: A component library used for its full-fledged accessibility and great design.
 - **Tailwind**: Used for styling as it reduces the need to write native CSS.
 - **Vercel**: The platform used for hosting the application because of its free tier. The API is built using serverless functions.
-- **PostgreSQL**: The database used for storing job entries. Used because of Vercel's free tier.
+- **MongoDB Atlas**: The database used for storing job entries. Used due to its generous free tier. In an earlier iteration, Vercel's PostgreSQL was used; since ACID compliance of a relational database is not necessary for the use case, the document model speeds up development, and the free tier of MongoDB is more generous, it was migrated over to MongoDB Atlas.
 
 ## Installation
 
