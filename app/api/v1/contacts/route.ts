@@ -1,10 +1,16 @@
-import {getContacts, insertContact} from "@/lib/db/db";
+import {createContact as insertContact, getContacts} from "@/lib/db/db-helpers";
 import {NextRequest, NextResponse} from "next/server";
 import {HttpStatusCode} from "axios";
-import {insertContactSchema} from "@/lib/db/schema";
+import mongoose from "mongoose";
+import mongooseConnection from "@/lib/db/mongoose-connection";
 
 
 export async function GET() {
+
+    if (mongoose.connection.readyState !== mongoose.STATES.connected) {
+        await mongooseConnection
+    }
+
     try {
         const results = await getContacts()
         return NextResponse.json({contacts: results}, {status: HttpStatusCode.Ok})
@@ -15,11 +21,10 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
     const newContact = await req.json()
-    const validatedContact = insertContactSchema.parse(newContact)
 
     try {
-        const createdContact = await insertContact(validatedContact)
-        return NextResponse.json(createdContact[0], {status: HttpStatusCode.Created})
+        const createdContact = await insertContact(newContact)
+        return NextResponse.json(createdContact, {status: HttpStatusCode.Created})
     } catch (error) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
     }

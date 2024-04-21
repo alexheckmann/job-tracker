@@ -1,10 +1,16 @@
-import {getJobs, insertJob} from "@/lib/db/db";
+import {createJob as insertJob, getJobs} from "@/lib/db/db-helpers";
 import {NextRequest, NextResponse} from "next/server";
 import {HttpStatusCode} from "axios";
-import {insertJobSchema} from "@/lib/db/schema";
+import mongoose from "mongoose";
+import mongooseConnection from "@/lib/db/mongoose-connection";
 
 
 export async function GET() {
+
+    if (mongoose.connection.readyState !== mongoose.STATES.connected) {
+        await mongooseConnection
+    }
+
     try {
         const results = await getJobs()
         return NextResponse.json({jobs: results}, {status: HttpStatusCode.Ok})
@@ -15,11 +21,10 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
     const newJob = await req.json()
-    const validatedJob = insertJobSchema.parse(newJob)
 
     try {
-        const createdJob = await insertJob(validatedJob)
-        return NextResponse.json(createdJob[0], {status: HttpStatusCode.Created})
+        const createdJob = await insertJob(newJob)
+        return NextResponse.json(createdJob, {status: HttpStatusCode.Created})
     } catch (error) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
     }

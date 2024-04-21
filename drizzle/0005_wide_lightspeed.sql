@@ -1,1 +1,0 @@
-ALTER TABLE "jobs" ALTER COLUMN "applicationStatus" SET DATA TYPE text;

@@ -12,7 +12,6 @@ import {
 import {Button} from "@/components/ui/button";
 import {StatusDropdown} from "@/components/status-dropdown";
 import {useEffect} from "react";
-import {InsertedJobEntry} from "@/lib/db/schema";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
 import {useDeleteJob} from "@/app/data/use-delete-data";
 import {HoverTooltip} from "@/components/hover-tooltip";
@@ -21,7 +20,9 @@ import {format} from "date-fns";
 import {BooleanStatusIcon} from "@/components/boolean-status-icon";
 import {OpenLinkButton} from "@/components/open-link-button";
 
-function RowActions({row}: { row: Row<InsertedJobEntry> }) {
+import {Job} from "@/lib/models/job";
+
+function RowActions({row}: { row: Row<Job> }) {
     const job = row.original
 
     const {mutateData: mutateJobs, isPending: isDeletingJob} = useDeleteJob(job);
@@ -70,10 +71,10 @@ function truncateString(str: string, num: number) {
     return str.slice(0, num) + '...'
 }
 
-export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
+export const jobTrackerColumns: ColumnDef<Job>[] = [
     {
         accessorKey: "role",
-        header: ({column}: { column: Column<InsertedJobEntry> }) => {
+        header: ({column}: { column: Column<Job> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -88,7 +89,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         accessorKey: "company",
-        header: ({column}: { column: Column<InsertedJobEntry> }) => {
+        header: ({column}: { column: Column<Job> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -102,7 +103,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         accessorKey: "lastUpdate",
-        header: ({column}: { column: Column<InsertedJobEntry> }) => {
+        header: ({column}: { column: Column<Job> }) => {
             // eslint-disable-next-line react-hooks/rules-of-hooks
             useEffect(() => {
                 column.toggleSorting(column.getIsSorted() !== "asc")
@@ -118,7 +119,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                 </Button>
             )
         },
-        cell: ({row}: { row: Row<InsertedJobEntry> }) => {
+        cell: ({row}: { row: Row<Job> }) => {
             const date = row.getValue<Date>("lastUpdate")
             return (
                 <HoverTooltip displayText={formatDate(date)}
@@ -129,7 +130,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         accessorKey: "status",
-        header: ({column}: { column: Column<InsertedJobEntry> }) => {
+        header: ({column}: { column: Column<Job> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -141,13 +142,13 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
             )
         },
 
-        cell: ({row}: { row: Row<InsertedJobEntry> }) => {
+        cell: ({row}: { row: Row<Job> }) => {
             return <StatusDropdown row={row}/>;
         },
     },
     {
         accessorKey: "exactTitle",
-        header: ({column}: { column: Column<InsertedJobEntry> }) => {
+        header: ({column}: { column: Column<Job> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -161,7 +162,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         accessorKey: "location",
-        header: ({column}: { column: Column<InsertedJobEntry> }) => {
+        header: ({column}: { column: Column<Job> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -182,14 +183,14 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                 </span>
             )
         },
-        cell: ({row}: { row: Row<InsertedJobEntry> }) => {
+        cell: ({row}: { row: Row<Job> }) => {
             return row.getValue("link") &&
                 <OpenLinkButton href={row.getValue("link")} buttonText={"Job posting"}/>
         },
     },
     {
         accessorKey: "salary",
-        header: ({column}: { column: Column<InsertedJobEntry> }) => {
+        header: ({column}: { column: Column<Job> }) => {
             // TODO format salary as 50,000 GBP / 50,000-60,000 GBP
             return (
                 <Button
@@ -204,7 +205,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         accessorKey: "isFavorite",
-        header: ({column}: { column: Column<InsertedJobEntry> }) => {
+        header: ({column}: { column: Column<Job> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -216,7 +217,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
             )
         },
 
-        cell: ({row}: { row: Row<InsertedJobEntry> }) => {
+        cell: ({row}: { row: Row<Job> }) => {
             return <BooleanStatusIcon bool={row.getValue<boolean>("isFavorite")}/>
         },
 
@@ -226,7 +227,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     {
         accessorKey: "isReferral",
 
-        header: ({column}: { column: Column<InsertedJobEntry> }) => {
+        header: ({column}: { column: Column<Job> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -238,7 +239,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
             )
         },
 
-        cell: ({row}: { row: Row<InsertedJobEntry> }) => {
+        cell: ({row}: { row: Row<Job> }) => {
             return <BooleanStatusIcon bool={row.getValue<boolean>("isReferral")}/>
         },
 
@@ -248,7 +249,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     {
         accessorKey: "isRecruiter",
 
-        header: ({column}: { column: Column<InsertedJobEntry> }) => {
+        header: ({column}: { column: Column<Job> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -260,7 +261,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
             )
         },
 
-        cell: ({row}: { row: Row<InsertedJobEntry> }) => {
+        cell: ({row}: { row: Row<Job> }) => {
             return <BooleanStatusIcon bool={row.getValue<boolean>("isRecruiter")}/>
         },
 
@@ -276,7 +277,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
                 </span>
             )
         },
-        cell: ({row}: { row: Row<InsertedJobEntry> }) => {
+        cell: ({row}: { row: Row<Job> }) => {
             const cellIsNotEmpty = row.getValue("notes") !== "";
             return (
                 cellIsNotEmpty &&
@@ -301,7 +302,7 @@ export const jobTrackerColumns: ColumnDef<InsertedJobEntry>[] = [
     },
     {
         id: "actions",
-        cell: ({row}: { row: Row<InsertedJobEntry> }) => {
+        cell: ({row}: { row: Row<Job> }) => {
             return (
                 <RowActions row={row}/>
             )

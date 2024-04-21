@@ -1,10 +1,12 @@
 import {StoreApi, UseBoundStore} from "zustand";
-import {ClientStateStore, InsertedContactEntry, InsertedJobEntry} from "@/lib/db/schema";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
 import {useContactEntriesStore, useJobEntriesStore} from "@/app/data/job-data";
 import {ToastAction} from "@/components/ui/toast";
+import {Contact} from "@/lib/models/contact";
+import {Job} from "@/lib/models/job";
+import {ClientStateStore} from "@/lib/models/client-state-store";
 
 export interface ToastContent {
     title: string
@@ -14,7 +16,7 @@ export interface ToastContent {
 }
 
 export interface TypeHasIdAndLastUpdate {
-    id: any,
+    _id?: any,
     lastUpdate: any
 }
 
@@ -40,7 +42,7 @@ export function useDeleteData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: str
         onSuccess: async () => {
             await queryClient.invalidateQueries({queryKey: dataKey});
 
-            const index = clientData.findIndex(item => item.id === id);
+            const index = clientData.findIndex(item => item._id === id);
 
             if (index !== -1) {
                 const updatedClientData = clientData.toSpliced(index, 1)
@@ -67,7 +69,7 @@ export function useDeleteData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: str
     return {mutateData, isPending};
 }
 
-export function useDeleteJob(job: InsertedJobEntry) {
+export function useDeleteJob(job: Job) {
 
     // TODO implement success undo action
     const successToastContent: ToastContent = {
@@ -89,11 +91,11 @@ export function useDeleteJob(job: InsertedJobEntry) {
         )
     }
 
-    return useDeleteData<InsertedJobEntry>("/api/v1/jobs", ["jobs"], useJobEntriesStore, job.id, successToastContent, errorToastContent);
+    return useDeleteData<Job>("/api/v1/jobs", ["jobs"], useJobEntriesStore, job._id, successToastContent, errorToastContent);
 }
 
 
-export function useDeleteContact(contact: InsertedContactEntry) {
+export function useDeleteContact(contact: Contact) {
 
     // TODO implement success undo action
     const successToastContent: ToastContent = {
@@ -115,5 +117,5 @@ export function useDeleteContact(contact: InsertedContactEntry) {
         )
     }
 
-    return useDeleteData<InsertedContactEntry>("/api/v1/contacts", ["contacts"], useContactEntriesStore, contact.id, successToastContent, errorToastContent);
+    return useDeleteData<Contact>("/api/v1/contacts", ["contacts"], useContactEntriesStore, contact._id, successToastContent, errorToastContent);
 }

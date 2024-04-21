@@ -1,6 +1,5 @@
 import {NextRequest, NextResponse} from "next/server";
-import {selectContactSchema} from "@/lib/db/schema";
-import {deleteContact, updateContact} from "@/lib/db/db";
+import {deleteContact, updateContact} from "@/lib/db/db-helpers";
 import {HttpStatusCode} from "axios";
 
 export async function PUT(req: NextRequest, {params}: { params: { id: string } }) {
@@ -8,9 +7,8 @@ export async function PUT(req: NextRequest, {params}: { params: { id: string } }
     const requestedContact = await req.json().then((data) => ({...data, lastUpdate: new Date(data.lastUpdate)}))
 
     try {
-        const validatedContact = selectContactSchema.parse(requestedContact)
-        const updatedContact = await updateContact(id, validatedContact)
-        return NextResponse.json(updatedContact[0], {status: HttpStatusCode.Ok});
+        const updatedContact = await updateContact(id, requestedContact)
+        return NextResponse.json(updatedContact, {status: HttpStatusCode.Ok});
     } catch (error) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
     }

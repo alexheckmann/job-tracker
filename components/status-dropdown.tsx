@@ -4,12 +4,12 @@ import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger
 import StatusBadge from "@/components/status-badge";
 import {ChevronDown} from "lucide-react";
 import {Row} from "@tanstack/react-table";
-import {ApplicationStatus, InsertedJobEntry} from "@/lib/db/schema";
+import {ApplicationStatus, Job} from "@/lib/models/job";
 import {useEffect, useState} from "react";
 import {useUpdateJob} from "@/app/data/use-update-data";
 
 interface StatusDropdownProps {
-    row: Row<InsertedJobEntry>,
+    row: Row<Job>,
 }
 
 export function StatusDropdown({row}: StatusDropdownProps) {
@@ -24,7 +24,7 @@ export function StatusDropdown({row}: StatusDropdownProps) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger disabled={isUpdatingStatus}
-                className={"inline-flex items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"}>
+                                 className={"inline-flex items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"}>
                 <StatusBadge status={status} className={isUpdatingStatus ? "bg-background" : ""}>
                     <ChevronDown className={"h-4 w-4 ml-1"}/>
                 </StatusBadge>

@@ -1,11 +1,13 @@
 import {StoreApi, UseBoundStore} from "zustand";
-import {ClientStateStore, ContactEntry, InsertedContactEntry, InsertedJobEntry, JobEntry} from "@/lib/db/schema";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
 import {ToastContent, TypeHasIdAndLastUpdate} from "@/app/data/use-delete-data";
 import {useContactEntriesStore, useJobEntriesStore} from "@/app/data/job-data";
 import {ToastAction} from "@/components/ui/toast";
+import {Contact} from "@/lib/models/contact";
+import {Job} from "@/lib/models/job";
+import {ClientStateStore} from "@/lib/models/client-state-store";
 
 export function useCreateData<S, T extends TypeHasIdAndLastUpdate>(apiEndpoint: string,
                                                                    dataKey: string[],
@@ -58,7 +60,7 @@ export function useCreateData<S, T extends TypeHasIdAndLastUpdate>(apiEndpoint: 
     return {mutateData, isPending};
 }
 
-export function useCreateJob(job: JobEntry, setUiState?: (data: any) => void) {
+export function useCreateJob(job: Job, setUiState?: (data: any) => void) {
 
     // TODO implement success undo action
     const successToastContent: ToastContent = {
@@ -80,10 +82,10 @@ export function useCreateJob(job: JobEntry, setUiState?: (data: any) => void) {
         )
     }
 
-    return useCreateData<JobEntry, InsertedJobEntry>('/api/v1/jobs', ['jobs'], useJobEntriesStore, successToastContent, errorToastContent, setUiState, false)
+    return useCreateData<Job, Job>('/api/v1/jobs', ['jobs'], useJobEntriesStore, successToastContent, errorToastContent, setUiState, false)
 }
 
-export function useCreateContact(contact: ContactEntry, setUiState?: (data: any) => void) {
+export function useCreateContact(contact: Contact, setUiState?: (data: any) => void) {
 
     // TODO implement success undo action
     const successToastContent: ToastContent = {
@@ -105,5 +107,5 @@ export function useCreateContact(contact: ContactEntry, setUiState?: (data: any)
         )
     }
 
-    return useCreateData<ContactEntry, InsertedContactEntry>('/api/v1/contacts', ['contacts'], useContactEntriesStore, successToastContent, errorToastContent, setUiState, false)
+    return useCreateData<Contact, Contact>('/api/v1/contacts', ['contacts'], useContactEntriesStore, successToastContent, errorToastContent, setUiState, false)
 }

@@ -8,19 +8,19 @@ import {Form, FormField} from "@/components/ui/form";
 import {FormInput} from "@/components/form-input";
 import {FormDatePicker} from "@/components/form-date-picker";
 import {FormTextarea} from "@/components/form-textarea";
-import {ContactEntry, insertContactSchema} from "@/lib/db/schema";
-import {Button} from "@/components/ui/button";
 import {useCreateContact} from "@/app/data/use-create-data";
-import {Loader2, UserRoundPlus} from "lucide-react";
+import {UserRoundPlus} from "lucide-react";
 import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
 import {SubmitButton} from "@/components/submit-button";
+
+import {Contact, ContactSchema} from "@/lib/models/contact";
 
 export default function ContactCreationDialogContent() {
 
     const {setData: setIsContactCreationDialogOpen} = useContactCreationDialogStore()
 
-    const form = useForm<ContactEntry>({
-        resolver: zodResolver(insertContactSchema),
+    const form = useForm<Contact>({
+        resolver: zodResolver(ContactSchema),
         defaultValues: {
             role: "Recruiter",
             company: "",
@@ -40,7 +40,7 @@ export default function ContactCreationDialogContent() {
     } = useCreateContact(form.getValues(), setIsContactCreationDialogOpen)
 
     useCtrlKeyShortcut("m", () => {
-        form.handleSubmit((contact: ContactEntry) => {
+        form.handleSubmit((contact: Contact) => {
             insertContact(contact)
         })();
     })
@@ -50,7 +50,7 @@ export default function ContactCreationDialogContent() {
         <DialogContent className="sm:max-w-[500px] max-h-[85svh] overflow-x-auto">
             <Form {...form}>
                 <form onSubmit={
-                    form.handleSubmit((contact: ContactEntry) => {
+                    form.handleSubmit((contact: Contact) => {
                         insertContact(contact)
                     })
                 }>

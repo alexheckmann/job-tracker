@@ -1,4 +1,4 @@
-import {ApplicationStatus} from "@/lib/db/schema";
+import {ApplicationStatus} from "@/lib/models/job";
 import {Badge} from "@/components/ui/badge";
 import {cn} from "@/lib/utils";
 

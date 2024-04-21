@@ -10,18 +10,20 @@ import {FormInput} from "@/components/form-input";
 import {FormDatePicker} from "@/components/form-date-picker";
 import {FormSwitch} from "@/components/form-switch";
 import {FormTextarea} from "@/components/form-textarea";
-import {ApplicationStatus, insertJobSchema, JobEntry} from "@/lib/db/schema";
+import {ApplicationStatus} from "@/lib/models/job";
 import {useCreateJob} from "@/app/data/use-create-data";
 import {ClipboardPlus} from "lucide-react";
 import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
 import {SubmitButton} from "@/components/submit-button";
 
+import {Job, JobSchema} from "@/lib/models/job";
+
 export default function JobCreationDialogContent() {
 
     const {setData: setIsJobCreationDialogOpen} = useJobCreationDialogStore()
 
-    const form = useForm<JobEntry>({
-        resolver: zodResolver(insertJobSchema),
+    const form = useForm<Job>({
+        resolver: zodResolver(JobSchema),
         defaultValues: {
             role: "AI Engineer",
             company: "",
@@ -41,8 +43,8 @@ export default function JobCreationDialogContent() {
     const {mutateData: insertJob, isPending: isAddingJob} = useCreateJob(form.getValues(), setIsJobCreationDialogOpen)
 
     useCtrlKeyShortcut("m", () => {
-        form.handleSubmit((jobEntry: JobEntry) => {
-            insertJob(jobEntry)
+        form.handleSubmit((job: Job) => {
+            insertJob(job)
         })();
     })
 
@@ -51,8 +53,8 @@ export default function JobCreationDialogContent() {
         <DialogContent className="sm:max-w-[500px] max-h-[85svh] overflow-x-auto">
             <Form {...form}>
                 <form onSubmit={
-                    form.handleSubmit((jobEntry: JobEntry) => {
-                        insertJob(jobEntry)
+                    form.handleSubmit((job: Job) => {
+                        insertJob(job)
                     })
                 }>
 

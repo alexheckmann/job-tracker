@@ -1,11 +1,13 @@
 import {StoreApi, UseBoundStore} from "zustand";
-import {ClientStateStore, InsertedContactEntry, InsertedJobEntry} from "@/lib/db/schema";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
 import {ToastContent, TypeHasIdAndLastUpdate} from "@/app/data/use-delete-data";
 import {useContactEntriesStore, useJobEntriesStore} from "@/app/data/job-data";
 import {ToastAction} from "@/components/ui/toast";
+import {Contact} from "@/lib/models/contact";
+import {Job} from "@/lib/models/job";
+import {ClientStateStore} from "@/lib/models/client-state-store";
 
 export function useUpdateData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: string,
                                                                 dataKey: string[],
@@ -20,7 +22,7 @@ export function useUpdateData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: str
 
     const {mutate: mutateData, isPending} = useMutation({
         mutationFn: async (dataToUpdate: T) => {
-            const id = dataToUpdate.id;
+            const id = dataToUpdate._id;
             return await axios.put<T>(`${apiEndpoint}/${id}`, {...dataToUpdate})
                 .then((res) => {
                     return {
@@ -37,7 +39,7 @@ export function useUpdateData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: str
         },
         onSuccess: async (data) => {
             await queryClient.invalidateQueries({queryKey: dataKey});
-            const index = clientData.findIndex(item => item.id === dataToUpdate.id);
+            const index = clientData.findIndex(item => item._id === dataToUpdate._id);
 
             if (index !== -1) {
                 const updatedClientData = clientData.toSpliced(index, 1, data)
@@ -68,7 +70,7 @@ export function useUpdateData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: str
     return {mutateData, isPending};
 }
 
-export function useUpdateJob(job: InsertedJobEntry, setUiState?: (data: any) => void, uiStateToSet?: any) {
+export function useUpdateJob(job: Job, setUiState?: (data: any) => void, uiStateToSet?: any) {
 
     // TODO implement success undo action
     const successToastContent: ToastContent = {
@@ -90,10 +92,10 @@ export function useUpdateJob(job: InsertedJobEntry, setUiState?: (data: any) => 
         )
     }
 
-    return useUpdateData<InsertedJobEntry>('/api/v1/jobs', ['jobs'], useJobEntriesStore, job, successToastContent, errorToastContent, setUiState, uiStateToSet)
+    return useUpdateData<Job>('/api/v1/jobs', ['jobs'], useJobEntriesStore, job, successToastContent, errorToastContent, setUiState, uiStateToSet)
 }
 
-export function useUpdateContact(contact: InsertedContactEntry, setUiState?: (data: any) => void, uiStateToSet?: any) {
+export function useUpdateContact(contact: Contact, setUiState?: (data: any) => void, uiStateToSet?: any) {
 
     // TODO implement success undo action
     const successToastContent: ToastContent = {
@@ -115,5 +117,5 @@ export function useUpdateContact(contact: InsertedContactEntry, setUiState?: (da
         )
     }
 
-    return useUpdateData<InsertedContactEntry>('/api/v1/contacts', ['contacts'], useContactEntriesStore, contact, successToastContent, errorToastContent, setUiState, uiStateToSet)
+    return useUpdateData<Contact>('/api/v1/contacts', ['contacts'], useContactEntriesStore, contact, successToastContent, errorToastContent, setUiState, uiStateToSet)
 }

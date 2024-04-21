@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
 import {useEffect} from "react";
-import {InsertedContactEntry} from "@/lib/db/schema";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
 import {useDeleteContact} from "@/app/data/use-delete-data";
 import {HoverTooltip} from "@/components/hover-tooltip";
@@ -19,7 +18,9 @@ import {format} from "date-fns";
 import {formatDate} from "@/lib/formatDate";
 import {OpenLinkButton} from "@/components/open-link-button";
 
-function RowActions({row}: { row: Row<InsertedContactEntry> }) {
+import {Contact} from "@/lib/models/contact";
+
+function RowActions({row}: { row: Row<Contact> }) {
     const contact = row.original
 
     const {mutateData: mutateContacts, isPending: isDeletingContact} = useDeleteContact(contact);
@@ -73,10 +74,10 @@ function truncateString(str: string, num: number) {
     return str.slice(0, num) + '...'
 }
 
-export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
+export const contactColumns: ColumnDef<Contact>[] = [
     {
         accessorKey: "name",
-        header: ({column}: { column: Column<InsertedContactEntry> }) => {
+        header: ({column}: { column: Column<Contact> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -91,7 +92,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
     },
     {
         accessorKey: "company",
-        header: ({column}: { column: Column<InsertedContactEntry> }) => {
+        header: ({column}: { column: Column<Contact> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -115,7 +116,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
     },
     {
         accessorKey: "location",
-        header: ({column}: { column: Column<InsertedContactEntry> }) => {
+        header: ({column}: { column: Column<Contact> }) => {
             return (
                 <Button
                     variant="ghost"
@@ -136,7 +137,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
                 </span>
             )
         },
-        cell: ({row}: { row: Row<InsertedContactEntry> }) => {
+        cell: ({row}: { row: Row<Contact> }) => {
             return row.getValue("linkedin") &&
                 <OpenLinkButton href={row.getValue("linkedin")} buttonText={"Open profile"}/>
         },
@@ -160,7 +161,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
                 </span>
             )
         },
-        cell: ({row}: { row: Row<InsertedContactEntry> }) => {
+        cell: ({row}: { row: Row<Contact> }) => {
             return row.getValue("email") && <Mail className={"h-4 w-4 text-muted-foreground"}/>
         },
         size: 20,
@@ -175,7 +176,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
                 </span>
             )
         },
-        cell: ({row}: { row: Row<InsertedContactEntry> }) => {
+        cell: ({row}: { row: Row<Contact> }) => {
             const cellIsNotEmpty = row.getValue("notes") !== "";
 
             return (
@@ -201,7 +202,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
     },
     {
         accessorKey: "lastUpdate",
-        header: ({column}: { column: Column<InsertedContactEntry> }) => {
+        header: ({column}: { column: Column<Contact> }) => {
             // eslint-disable-next-line react-hooks/rules-of-hooks
             useEffect(() => {
                 column.toggleSorting(column.getIsSorted() !== "asc")
@@ -217,7 +218,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
                 </Button>
             )
         },
-        cell: ({row}: { row: Row<InsertedContactEntry> }) => {
+        cell: ({row}: { row: Row<Contact> }) => {
             const date = row.getValue<Date>("lastUpdate")
             return (
                 <HoverTooltip displayText={formatDate(date)}
@@ -227,7 +228,7 @@ export const contactColumns: ColumnDef<InsertedContactEntry>[] = [
     },
     {
         id: "actions",
-        cell: ({row}: { row: Row<InsertedContactEntry> }) => {
+        cell: ({row}: { row: Row<Contact> }) => {
             return (
                 <RowActions row={row}/>
             )
