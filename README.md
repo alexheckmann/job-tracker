@@ -17,7 +17,6 @@ and Tailwind. It is designed to easily manage an overview over applications, con
   by providing type safety.
 - **Next.js**: A full-stack framework used for its architectural simplicity.
 - **Zustand**: The main client-side state management library used for its simplicity.
-- **Drizzle and drizzle-zod**: Used as the ORM for their end-to-end type safety and simplicity.
 - **React**: The main library used for building the user interface.
 - **React Query**: Used for fetching data from the server and caching it.
 - **React Hook Form**: Used for form validation.
@@ -25,6 +24,7 @@ and Tailwind. It is designed to easily manage an overview over applications, con
 - **Tailwind**: Used for styling as it reduces the need to write native CSS.
 - **Vercel**: The platform used for hosting the application because of its free tier. The API is built using serverless functions.
 - **MongoDB Atlas**: The database used for storing job entries. Used due to its generous free tier. In an earlier iteration, Vercel's PostgreSQL was used; since ACID compliance of a relational database is not necessary for the use case, the document model speeds up development, and the free tier of MongoDB is more generous, it was migrated over to MongoDB Atlas.
+- **Mongoose**: Used as the abstraction library for MongoDB iteraction for end-to-end type safety and simplicity.
 
 ## Installation
 
