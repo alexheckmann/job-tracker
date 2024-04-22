@@ -13,9 +13,8 @@ export const ContactModelSchema = new Schema<Contact>(
         location: {type: String, required: true},
         notes: {type: String},
         lastUpdate: {type: Date, required: true},
-    }
+            user: {type: Schema.Types.ObjectId, ref: 'User'}
+    }, {timestamps: true}
 );
-
-ContactModelSchema.set('timestamps', true);
 
 export const ContactModel = mongoose.models[CONTACT_COLLECTION_NAME]<Contact> || model<Contact>(CONTACT_COLLECTION_NAME, ContactModelSchema)

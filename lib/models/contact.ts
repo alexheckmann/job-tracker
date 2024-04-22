@@ -24,6 +24,7 @@ export const ContactSchema = DatabaseObject.extend({
     // isPersonalConnection: z.boolean(),
     lastUpdate: z.coerce.date(),
     status: z.enum(["Saved", "Continuing", "Discontinued"]).optional(),
+    user: z.any().optional()
 });
 
 export type Contact = z.infer<typeof ContactSchema>;

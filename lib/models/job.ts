@@ -25,6 +25,7 @@ export const JobSchema = DatabaseObject.extend({
     isReferral: z.boolean(),
     notes: z.string().max(jobsMaxLengthConstraints.notes).optional(),
     lastUpdate: z.coerce.date(),
+    user: z.any().optional()
 },);
 
 export type Job = z.infer<typeof JobSchema>;

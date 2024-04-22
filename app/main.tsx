@@ -5,6 +5,7 @@ import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {ReactNode} from "react";
 import {Toaster} from "@/components/ui/toaster";
 import {TooltipProvider} from "@/components/ui/tooltip";
+import {SessionProvider} from "next-auth/react";
 
 interface MainProps {
     children: ReactNode
@@ -16,6 +17,7 @@ export default function Main({children}: MainProps) {
 
     return (
         <>
+            <SessionProvider>
             <QueryClientProvider client={queryClient}>
                 <TooltipProvider>
                     <Navbar/>
@@ -23,6 +25,7 @@ export default function Main({children}: MainProps) {
                     <Toaster/>
                 </TooltipProvider>
             </QueryClientProvider>
+            </SessionProvider>
         </>
     );
 }

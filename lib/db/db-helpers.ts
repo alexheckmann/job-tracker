@@ -2,6 +2,10 @@ import {ContactModel} from "@/lib/db/contact-model";
 import {Contact} from "@/lib/models/contact";
 import {Job} from "@/lib/models/job";
 import {JobModel} from "@/lib/db/job-model";
+import {User} from "@/lib/models/user";
+import {UserModel} from "@/lib/db/user-model";
+import mongoose from "mongoose";
+
 
 /**
  * Create a job in the database
@@ -16,8 +20,8 @@ export function createJob(job: Job) {
  * Get all jobs from the database
  * @returns All jobs
  */
-export function getJobs() {
-    return JobModel.find<Job>().exec()
+export function getJobs(userId: string) {
+    return JobModel.find<Job>({user: new mongoose.Types.ObjectId(userId)}).exec()
 }
 
 /**
@@ -49,11 +53,11 @@ export function createContact(contact: Contact) {
 }
 
 /**
- * Get all contacts from the database
+ * Get all contacts from the database for a user
  * @returns All contacts
  */
-export function getContacts() {
-    return ContactModel.find<Contact>().exec()
+export function getContacts(userId: string) {
+    return ContactModel.find<Contact>({user: new mongoose.Types.ObjectId(userId)}).exec()
 }
 
 /**
@@ -73,5 +77,13 @@ export function updateContact(id: string, contact: Partial<Contact>) {
  */
 export function deleteContact(id: string) {
     return ContactModel.findByIdAndDelete(id).exec()
+}
+
+export function createUser(user: User) {
+    return UserModel.create<User>(user)
+}
+
+export function getUserByEmail(email: string) {
+    return UserModel.findOne<User>({email}).exec()
 }
 

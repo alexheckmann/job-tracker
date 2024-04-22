@@ -9,6 +9,8 @@ import Logo from "@/components/logo";
 import {usePathname} from "next/navigation";
 import {JobCreationButton} from "@/components/job-creation-button";
 import {ContactCreationButton} from "@/components/contact-creation-button";
+import {signOut, useSession} from "next-auth/react";
+import {GoogleLoginButton} from "@/components/google-login-button";
 
 const navLinks = [
     {path: "/", label: "Applications"},
@@ -20,6 +22,7 @@ const navLinks = [
 export default function Navbar() {
 
     const pathname = usePathname();
+    const {status, data} = useSession();
 
     return (
 
@@ -93,21 +96,25 @@ export default function Navbar() {
 
             <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
 
-                <JobCreationButton/>
-                <ContactCreationButton/>
+                {status === "authenticated" && <JobCreationButton/>}
+                {status === "authenticated" && <ContactCreationButton/>}
 
-                <HoverableDropdownMenu
-                    dropdownMenuTrigger={
-                        <Button variant="secondary" size="icon" className="rounded-full">
-                            <CircleUser className="h-5 w-5"/>
-                            <span className="sr-only">Toggle user menu</span>
-                        </Button>
-                    } dropdownMenuItems={[
-                    <span key={1}>My Account</span>,
-                    <span key={2}>Donate</span>,
-                    <span key={3}>Feedback</span>,
-                    <span key={4}>Logout</span>
-                ]}/>
+                {/* TODO fix and replace with viable alternative*/}
+                {status === "authenticated" ?
+                    <HoverableDropdownMenu
+                        dropdownMenuTrigger={
+                            <Button variant="secondary" size="icon" className="rounded-full">
+                                <CircleUser className="h-5 w-5"/>
+                                <span className="sr-only">Toggle user menu</span>
+                            </Button>
+                        } dropdownMenuItems={[
+                        <span key={1}>{data?.user?.name}</span>,
+                        <span key={2}>Donate</span>,
+                        <span key={3}>Feedback</span>,
+                        <Button key={4} onClick={() => signOut()}>Sign out</Button>
+                    ]}/> :
+                    <GoogleLoginButton className={"ml-auto"}/>
+                }
             </div>
         </header>
     )

@@ -16,8 +16,8 @@ export const JobModelSchema = new Schema<Job>(
         isReferral: {type: Boolean, required: true},
         notes: {type: String},
         lastUpdate: {type: Date, required: true},
-    }
+            user: {type: Schema.Types.ObjectId, ref: 'User'}
+    }, {timestamps: true}
 );
 
-JobModelSchema.set('timestamps', true);
 export const JobModel = mongoose.models[JOB_COLLECTION_NAME]<Job> || model<Job>(JOB_COLLECTION_NAME, JobModelSchema)
