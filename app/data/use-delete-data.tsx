@@ -2,7 +2,7 @@ import {StoreApi, UseBoundStore} from "zustand";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
-import {useContactEntriesStore, useJobEntriesStore} from "@/app/data/job-data";
+import {useContactEntriesStore, useJobEntriesStore} from "@/app/data/use-get-data";
 import {ToastAction} from "@/components/ui/toast";
 import {Contact} from "@/lib/models/contact";
 import {Job} from "@/lib/models/job";

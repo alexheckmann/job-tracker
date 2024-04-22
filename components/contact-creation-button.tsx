@@ -1,6 +1,6 @@
 "use client"
 
-import {useContactCreationDialogStore} from "@/app/data/job-data";
+import {useContactCreationDialogStore} from "@/app/data/use-get-data";
 import {Dialog, DialogTrigger} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 import {UserRoundPlus} from "lucide-react";

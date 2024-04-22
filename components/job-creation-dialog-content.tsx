@@ -1,7 +1,7 @@
 "use client"
 
 import {DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
-import {cityData, roleData, useJobCreationDialogStore} from "@/app/data/job-data";
+import {cityData, roleData, useJobCreationDialogStore} from "@/app/data/use-get-data";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormField} from "@/components/ui/form";
@@ -10,13 +10,11 @@ import {FormInput} from "@/components/form-input";
 import {FormDatePicker} from "@/components/form-date-picker";
 import {FormSwitch} from "@/components/form-switch";
 import {FormTextarea} from "@/components/form-textarea";
-import {ApplicationStatus} from "@/lib/models/job";
+import {ApplicationStatus, Job, JobSchema} from "@/lib/models/job";
 import {useCreateJob} from "@/app/data/use-create-data";
 import {ClipboardPlus} from "lucide-react";
 import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
 import {SubmitButton} from "@/components/submit-button";
-
-import {Job, JobSchema} from "@/lib/models/job";
 
 export default function JobCreationDialogContent() {
 

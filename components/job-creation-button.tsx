@@ -1,6 +1,6 @@
 "use client"
 
-import {useJobCreationDialogStore} from "@/app/data/job-data";
+import {useJobCreationDialogStore} from "@/app/data/use-get-data";
 import {Dialog, DialogTrigger} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 import {ClipboardPlus} from "lucide-react";
