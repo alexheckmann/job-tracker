@@ -27,7 +27,8 @@ export async function POST(req: NextRequest) {
     const newContact = await req.json()
 
     try {
-        const createdContact = await insertContact(newContact)
+        const session = await getServerSession(authOptions)
+        const createdContact = await insertContact(newContact, session.id)
         return NextResponse.json(createdContact, {status: HttpStatusCode.Created})
     } catch (error) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})

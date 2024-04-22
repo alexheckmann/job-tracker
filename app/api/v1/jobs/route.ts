@@ -27,7 +27,8 @@ export async function POST(req: NextRequest) {
     const newJob = await req.json()
 
     try {
-        const createdJob = await insertJob(newJob)
+        const session = await getServerSession(authOptions)
+        const createdJob = await insertJob(newJob, session.id)
         return NextResponse.json(createdJob, {status: HttpStatusCode.Created})
     } catch (error) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})

@@ -10,10 +10,11 @@ import mongoose from "mongoose";
 /**
  * Create a job in the database
  * @param job The job to create
+ * @param userId The id of the user associated with the job
  * @returns The created job
  */
-export function createJob(job: Job) {
-    return JobModel.create(job)
+export function createJob(job: Job, userId: string) {
+    return JobModel.create({...job, user: new mongoose.Types.ObjectId(userId)})
 }
 
 /**
@@ -46,10 +47,11 @@ export function deleteJob(id: string) {
 /**
  * Create a contact in the database
  * @param contact The contact to create
+ * @param userId The id of the user associated with the contact
  * @returns The created contact
  */
-export function createContact(contact: Contact) {
-    return ContactModel.create(contact)
+export function createContact(contact: Contact, userId: string) {
+    return ContactModel.create({...contact, user: new mongoose.Types.ObjectId(userId)})
 }
 
 /**
