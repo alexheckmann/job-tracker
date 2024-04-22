@@ -4,7 +4,8 @@ import {HttpStatusCode} from "axios";
 import mongoose from "mongoose";
 import mongooseConnection from "@/lib/db/mongoose-connection";
 import {getServerSession} from "next-auth";
-import {authOptions} from "@/app/api/auth/[...nextauth]/route";
+
+import {authOptions} from "@/app/api/auth/[...nextauth]/authOptions";
 
 
 export async function GET() {
