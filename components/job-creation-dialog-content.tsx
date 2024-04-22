@@ -76,7 +76,7 @@ export default function JobCreationDialogContent() {
 
                         <FormField control={form.control} name={"company"} render={({field}) => (
                             /* TODO implement clientside validation*/
-                            <FormInput labelName={"Company"} placeholder={"Company"} isRequired
+                            <FormInput labelName={"Company"} placeholder={"Company"} required
                                        field={field}/>
                         )}/>
 

@@ -67,23 +67,23 @@ export default function ContactCreationDialogContent() {
 
                     <div className="grid gap-4 py-4">
                         <FormField control={form.control} name={"name"} render={({field}) => (
-                            <FormInput labelName={"Name"} placeholder={"Name"} isRequired
+                            <FormInput labelName={"Name"} placeholder={"Name"} required
                                        field={field}/>
                         )}/>
 
                         <FormField control={form.control} name={"company"} render={({field}) => (
-                            <FormInput labelName={"Company"} placeholder={"Company"} isRequired
+                            <FormInput labelName={"Company"} placeholder={"Company"} required
                                        field={field}/>
                         )}/>
 
                         <div className={"grid grid-cols-2 gap-4 items-end"}>
                             <FormField control={form.control} name={"location"} render={({field}) => (
-                                <FormInput labelName={"Location"} placeholder={"Location"} isRequired
+                                <FormInput labelName={"Location"} placeholder={"Location"} required
                                            field={field}/>
                             )}/>
 
                             <FormField control={form.control} name={"role"} render={({field}) => (
-                                <FormInput labelName={"Role"} placeholder={"Role"} isRequired
+                                <FormInput labelName={"Role"} placeholder={"Role"} required
                                            field={field}/>
                             )}/>
                         </div>
