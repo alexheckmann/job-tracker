@@ -1,24 +1,15 @@
 "use client"
 
-import {useJobData, useJobEntriesStore} from "@/app/data/job-data";
-import {useEffect} from "react";
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
+import {Card, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
 import {ArrowUpRight} from "lucide-react";
-import {DataTable} from "@/components/data-table";
-import {jobTrackerColumns} from "@/app/data/job-columns";
+import {JobTable} from "@/app/job-table";
+import {useSession} from "next-auth/react";
 
 export default function Home() {
 
-    const {data: fetchedJobData, isLoading: isLoadingJobData, isFetched: isJobDataFetched} = useJobData()
-    const {data: jobData, setData: setJobData} = useJobEntriesStore()
-
-    useEffect(() => {
-        if (isJobDataFetched) {
-            setJobData(fetchedJobData!)
-        }
-    }, [isJobDataFetched, fetchedJobData])
+    const {status} = useSession()
 
     return (
         <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8 max-h-[88vh]">
@@ -38,11 +29,7 @@ export default function Home() {
                             </Link>
                         </Button>
                     </CardHeader>
-                    <CardContent className={"h-[75vh]"}>
-                        {isLoadingJobData ? "Loading..." :
-                            <DataTable className={"h-[70vh] overflow-auto"} data={jobData} columns={jobTrackerColumns}/>
-                        }
-                    </CardContent>
+                    {status === "authenticated" && <JobTable/>}
                 </Card>
             </div>
         </main>

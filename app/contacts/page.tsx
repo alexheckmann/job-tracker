@@ -1,21 +1,12 @@
 "use client"
 
-import {useContactData, useContactEntriesStore} from "@/app/data/job-data";
-import {useEffect} from "react";
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
-import {DataTable} from "@/components/data-table";
-import {contactColumns} from "@/app/data/contact-columns";
+import {Card, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
+import {useSession} from "next-auth/react";
+import ContactTable from "@/app/contacts/contact-table";
 
 export default function ContactsPage() {
 
-    const {data: fetchedContactData, isLoading: isLoadingJobData, isFetched: isContactDataFetched} = useContactData()
-    const {data: contactData, setData: setContactData} = useContactEntriesStore()
-
-    useEffect(() => {
-        if (isContactDataFetched) {
-            setContactData(fetchedContactData!)
-        }
-    }, [isContactDataFetched, fetchedContactData])
+    const {status} = useSession()
 
     return (
         <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8 max-h-[88vh]">
@@ -29,12 +20,7 @@ export default function ContactsPage() {
                             </CardDescription>
                         </div>
                     </CardHeader>
-                    <CardContent className={"h-[75vh]"}>
-                        {isLoadingJobData ? "Loading..." :
-                            <DataTable className={"h-[70vh] overflow-auto"} data={contactData}
-                                       columns={contactColumns}/>
-                        }
-                    </CardContent>
+                    {status === "authenticated" && <ContactTable/>}
                 </Card>
             </div>
         </main>
