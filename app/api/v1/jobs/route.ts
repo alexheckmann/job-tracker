@@ -3,6 +3,8 @@ import {NextRequest, NextResponse} from "next/server";
 import {HttpStatusCode} from "axios";
 import mongoose from "mongoose";
 import mongooseConnection from "@/lib/db/mongoose-connection";
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 
 
 export async function GET() {
@@ -12,7 +14,8 @@ export async function GET() {
     }
 
     try {
-        const results = await getJobs()
+        const session = await getServerSession(authOptions)
+        const results = await getJobs(session.id)
         return NextResponse.json({jobs: results}, {status: HttpStatusCode.Ok})
     } catch (error) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
