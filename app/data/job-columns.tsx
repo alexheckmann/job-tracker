@@ -1,19 +1,11 @@
 "use client"
 
 import {Column, ColumnDef, Row} from "@tanstack/react-table"
-import {ChevronsUpDown, Loader2, MoreHorizontal, SquarePen, Trash} from "lucide-react";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu";
+import {ChevronsUpDown} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {StatusDropdown} from "@/components/status-dropdown";
 import {useEffect} from "react";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
-import {useDeleteJob} from "@/app/data/use-delete-data";
 import {HoverTooltip} from "@/components/hover-tooltip";
 import {formatDate} from "@/lib/formatDate";
 import {format} from "date-fns";
@@ -21,47 +13,7 @@ import {BooleanStatusIcon} from "@/components/boolean-status-icon";
 import {OpenLinkButton} from "@/components/open-link-button";
 
 import {Job} from "@/lib/models/job";
-
-function RowActions({row}: { row: Row<Job> }) {
-    const job = row.original
-
-    const {mutateData: mutateJobs, isPending: isDeletingJob} = useDeleteJob(job);
-
-    return (
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="h-8 w-8 p-0" disabled={isDeletingJob}>
-                    {isDeletingJob ?
-                        <>
-                            <span className="sr-only">Deleting entry</span>
-                            <Loader2 className={"h-4 w-4 animate-spin"}/>
-                        </>
-                        :
-                        <>
-                            <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4"/>
-                        </>
-                    }
-                </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Actions</DropdownMenuLabel>
-
-                {/* TODO implement edit dialog */}
-                <DropdownMenuItem className={"gap-2"}>
-                    <SquarePen className={"h-4 w-4"}/>
-                    Edit
-                </DropdownMenuItem>
-
-                <DropdownMenuItem className={"gap-2"}
-                                  onClick={() => mutateJobs()}>
-                    <Trash className={"h-4 w-4"}/>
-                    Delete
-                </DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
-    )
-}
+import {JobRowActions} from "@/app/data/job-row-actions";
 
 // function that returns the first n characters of a string
 function truncateString(str: string, num: number) {
@@ -304,7 +256,7 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
         id: "actions",
         cell: ({row}: { row: Row<Job> }) => {
             return (
-                <RowActions row={row}/>
+                <JobRowActions row={row}/>
             )
         },
     },

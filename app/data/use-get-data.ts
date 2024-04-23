@@ -40,7 +40,17 @@ export const useJobCreationDialogStore = create<ClientStateStore<boolean>>(set =
     setData: (data) => set({data: data})
 }));
 
+export const useJobEditDialogStore = create<ClientStateStore<boolean>>(set => ({
+    data: false,
+    setData: (data) => set({data: data})
+}));
+
 export const useContactCreationDialogStore = create<ClientStateStore<boolean>>(set => ({
+    data: false,
+    setData: (data) => set({data: data})
+}));
+
+export const useContactEditDialogStore = create<ClientStateStore<boolean>>(set => ({
     data: false,
     setData: (data) => set({data: data})
 }));

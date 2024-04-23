@@ -1,43 +1,36 @@
 "use client"
 
 import {DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
-import {useJobCreationDialogStore} from "@/app/data/use-get-data";
+import {useJobEditDialogStore} from "@/app/data/use-get-data";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form} from "@/components/ui/form";
 import {Job, JobSchema} from "@/lib/models/job";
-import {useCreateJob} from "@/app/data/use-create-data";
 import {ClipboardPlus} from "lucide-react";
 import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
 import {SubmitButton} from "@/components/submit-button";
 import JobDialogContent from "@/components/job-dialog-content";
+import {useMemo} from "react";
+import {useUpdateJob} from "@/app/data/use-update-data";
 
-export default function JobCreationDialogContent() {
 
-    const {setData: setIsJobCreationDialogOpen} = useJobCreationDialogStore()
+interface JobEditDialogContentProps {
+    job: Job
+}
+
+export default function JobEditDialogContent({job}: JobEditDialogContentProps) {
+
+    const {setData: setIsJobEditDialogOpen} = useJobEditDialogStore()
 
     const form = useForm<Job>({
         resolver: zodResolver(JobSchema),
-        defaultValues: {
-            role: "AI Engineer",
-            company: "",
-            location: "London, United Kingdom",
-            lastUpdate: new Date(),
-            status: "Applied",
-            exactTitle: "",
-            salary: "",
-            isFavorite: false,
-            isRecruiter: false,
-            isReferral: false,
-            notes: "",
-            link: ""
-        }
+        defaultValues: useMemo(() => job, [job])
     })
 
     const {
         mutateData: insertJob,
         isPending: isAddingJob
-    } = useCreateJob(form.getValues(), setIsJobCreationDialogOpen, false)
+    } = useUpdateJob(form.getValues(), setIsJobEditDialogOpen, false)
 
     useCtrlKeyShortcut("m", () => {
         form.handleSubmit((job: Job) => {
@@ -66,9 +59,8 @@ export default function JobCreationDialogContent() {
                     </DialogHeader>
 
                     <JobDialogContent form={form}/>
-
                     <DialogFooter>
-                        <SubmitButton disabled={isAddingJob}>Add job</SubmitButton>
+                        <SubmitButton disabled={isAddingJob}>Save job</SubmitButton>
                     </DialogFooter>
                 </form>
             </Form>

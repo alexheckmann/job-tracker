@@ -1,65 +1,17 @@
 "use client"
 
 import {Column, ColumnDef, Row} from "@tanstack/react-table"
-import {ChevronsUpDown, Loader2, Mail, MoreHorizontal, SquarePen, Trash} from "lucide-react";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu";
+import {ChevronsUpDown, Mail} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {useEffect} from "react";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
-import {useDeleteContact} from "@/app/data/use-delete-data";
 import {HoverTooltip} from "@/components/hover-tooltip";
 import {format} from "date-fns";
 import {formatDate} from "@/lib/formatDate";
 import {OpenLinkButton} from "@/components/open-link-button";
 
 import {Contact} from "@/lib/models/contact";
-
-function RowActions({row}: { row: Row<Contact> }) {
-    const contact = row.original
-
-    const {mutateData: mutateContacts, isPending: isDeletingContact} = useDeleteContact(contact);
-
-    return (
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="h-8 w-8 p-0" disabled={isDeletingContact}>
-                    {isDeletingContact ?
-                        <>
-                            <span className="sr-only">Deleting entry</span>
-                            <Loader2 className={"h-4 w-4 animate-spin"}/>
-                        </>
-                        :
-                        <>
-                            <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4"/>
-                        </>
-                    }
-                </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Actions</DropdownMenuLabel>
-
-                {/* TODO implement edit dialog */}
-                <DropdownMenuItem className={"gap-2"}>
-                    <SquarePen className={"h-4 w-4"}/>
-                    Edit
-                </DropdownMenuItem>
-
-                <DropdownMenuItem className={"gap-2"}
-                                  onClick={() => mutateContacts()}>
-                    <Trash className={"h-4 w-4"}/>
-                    Delete
-                </DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
-    )
-}
+import {ContactRowActions} from "@/app/data/contact-row-actions";
 
 /**
  * Truncate a string to a certain length. Used as a workaround for the lack of ellipsis support in the table.
@@ -230,7 +182,7 @@ export const contactColumns: ColumnDef<Contact>[] = [
         id: "actions",
         cell: ({row}: { row: Row<Contact> }) => {
             return (
-                <RowActions row={row}/>
+                <ContactRowActions row={row}/>
             )
         },
     },

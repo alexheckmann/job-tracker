@@ -60,7 +60,7 @@ export function useCreateData<S, T extends TypeHasIdAndLastUpdate>(apiEndpoint: 
     return {mutateData, isPending};
 }
 
-export function useCreateJob(job: Job, setUiState?: (data: any) => void) {
+export function useCreateJob(job: Job, setUiState?: (data: any) => void, uiStateToSet?: any) {
 
     // TODO implement success undo action
     const successToastContent: ToastContent = {
@@ -82,10 +82,10 @@ export function useCreateJob(job: Job, setUiState?: (data: any) => void) {
         )
     }
 
-    return useCreateData<Job, Job>('/api/v1/jobs', ['jobs'], useJobEntriesStore, successToastContent, errorToastContent, setUiState, false)
+    return useCreateData<Job, Job>('/api/v1/jobs', ['jobs'], useJobEntriesStore, successToastContent, errorToastContent, setUiState, uiStateToSet)
 }
 
-export function useCreateContact(contact: Contact, setUiState?: (data: any) => void) {
+export function useCreateContact(contact: Contact, setUiState?: (data: any) => void, uiStateToSet?: any) {
 
     // TODO implement success undo action
     const successToastContent: ToastContent = {
@@ -107,5 +107,5 @@ export function useCreateContact(contact: Contact, setUiState?: (data: any) => v
         )
     }
 
-    return useCreateData<Contact, Contact>('/api/v1/contacts', ['contacts'], useContactEntriesStore, successToastContent, errorToastContent, setUiState, false)
+    return useCreateData<Contact, Contact>('/api/v1/contacts', ['contacts'], useContactEntriesStore, successToastContent, errorToastContent, setUiState, uiStateToSet)
 }

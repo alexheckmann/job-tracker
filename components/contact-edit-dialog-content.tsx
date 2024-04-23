@@ -1,41 +1,35 @@
 "use client"
 
 import {DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
-import {useContactCreationDialogStore} from "@/app/data/use-get-data";
+import {useContactEditDialogStore} from "@/app/data/use-get-data";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form} from "@/components/ui/form";
-import {useCreateContact} from "@/app/data/use-create-data";
 import {UserRoundPlus} from "lucide-react";
 import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
 import {SubmitButton} from "@/components/submit-button";
-
 import {Contact, ContactSchema} from "@/lib/models/contact";
 import ContactDialogContent from "@/components/contact-dialog-content";
+import {useMemo} from "react";
+import {useUpdateContact} from "@/app/data/use-update-data";
 
-export default function ContactCreationDialogContent() {
+interface ContentEditDialogContentProps {
+    contact: Contact;
+}
 
-    const {setData: setIsContactCreationDialogOpen} = useContactCreationDialogStore()
+export default function ContactEditDialogContent({contact}: ContentEditDialogContentProps) {
+
+    const {setData: setIsContactCreationDialogOpen} = useContactEditDialogStore()
 
     const form = useForm<Contact>({
         resolver: zodResolver(ContactSchema),
-        defaultValues: {
-            role: "Recruiter",
-            company: "",
-            location: "London, United Kingdom",
-            lastUpdate: new Date(),
-            notes: "",
-            linkedin: "",
-            name: "",
-            email: "",
-            phone: ""
-        }
+        defaultValues: useMemo(() => contact, [contact])
     })
 
     const {
         mutateData: insertContact,
         isPending: isAddingContact
-    } = useCreateContact(form.getValues(), setIsContactCreationDialogOpen, false)
+    } = useUpdateContact(form.getValues(), setIsContactCreationDialogOpen, false)
 
     useCtrlKeyShortcut("m", () => {
         form.handleSubmit((contact: Contact) => {
@@ -55,7 +49,7 @@ export default function ContactCreationDialogContent() {
                     <DialogHeader>
                         <DialogTitle className={"flex flex-row gap-2"}>
                             <UserRoundPlus className={"h-4 w-4"}/>
-                            Add contact
+                            Edit contact
                         </DialogTitle>
                         <DialogDescription>
                             Click save when you are done.
@@ -65,7 +59,7 @@ export default function ContactCreationDialogContent() {
                     <ContactDialogContent form={form}/>
 
                     <DialogFooter>
-                        <SubmitButton disabled={isAddingContact}>Add contact</SubmitButton>
+                        <SubmitButton disabled={isAddingContact}>Save contact</SubmitButton>
                     </DialogFooter>
                 </form>
             </Form>
