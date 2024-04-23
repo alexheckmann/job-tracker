@@ -15,17 +15,27 @@ import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/
 import {useState} from "react";
 import {cn} from "@/lib/utils";
 import {Input} from "@/components/ui/input";
+import {Toggle} from "@/components/ui/toggle";
+
+export interface FilterColumnOption {
+    name: string,
+    type: "button" | "input",
+    label: string,
+    filterValue?: string | boolean
+
+}
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[],
-    className?: string
+    className?: string,
+    filterColumnOptions?: FilterColumnOption[],
 }
-
 export function DataTable<TData, TValue>({
                                              columns,
                                              data,
-                                             className
+                                             className,
+                                             filterColumnOptions
                                          }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = useState<SortingState>([])
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
@@ -51,14 +61,35 @@ export function DataTable<TData, TValue>({
     return (
         <>
             <div className="flex items-center py-4 gap-2">
-                <Input
-                    placeholder="Search for a company..."
-                    value={(table.getColumn("company")?.getFilterValue() as string) ?? ""}
-                    onChange={(event) =>
-                        table.getColumn("company")?.setFilterValue(event.target.value)
+                {filterColumnOptions?.map((filterColumnOption) => {
+                    const column = table.getColumn(filterColumnOption.name)
+
+                    if (filterColumnOption.type === "button") {
+                        return (
+                            <Toggle variant={"outline"} onPressedChange={
+                                (pressed) => {
+                                    pressed ? column?.setFilterValue(filterColumnOption.filterValue ?? "") :
+                                        column?.setFilterValue("")
+                                }}>
+                                {filterColumnOption.label}
+                            </Toggle>
+                        )
+                    } else {
+                        return (
+                            <Input
+                                key={filterColumnOption.name}
+                                placeholder={filterColumnOption.label}
+                                value={(column?.getFilterValue() as string) ?? ""}
+                                onChange={(event) => column?.setFilterValue(event.target.value)}
+                                className="max-w-64"
+                            />
+                        )
                     }
-                    className="max-w-sm"
-                />
+
+                })}
+
+
+
             </div>
             <div className={cn("rounded-md border bg-white", className)}>
                 <Table>

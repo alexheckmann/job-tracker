@@ -1,8 +1,16 @@
-import {DataTable} from "@/components/data-table";
+import {DataTable, FilterColumnOption} from "@/components/data-table";
 import {contactColumns} from "@/app/data/contact-columns";
 import {CardContent} from "@/components/ui/card";
 import {useContactData, useContactEntriesStore} from "@/app/data/use-get-data";
 import {useEffect} from "react";
+
+const filterColumnOptions: FilterColumnOption[] = [
+    {
+        name: "company",
+        type: "input",
+        label: "Search for a company..."
+    }
+]
 
 export default function ContactTable() {
 
@@ -19,7 +27,7 @@ export default function ContactTable() {
         <CardContent className={"h-[75vh]"}>
             {isLoadingJobData ? "Loading..." :
                 <DataTable className={"h-[70vh] overflow-auto"} data={contactData}
-                           columns={contactColumns}/>
+                           columns={contactColumns} filterColumnOptions={filterColumnOptions}/>
             }
         </CardContent>
     )
