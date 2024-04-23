@@ -7,7 +7,6 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Form} from "@/components/ui/form";
 import {Job, JobSchema} from "@/lib/models/job";
 import {ClipboardPlus} from "lucide-react";
-import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
 import {SubmitButton} from "@/components/submit-button";
 import JobDialogContent from "@/components/job-dialog-content";
 import {useMemo} from "react";
@@ -32,12 +31,6 @@ export default function JobEditDialogContent({job}: JobEditDialogContentProps) {
         isPending: isAddingJob
     } = useUpdateJob(form.getValues(), setIsJobEditDialogOpen, false)
 
-    useCtrlKeyShortcut("m", () => {
-        form.handleSubmit((job: Job) => {
-            insertJob(job)
-        })();
-    })
-
 
     return (
         <DialogContent className="sm:max-w-[500px] max-h-[85svh] overflow-x-auto">
@@ -60,7 +53,7 @@ export default function JobEditDialogContent({job}: JobEditDialogContentProps) {
 
                     <JobDialogContent form={form}/>
                     <DialogFooter>
-                        <SubmitButton disabled={isAddingJob}>Save job</SubmitButton>
+                        <SubmitButton disabled={isAddingJob}>{isAddingJob ? "Saving job" : "Save job"}</SubmitButton>
                     </DialogFooter>
                 </form>
             </Form>

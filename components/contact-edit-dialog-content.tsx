@@ -6,7 +6,6 @@ import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form} from "@/components/ui/form";
 import {UserRoundPlus} from "lucide-react";
-import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
 import {SubmitButton} from "@/components/submit-button";
 import {Contact, ContactSchema} from "@/lib/models/contact";
 import ContactDialogContent from "@/components/contact-dialog-content";
@@ -31,12 +30,6 @@ export default function ContactEditDialogContent({contact}: ContentEditDialogCon
         isPending: isAddingContact
     } = useUpdateContact(form.getValues(), setIsContactCreationDialogOpen, false)
 
-    useCtrlKeyShortcut("m", () => {
-        form.handleSubmit((contact: Contact) => {
-            insertContact(contact)
-        })();
-    })
-
     return (
         <DialogContent className="sm:max-w-[500px] max-h-[85svh] overflow-x-auto">
             <Form {...form}>
@@ -59,7 +52,8 @@ export default function ContactEditDialogContent({contact}: ContentEditDialogCon
                     <ContactDialogContent form={form}/>
 
                     <DialogFooter>
-                        <SubmitButton disabled={isAddingContact}>Save contact</SubmitButton>
+                        <SubmitButton
+                            disabled={isAddingContact}>{isAddingContact ? "Saving contact" : "Save contact"}</SubmitButton>
                     </DialogFooter>
                 </form>
             </Form>

@@ -65,7 +65,8 @@ export default function ContactCreationDialogContent() {
                     <ContactDialogContent form={form}/>
 
                     <DialogFooter>
-                        <SubmitButton disabled={isAddingContact}>Add contact</SubmitButton>
+                        <SubmitButton
+                            disabled={isAddingContact}>{isAddingContact ? "Adding contact" : "Add contact"}</SubmitButton>
                     </DialogFooter>
                 </form>
             </Form>
