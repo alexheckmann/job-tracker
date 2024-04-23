@@ -2,9 +2,11 @@ import {FormField} from "@/components/ui/form";
 import {FormInput} from "@/components/form-input";
 import {FormTextarea} from "@/components/form-textarea";
 import {FormDatePicker} from "@/components/form-date-picker";
+import {UseFormReturn} from "react-hook-form";
+import {Contact} from "@/lib/models/contact";
 
 interface ContactDialogContentProps {
-    form: any;
+    form: UseFormReturn<Contact>;
 
 }
 

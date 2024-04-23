@@ -4,11 +4,12 @@ import {cityData, roleData} from "@/app/data/use-get-data";
 import {FormInput} from "@/components/form-input";
 import {FormTextarea} from "@/components/form-textarea";
 import {FormDatePicker} from "@/components/form-date-picker";
-import {ApplicationStatus} from "@/lib/models/job";
+import {ApplicationStatus, Job} from "@/lib/models/job";
 import {FormSwitch} from "@/components/form-switch";
+import {UseFormReturn} from "react-hook-form";
 
 interface JobDialogContentProps {
-    form: any;
+    form: UseFormReturn<Job>;
 }
 
 export default function JobDialogContent({form}: JobDialogContentProps) {
