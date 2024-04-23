@@ -1,7 +1,7 @@
 "use client"
 
 import {Column, ColumnDef, Row} from "@tanstack/react-table"
-import {ChevronsUpDown} from "lucide-react";
+import {ChevronsUpDown, Star} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {StatusDropdown} from "@/components/status-dropdown";
 import {useEffect} from "react";
@@ -24,6 +24,32 @@ function truncateString(str: string, num: number) {
 }
 
 export const jobTrackerColumns: ColumnDef<Job>[] = [
+    {
+        accessorKey: "isFavorite",
+        header: ({column}: { column: Column<Job> }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Favorite?
+                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                </Button>
+            )
+        },
+
+        cell: ({row}: { row: Row<Job> }) => {
+            //return <BooleanStatusIcon bool={row.getValue<boolean>("isFavorite")}/>
+            const isFavorite = row.getValue<boolean>("isFavorite")
+            return (
+                isFavorite ? <Star className="h-4 w-4 text-ternary"/> :
+                    <Star className={"h-4 w-4 text-muted-foreground"}/>
+            )
+        },
+
+        size: 20,
+        enableResizing: false
+    },
     {
         accessorKey: "role",
         header: ({column}: { column: Column<Job> }) => {
@@ -154,27 +180,6 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
                 </Button>
             )
         },
-    },
-    {
-        accessorKey: "isFavorite",
-        header: ({column}: { column: Column<Job> }) => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                >
-                    Favorite?
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
-                </Button>
-            )
-        },
-
-        cell: ({row}: { row: Row<Job> }) => {
-            return <BooleanStatusIcon bool={row.getValue<boolean>("isFavorite")}/>
-        },
-
-        size: 20,
-        enableResizing: false
     },
     {
         accessorKey: "isReferral",
