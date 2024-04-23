@@ -6,6 +6,8 @@ import {FormTextarea} from "@/components/form-textarea";
 import {FormDatePicker} from "@/components/form-date-picker";
 import {ApplicationStatus, Job} from "@/lib/models/job";
 import {FormSwitch} from "@/components/form-switch";
+import {Button} from "@/components/ui/button";
+import {Star} from "lucide-react";
 import {UseFormReturn} from "react-hook-form";
 
 interface JobDialogContentProps {
@@ -15,10 +17,24 @@ interface JobDialogContentProps {
 export default function JobDialogContent({form}: JobDialogContentProps) {
     return (
         <div className="grid gap-4 py-4">
-            <FormField control={form.control} name={"role"} render={({field}) => (
-                <FormSelect entries={roleData} label={"Role"} defaultValue={form.getValues("role")}
-                            onValueChange={field.onChange} isExpandable/>
-            )}/>
+            <div className={"grid grid-cols-8 gap-4 items-end"}>
+                <FormField control={form.control} name={"role"} render={({field}) => (
+                    <FormSelect className={"col-span-7"} entries={roleData} label={"Role"}
+                                defaultValue={form.getValues("role")}
+                                onValueChange={field.onChange} isExpandable/>
+                )}/>
+
+                <FormField control={form.control} name={"isFavorite"} render={({field}) => (
+                    <Button variant={"ghost"} type={"button"} className={"p-3"}
+                            onClick={() => form.setValue("isFavorite", !form.getValues<"isFavorite">("isFavorite"))
+                            }>
+                        {field.value ?
+                            <Star fill={"#FFD700"} className="h-6 w-6 text-ternary"/> :
+                            <Star className={"h-6 w-6 text-muted-foreground"}/>}
+                    </Button>
+                )}/>
+            </div>
+
 
             <FormField control={form.control} name={"company"} render={({field}) => (
                 /* TODO implement clientside validation*/
@@ -68,22 +84,9 @@ export default function JobDialogContent({form}: JobDialogContentProps) {
             </div>
 
             <div className={"grid grid-cols-2 gap-4 items-end"}>
-                <FormField control={form.control} name={"status"} render={({field}) => (
-                    <FormSelect entries={ApplicationStatus.options} label={"Contact"}
-                                defaultValue={form.getValues("status")}
-                                onValueChange={field.onChange}/>
-                )}/>
 
                 <FormField control={form.control} name={"isReferral"} render={({field}) => (
                     <FormSwitch label={"Got referral"} checked={field.value}
-                                onCheckedChange={field.onChange}/>
-                )}/>
-            </div>
-
-
-            <div className={"grid grid-cols-2 gap-4 items-end"}>
-                <FormField control={form.control} name={"isFavorite"} render={({field}) => (
-                    <FormSwitch label={"Favorite role"} checked={field.value}
                                 onCheckedChange={field.onChange}/>
                 )}/>
 

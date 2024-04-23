@@ -14,7 +14,7 @@ import {OpenLinkButton} from "@/components/open-link-button";
 
 import {Job} from "@/lib/models/job";
 import {JobRowActions} from "@/app/data/job-row-actions";
-import {FavoriteButton} from "@/app/data/favorite-button";
+import {FavoriteButton} from "@/components/favorite-button";
 
 // function that returns the first n characters of a string
 function truncateString(str: string, num: number) {

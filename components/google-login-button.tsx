@@ -15,8 +15,8 @@ export function GoogleLoginButton({className}: GoogleLoginButtonProps) {
     return (
         <Button
             disabled={loading}
-            variant="outline"
-            className={cn(className, "w-fit")}
+            variant="secondary"
+            className={cn(className, "w-[150px]")}
             onClick={() => {
                 setLoading(true)
                 signIn("google")
@@ -24,7 +24,7 @@ export function GoogleLoginButton({className}: GoogleLoginButtonProps) {
             {loading ?
                 <div className={"flex flex-row gap-2 items-center"}>
                     <Loader2 className={"h-4 w-4 animate-spin"}/>
-                    <span className={"animate-pulse"}>Signing in...</span>
+                    <span className={"animate-pulse"}>Signing in</span>
                 </div>
                 :
                 "Login with Google"

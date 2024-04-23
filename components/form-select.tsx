@@ -8,8 +8,10 @@ import {
     SelectTrigger,
     SelectValue
 } from "@/components/ui/select";
+import {HTMLAttributes} from "react";
+import {cn} from "@/lib/utils";
 
-interface FormSelectProps {
+interface FormSelectProps extends HTMLAttributes<HTMLDivElement> {
     entries: string[],
     defaultValue: string,
     label: string,
@@ -17,10 +19,17 @@ interface FormSelectProps {
     isExpandable?: boolean
 }
 
-export function FormSelect({entries, label, defaultValue, onValueChange, isExpandable = false}: FormSelectProps) {
+export function FormSelect({
+                               className,
+                               entries,
+                               label,
+                               defaultValue,
+                               onValueChange,
+                               isExpandable = false
+                           }: FormSelectProps) {
 
     return (
-        <div className="flex flex-col gap-2">
+        <div className={cn(className, "flex flex-col gap-2")}>
             <FormItem>
 
                 <FormLabel>{label}</FormLabel>
