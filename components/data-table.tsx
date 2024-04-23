@@ -31,6 +31,7 @@ interface DataTableProps<TData, TValue> {
     className?: string,
     filterColumnOptions?: FilterColumnOption[],
 }
+
 export function DataTable<TData, TValue>({
                                              columns,
                                              data,
@@ -66,11 +67,14 @@ export function DataTable<TData, TValue>({
 
                     if (filterColumnOption.type === "button") {
                         return (
-                            <Toggle variant={"outline"} onPressedChange={
-                                (pressed) => {
-                                    pressed ? column?.setFilterValue(filterColumnOption.filterValue ?? "") :
-                                        column?.setFilterValue("")
-                                }}>
+                            <Toggle
+                                key={filterColumnOption.name}
+                                variant={"outline"}
+                                onPressedChange={
+                                    (pressed) => {
+                                        pressed ? column?.setFilterValue(filterColumnOption.filterValue ?? "") :
+                                            column?.setFilterValue("")
+                                    }}>
                                 {filterColumnOption.label}
                             </Toggle>
                         )
@@ -87,7 +91,6 @@ export function DataTable<TData, TValue>({
                     }
 
                 })}
-
 
 
             </div>
