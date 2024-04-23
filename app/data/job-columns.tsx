@@ -1,7 +1,7 @@
 "use client"
 
 import {Column, ColumnDef, Row} from "@tanstack/react-table"
-import {ChevronsUpDown, Star} from "lucide-react";
+import {ChevronsUpDown} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {StatusDropdown} from "@/components/status-dropdown";
 import {useEffect} from "react";
@@ -14,6 +14,7 @@ import {OpenLinkButton} from "@/components/open-link-button";
 
 import {Job} from "@/lib/models/job";
 import {JobRowActions} from "@/app/data/job-row-actions";
+import {FavoriteButton} from "@/app/data/favorite-button";
 
 // function that returns the first n characters of a string
 function truncateString(str: string, num: number) {
@@ -32,7 +33,6 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Favorite?
                     <ChevronsUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             )
@@ -40,10 +40,8 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
 
         cell: ({row}: { row: Row<Job> }) => {
             //return <BooleanStatusIcon bool={row.getValue<boolean>("isFavorite")}/>
-            const isFavorite = row.getValue<boolean>("isFavorite")
             return (
-                isFavorite ? <Star className="h-4 w-4 text-ternary"/> :
-                    <Star className={"h-4 w-4 text-muted-foreground"}/>
+                <FavoriteButton job={row.original}/>
             )
         },
 
