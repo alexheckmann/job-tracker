@@ -4,18 +4,19 @@ import Link from "next/link";
 import {CircleUser, Menu} from "lucide-react";
 import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
 import {Button} from "@/components/ui/button";
-import HoverableDropdownMenu from "@/components/hoverable-dropdown-menu";
 import Logo from "@/components/logo";
 import {usePathname} from "next/navigation";
 import {JobCreationButton} from "@/components/job-creation-button";
 import {ContactCreationButton} from "@/components/contact-creation-button";
 import {signOut, useSession} from "next-auth/react";
 import {GoogleLoginButton} from "@/components/google-login-button";
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
 
 const navLinks = [
     {path: "/", label: "Applications"},
     {path: "/contacts", label: "Contacts"},
-    {path: "#", label: "Analytics"}
+    // {path: "/notes", label: "Notes"},
+    // {path: "/analytics", label: "Analytics"}
 ]
 
 
@@ -101,19 +102,27 @@ export default function Navbar() {
 
                 {/* TODO fix and replace with viable alternative*/}
                 {status === "authenticated" ?
-                    <HoverableDropdownMenu
-                        dropdownMenuTrigger={
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
                             <Button variant="secondary" size="icon" className="rounded-full">
                                 <CircleUser className="h-5 w-5"/>
                                 <span className="sr-only">Toggle user menu</span>
                             </Button>
-                        } dropdownMenuItems={[
-                        <span key={1}>{data?.user?.name}</span>,
-                        <span key={2}>Donate</span>,
-                        <span key={3}>Feedback</span>,
-                        <Button key={4} onClick={() => signOut()}>Sign out</Button>
-                    ]}/> :
-                    <GoogleLoginButton className={"ml-auto"}/>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="center">
+                            <DropdownMenuItem asChild>
+                                <span>Donate</span>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem asChild>
+                                <span>Feedback</span>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem className={"cursor-pointer"} onClick={() => signOut()}>
+                                Sign out
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                    :
+                    <GoogleLoginButton disabled={status === "loading"} className={"ml-auto"}/>
                 }
             </div>
         </header>

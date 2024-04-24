@@ -4,19 +4,19 @@ import {Button} from "@/components/ui/button";
 import {signIn} from "next-auth/react";
 import {HTMLAttributes, useState} from "react";
 import {cn} from "@/lib/utils";
-import {Loader2} from "lucide-react";
+import {Loader2, LogIn} from "lucide-react";
 
 interface GoogleLoginButtonProps extends HTMLAttributes<HTMLButtonElement> {
-
+    disabled?: boolean;
 }
 
-export function GoogleLoginButton({className}: GoogleLoginButtonProps) {
+export function GoogleLoginButton({disabled, className}: GoogleLoginButtonProps) {
     const [loading, setLoading] = useState(false)
     return (
         <Button
-            disabled={loading}
+            disabled={loading || disabled}
             variant="secondary"
-            className={cn(className, "w-[150px]")}
+            className={cn(className, "w-[170px]")}
             onClick={() => {
                 setLoading(true)
                 signIn("google")
@@ -27,7 +27,10 @@ export function GoogleLoginButton({className}: GoogleLoginButtonProps) {
                     <span className={"animate-pulse"}>Signing in</span>
                 </div>
                 :
-                "Login with Google"
+                <div className={"flex flex-row gap-2 items-center"}>
+                    <LogIn className={"h-4 w-4"}/>
+                    <span>Sign in with Google</span>
+                </div>
             }
         </Button>
     )
