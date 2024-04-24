@@ -18,7 +18,7 @@ export default function StatusBadge({status, children, className}: StatusBadgePr
         case "Applied":
             statusColor = "bg-blue-100 text-blue-800 hover:bg-blue-300 hover:text-blue-900";
             break;
-        case "Interviewed":
+        case "Interview":
             statusColor = "bg-yellow-100 text-yellow-800 hover:bg-yellow-300 hover:text-yellow-900";
             break;
         case "Declined":

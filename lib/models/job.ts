@@ -1,7 +1,7 @@
 import {DatabaseObject} from "@/lib/models/database-object";
 import {z} from "zod";
 
-export const ApplicationStatus = z.enum(["Saved", "Applied", "Interviewed", "Offered", "Declined"]);
+export const ApplicationStatus = z.enum(["Saved", "Applied", "Interview", "Offered", "Declined"]);
 
 const jobsMaxLengthConstraints = {
     role: 128,
