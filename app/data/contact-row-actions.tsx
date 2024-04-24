@@ -40,14 +40,14 @@ export function ContactRowActions({row}: { row: Row<Contact> }) {
 
                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
-                    <DropdownMenuItem className={"gap-2"}>
+                    <DropdownMenuItem className={"cursor-pointer"}>
                         <DialogTrigger className={"flex flex-row gap-2 w-full items-center"}>
                             <SquarePen className={"h-4 w-4"}/>
                             Edit
                         </DialogTrigger>
                     </DropdownMenuItem>
 
-                    <DropdownMenuItem className={"gap-2"}
+                    <DropdownMenuItem className={"gap-2 cursor-pointer"}
                                       onClick={() => mutateContacts()}>
 
                         <Trash className={"h-4 w-4"}/>
