@@ -33,7 +33,7 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                    <ChevronsUpDown className="ml-4 h-4 w-4"/>
                 </Button>
             )
         },
