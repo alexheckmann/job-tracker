@@ -21,7 +21,7 @@ const filterColumns: FilterColumnOption[] = [
     {
         name: "isRecruiter",
         type: "button",
-        label: "Not a recruitment agency",
+        label: "HR",
         filterValue: false
     }
 ]
