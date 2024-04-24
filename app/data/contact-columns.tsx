@@ -1,7 +1,7 @@
 "use client"
 
 import {Column, ColumnDef, Row} from "@tanstack/react-table"
-import {ChevronsUpDown, Mail} from "lucide-react";
+import {ChevronsUpDown} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {useEffect} from "react";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
@@ -91,7 +91,7 @@ export const contactColumns: ColumnDef<Contact>[] = [
         },
         cell: ({row}: { row: Row<Contact> }) => {
             return row.getValue("linkedin") &&
-                <OpenLinkButton href={row.getValue("linkedin")} buttonText={"Open profile"}/>
+                <OpenLinkButton href={row.getValue("linkedin")} type={"linkedin"}/>
         },
     },
     {
@@ -114,7 +114,7 @@ export const contactColumns: ColumnDef<Contact>[] = [
             )
         },
         cell: ({row}: { row: Row<Contact> }) => {
-            return row.getValue("email") && <Mail className={"h-4 w-4 text-muted-foreground"}/>
+            return <OpenLinkButton href={row.getValue("email")} type={"email"}/>
         },
         size: 20,
         enableResizing: false

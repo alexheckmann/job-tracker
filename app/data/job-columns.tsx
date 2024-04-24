@@ -161,7 +161,7 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
         },
         cell: ({row}: { row: Row<Job> }) => {
             return row.getValue("link") &&
-                <OpenLinkButton href={row.getValue("link")} buttonText={"Job posting"}/>
+                <OpenLinkButton href={row.getValue("link")} type={"link"}/>
         },
     },
     {
