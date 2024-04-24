@@ -17,9 +17,9 @@ interface JobDialogContentProps {
 export default function JobDialogContent({form}: JobDialogContentProps) {
     return (
         <div className="grid gap-4 py-4">
-            <div className={"grid grid-cols-8 gap-4 items-end"}>
+            <div className={"grid grid-cols-6 md:grid-cols-8 gap-4 items-end"}>
                 <FormField control={form.control} name={"role"} render={({field}) => (
-                    <FormSelect className={"col-span-7"} entries={roleData} label={"Role"}
+                    <FormSelect className={"col-span-5 md:col-span-7"} entries={roleData} label={"Role"}
                                 defaultValue={form.getValues("role")}
                                 onValueChange={field.onChange} isExpandable/>
                 )}/>
