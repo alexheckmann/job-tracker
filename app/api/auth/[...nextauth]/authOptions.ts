@@ -46,8 +46,8 @@ export const authOptions = {
             // not the most performant way to do this, but necessary since no other way to get userid was found.
             // the problem is that token.sub is the google user id (?), not the user id in the database
             const user = await getUserByEmail(token.email)
+            // passing the user id to the token, so it can be used in the session
             token.id = user?._id
-            console.log("queried mongodb for id")
             return token
         },
         // @ts-ignore
