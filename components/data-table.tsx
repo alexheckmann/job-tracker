@@ -61,7 +61,7 @@ export function DataTable<TData, TValue>({
 
     return (
         <>
-            <div className="flex items-center py-4 gap-2">
+            <div className="flex flex-wrap items-center py-4 gap-2">
                 {filterColumnOptions?.map((filterColumnOption) => {
                     const column = table.getColumn(filterColumnOption.name)
 
@@ -85,7 +85,7 @@ export function DataTable<TData, TValue>({
                                 placeholder={filterColumnOption.label}
                                 value={(column?.getFilterValue() as string) ?? ""}
                                 onChange={(event) => column?.setFilterValue(event.target.value)}
-                                className="max-w-64"
+                                className="max-w-40 sm:max-w-64"
                             />
                         )
                     }
