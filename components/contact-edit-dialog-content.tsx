@@ -1,6 +1,6 @@
 "use client"
 
-import {DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
+import {DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {useContactEditDialogStore} from "@/app/data/use-get-data";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
@@ -11,6 +11,7 @@ import {Contact, ContactSchema} from "@/lib/models/contact";
 import ContactDialogContent from "@/components/contact-dialog-content";
 import {useMemo} from "react";
 import {useUpdateContact} from "@/app/data/use-update-data";
+import DialogContentWrapper from "@/components/dialog-content-wrapper";
 
 interface ContentEditDialogContentProps {
     contact: Contact;
@@ -31,7 +32,7 @@ export default function ContactEditDialogContent({contact}: ContentEditDialogCon
     } = useUpdateContact(form.getValues(), setIsContactCreationDialogOpen, false)
 
     return (
-        <DialogContent className="sm:max-w-[500px] max-h-[85svh] overflow-x-auto">
+        <DialogContentWrapper>
             <Form {...form}>
                 <form onSubmit={
                     form.handleSubmit((contact: Contact) => {
@@ -57,6 +58,6 @@ export default function ContactEditDialogContent({contact}: ContentEditDialogCon
                     </DialogFooter>
                 </form>
             </Form>
-        </DialogContent>
+        </DialogContentWrapper>
     )
 }

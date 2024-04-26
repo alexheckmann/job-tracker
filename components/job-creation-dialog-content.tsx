@@ -1,6 +1,6 @@
 "use client"
 
-import {DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
+import {DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {useJobCreationDialogStore} from "@/app/data/use-get-data";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
@@ -11,6 +11,7 @@ import {ClipboardPlus} from "lucide-react";
 import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
 import {SubmitButton} from "@/components/submit-button";
 import JobDialogContent from "@/components/job-dialog-content";
+import DialogContentWrapper from "@/components/dialog-content-wrapper";
 
 export default function JobCreationDialogContent() {
 
@@ -47,7 +48,7 @@ export default function JobCreationDialogContent() {
 
 
     return (
-        <DialogContent className="sm:max-w-[500px] max-h-[90svh] overflow-x-auto">
+        <DialogContentWrapper>
             <Form {...form}>
                 <form onSubmit={
                     form.handleSubmit((job: Job) => {
@@ -72,6 +73,6 @@ export default function JobCreationDialogContent() {
                     </DialogFooter>
                 </form>
             </Form>
-        </DialogContent>
+        </DialogContentWrapper>
     )
 }

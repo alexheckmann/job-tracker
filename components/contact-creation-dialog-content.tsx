@@ -1,6 +1,6 @@
 "use client"
 
-import {DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
+import {DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {useContactCreationDialogStore} from "@/app/data/use-get-data";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
@@ -12,6 +12,7 @@ import {SubmitButton} from "@/components/submit-button";
 
 import {Contact, ContactSchema} from "@/lib/models/contact";
 import ContactDialogContent from "@/components/contact-dialog-content";
+import DialogContentWrapper from "@/components/dialog-content-wrapper";
 
 export default function ContactCreationDialogContent() {
 
@@ -44,7 +45,7 @@ export default function ContactCreationDialogContent() {
     })
 
     return (
-        <DialogContent className="sm:max-w-[500px] max-h-[85svh] overflow-x-auto">
+        <DialogContentWrapper>
             <Form {...form}>
                 <form onSubmit={
                     form.handleSubmit((contact: Contact) => {
@@ -70,6 +71,6 @@ export default function ContactCreationDialogContent() {
                     </DialogFooter>
                 </form>
             </Form>
-        </DialogContent>
+        </DialogContentWrapper>
     )
 }

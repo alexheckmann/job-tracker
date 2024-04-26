@@ -1,6 +1,6 @@
 "use client"
 
-import {DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
+import {DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {useJobEditDialogStore} from "@/app/data/use-get-data";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
@@ -11,6 +11,7 @@ import {SubmitButton} from "@/components/submit-button";
 import JobDialogContent from "@/components/job-dialog-content";
 import {useMemo} from "react";
 import {useUpdateJob} from "@/app/data/use-update-data";
+import DialogContentWrapper from "@/components/dialog-content-wrapper";
 
 
 interface JobEditDialogContentProps {
@@ -33,7 +34,7 @@ export default function JobEditDialogContent({job}: JobEditDialogContentProps) {
 
 
     return (
-        <DialogContent className="sm:max-w-[500px] max-h-[85svh] overflow-x-auto">
+        <DialogContentWrapper>
             <Form {...form}>
                 <form onSubmit={
                     form.handleSubmit((job: Job) => {
@@ -44,7 +45,7 @@ export default function JobEditDialogContent({job}: JobEditDialogContentProps) {
                     <DialogHeader>
                         <DialogTitle className={"flex flex-row gap-2"}>
                             <ClipboardPlus className={"h-4 w-4"}/>
-                            Add job
+                            Edit job
                         </DialogTitle>
                         <DialogDescription>
                             Click save when you are done.
@@ -57,6 +58,6 @@ export default function JobEditDialogContent({job}: JobEditDialogContentProps) {
                     </DialogFooter>
                 </form>
             </Form>
-        </DialogContent>
+        </DialogContentWrapper>
     )
 }
