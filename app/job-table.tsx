@@ -37,9 +37,9 @@ export function JobTable() {
         }
     }, [isJobDataFetched, fetchedJobData])
 
-    return <CardContent className={"h-[75vh]"}>
+    return <CardContent className={"h-[70vh]"}>
         {isLoadingJobData ? "Loading..." :
-            <DataTable className={"h-[70vh] overflow-auto"} data={jobData} columns={jobTrackerColumns}
+            <DataTable className={"h-[60vh] overflow-auto"} data={jobData} columns={jobTrackerColumns}
                        filterColumnOptions={filterColumns}/>
         }
     </CardContent>;

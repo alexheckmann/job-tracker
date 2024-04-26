@@ -11,7 +11,7 @@ export default function ContactsPage() {
     return (
         <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8 max-h-[88vh]">
             <div className="grid gap-4 md:gap-8 bg-white max-h-[88vh]">
-                <Card className="max-w-full h-[86vh] overflow-auto">
+                <Card className="max-w-full h-[88vh] overflow-x-auto">
                     <CardHeader className="flex flex-row items-center">
                         <div className="grid gap-2">
                             <CardTitle>Contacts</CardTitle>

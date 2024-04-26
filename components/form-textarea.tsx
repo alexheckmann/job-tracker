@@ -15,7 +15,7 @@ export function FormTextarea({label, placeholder, field, ...props}: FormTextarea
                 <FormLabel>{label}</FormLabel>
                 <FormControl>
                     <Textarea {...props} placeholder={placeholder}
-                              className={"resize-none"} {...field}/>
+                              className={"resize-none h-[138px]"} {...field}/>
                 </FormControl>
             </div>
         </FormItem>
