@@ -24,9 +24,9 @@ export default function ContactTable() {
     }, [isContactDataFetched, fetchedContactData])
 
     return (
-        <CardContent className={"h-[70vh]"}>
+        <CardContent className={"h-[70dvh]"}>
             {isLoadingJobData ? "Loading..." :
-                <DataTable className={"h-[60vh] overflow-auto"} data={contactData}
+                <DataTable className={"h-[60dvh] overflow-auto"} data={contactData}
                            columns={contactColumns} filterColumnOptions={filterColumnOptions}/>
             }
         </CardContent>
