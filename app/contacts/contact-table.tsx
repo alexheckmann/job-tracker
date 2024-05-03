@@ -14,7 +14,11 @@ const filterColumnOptions: FilterColumnOption[] = [
 
 export default function ContactTable() {
 
-    const {data: fetchedContactData, isLoading: isLoadingJobData, isFetched: isContactDataFetched} = useContactData()
+    const {
+        data: fetchedContactData,
+        isLoading: isLoadingContactData,
+        isFetched: isContactDataFetched
+    } = useContactData()
     const {data: contactData, setData: setContactData} = useContactEntriesStore()
 
     useEffect(() => {
@@ -25,10 +29,8 @@ export default function ContactTable() {
 
     return (
         <CardContent className={"h-[70dvh]"}>
-            {isLoadingJobData ? "Loading..." :
-                <DataTable className={"h-[60dvh] overflow-auto"} data={contactData}
-                           columns={contactColumns} filterColumnOptions={filterColumnOptions}/>
-            }
+            <DataTable className={"h-[60dvh] overflow-auto"} data={contactData} isLoading={isLoadingContactData}
+                       columns={contactColumns} filterColumnOptions={filterColumnOptions}/>
         </CardContent>
     )
 }

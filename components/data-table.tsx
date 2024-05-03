@@ -16,6 +16,7 @@ import {useState} from "react";
 import {cn} from "@/lib/utils";
 import {Input} from "@/components/ui/input";
 import {Toggle} from "@/components/ui/toggle";
+import {Skeleton} from "@/components/ui/skeleton";
 
 export interface FilterColumnOption {
     name: string,
@@ -30,13 +31,15 @@ interface DataTableProps<TData, TValue> {
     data: TData[],
     className?: string,
     filterColumnOptions?: FilterColumnOption[],
+    isLoading?: boolean
 }
 
 export function DataTable<TData, TValue>({
                                              columns,
                                              data,
                                              className,
-                                             filterColumnOptions
+                                             filterColumnOptions,
+                                             isLoading
                                          }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = useState<SortingState>([])
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
@@ -116,26 +119,38 @@ export function DataTable<TData, TValue>({
                         ))}
                     </TableHeader>
                     <TableBody>
-                        {table.getRowModel().rows?.length ? (
-                            table.getRowModel().rows.map((row) => (
-                                <TableRow
-                                    key={row.id}
-                                    data-state={row.getIsSelected() && "selected"}
-                                >
-                                    {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id} style={{width: cell.column.getSize()}}>
-                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                        </TableCell>
-                                    ))}
+                        {!isLoading ?
+                            table.getRowModel().rows?.length ? (
+                                table.getRowModel().rows.map((row) => (
+                                    <TableRow
+                                        key={row.id}
+                                        data-state={row.getIsSelected() && "selected"}
+                                    >
+                                        {row.getVisibleCells().map((cell) => (
+                                            <TableCell key={cell.id} style={{width: cell.column.getSize()}}>
+                                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                            </TableCell>
+                                        ))}
+                                    </TableRow>
+                                ))
+                            ) : (
+                                <TableRow>
+                                    <TableCell colSpan={columns.length} className="h-24 text-center">
+                                        No results.
+                                    </TableCell>
                                 </TableRow>
-                            ))
-                        ) : (
-                            <TableRow>
-                                <TableCell colSpan={columns.length} className="h-24 text-center">
-                                    No results.
-                                </TableCell>
-                            </TableRow>
-                        )}
+                            ) : (
+                                Array.from({length: 12}, (_, i) => i).map((_, i) => (
+                                    <TableRow>
+                                        {columns.map((column) => (
+                                            <TableCell key={column.id} style={{width: column.size}}>
+                                                <Skeleton className={"h-4"}/>
+                                            </TableCell>
+                                        ))}
+                                    </TableRow>
+                                ))
+                            )
+                        }
                     </TableBody>
                 </Table>
             </div>
