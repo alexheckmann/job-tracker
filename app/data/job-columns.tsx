@@ -202,7 +202,11 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
         },
 
         cell: ({row}: { row: Row<Job> }) => {
-            return <BooleanStatusIcon bool={row.getValue<boolean>("isReferral")}/>
+            return (
+                <HoverTooltip hoverText={"Submitted by referral"} asChild>
+                    <BooleanStatusIcon bool={row.getValue<boolean>("isReferral")}/>
+                </HoverTooltip>
+            )
         },
 
         size: 20,
