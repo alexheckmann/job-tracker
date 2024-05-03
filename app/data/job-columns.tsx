@@ -228,7 +228,11 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
         },
 
         cell: ({row}: { row: Row<Job> }) => {
-            return <BooleanStatusIcon bool={row.getValue<boolean>("isRecruiter")}/>
+            return (
+                <HoverTooltip hoverText={"Job application via an external recruitment agency"} asChild>
+                    <BooleanStatusIcon bool={row.getValue<boolean>("isRecruiter")}/>
+                </HoverTooltip>
+            )
         },
 
         size: 20,
