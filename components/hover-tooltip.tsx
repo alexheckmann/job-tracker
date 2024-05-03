@@ -1,15 +1,16 @@
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
+import {HTMLAttributes} from "react";
 
-interface TooltipProps {
-    displayText: string,
-    hoverText: string
+interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
+    hoverText: string,
+    asChild?: boolean
 }
 
-export function HoverTooltip({displayText, hoverText}: TooltipProps) {
+export function HoverTooltip({children, hoverText, asChild}: TooltipProps) {
     return (
         <Tooltip>
-            <TooltipTrigger asChild>
-                <span>{displayText}</span>
+            <TooltipTrigger asChild={asChild}>
+                {children}
             </TooltipTrigger>
             <TooltipContent>
                 <p>{hoverText}</p>
