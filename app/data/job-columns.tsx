@@ -162,12 +162,12 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
             )
         },
         cell: ({row}: { row: Row<Job> }) => {
+            const link = row.getValue<string>("link")
             return (
+                link &&
                 <HoverTooltip hoverText={"Open job description"}>
-                    {row.getValue("link") ?
-                        <OpenLinkButton href={row.getValue("link")} type={"link"}/> : null}
+                    <OpenLinkButton href={link} type={"link"}/>
                 </HoverTooltip>
-
             )
         },
     },
@@ -202,9 +202,11 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
         },
 
         cell: ({row}: { row: Row<Job> }) => {
+            const isReferral = row.getValue<boolean>("isReferral")
             return (
-                <HoverTooltip hoverText={"Submitted by referral"} asChild>
-                    <BooleanStatusIcon bool={row.getValue<boolean>("isReferral")}/>
+                isReferral &&
+                <HoverTooltip hoverText={"Submitted by referral"} className={"cursor-default"}>
+                    <BooleanStatusIcon bool={isReferral}/>
                 </HoverTooltip>
             )
         },
@@ -228,9 +230,12 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
         },
 
         cell: ({row}: { row: Row<Job> }) => {
+            const isRecruiter = row.getValue<boolean>("isRecruiter")
             return (
-                <HoverTooltip hoverText={"Job application via an external recruitment agency"} asChild>
-                    <BooleanStatusIcon bool={row.getValue<boolean>("isRecruiter")}/>
+                isRecruiter &&
+                <HoverTooltip hoverText={"Job application via an external recruitment agency"}
+                              className={"cursor-default"}>
+                    <BooleanStatusIcon bool={isRecruiter}/>
                 </HoverTooltip>
             )
         },
