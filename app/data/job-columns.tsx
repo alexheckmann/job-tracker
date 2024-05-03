@@ -233,7 +233,7 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
             const isRecruiter = row.getValue<boolean>("isRecruiter")
             return (
                 isRecruiter &&
-                <HoverTooltip hoverText={"Job application via an external recruitment agency"}
+                <HoverTooltip hoverText={"Application via an external recruitment agency"}
                               className={"cursor-default"}>
                     <BooleanStatusIcon bool={isRecruiter}/>
                 </HoverTooltip>
