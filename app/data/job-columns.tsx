@@ -41,7 +41,9 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
         cell: ({row}: { row: Row<Job> }) => {
             //return <BooleanStatusIcon bool={row.getValue<boolean>("isFavorite")}/>
             return (
-                <FavoriteButton job={row.original}/>
+                <HoverTooltip hoverText={"Add to favorites"}>
+                    <FavoriteButton job={row.original}/>
+                </HoverTooltip>
             )
         },
 
