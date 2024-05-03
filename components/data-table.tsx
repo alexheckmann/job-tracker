@@ -141,7 +141,7 @@ export function DataTable<TData, TValue>({
                                 </TableRow>
                             ) : (
                                 Array.from({length: 12}, (_, i) => i).map((_, i) => (
-                                    <TableRow>
+                                    <TableRow key={i}>
                                         {columns.map((column) => (
                                             <TableCell key={column.id} style={{width: column.size}}>
                                                 <Skeleton className={"h-4"}/>
