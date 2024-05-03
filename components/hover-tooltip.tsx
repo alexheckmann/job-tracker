@@ -12,7 +12,7 @@ export function HoverTooltip({children, hoverText, asChild}: TooltipProps) {
             <TooltipTrigger asChild={asChild}>
                 {children}
             </TooltipTrigger>
-            <TooltipContent>
+            <TooltipContent className={"max-w-52"}>
                 <p>{hoverText}</p>
             </TooltipContent>
         </Tooltip>
