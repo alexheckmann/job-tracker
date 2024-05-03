@@ -7,6 +7,6 @@ import {CheckSquare} from "lucide-react";
 export function BooleanStatusIcon({bool}: { bool: boolean }) {
 
     return (
-        bool && <CheckSquare className={"h-4 w-4 text-primary"}/>
+        bool && <CheckSquare className={"h-4 w-4 text-muted-foreground"}/>
     )
 }
