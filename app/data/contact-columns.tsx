@@ -173,8 +173,9 @@ export const contactColumns: ColumnDef<Contact>[] = [
         cell: ({row}: { row: Row<Contact> }) => {
             const date = row.getValue<Date>("lastUpdate")
             return (
-                <HoverTooltip displayText={formatDate(date)}
-                              hoverText={`Last updated on ${format(date, "dd/MM/yyyy")}`}/>
+                <HoverTooltip hoverText={`Last updated on ${format(date, "dd/MM/yyyy")}`} asChild>
+                    <span>{formatDate(date)}</span>
+                </HoverTooltip>
             );
         },
     },
@@ -182,7 +183,9 @@ export const contactColumns: ColumnDef<Contact>[] = [
         id: "actions",
         cell: ({row}: { row: Row<Contact> }) => {
             return (
-                <ContactRowActions row={row}/>
+                <HoverTooltip hoverText={"More actions"}>
+                    <ContactRowActions row={row}/>
+                </HoverTooltip>
             )
         },
     },
