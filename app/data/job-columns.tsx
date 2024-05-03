@@ -163,8 +163,13 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
             )
         },
         cell: ({row}: { row: Row<Job> }) => {
-            return row.getValue("link") &&
-                <OpenLinkButton href={row.getValue("link")} type={"link"}/>
+            return (
+                <HoverTooltip hoverText={"Open job description"}>
+                    {row.getValue("link") ?
+                        <OpenLinkButton href={row.getValue("link")} type={"link"}/> : null}
+                </HoverTooltip>
+
+            )
         },
     },
     {
