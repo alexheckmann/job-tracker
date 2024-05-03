@@ -39,7 +39,6 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
         },
 
         cell: ({row}: { row: Row<Job> }) => {
-            //return <BooleanStatusIcon bool={row.getValue<boolean>("isFavorite")}/>
             return (
                 <HoverTooltip hoverText={"Add to favorites"}>
                     <FavoriteButton job={row.original}/>
@@ -267,7 +266,9 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
         id: "actions",
         cell: ({row}: { row: Row<Job> }) => {
             return (
-                <JobRowActions row={row}/>
+                <HoverTooltip hoverText={"More actions"}>
+                    <JobRowActions row={row}/>
+                </HoverTooltip>
             )
         },
     },
