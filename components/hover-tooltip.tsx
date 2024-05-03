@@ -6,10 +6,10 @@ interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
     asChild?: boolean
 }
 
-export function HoverTooltip({children, hoverText, asChild}: TooltipProps) {
+export function HoverTooltip({children, hoverText, asChild, className}: TooltipProps) {
     return (
         <Tooltip>
-            <TooltipTrigger asChild={asChild}>
+            <TooltipTrigger className={className} asChild={asChild}>
                 {children}
             </TooltipTrigger>
             <TooltipContent className={"max-w-52"}>

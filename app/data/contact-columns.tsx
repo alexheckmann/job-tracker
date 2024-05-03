@@ -90,8 +90,13 @@ export const contactColumns: ColumnDef<Contact>[] = [
             )
         },
         cell: ({row}: { row: Row<Contact> }) => {
-            return row.getValue("linkedin") &&
-                <OpenLinkButton href={row.getValue("linkedin")} type={"linkedin"}/>
+            const linkedin = row.getValue<string>("linkedin")
+            return (
+                linkedin &&
+                <HoverTooltip hoverText={"Open LinkedIn profile"}>
+                    <OpenLinkButton href={linkedin} type={"linkedin"}/>
+                </HoverTooltip>
+            )
         },
     },
     {
@@ -114,7 +119,13 @@ export const contactColumns: ColumnDef<Contact>[] = [
             )
         },
         cell: ({row}: { row: Row<Contact> }) => {
-            return <OpenLinkButton href={row.getValue("email")} type={"email"}/>
+            const email = row.getValue<string>("email")
+            return (
+                email &&
+                <HoverTooltip hoverText={`${email}`}>
+                    <OpenLinkButton href={email} type={"email"}/>
+                </HoverTooltip>
+            )
         },
         size: 20,
         enableResizing: false
