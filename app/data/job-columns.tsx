@@ -100,8 +100,9 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
         cell: ({row}: { row: Row<Job> }) => {
             const date = row.getValue<Date>("lastUpdate")
             return (
-                <HoverTooltip displayText={formatDate(date)}
-                              hoverText={`Last updated on ${format(date, "dd/MM/yyyy")}`}/>
+                <HoverTooltip hoverText={`Last updated on ${format(date, "dd/MM/yyyy")}`} asChild>
+                    <span>{formatDate(date)}</span>
+                </HoverTooltip>
             );
 
         },
