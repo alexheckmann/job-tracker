@@ -11,6 +11,7 @@ import {ContactCreationButton} from "@/components/contact-creation-button";
 import {signOut, useSession} from "next-auth/react";
 import {GoogleLoginButton} from "@/components/google-login-button";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
+import {useState} from "react";
 
 const navLinks = [
     {path: "/", label: "Applications"},
@@ -24,6 +25,7 @@ export default function Navbar() {
 
     const pathname = usePathname();
     const {status, data} = useSession();
+    const [isSheetOpen, setIsSheetOpen] = useState(false);
 
     return (
 
@@ -56,7 +58,7 @@ export default function Navbar() {
                 ))}
 
             </nav>
-            <Sheet>
+            <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
                 <SheetTrigger asChild>
                     <Button
                         variant="outline"
@@ -78,7 +80,8 @@ export default function Navbar() {
                         </Link>
 
                         {navLinks.map(({path, label}) => (
-                            <Button variant={"link"} key={path} className={"hover:no-underline hover:text-foreground"}>
+                            <Button variant={"link"} key={path} className={"hover:no-underline hover:text-foreground"}
+                                    onClick={() => setIsSheetOpen(false)}>
                                 <Link
                                     href={path}
                                     className={`${
