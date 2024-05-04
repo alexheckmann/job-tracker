@@ -35,11 +35,6 @@ export default function ContactDialogContent({form}: ContactDialogContentProps) 
                 )}/>
             </div>
 
-
-            <FormField control={form.control} name={"notes"} render={({field}) => (
-                <FormTextarea label={"Notes"} placeholder={"Add your notes"} field={field}/>
-            )}/>
-
             <div className={"grid grid-cols-2 gap-4 items-end"}>
                 <FormField control={form.control} name={"lastUpdate"} render={({field}) => (
                     <FormDatePicker labelName={"Last update"} field={field}/>
@@ -51,6 +46,11 @@ export default function ContactDialogContent({form}: ContactDialogContentProps) 
                 )}/>
 
             </div>
+
+            <FormField control={form.control} name={"notes"} render={({field}) => (
+                <FormTextarea label={"Notes"} placeholder={"Add your notes"} field={field}/>
+            )}/>
+
 
             <div className={"grid grid-cols-2 gap-4 items-end"}>
                 <FormField control={form.control} name={"email"} render={({field}) => (

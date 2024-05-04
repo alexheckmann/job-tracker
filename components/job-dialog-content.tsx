@@ -55,10 +55,6 @@ export default function JobDialogContent({form}: JobDialogContentProps) {
                 )}/>
             </div>
 
-            <FormField control={form.control} name={"notes"} render={({field}) => (
-                <FormTextarea label={"Notes"} placeholder={"Add your notes"} field={field}/>
-            )}/>
-
             <div className={"grid grid-cols-2 gap-4 items-end"}>
                 <FormField control={form.control} name={"lastUpdate"} render={({field}) => (
                     <FormDatePicker labelName={"Last update"} field={field}/>
@@ -70,6 +66,11 @@ export default function JobDialogContent({form}: JobDialogContentProps) {
                                 onValueChange={field.onChange}/>
                 )}/>
             </div>
+
+            <FormField control={form.control} name={"notes"} render={({field}) => (
+                <FormTextarea label={"Notes"} placeholder={"Add your notes"} field={field}/>
+            )}/>
+
 
             <div className={"grid grid-cols-2 gap-4 items-end"}>
                 <FormField control={form.control} name={"exactTitle"} render={({field}) => (
