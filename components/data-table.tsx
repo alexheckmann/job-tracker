@@ -65,13 +65,13 @@ export function DataTable<TData, TValue>({
     return (
         <>
             <div className="flex flex-wrap items-center py-4 gap-2">
-                {filterColumnOptions?.map((filterColumnOption) => {
+                {filterColumnOptions?.map((filterColumnOption, index) => {
                     const column = table.getColumn(filterColumnOption.name)
 
                     if (filterColumnOption.type === "button") {
                         return (
                             <Toggle
-                                key={filterColumnOption.name}
+                                key={index}
                                 variant={"outline"}
                                 onPressedChange={
                                     (pressed) => {
@@ -81,14 +81,14 @@ export function DataTable<TData, TValue>({
                                 {filterColumnOption.label}
                             </Toggle>
                         )
-                    } else {
+                    } else if (filterColumnOption.type === "input") {
                         return (
                             <Input
-                                key={filterColumnOption.name}
+                                key={index}
                                 placeholder={filterColumnOption.label}
                                 value={(column?.getFilterValue() as string) ?? ""}
                                 onChange={(event) => column?.setFilterValue(event.target.value)}
-                                className="max-w-40 sm:max-w-64"
+                                className="max-w-44 sm:max-w-64"
                             />
                         )
                     }

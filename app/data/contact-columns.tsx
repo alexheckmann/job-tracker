@@ -5,7 +5,7 @@ import {ChevronsUpDown} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {useEffect} from "react";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
-import {HoverTooltip} from "@/components/hover-tooltip";
+import {HoverTooltip, LinkHoverTooltip} from "@/components/hover-tooltip";
 import {format} from "date-fns";
 import {formatDate} from "@/lib/formatDate";
 import {OpenLinkButton} from "@/components/open-link-button";
@@ -93,9 +93,9 @@ export const contactColumns: ColumnDef<Contact>[] = [
             const linkedin = row.getValue<string>("linkedin")
             return (
                 linkedin &&
-                <HoverTooltip hoverText={"Open LinkedIn profile"}>
+                <LinkHoverTooltip hoverText={"Open LinkedIn profile"}>
                     <OpenLinkButton href={linkedin} type={"linkedin"}/>
-                </HoverTooltip>
+                </LinkHoverTooltip>
             )
         },
     },
@@ -122,9 +122,9 @@ export const contactColumns: ColumnDef<Contact>[] = [
             const email = row.getValue<string>("email")
             return (
                 email &&
-                <HoverTooltip hoverText={`${email}`}>
+                <LinkHoverTooltip hoverText={`${email}`}>
                     <OpenLinkButton href={email} type={"email"}/>
-                </HoverTooltip>
+                </LinkHoverTooltip>
             )
         },
         size: 20,

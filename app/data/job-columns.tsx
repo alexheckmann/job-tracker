@@ -6,7 +6,7 @@ import {Button} from "@/components/ui/button";
 import {StatusDropdown} from "@/components/status-dropdown";
 import {useEffect} from "react";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
-import {HoverTooltip} from "@/components/hover-tooltip";
+import {HoverTooltip, LinkHoverTooltip} from "@/components/hover-tooltip";
 import {formatDate} from "@/lib/formatDate";
 import {format} from "date-fns";
 import {BooleanStatusIcon} from "@/components/boolean-status-icon";
@@ -163,11 +163,12 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
         },
         cell: ({row}: { row: Row<Job> }) => {
             const link = row.getValue<string>("link")
+
             return (
                 link &&
-                <HoverTooltip hoverText={"Open job description"}>
+                <LinkHoverTooltip hoverText={"Open job description"}>
                     <OpenLinkButton href={link} type={"link"}/>
-                </HoverTooltip>
+                </LinkHoverTooltip>
             )
         },
     },
