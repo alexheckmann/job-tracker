@@ -37,7 +37,7 @@ export function JobTable() {
         }
     }, [isJobDataFetched, fetchedJobData])
 
-    return <CardContent className={"h-[70dvh]"}>
+    return <CardContent className={"h-[70dvh] p-5 pt-3 md:p-6"}>
         <DataTable className={"h-[60dvh] overflow-auto"}
                    isLoading={isLoadingJobData}
                    data={jobData}
