@@ -49,7 +49,6 @@ export function FormDatePicker({labelName, field}: FormDatePickerProps) {
                             weekStartsOn={1}
                             selected={field.value}
                             onSelect={field.onChange}
-                            initialFocus
                         />
                     </PopoverContent>
                 </Popover>
