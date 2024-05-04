@@ -43,7 +43,7 @@ export default function Navbar() {
                 {navLinks.map(({path, label}) => (
 
                     <Button variant={"link"} className={"hover:no-underline hover:text-muted-foreground px-2"}
-                            key={path}>
+                            key={path} tabIndex={-1}>
                         <Link
                             href={path}
                             className={`${
@@ -81,7 +81,7 @@ export default function Navbar() {
 
                         {navLinks.map(({path, label}) => (
                             <Button variant={"link"} key={path} className={"hover:no-underline hover:text-foreground"}
-                                    onClick={() => setIsSheetOpen(false)}>
+                                    onClick={() => setIsSheetOpen(false)} tabIndex={-1}>
                                 <Link
                                     href={path}
                                     className={`${

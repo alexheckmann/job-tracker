@@ -42,7 +42,7 @@ export function HoverTooltip({children, hoverText, asChild, className}: TooltipP
 export function LinkHoverTooltip({children, hoverText, asChild, className}: TooltipProps) {
     return (
         <Tooltip>
-            <TooltipTrigger className={className} asChild={asChild}>
+            <TooltipTrigger className={className} asChild={asChild} tabIndex={-1}>
                 {children}
             </TooltipTrigger>
             <TooltipContent>
