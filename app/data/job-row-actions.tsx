@@ -40,14 +40,14 @@ export function JobRowActions({row}: { row: Row<Job> }) {
                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
                     {/* TODO implement edit dialog */}
-                    <DropdownMenuItem className={"cursor-pointer"}>
+                    <DropdownMenuItem className={"cursor-pointer font-semibold"}>
                         <DialogTrigger className={"flex flex-row gap-2 w-full items-center"}>
                             <SquarePen className={"h-4 w-4"}/>
                             Edit
                         </DialogTrigger>
                     </DropdownMenuItem>
 
-                    <DropdownMenuItem className={"gap-2 cursor-pointer"}
+                    <DropdownMenuItem className={"gap-2 cursor-pointer text-destructive font-semibold"}
                                       onClick={() => mutateJobs()}>
                         <Trash className={"h-4 w-4"}/>
                         Delete
