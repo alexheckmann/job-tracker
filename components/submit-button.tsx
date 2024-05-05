@@ -6,16 +6,23 @@ import {cn} from "@/lib/utils";
 
 interface SubmitButtonProps extends HTMLAttributes<HTMLButtonElement> {
     disabled?: boolean;
+    showShortcut?: boolean;
 }
 
-export function SubmitButton({children, disabled = false, ...props}: SubmitButtonProps) {
+export function SubmitButton({
+                                 children,
+                                 disabled = false,
+                                 showShortcut = true,
+                                 className,
+                                 ...props
+                             }: SubmitButtonProps) {
 
     return (
-        <Button {...props} type="submit" className={"gap-2 sm:w-[140px]"} disabled={disabled}>
+        <Button {...props} type="submit" className={cn("gap-2 sm:w-[140px]", className)} disabled={disabled}>
             <span className={cn(disabled && "animate-pulse")}>{children}</span>
             {disabled ?
                 <Loader2 className={"h-4 w-4 animate-spin"}/> :
-                <Shortcut keys={["Ctrl", "M"]}/>
+                showShortcut && <Shortcut keys={["Ctrl", "M"]}/>
             }
         </Button>
     )
