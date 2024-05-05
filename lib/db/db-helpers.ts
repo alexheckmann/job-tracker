@@ -5,6 +5,7 @@ import {JobModel} from "@/lib/db/job-model";
 import {User} from "@/lib/models/user";
 import {UserModel} from "@/lib/db/user-model";
 import mongoose from "mongoose";
+import {cache} from "react";
 
 
 /**
@@ -85,7 +86,18 @@ export function createUser(user: User) {
     return UserModel.create<User>(user)
 }
 
-export function getUserByEmail(email: string) {
+export function uncachedGetUserByEmail(email: string) {
     return UserModel.findOne<User>({email}).exec()
 }
 
+export const getUserByEmail = cache(async (email: string) => {
+    return await uncachedGetUserByEmail(email)
+})
+
+export function getUserById(id: string) {
+    return UserModel.findById<User>(id).exec()
+}
+
+export function updateUser(id: string, user: Partial<User>) {
+    return UserModel.findByIdAndUpdate<User>(id, user, {new: true}).exec()
+}

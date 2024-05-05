@@ -55,17 +55,4 @@ export const useContactEditDialogStore = create<ClientStateStore<boolean>>(set =
     setData: (data) => set({data: data})
 }));
 
-export const roleData = [
-    "AI Engineer",
-    "Data Engineer",
-    "Software Engineer"
-]
-
-export const cityData = [
-    "London, United Kingdom",
-    "Barcelona, Spain",
-    "Remote, United Kingdom",
-    "Remote, Spain",
-    "Remote, Germany",
-]
 
