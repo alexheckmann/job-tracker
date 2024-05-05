@@ -11,6 +11,10 @@ const UserModelSchema = new Schema<User>({
         type: String,
         required: true
     },
+    roles: {
+        type: [String],
+        required: false
+    },
 }, {timestamps: true})
 
 export const UserModel = mongoose.models[USER_COLLECTION_NAME] || model(USER_COLLECTION_NAME, UserModelSchema)

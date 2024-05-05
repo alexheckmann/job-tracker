@@ -5,7 +5,7 @@ import {getUserById, updateUser} from "@/lib/db/db-helpers";
 import {HttpStatusCode} from "axios";
 
 export async function POST(req: NextRequest) {
-    const newRole = await req.json().then((data) => data.role)
+    const newRole = await req.json().then((data) => data.value)
 
     try {
         const session = await getServerSession(authOptions)
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
-    const roleToDelete = await req.json().then((data) => data.role)
+    const roleToDelete = await req.json().then((data) => data.value)
 
     try {
         const session = await getServerSession(authOptions)
