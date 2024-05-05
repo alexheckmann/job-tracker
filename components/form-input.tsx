@@ -32,7 +32,7 @@ export function FormInput({
                         <span className={"select-none text-sm font-light"}>Required</span> : null}
                 </div>
                 <FormControl>
-                    <Input {...props} {...field}/>
+                    <Input {...props} placeholder={placeholder} {...field}/>
                 </FormControl>
             </div>
         </FormItem>
