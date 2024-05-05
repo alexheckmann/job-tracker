@@ -48,11 +48,22 @@ export const authOptions = {
             const user = await getUserByEmail(token.email)
             // passing the user id to the token, so it can be used in the session
             token.id = user?._id
+            token.roles = user?.roles
+            token.cities = [
+                "London, United Kingdom",
+                "Barcelona, Spain",
+                "München, Germany",
+                "Remote, United Kingdom",
+                "Remote, Spain",
+                "Remote, Germany",
+            ]
             return token
         },
         // @ts-ignore
         session({session, token}) {
             session.id = token.id
+            session.roles = token.roles
+            session.cities = token.cities
             return session
         },
     }

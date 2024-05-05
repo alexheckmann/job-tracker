@@ -1,6 +1,7 @@
+"use client"
+
 import {FormField} from "@/components/ui/form";
 import {FormSelect} from "@/components/form-select";
-import {cityData, roleData} from "@/app/data/use-get-data";
 import {FormInput} from "@/components/form-input";
 import {FormTextarea} from "@/components/form-textarea";
 import {FormDatePicker} from "@/components/form-date-picker";
@@ -9,17 +10,23 @@ import {FormSwitch} from "@/components/form-switch";
 import {Button} from "@/components/ui/button";
 import {Star} from "lucide-react";
 import {UseFormReturn} from "react-hook-form";
+import {useSession} from "next-auth/react";
 
 interface JobDialogContentProps {
     form: UseFormReturn<Job>;
 }
 
 export default function JobDialogContent({form}: JobDialogContentProps) {
+
+    const {data: session} = useSession()
+    const roles = session?.roles || []
+    const cities = session?.cities || []
+
     return (
         <div className="grid gap-4 py-4">
             <div className={"grid grid-cols-6 md:grid-cols-8 gap-4 items-end"}>
                 <FormField control={form.control} name={"role"} render={({field}) => (
-                    <FormSelect className={"col-span-5 md:col-span-7"} entries={roleData} label={"Role"}
+                    <FormSelect className={"col-span-5 md:col-span-7"} entries={roles} label={"Role"}
                                 defaultValue={form.getValues("role")}
                                 onValueChange={field.onChange} isExpandable/>
                 )}/>
@@ -44,7 +51,7 @@ export default function JobDialogContent({form}: JobDialogContentProps) {
 
             <div className={"grid grid-cols-2 gap-4 items-end"}>
                 <FormField control={form.control} name={"location"} render={({field}) => (
-                    <FormSelect entries={cityData} label={"Location"}
+                    <FormSelect entries={cities} label={"Location"}
                                 defaultValue={form.getValues("location")}
                                 onValueChange={field.onChange} isExpandable/>
                 )}/>
