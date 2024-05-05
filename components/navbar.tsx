@@ -113,11 +113,24 @@ export default function Navbar() {
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center">
-                            <DropdownMenuItem asChild>
+                            {
+                                /*
+                                <DropdownMenuItem asChild>
                                 <span>Donate</span>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem asChild>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem asChild>
                                 <span>Feedback</span>
+                                </DropdownMenuItem>
+                                */
+                            }
+                            <DropdownMenuItem className={"cursor-pointer"}>
+                                <Link href={"/settings"} className={`${
+                                    pathname === "/settings"
+                                        ? "text-foreground font-semibold"
+                                        : "text-muted-foreground"
+                                } text-foreground transition-colors font-light`}>
+                                    Settings
+                                </Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem className={"cursor-pointer"} onClick={() => signOut()}>
                                 Sign out
