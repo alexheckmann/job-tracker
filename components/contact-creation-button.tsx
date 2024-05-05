@@ -7,12 +7,13 @@ import {UserRoundPlus} from "lucide-react";
 import ContactCreationDialogContent from "@/components/contact-creation-dialog-content";
 import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
 import {HTMLAttributes} from "react";
+import {cn} from "@/lib/utils";
 
 interface ContactCreationButtonProps extends HTMLAttributes<HTMLButtonElement> {
     disabled?: boolean
 }
 
-export function ContactCreationButton({disabled, ...props}: ContactCreationButtonProps) {
+export function ContactCreationButton({disabled, className, ...props}: ContactCreationButtonProps) {
     const {data: isContactCreationDialogOpen, setData: setIsContactCreationDialogOpen} = useContactCreationDialogStore()
 
     useCtrlKeyShortcut("i", () => {
@@ -22,7 +23,7 @@ export function ContactCreationButton({disabled, ...props}: ContactCreationButto
     return (
         <Dialog open={isContactCreationDialogOpen} onOpenChange={setIsContactCreationDialogOpen}>
             <DialogTrigger asChild>
-                <Button {...props} variant={"secondary"} className={"w-fit gap-2"}>
+                <Button {...props} variant={"secondary"} className={cn("w-fit gap-2", className)}>
                     <UserRoundPlus className={"h-4 w-4"}/>
                     <span>New contact</span>
                 </Button>

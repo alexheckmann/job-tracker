@@ -100,7 +100,7 @@ export default function Navbar() {
 
             <div className="flex w-full items-center gap-2 md:ml-auto lg:gap-4">
 
-                {status === "authenticated" && <JobCreationButton/>}
+                {status === "authenticated" && <JobCreationButton className={"ml-auto"}/>}
                 {status === "authenticated" && <ContactCreationButton/>}
 
                 {/* TODO fix and replace with viable alternative*/}

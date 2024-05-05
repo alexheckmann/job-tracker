@@ -7,12 +7,13 @@ import {ClipboardPlus} from "lucide-react";
 import JobCreationDialogContent from "@/components/job-creation-dialog-content";
 import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
 import {HTMLAttributes} from "react";
+import {cn} from "@/lib/utils";
 
 interface JobCreationButtonProps extends HTMLAttributes<HTMLButtonElement> {
     disabled?: boolean
 }
 
-export function JobCreationButton({disabled, ...props}: JobCreationButtonProps) {
+export function JobCreationButton({disabled, className, ...props}: JobCreationButtonProps) {
     const {data: isJobCreationDialogOpen, setData: setIsJobCreationDialogOpen} = useJobCreationDialogStore()
 
     useCtrlKeyShortcut("u", () => {
@@ -22,7 +23,7 @@ export function JobCreationButton({disabled, ...props}: JobCreationButtonProps) 
     return (
         <Dialog open={isJobCreationDialogOpen} onOpenChange={setIsJobCreationDialogOpen}>
             <DialogTrigger asChild>
-                <Button {...props} variant={"secondary"} className={"ml-auto w-fit gap-2"}>
+                <Button {...props} variant={"secondary"} className={cn("w-fit gap-2", className)}>
                     <ClipboardPlus className={"h-4 w-4"}/>
                     <span>New job</span>
                 </Button>
