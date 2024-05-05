@@ -1,4 +1,4 @@
-import {RolesCard} from "@/app/notes/roles-card";
+import {RolesCard} from "@/app/settings/roles-card";
 import {CardContainer} from "@/app/notes/card-container";
 
 export default function SettingsPage() {
