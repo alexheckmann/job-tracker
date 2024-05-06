@@ -3,31 +3,11 @@
 import {useSession} from "next-auth/react";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {OneInputFieldForm} from "@/components/one-input-field-form";
-import {Trash, X} from "lucide-react";
-import {HTMLAttributes, useEffect, useState} from "react";
-import {cn} from "@/lib/utils";
-import {Button} from "@/components/ui/button";
+import {useEffect, useState} from "react";
 import {InfoButton} from "@/components/info-button";
 import axios from "axios";
+import {RemoveButton} from "@/app/settings/remove-button";
 
-interface RemoveButtonProps extends HTMLAttributes<HTMLButtonElement> {
-}
-
-function RemoveButton({className, onClick}: RemoveButtonProps) {
-    const [isFirstClick, setIsFirstClick] = useState(true)
-    return (
-        isFirstClick ?
-            <Button variant="ghost" size="icon" className={cn("h-6 w-6 text-muted-foreground", className)}
-                    onClick={() => setIsFirstClick(false)}>
-                <X className="h-3 w-3"/>
-            </Button> :
-            <Button variant="destructive" size="icon" className={cn("h-6 w-6", className)}
-                    onMouseLeave={() => setIsFirstClick(true)}
-                    onClick={onClick}>
-                <Trash className="h-3 w-3"/>
-            </Button>
-    )
-}
 
 const rolesCardInfoText = "Grouping applications into role types helps with keeping an overview instead of using the exact job titles."
 
