@@ -25,9 +25,9 @@ const FormSelectWithInputField = () => {
 
     const {data: session} = useSession();
 
-    const options = session?.cities.map((city) => ({
-        label: city,
-        value: city
+    const options = session?.locations.map((location) => ({
+        label: location,
+        value: location
     })) || [];
 
     const form = useForm<z.infer<typeof FormSchema>>({
