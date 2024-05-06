@@ -5,14 +5,14 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/compo
 import {InfoButton} from "@/components/info-button";
 import {Ratings} from "@/components/rating";
 import {useForm} from "react-hook-form";
-import {ContactSchema} from "@/lib/models/contact";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {Feedback} from "@/lib/models/feedback";
+import {Feedback, feedbackMaxValueConstraints, FeedbackSchema} from "@/lib/models/feedback";
 import {Form, FormControl, FormField, FormItem, FormLabel} from "@/components/ui/form";
 import {FormTextarea} from "@/components/form/form-textarea";
 import {SubmitButton} from "@/components/submit-button";
 import {toast} from "@/components/ui/use-toast";
 import {useEffect} from "react";
+import axios from "axios";
 
 
 const rolesCardInfoText = "Feedback is semi-anonymous: only the rating, the text and your user ID will be used if signed in."
@@ -22,7 +22,7 @@ export function FeedbackCreationCard() {
     const {data: session} = useSession()
 
     const form = useForm<Feedback>({
-        resolver: zodResolver(ContactSchema),
+        resolver: zodResolver(FeedbackSchema),
         defaultValues: {
             rating: 0,
             feedback: "",
@@ -40,16 +40,17 @@ export function FeedbackCreationCard() {
             <Form {...form}>
                 <form onSubmit={
                     form.handleSubmit(async (feedback: Feedback) => {
-                        // await axios.post("/api/v1/feedback", feedback)
-                        console.log(feedback)
+                            await axios.post("/api/v1/feedback", feedback)
 
-                        toast({
-                            title: "Feedback submitted",
-                            description: "Thank you for your feedback!",
-                            variant: "default"
-                        })
-                    })
-                }>
+                            toast({
+                                title: "Feedback submitted",
+                                description: "Thank you for your feedback!",
+                                variant: "default"
+                            })
+
+                            form.reset()
+                        }
+                    )}>
                     <CardHeader>
                         <CardTitle>
                             Feedback
@@ -70,11 +71,10 @@ export function FeedbackCreationCard() {
                                            </FormLabel>
                                            <FormControl>
                                                <Ratings rating={0} variant={"yellow"} size={24}
+                                                        totalStars={feedbackMaxValueConstraints.rating}
                                                         className={"cursor-pointer"} {...field}
                                                         onRatingChange={(rating) => {
-                                                            console.log(rating)
                                                             form.setValue("rating", rating)
-                                                            console.log(form.getValues())
                                                         }}/>
                                            </FormControl>
                                        </FormItem>
@@ -85,7 +85,6 @@ export function FeedbackCreationCard() {
                         )}/>
 
                         <SubmitButton showShortcut={false}>Submit feedback</SubmitButton>
-
                     </CardContent>
                 </form>
             </Form>
