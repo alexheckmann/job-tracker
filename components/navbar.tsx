@@ -30,7 +30,7 @@ const profileLinks = [
 export default function Navbar() {
 
     const pathname = usePathname();
-    const {status, data} = useSession();
+    const {status} = useSession();
     const [isSheetOpen, setIsSheetOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -47,7 +47,7 @@ export default function Navbar() {
                     <span>Pegasus</span>
                 </Link>
 
-                {navLinks.map(({path, label}) => (
+                {status === "authenticated" && navLinks.map(({path, label}) => (
 
                     <Link
                         key={path}
@@ -84,7 +84,7 @@ export default function Navbar() {
                             <span className="sr-only">Pegasus</span>
                         </Link>
 
-                        {navLinks.map(({path, label}) => (
+                        {status === "authenticated" && navLinks.map(({path, label}) => (
                             <Link
                                 key={path}
                                 href={path}
