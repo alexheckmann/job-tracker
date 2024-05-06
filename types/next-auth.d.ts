@@ -6,6 +6,6 @@ declare module "next-auth" {
      */
     interface Session extends DefaultSession {
         roles: string[],
-        cities: string[],
+        locations: string[],
     }
 }
