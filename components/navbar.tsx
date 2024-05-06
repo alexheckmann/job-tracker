@@ -20,6 +20,12 @@ const navLinks = [
     // {path: "/analytics", label: "Analytics"}
 ]
 
+const profileLinks = [
+    {path: "/settings", label: "Settings"},
+    // {path: "/feedback", label: "Feedback"}, TODO implement feedback
+    // {path: "/donate", label: "Donate"}, TODO implement donate
+]
+
 
 export default function Navbar() {
 
@@ -113,25 +119,20 @@ export default function Navbar() {
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center">
-                            {
-                                /*
-                                <DropdownMenuItem asChild>
-                                <span>Donate</span>
+                            {profileLinks.map(({path, label}) => (
+                                <DropdownMenuItem key={path} className={"cursor-pointer"}>
+                                    <Link
+                                        href={path}
+                                        className={`${
+                                            pathname === path
+                                                ? "text-foreground font-semibold"
+                                                : "text-popover-foreground font-normal"
+                                        } text-foreground transition-colors font-light w-full h-full`}
+                                    >
+                                        {label}
+                                    </Link>
                                 </DropdownMenuItem>
-                                <DropdownMenuItem asChild>
-                                <span>Feedback</span>
-                                </DropdownMenuItem>
-                                */
-                            }
-                            <DropdownMenuItem className={"cursor-pointer"}>
-                                <Link href={"/settings"} className={`${
-                                    pathname === "/settings"
-                                        ? "text-foreground font-semibold"
-                                        : "text-muted-foreground"
-                                } text-foreground transition-colors font-light`}>
-                                    Settings
-                                </Link>
-                            </DropdownMenuItem>
+                            ))}
                             <DropdownMenuItem className={"cursor-pointer"} onClick={() => signOut()}>
                                 Sign out
                             </DropdownMenuItem>
