@@ -49,19 +49,17 @@ export default function Navbar() {
 
                 {navLinks.map(({path, label}) => (
 
-                    <Button variant={"link"} className={"hover:no-underline hover:text-muted-foreground px-2"}
-                            key={path} tabIndex={-1}>
-                        <Link
-                            href={path}
-                            className={`${
-                                pathname === path
-                                    ? "text-foreground font-semibold"
-                                    : "text-muted-foreground"
-                            } text-foreground transition-colors font-light`}
-                        >
-                            {label}
-                        </Link>
-                    </Button>
+                    <Link
+                        key={path}
+                        href={path}
+                        className={`${
+                            pathname === path
+                                ? "text-foreground font-semibold"
+                                : "text-muted-foreground"
+                        } text-foreground transition-colors font-light w-full h-full px-2 py-4`}
+                    >
+                        {label}
+                    </Link>
                 ))}
 
             </nav>
@@ -87,19 +85,18 @@ export default function Navbar() {
                         </Link>
 
                         {navLinks.map(({path, label}) => (
-                            <Button variant={"link"} key={path} className={"hover:no-underline hover:text-foreground"}
-                                    onClick={() => setIsSheetOpen(false)} tabIndex={-1}>
-                                <Link
-                                    href={path}
-                                    className={`${
-                                        pathname === path
-                                            ? "text-foreground font-semibold"
-                                            : "text-muted-foreground"
-                                    } text-foreground transition-colors font-light`}
-                                >
-                                    {label}
-                                </Link>
-                            </Button>
+                            <Link
+                                key={path}
+                                href={path}
+                                onClick={() => setIsSheetOpen(false)}
+                                className={`${
+                                    pathname === path
+                                        ? "text-foreground font-semibold"
+                                        : "text-muted-foreground"
+                                } text-foreground transition-colors font-light w-full h-full px-4 py-2`}
+                            >
+                                {label}
+                            </Link>
                         ))}
                     </nav>
                 </SheetContent>
