@@ -32,6 +32,7 @@ export default function Navbar() {
     const pathname = usePathname();
     const {status, data} = useSession();
     const [isSheetOpen, setIsSheetOpen] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     return (
 
@@ -111,7 +112,7 @@ export default function Navbar() {
 
                 {/* TODO fix and replace with viable alternative*/}
                 {status === "authenticated" ?
-                    <DropdownMenu>
+                    <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
                         <DropdownMenuTrigger asChild>
                             <Button variant="secondary" size="icon" className="rounded-full">
                                 <CircleUser className="h-5 w-5"/>
@@ -128,12 +129,16 @@ export default function Navbar() {
                                                 ? "text-foreground font-semibold"
                                                 : "text-popover-foreground font-normal"
                                         } text-foreground transition-colors font-light w-full h-full`}
+                                        onClick={() => setIsDropdownOpen(false)}
                                     >
                                         {label}
                                     </Link>
                                 </DropdownMenuItem>
                             ))}
-                            <DropdownMenuItem className={"cursor-pointer"} onClick={() => signOut()}>
+                            <DropdownMenuItem className={"cursor-pointer"} onClick={() => {
+                                signOut()
+                                setIsDropdownOpen(false)
+                            }}>
                                 Sign out
                             </DropdownMenuItem>
                         </DropdownMenuContent>
