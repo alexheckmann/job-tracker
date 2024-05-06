@@ -1,5 +1,6 @@
 import {RolesCard} from "@/app/settings/roles-card";
 import {CardContainer} from "@/app/notes/card-container";
+import {LocationsCard} from "@/app/settings/locations-card";
 
 export default function SettingsPage() {
     return (
@@ -7,6 +8,9 @@ export default function SettingsPage() {
             <div className="col-span-2 grid items-start gap-6 lg:col-span-1">
                 <CardContainer>
                     <RolesCard/>
+                </CardContainer>
+                <CardContainer>
+                    <LocationsCard/>
                 </CardContainer>
             </div>
         </div>
