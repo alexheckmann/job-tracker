@@ -20,7 +20,7 @@ export default function JobDialogContent({form}: JobDialogContentProps) {
 
     const {data: session} = useSession()
     const roles = session?.roles || []
-    const cities = session?.cities || []
+    const locations = session?.locations || []
 
     return (
         <div className="grid gap-4 py-4">
@@ -51,7 +51,7 @@ export default function JobDialogContent({form}: JobDialogContentProps) {
 
             <div className={"grid grid-cols-2 gap-4 items-end"}>
                 <FormField control={form.control} name={"location"} render={({field}) => (
-                    <FormSelect entries={cities} label={"Location"}
+                    <FormSelect entries={locations} label={"Location"}
                                 defaultValue={form.getValues("location")}
                                 onValueChange={field.onChange} isExpandable/>
                 )}/>
