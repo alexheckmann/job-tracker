@@ -1,7 +1,7 @@
 "use client"
 
 import {Button} from "@/components/ui/button";
-import {signIn} from "next-auth/react";
+import {signIn, useSession} from "next-auth/react";
 import {HTMLAttributes, useState} from "react";
 import {cn} from "@/lib/utils";
 import {Loader2, LogIn} from "lucide-react";
@@ -12,9 +12,11 @@ interface GoogleLoginButtonProps extends HTMLAttributes<HTMLButtonElement> {
 
 export function GoogleLoginButton({disabled, className}: GoogleLoginButtonProps) {
     const [loading, setLoading] = useState(false)
+    const {status} = useSession();
+
     return (
         <Button
-            disabled={loading || disabled}
+            disabled={loading || status === "loading" || disabled}
             variant="secondary"
             className={cn(className, "w-[170px]")}
             onClick={() => {
