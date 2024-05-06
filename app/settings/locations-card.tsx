@@ -9,7 +9,7 @@ import axios from "axios";
 import {RemoveButton} from "@/app/settings/remove-button";
 
 
-const rolesCardInfoText = "Grouping applications into role types helps with keeping an overview instead of using the exact job titles."
+const locationsCardInfoText = "Grouping locations of the jobs you are applying to can helps with keeping an overview if you are applying to jobs in multiple locations."
 
 export function LocationsCard() {
 
@@ -24,15 +24,15 @@ export function LocationsCard() {
         <Card>
             <CardHeader>
                 <CardTitle>
-                    Roles
+                    Locations
                 </CardTitle>
                 <CardDescription className={"inline-flex gap-2 align-middle"}>
-                    The type of roles you are looking for.
-                    <InfoButton infoText={rolesCardInfoText}/>
+                    The different locations you are applying at.
+                    <InfoButton infoText={locationsCardInfoText}/>
                 </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-6">
-                <OneInputFieldForm existingEntries={locations}/>
+                <OneInputFieldForm existingEntries={locations} type={"locations"}/>
                 <div className={"grid grid-cols-2 gap-4 items-end"}>
                     {locations.map((role) => (
                         <div key={role}

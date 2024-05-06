@@ -32,7 +32,7 @@ export function RolesCard() {
                 </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-6">
-                <OneInputFieldForm existingEntries={roles}/>
+                <OneInputFieldForm existingEntries={roles} type={"roles"}/>
                 <div className={"grid grid-cols-2 gap-4 items-end"}>
                     {roles.map((role) => (
                         <div key={role}

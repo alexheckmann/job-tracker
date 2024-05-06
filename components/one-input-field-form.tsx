@@ -8,6 +8,7 @@ import {Form, FormControl, FormField, FormItem, FormLabel} from "@/components/ui
 import {Input} from "@/components/ui/input";
 import {SubmitButton} from "@/components/submit-button";
 import axios from "axios";
+import {HTMLAttributes} from "react";
 
 const FormSchema = z.object({
     value: z.string().min(2, {
@@ -15,23 +16,13 @@ const FormSchema = z.object({
     }),
 })
 
-async function onSubmit(data: z.infer<typeof FormSchema>, existingEntries: string[]) {
-    if (existingEntries.includes(data.value)) {
-        toast({
-            title: "Already exists",
-            description: "Please enter a different value",
-        })
-        return
-    }
 
-    const result = await axios.post<string>("/api/v1/roles", {value: data.value})
+interface OneInputFieldFormProps extends HTMLAttributes<HTMLFormElement> {
+    existingEntries: string[],
+    type: "roles" | "locations"
 }
 
-interface OneInputFieldFormProps {
-    existingEntries: string[]
-}
-
-export function OneInputFieldForm({existingEntries}: OneInputFieldFormProps) {
+export function OneInputFieldForm({existingEntries, type}: OneInputFieldFormProps) {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -43,7 +34,15 @@ export function OneInputFieldForm({existingEntries}: OneInputFieldFormProps) {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(async (data) => {
-                await onSubmit(data, existingEntries)
+                if (existingEntries.includes(data.value)) {
+                    toast({
+                        title: "Already exists",
+                        description: "Please enter a different value",
+                    })
+                    return
+                }
+
+                const result = await axios.post<string>(`/api/v1/${type}`, {value: data.value})
                 form.reset()
             })}
                   className="w-2/3 space-y-6 flex flex-row items-end gap-2">
