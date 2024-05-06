@@ -12,17 +12,19 @@ import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
 import {SubmitButton} from "@/components/submit-button";
 import JobDialogContent from "@/components/job-dialog-content";
 import DialogContentWrapper from "@/components/dialog-content-wrapper";
+import {useSession} from "next-auth/react";
 
 export default function JobCreationDialogContent() {
 
     const {setData: setIsJobCreationDialogOpen} = useJobCreationDialogStore()
+    const {data: session} = useSession()
 
     const form = useForm<Job>({
         resolver: zodResolver(JobSchema),
         defaultValues: {
-            role: "AI Engineer",
+            role: session?.roles?.[0] || "",
             company: "",
-            location: "London, United Kingdom",
+            location: session?.locations?.[0] || "",
             lastUpdate: new Date(),
             status: "Applied",
             exactTitle: "",
