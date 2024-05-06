@@ -133,7 +133,7 @@ export default function Navbar() {
                                 </DropdownMenuItem>
                             ))}
                             <DropdownMenuItem className={"cursor-pointer"} onClick={() => {
-                                signOut()
+                                signOut({callbackUrl: "/login"})
                                 setIsDropdownOpen(false)
                             }}>
                                 Sign out
