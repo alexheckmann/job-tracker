@@ -1,7 +1,7 @@
 import {FormField} from "@/components/ui/form";
-import {FormInput} from "@/components/form-input";
-import {FormTextarea} from "@/components/form-textarea";
-import {FormDatePicker} from "@/components/form-date-picker";
+import {FormInput} from "@/components/form/form-input";
+import {FormTextarea} from "@/components/form/form-textarea";
+import {FormDatePicker} from "@/components/form/form-date-picker";
 import {UseFormReturn} from "react-hook-form";
 import {Contact} from "@/lib/models/contact";
 

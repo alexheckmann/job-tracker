@@ -6,10 +6,10 @@ import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
 import {Button} from "@/components/ui/button";
 import Logo from "@/components/logo";
 import {usePathname} from "next/navigation";
-import {JobCreationButton} from "@/components/job-creation-button";
-import {ContactCreationButton} from "@/components/contact-creation-button";
+import {JobCreationButton} from "@/components/navbar/job-creation-button";
+import {ContactCreationButton} from "@/components/navbar/contact-creation-button";
 import {signOut, useSession} from "next-auth/react";
-import {GoogleLoginButton} from "@/components/google-login-button";
+import {GoogleLoginButton} from "@/components/navbar/google-login-button";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
 import {useState} from "react";
 
@@ -22,7 +22,7 @@ const navLinks = [
 
 const profileLinks = [
     {path: "/settings", label: "Settings"},
-    // {path: "/feedback", label: "Feedback"}, TODO implement feedback
+    {path: "/feedback", label: "Feedback"},
     // {path: "/donate", label: "Donate"}, TODO implement donate
 ]
 

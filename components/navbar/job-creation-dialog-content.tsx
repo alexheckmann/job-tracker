@@ -10,7 +10,7 @@ import {useCreateJob} from "@/app/data/use-create-data";
 import {ClipboardPlus} from "lucide-react";
 import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
 import {SubmitButton} from "@/components/submit-button";
-import JobDialogContent from "@/components/job-dialog-content";
+import JobDialogContent from "@/components/navbar/job-dialog-content";
 import DialogContentWrapper from "@/components/dialog-content-wrapper";
 import {useSession} from "next-auth/react";
 

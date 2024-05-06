@@ -8,7 +8,7 @@ import {Form} from "@/components/ui/form";
 import {UserRoundPlus} from "lucide-react";
 import {SubmitButton} from "@/components/submit-button";
 import {Contact, ContactSchema} from "@/lib/models/contact";
-import ContactDialogContent from "@/components/contact-dialog-content";
+import ContactDialogContent from "@/components/navbar/contact-dialog-content";
 import {useMemo} from "react";
 import {useUpdateContact} from "@/app/data/use-update-data";
 import DialogContentWrapper from "@/components/dialog-content-wrapper";

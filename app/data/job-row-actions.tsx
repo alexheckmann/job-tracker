@@ -11,7 +11,7 @@ import {
 import {Button} from "@/components/ui/button";
 import {Loader2, MoreHorizontal, SquarePen, Trash} from "lucide-react";
 import {Dialog, DialogTrigger} from "@/components/ui/dialog";
-import JobEditDialogContent from "@/components/job-edit-dialog-content";
+import JobEditDialogContent from "@/components/navbar/job-edit-dialog-content";
 
 export function JobRowActions({row}: { row: Row<Job> }) {
     const job = row.original

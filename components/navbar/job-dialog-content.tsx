@@ -1,12 +1,12 @@
 "use client"
 
 import {FormField} from "@/components/ui/form";
-import {FormSelect} from "@/components/form-select";
-import {FormInput} from "@/components/form-input";
-import {FormTextarea} from "@/components/form-textarea";
-import {FormDatePicker} from "@/components/form-date-picker";
+import {FormSelect} from "@/components/form/form-select";
+import {FormInput} from "@/components/form/form-input";
+import {FormTextarea} from "@/components/form/form-textarea";
+import {FormDatePicker} from "@/components/form/form-date-picker";
 import {ApplicationStatus, Job} from "@/lib/models/job";
-import {FormSwitch} from "@/components/form-switch";
+import {FormSwitch} from "@/components/form/form-switch";
 import {Button} from "@/components/ui/button";
 import {Star} from "lucide-react";
 import {UseFormReturn} from "react-hook-form";

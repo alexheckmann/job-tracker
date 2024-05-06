@@ -4,7 +4,7 @@ import {useContactCreationDialogStore} from "@/app/data/use-get-data";
 import {Dialog, DialogTrigger} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 import {UserRoundPlus} from "lucide-react";
-import ContactCreationDialogContent from "@/components/contact-creation-dialog-content";
+import ContactCreationDialogContent from "@/components/navbar/contact-creation-dialog-content";
 import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
 import {HTMLAttributes} from "react";
 import {cn} from "@/lib/utils";

@@ -11,7 +11,7 @@ import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
 import {SubmitButton} from "@/components/submit-button";
 
 import {Contact, ContactSchema} from "@/lib/models/contact";
-import ContactDialogContent from "@/components/contact-dialog-content";
+import ContactDialogContent from "@/components/navbar/contact-dialog-content";
 import DialogContentWrapper from "@/components/dialog-content-wrapper";
 
 export default function ContactCreationDialogContent() {

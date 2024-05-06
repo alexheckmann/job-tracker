@@ -8,7 +8,7 @@ import {Form} from "@/components/ui/form";
 import {Job, JobSchema} from "@/lib/models/job";
 import {ClipboardPlus} from "lucide-react";
 import {SubmitButton} from "@/components/submit-button";
-import JobDialogContent from "@/components/job-dialog-content";
+import JobDialogContent from "@/components/navbar/job-dialog-content";
 import {useMemo} from "react";
 import {useUpdateJob} from "@/app/data/use-update-data";
 import DialogContentWrapper from "@/components/dialog-content-wrapper";

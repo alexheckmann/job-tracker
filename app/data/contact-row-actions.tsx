@@ -11,7 +11,7 @@ import {
 import {Button} from "@/components/ui/button";
 import {Loader2, MoreHorizontal, SquarePen, Trash} from "lucide-react";
 import {Dialog, DialogTrigger} from "@/components/ui/dialog";
-import ContactEditDialogContent from "@/components/contact-edit-dialog-content";
+import ContactEditDialogContent from "@/components/navbar/contact-edit-dialog-content";
 
 export function ContactRowActions({row}: { row: Row<Contact> }) {
     const contact = row.original
