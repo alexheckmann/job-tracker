@@ -28,7 +28,7 @@ export default function JobDialogContent({form}: JobDialogContentProps) {
                 <FormField control={form.control} name={"role"} render={({field}) => (
                     <FormSelect className={"col-span-5 md:col-span-7"} entries={roles} label={"Role"}
                                 defaultValue={form.getValues("role")}
-                                onValueChange={field.onChange} isExpandable/>
+                                onValueChange={field.onChange}/>
                 )}/>
 
                 <FormField control={form.control} name={"isFavorite"} render={({field}) => (
@@ -53,7 +53,7 @@ export default function JobDialogContent({form}: JobDialogContentProps) {
                 <FormField control={form.control} name={"location"} render={({field}) => (
                     <FormSelect entries={locations} label={"Location"}
                                 defaultValue={form.getValues("location")}
-                                onValueChange={field.onChange} isExpandable/>
+                                onValueChange={field.onChange}/>
                 )}/>
 
                 <FormField control={form.control} name={"salary"} render={({field}) => (
