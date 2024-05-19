@@ -118,7 +118,7 @@ export default function Navbar() {
                             <Button
                                 variant="outline"
                                 size="icon"
-                                className="rounded-full w-full h-full px-4 py-2"
+                                className="w-full h-full px-4 py-2"
                                 onClick={() => {
                                     signOut({callbackUrl: "/login"})
                                     setIsSheetOpen(false)
