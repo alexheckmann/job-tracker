@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
         const user = await getUserById(session.id)
         user?.roles?.push(newRole)
         await updateUser(session.id, user!)
-        return NextResponse.json({user: user}, {status: HttpStatusCode.Created})
+        return NextResponse.json(user?.roles, {status: HttpStatusCode.Created})
     } catch (error) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
     }

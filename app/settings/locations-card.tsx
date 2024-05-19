@@ -7,6 +7,7 @@ import {useEffect, useState} from "react";
 import {InfoButton} from "@/components/info-button";
 import axios from "axios";
 import {RemoveButton} from "@/app/settings/remove-button";
+import {useInsertLocation} from "@/app/settings/use-string-array-insertion";
 
 
 const locationsCardInfoText = "Grouping locations of the jobs you are applying to can helps with keeping an overview if you are applying to jobs in multiple locations."
@@ -15,6 +16,8 @@ export function LocationsCard() {
 
     const {data: session} = useSession()
     const [locations, setLocations] = useState<string[]>([])
+
+    const {mutateData: submitLocation, isPending: isPendingSubmission} = useInsertLocation(locations, setLocations)
 
     useEffect(() => {
         setLocations(session?.locations || [])
@@ -32,7 +35,8 @@ export function LocationsCard() {
                 </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-6">
-                <OneInputFieldForm existingEntries={locations} type={"locations"}/>
+                <OneInputFieldForm existingEntries={locations} type={"locations"} formFieldLabel={"Add location"}
+                                   submitFunction={submitLocation} isPendingSubmission={isPendingSubmission}/>
                 <div className={"grid sm:grid-cols-2 gap-4 items-end"}>
                     {locations.map((role) => (
                         <div key={role}
