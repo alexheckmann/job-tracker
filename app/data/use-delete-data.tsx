@@ -3,17 +3,10 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
 import {useContactEntriesStore, useJobEntriesStore} from "@/app/data/use-get-data";
-import {ToastAction} from "@/components/ui/toast";
 import {Contact} from "@/lib/models/contact";
 import {Job} from "@/lib/models/job";
 import {ClientStateStore} from "@/lib/models/client-state-store";
-
-export interface ToastContent {
-    title: string
-    description: string
-    variant: "destructive" | "default",
-    action: any
-}
+import {ToastContent} from "@/app/data/toast-content";
 
 export interface TypeHasIdAndLastUpdate {
     _id?: any,
@@ -76,9 +69,9 @@ export function useDeleteJob(job: Job) {
         title: "Job deleted",
         description: `The job at ${job.company} has been successfully deleted.`,
         variant: "default",
-        action: (
-            <ToastAction altText="Undo">Undo</ToastAction>
-        )
+        // action: (
+        //    <ToastAction altText="Undo">Undo</ToastAction>
+        //)
     }
 
     // TODO implement error retry action
@@ -86,9 +79,9 @@ export function useDeleteJob(job: Job) {
         title: "Deleting unsuccessful",
         description: `Please try again to delete the job at ${job.company}.`,
         variant: "destructive",
-        action: (
-            <ToastAction altText="Retry">Retry</ToastAction>
-        )
+        //action: (
+        //    <ToastAction altText="Retry">Retry</ToastAction>
+        //)
     }
 
     return useDeleteData<Job>("/api/v1/jobs", ["jobs"], useJobEntriesStore, job._id, successToastContent, errorToastContent);
@@ -102,9 +95,9 @@ export function useDeleteContact(contact: Contact) {
         title: "Job deleted",
         description: `The contact at ${contact.company} has been successfully deleted.`,
         variant: "default",
-        action: (
-            <ToastAction altText="Undo">Undo</ToastAction>
-        )
+        //action: (
+        //    <ToastAction altText="Undo">Undo</ToastAction>
+        //)
     }
 
     // TODO implement error retry action
@@ -112,9 +105,9 @@ export function useDeleteContact(contact: Contact) {
         title: "Deleting unsuccessful",
         description: `Please try again to delete the contact at ${contact.company}.`,
         variant: "destructive",
-        action: (
-            <ToastAction altText="Retry">Retry</ToastAction>
-        )
+        //action: (
+        //    <ToastAction altText="Retry">Retry</ToastAction>
+        //)
     }
 
     return useDeleteData<Contact>("/api/v1/contacts", ["contacts"], useContactEntriesStore, contact._id, successToastContent, errorToastContent);

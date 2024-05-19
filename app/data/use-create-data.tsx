@@ -2,12 +2,12 @@ import {StoreApi, UseBoundStore} from "zustand";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
-import {ToastContent, TypeHasIdAndLastUpdate} from "@/app/data/use-delete-data";
+import {TypeHasIdAndLastUpdate} from "@/app/data/use-delete-data";
 import {useContactEntriesStore, useJobEntriesStore} from "@/app/data/use-get-data";
-import {ToastAction} from "@/components/ui/toast";
 import {Contact} from "@/lib/models/contact";
 import {Job} from "@/lib/models/job";
 import {ClientStateStore} from "@/lib/models/client-state-store";
+import {ToastContent} from "@/app/data/toast-content";
 
 export function useCreateData<S, T extends TypeHasIdAndLastUpdate>(apiEndpoint: string,
                                                                    dataKey: string[],
@@ -67,9 +67,9 @@ export function useCreateJob(job: Job, setUiState?: (data: any) => void, uiState
         title: "Job added",
         description: `The job at ${job.company} has been added.`,
         variant: "default",
-        action: (
-            <ToastAction altText={"Undo"}>Undo</ToastAction>
-        )
+        //action: (
+        //    <ToastAction altText={"Undo"}>Undo</ToastAction>
+        //)
     }
 
     // TODO implement error retry action
@@ -77,9 +77,9 @@ export function useCreateJob(job: Job, setUiState?: (data: any) => void, uiState
         title: "Failed to add job",
         description: `The job at ${job.company} could not be added; please retry.`,
         variant: "destructive",
-        action: (
-            <ToastAction altText={"Retry"}>Retry</ToastAction>
-        )
+        //action: (
+        //    <ToastAction altText={"Retry"}>Retry</ToastAction>
+        //)
     }
 
     return useCreateData<Job, Job>('/api/v1/jobs', ['jobs'], useJobEntriesStore, successToastContent, errorToastContent, setUiState, uiStateToSet)
@@ -92,9 +92,9 @@ export function useCreateContact(contact: Contact, setUiState?: (data: any) => v
         title: "Contact added",
         description: `The contact at ${contact.company} has been added.`,
         variant: "default",
-        action: (
-            <ToastAction altText={"Undo"}>Undo</ToastAction>
-        )
+        //action: (
+        //    <ToastAction altText={"Undo"}>Undo</ToastAction>
+        //)
     }
 
     // TODO implement error retry action
@@ -102,9 +102,9 @@ export function useCreateContact(contact: Contact, setUiState?: (data: any) => v
         title: "Failed to add contact",
         description: `The contact at ${contact.company} could not be added; please retry.`,
         variant: "destructive",
-        action: (
-            <ToastAction altText={"Retry"}>Retry</ToastAction>
-        )
+        //action: (
+        //    <ToastAction altText={"Retry"}>Retry</ToastAction>
+        //)
     }
 
     return useCreateData<Contact, Contact>('/api/v1/contacts', ['contacts'], useContactEntriesStore, successToastContent, errorToastContent, setUiState, uiStateToSet)
