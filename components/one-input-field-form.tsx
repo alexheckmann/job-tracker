@@ -62,7 +62,7 @@ export function OneInputFieldForm({
                         <FormItem>
                             <FormLabel>{formFieldLabel}</FormLabel>
                             <FormControl>
-                                <Input {...field} disabled={isPendingSubmission}/>
+                                <Input className={"min-w-[140px]"} {...field} disabled={isPendingSubmission}/>
                             </FormControl>
                         </FormItem>
                     )}
