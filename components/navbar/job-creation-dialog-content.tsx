@@ -59,7 +59,7 @@ export default function JobCreationDialogContent() {
                 }>
 
                     <DialogHeader>
-                        <DialogTitle className={"flex flex-row gap-2"}>
+                        <DialogTitle className={"flex flex-row gap-2 justify-center sm:justify-start"}>
                             <ClipboardPlus className={"h-4 w-4"}/>
                             Add job
                         </DialogTitle>
