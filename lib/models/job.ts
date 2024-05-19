@@ -10,7 +10,7 @@ const jobsMaxLengthConstraints = {
     location: 256,
     link: 256,
     salary: 16,
-    notes: 2048
+    notes: 16384
 }
 export const JobSchema = DatabaseObject.extend({
     role: z.string().min(1).max(jobsMaxLengthConstraints.role),
