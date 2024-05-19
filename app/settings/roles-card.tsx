@@ -5,16 +5,16 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/compo
 import {OneInputFieldForm} from "@/components/one-input-field-form";
 import {useEffect, useState} from "react";
 import {InfoButton} from "@/components/info-button";
-import axios from "axios";
 import {RemoveButton} from "@/app/settings/remove-button";
 import {useInsertRole} from "@/app/settings/use-string-array-insertion";
+import {useRemoveRole} from "@/app/settings/use-string-array-removal";
 
 
 const rolesCardInfoText = "Grouping applications into role types helps with keeping an overview instead of using the exact job titles."
 
 export function RolesCard() {
 
-    const {data: session} = useSession()
+    const {data: session, status} = useSession()
     const [roles, setRoles] = useState<string[]>([])
 
     useEffect(() => {
@@ -22,6 +22,7 @@ export function RolesCard() {
     }, [session?.roles])
 
     const {mutateData: submitRole, isPending: isPendingSubmission} = useInsertRole(roles, setRoles)
+    const {mutateData: removeRole, isPending: isPendingRemoval} = useRemoveRole(roles, setRoles)
 
     return (
         <Card>
@@ -36,17 +37,15 @@ export function RolesCard() {
             </CardHeader>
             <CardContent className="grid gap-6">
                 <OneInputFieldForm existingEntries={roles} type={"roles"} formFieldLabel={"Add role"}
-                                   submitFunction={submitRole} isPendingSubmission={isPendingSubmission}/>
+                                   submitFunction={submitRole} isPendingSubmission={isPendingSubmission}
+                                   disabled={status !== "authenticated"}/>
                 <div className={"grid sm:grid-cols-2 gap-4 items-end"}>
                     {roles.map((role) => (
                         <div key={role}
                              className="flex items-center align-middle h-6 space-x-4 justify-between w-full group">
                             <p className="text-sm font-medium leading-none">{role}</p>
                             <RemoveButton className={"invisible group-hover:visible"} role={role}
-                                          onClick={async () => {
-                                              await axios.delete("/api/v1/roles", {data: {value: role}})
-                                              setRoles(roles.filter(r => r !== role))
-                                          }}/>
+                                          onClick={() => removeRole(role)}/>
                         </div>
                     ))}
                 </div>

@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
-    const locationToDelete = await req.json().then((data) => data.value)
+    const locationToDelete = await req.json()
 
     try {
         const session = await getServerSession(authOptions)
@@ -30,10 +30,10 @@ export async function DELETE(req: NextRequest) {
             return NextResponse.json({error: "Role not found"}, {status: HttpStatusCode.NotFound})
         }
 
-        user?.roles!.splice(index!, 1)
+        user?.locations!.splice(index!, 1)
 
         await updateUser(session.id, user!)
-        return NextResponse.json({status: HttpStatusCode.NoContent})
+        return NextResponse.json(user?.locations, {status: HttpStatusCode.Ok})
     } catch (error) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
     }
