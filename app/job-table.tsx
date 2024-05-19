@@ -13,12 +13,6 @@ const filterColumns: FilterColumnOption[] = [
         label: "Search for a company..."
     },
     {
-        name: "status",
-        type: "button",
-        label: "Saved",
-        filterValue: "saved"
-    },
-    {
         name: "isRecruiter",
         type: "button",
         label: "HR",
