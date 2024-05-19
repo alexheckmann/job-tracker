@@ -7,6 +7,7 @@ import {useEffect, useState} from "react";
 import {InfoButton} from "@/components/info-button";
 import axios from "axios";
 import {RemoveButton} from "@/app/settings/remove-button";
+import {useInsertRole} from "@/app/settings/use-string-array-insertion";
 
 
 const rolesCardInfoText = "Grouping applications into role types helps with keeping an overview instead of using the exact job titles."
@@ -20,6 +21,8 @@ export function RolesCard() {
         setRoles(session?.roles || [])
     }, [session?.roles])
 
+    const {mutateData: submitRole, isPending: isPendingSubmission} = useInsertRole(roles, setRoles)
+
     return (
         <Card>
             <CardHeader>
@@ -32,7 +35,8 @@ export function RolesCard() {
                 </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-6">
-                <OneInputFieldForm existingEntries={roles} type={"roles"}/>
+                <OneInputFieldForm existingEntries={roles} type={"roles"} formFieldLabel={"Add role"}
+                                   submitFunction={submitRole} isPendingSubmission={isPendingSubmission}/>
                 <div className={"grid sm:grid-cols-2 gap-4 items-end"}>
                     {roles.map((role) => (
                         <div key={role}
