@@ -33,7 +33,7 @@ export function RolesCard() {
             </CardHeader>
             <CardContent className="grid gap-6">
                 <OneInputFieldForm existingEntries={roles} type={"roles"}/>
-                <div className={"grid grid-cols-2 gap-4 items-end"}>
+                <div className={"grid sm:grid-cols-2 gap-4 items-end"}>
                     {roles.map((role) => (
                         <div key={role}
                              className="flex items-center align-middle h-6 space-x-4 justify-between w-full group">
