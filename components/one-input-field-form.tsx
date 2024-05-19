@@ -1,5 +1,3 @@
-"use client"
-
 import {z} from "zod";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
@@ -7,7 +5,6 @@ import {toast} from "@/components/ui/use-toast";
 import {Form, FormControl, FormField, FormItem, FormLabel} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
 import {SubmitButton} from "@/components/submit-button";
-import axios from "axios";
 import {HTMLAttributes} from "react";
 
 const FormSchema = z.object({
@@ -19,10 +16,19 @@ const FormSchema = z.object({
 
 interface OneInputFieldFormProps extends HTMLAttributes<HTMLFormElement> {
     existingEntries: string[],
-    type: "roles" | "locations"
+    type: "roles" | "locations",
+    formFieldLabel: string,
+    submitFunction: (data: any) => any,
+    isPendingSubmission: boolean
 }
 
-export function OneInputFieldForm({existingEntries, type}: OneInputFieldFormProps) {
+export function OneInputFieldForm({
+                                      existingEntries,
+                                      type,
+                                      formFieldLabel,
+                                      submitFunction,
+                                      isPendingSubmission
+                                  }: OneInputFieldFormProps) {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -36,13 +42,16 @@ export function OneInputFieldForm({existingEntries, type}: OneInputFieldFormProp
             <form onSubmit={form.handleSubmit(async (data) => {
                 if (existingEntries.includes(data.value)) {
                     toast({
-                        title: "Already exists",
+                        title: type === "roles" ?
+                            "Role already exists" :
+                            "Location already exists",
                         description: "Please enter a different value",
+                        variant: "destructive"
                     })
                     return
                 }
 
-                const result = await axios.post<string>(`/api/v1/${type}`, {value: data.value})
+                const result = await submitFunction(data)
                 form.reset()
             })}
                   className="w-2/3 space-y-6 flex flex-row items-end gap-2">
@@ -51,14 +60,14 @@ export function OneInputFieldForm({existingEntries, type}: OneInputFieldFormProp
                     name="value"
                     render={({field}) => (
                         <FormItem>
-                            <FormLabel>Add role</FormLabel>
+                            <FormLabel>{formFieldLabel}</FormLabel>
                             <FormControl>
-                                <Input {...field} />
+                                <Input {...field} disabled={isPendingSubmission}/>
                             </FormControl>
                         </FormItem>
                     )}
                 />
-                <SubmitButton className={"sm:w-fit"} showShortcut={false}>
+                <SubmitButton className={"sm:w-fit"} showShortcut={false} disabled={isPendingSubmission}>
                     Add
                 </SubmitButton>
             </form>
