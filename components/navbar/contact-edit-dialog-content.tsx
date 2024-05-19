@@ -41,7 +41,7 @@ export default function ContactEditDialogContent({contact}: ContentEditDialogCon
                 }>
 
                     <DialogHeader>
-                        <DialogTitle className={"flex flex-row gap-2"}>
+                        <DialogTitle className={"flex flex-row gap-2 justify-center sm:justify-start"}>
                             <UserRoundPlus className={"h-4 w-4"}/>
                             Edit contact
                         </DialogTitle>
