@@ -71,7 +71,7 @@ export default function JobCreationDialogContent() {
                     <JobDialogContent form={form}/>
 
                     <DialogFooter>
-                        <SubmitButton disabled={isAddingJob}>{isAddingJob ? "Adding job" : "Add job"}</SubmitButton>
+                        <SubmitButton isPending={isAddingJob}>{isAddingJob ? "Adding job" : "Add job"}</SubmitButton>
                     </DialogFooter>
                 </form>
             </Form>

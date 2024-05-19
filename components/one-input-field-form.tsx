@@ -19,7 +19,8 @@ interface OneInputFieldFormProps extends HTMLAttributes<HTMLFormElement> {
     type: "roles" | "locations",
     formFieldLabel: string,
     submitFunction: (data: any) => any,
-    isPendingSubmission: boolean
+    isPendingSubmission: boolean,
+    disabled?: boolean
 }
 
 export function OneInputFieldForm({
@@ -27,7 +28,8 @@ export function OneInputFieldForm({
                                       type,
                                       formFieldLabel,
                                       submitFunction,
-                                      isPendingSubmission
+                                      isPendingSubmission,
+                                      disabled
                                   }: OneInputFieldFormProps) {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
@@ -51,7 +53,7 @@ export function OneInputFieldForm({
                     return
                 }
 
-                const result = await submitFunction(data)
+                await submitFunction(data)
                 form.reset()
             })}
                   className="w-2/3 space-y-6 flex flex-row items-end gap-2">
@@ -62,12 +64,14 @@ export function OneInputFieldForm({
                         <FormItem>
                             <FormLabel>{formFieldLabel}</FormLabel>
                             <FormControl>
-                                <Input className={"min-w-[140px]"} {...field} disabled={isPendingSubmission}/>
+                                <Input className={"min-w-[140px]"} {...field}
+                                       disabled={isPendingSubmission || disabled}/>
                             </FormControl>
                         </FormItem>
                     )}
                 />
-                <SubmitButton className={"sm:w-fit"} showShortcut={false} disabled={isPendingSubmission}>
+                <SubmitButton className={"sm:w-fit"} showShortcut={false} isPending={isPendingSubmission}
+                              disabled={disabled}>
                     Add
                 </SubmitButton>
             </form>
