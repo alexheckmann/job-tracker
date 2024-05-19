@@ -77,11 +77,11 @@ export default function Navbar() {
                 <SheetContent side="left">
                     <nav className="grid gap-2 text-lg font-medium">
                         <Link
-                            href="#"
-                            className="flex items-center gap-2 text-lg font-semibold"
+                            href="/"
+                            className="flex items-center gap-2 font-bold md:text-base px-4 py-2"
                         >
-                            <Logo className={"h-6 w-6"}/>
-                            <span className="sr-only">Pegasus</span>
+                            <Logo className={"h-8 w-8"}/>
+                            <span>Pegasus</span>
                         </Link>
 
                         {status === "authenticated" && navLinks.map(({path, label}) => (
