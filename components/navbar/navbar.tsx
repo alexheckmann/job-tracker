@@ -98,6 +98,35 @@ export default function Navbar() {
                                 {label}
                             </Link>
                         ))}
+
+                        {status === "authenticated" && profileLinks.map(({path, label}) => (
+                            <Link
+                                key={path}
+                                href={path}
+                                onClick={() => setIsSheetOpen(false)}
+                                className={`${
+                                    pathname === path
+                                        ? "text-foreground font-semibold"
+                                        : "text-muted-foreground"
+                                } text-foreground transition-colors font-light w-full h-full px-4 py-2`}
+                            >
+                                {label}
+                            </Link>
+                        ))}
+
+                        {status === "authenticated" &&
+                            <Button
+                                variant="outline"
+                                size="icon"
+                                className="rounded-full w-full h-full px-4 py-2"
+                                onClick={() => {
+                                    signOut({callbackUrl: "/login"})
+                                    setIsSheetOpen(false)
+                                }}
+                            >
+                                Sign out
+                            </Button>
+                        }
                     </nav>
                 </SheetContent>
             </Sheet>
@@ -111,7 +140,7 @@ export default function Navbar() {
                 {status === "authenticated" ?
                     <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
                         <DropdownMenuTrigger asChild>
-                            <Button variant="secondary" size="icon" className="rounded-full">
+                            <Button variant="secondary" size="icon" className="rounded-full hidden md:inline-flex">
                                 <CircleUser className="h-5 w-5"/>
                                 <span className="sr-only">Toggle user menu</span>
                             </Button>
