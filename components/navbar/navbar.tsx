@@ -33,6 +33,7 @@ export default function Navbar() {
     const {status} = useSession();
     const [isSheetOpen, setIsSheetOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const isAuthenticated = status === "authenticated";
 
     return (
 
@@ -47,7 +48,7 @@ export default function Navbar() {
                     <span>Pegasus</span>
                 </Link>
 
-                {status === "authenticated" && navLinks.map(({path, label}) => (
+                {isAuthenticated && navLinks.map(({path, label}) => (
 
                     <Link
                         key={path}
@@ -84,7 +85,7 @@ export default function Navbar() {
                             <span>Pegasus</span>
                         </Link>
 
-                        {status === "authenticated" && navLinks.map(({path, label}) => (
+                        {isAuthenticated && navLinks.map(({path, label}) => (
                             <Link
                                 key={path}
                                 href={path}
@@ -117,7 +118,7 @@ export default function Navbar() {
                         })}
                     </nav>
 
-                    {status === "authenticated" &&
+                    {isAuthenticated &&
                         <Button
                             variant="outline"
                             size="icon"
@@ -135,11 +136,11 @@ export default function Navbar() {
 
             <div className="flex w-full items-center gap-2 md:ml-auto lg:gap-4">
 
-                {status === "authenticated" && <JobCreationButton className={"ml-auto"}/>}
-                {status === "authenticated" && <ContactCreationButton/>}
+                {isAuthenticated && <JobCreationButton className={"ml-auto"}/>}
+                {isAuthenticated && <ContactCreationButton/>}
 
                 {/* TODO fix and replace with viable alternative*/}
-                {status === "authenticated" ?
+                {isAuthenticated ?
                     <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
                         <DropdownMenuTrigger asChild>
                             <Button variant="secondary" size="icon" className="rounded-full hidden md:inline-flex">
