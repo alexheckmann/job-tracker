@@ -124,7 +124,7 @@ export default function Navbar() {
                             size="icon"
                             className="w-full px-4 py-2 mt-auto"
                             onClick={() => {
-                                signOut({callbackUrl: "/login"})
+                                signOut({callbackUrl: "/"})
                                 setIsSheetOpen(false)
                             }}
                         >
@@ -165,7 +165,7 @@ export default function Navbar() {
                                 </DropdownMenuItem>
                             ))}
                             <DropdownMenuItem className={"cursor-pointer"} onClick={() => {
-                                signOut({callbackUrl: "/login"})
+                                signOut({callbackUrl: "/"})
                                 setIsDropdownOpen(false)
                             }}>
                                 Sign out
