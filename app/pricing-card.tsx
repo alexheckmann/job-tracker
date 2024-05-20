@@ -1,9 +1,9 @@
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {Badge} from "@/components/ui/badge";
-import {Button} from "@/components/ui/button";
 import {Check} from "lucide-react";
 import {HTMLAttributes} from "react";
 import {cn} from "@/lib/utils";
+import {SignInButton} from "@/components/sign-in-button";
 
 interface PricingCardProps extends HTMLAttributes<HTMLDivElement> {
 
@@ -32,9 +32,7 @@ export function PricingCard({className}: PricingCardProps) {
             </CardHeader>
 
             <CardContent>
-                <Button className="w-full">
-                    Start for free
-                </Button>
+                <SignInButton variant={"default"} className={"w-full"}/>
             </CardContent>
 
             <hr className="w-4/5 m-auto mb-4"/>
