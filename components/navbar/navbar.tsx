@@ -9,9 +9,9 @@ import {usePathname} from "next/navigation";
 import {JobCreationButton} from "@/components/navbar/job-creation-button";
 import {ContactCreationButton} from "@/components/navbar/contact-creation-button";
 import {signOut, useSession} from "next-auth/react";
-import {GoogleLoginButton} from "@/components/navbar/google-login-button";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
 import {useState} from "react";
+import {SignInButton} from "@/components/sign-in-button";
 
 const navLinks = [
     {path: "/dashboard", label: "Applications"},
@@ -168,9 +168,8 @@ export default function Navbar() {
                                 Sign out
                             </DropdownMenuItem>
                         </DropdownMenuContent>
-                    </DropdownMenu>
-                    :
-                    <GoogleLoginButton disabled={status === "loading"} className={"ml-auto"}/>
+                    </DropdownMenu> :
+                    <SignInButton className={"ml-auto"}/>
                 }
             </div>
         </header>
