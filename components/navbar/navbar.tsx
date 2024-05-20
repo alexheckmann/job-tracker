@@ -22,8 +22,8 @@ const navLinks = [
 
 const profileLinks = [
     {path: "/settings", label: "Settings"},
-    {path: "/feedback", label: "Feedback"},
-    // {path: "/donate", label: "Donate"}, TODO implement donate
+    {path: "/feedback", label: "Feedback", publicLink: true},
+    // {path: "/donate", label: "Donate", public: true}, TODO implement donate
 ]
 
 
@@ -99,20 +99,22 @@ export default function Navbar() {
                             </Link>
                         ))}
 
-                        {status === "authenticated" && profileLinks.map(({path, label}) => (
-                            <Link
-                                key={path}
-                                href={path}
-                                onClick={() => setIsSheetOpen(false)}
-                                className={`${
-                                    pathname === path
-                                        ? "text-foreground font-semibold"
-                                        : "text-muted-foreground"
-                                } text-foreground transition-colors font-light w-full h-full px-4 py-2`}
-                            >
-                                {label}
-                            </Link>
-                        ))}
+                        {profileLinks.map(({path, label, publicLink}) => {
+                            if (publicLink || isAuthenticated)
+                                return (
+                                    <Link
+                                        key={path}
+                                        href={path}
+                                        onClick={() => setIsSheetOpen(false)}
+                                        className={`${
+                                            pathname === path
+                                                ? "text-foreground font-semibold"
+                                                : "text-muted-foreground"
+                                        } text-foreground transition-colors font-light w-full h-full px-4 py-2`}>
+                                        {label}
+                                    </Link>
+                                )
+                        })}
                     </nav>
 
                     {status === "authenticated" &&
