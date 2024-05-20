@@ -21,7 +21,7 @@ export function GoogleLoginButton({disabled, className}: GoogleLoginButtonProps)
             className={cn(className, "w-[170px]")}
             onClick={() => {
                 setLoading(true)
-                signIn("google", {callbackUrl: "/"})
+                signIn("google", {callbackUrl: "/dashboard"})
             }}>
             {loading ?
                 <div className={"flex flex-row gap-2 items-center"}>
