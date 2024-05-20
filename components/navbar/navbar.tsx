@@ -14,7 +14,7 @@ import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger
 import {useState} from "react";
 
 const navLinks = [
-    {path: "/", label: "Applications"},
+    {path: "/dashboard", label: "Applications"},
     {path: "/contacts", label: "Contacts"},
     // {path: "/notes", label: "Notes"},
     // {path: "/analytics", label: "Analytics"}
