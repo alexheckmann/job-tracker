@@ -23,7 +23,7 @@ const navLinks = [
 const profileLinks = [
     {path: "/settings", label: "Settings"},
     {path: "/feedback", label: "Feedback", publicLink: true},
-    // {path: "/donate", label: "Donate", public: true}, TODO implement donate
+    {path: "/donate", label: "Donate", publicLink: true}
 ]
 
 
