@@ -17,7 +17,7 @@ export function PitchCard({className}: PitchCardProps) {
             className={cn("flex flex-col justify-center items-center drop-shadow-xl shadow-black/10", className)}>
             <CardHeader className="mt-8 flex justify-center items-center pb-2">
                 <Logo
-                    className="absolute grayscale-[0%] -top-12 rounded-full w-24 h-24 aspect-square object-cover"/>
+                    className="absolute grayscale-[0%] -top-9 rounded-full w-24 h-24 aspect-square object-cover"/>
                 <CardTitle className="text-center">
                     Pegasus
                 </CardTitle>
