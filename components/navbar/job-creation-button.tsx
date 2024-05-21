@@ -25,7 +25,7 @@ export function JobCreationButton({disabled, className, ...props}: JobCreationBu
             <DialogTrigger asChild>
                 <Button {...props} variant={"secondary"} className={cn("w-fit gap-2", className)}>
                     <ClipboardPlus className={"h-4 w-4 hidden xs:inline-flex"}/>
-                    <span>New job</span>
+                    <span>Job</span>
                 </Button>
             </DialogTrigger>
             <JobCreationDialogContent/>

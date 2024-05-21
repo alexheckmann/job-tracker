@@ -25,7 +25,7 @@ export function ContactCreationButton({disabled, className, ...props}: ContactCr
             <DialogTrigger asChild>
                 <Button {...props} variant={"secondary"} className={cn("w-fit gap-2", className)}>
                     <UserRoundPlus className={"h-4 w-4 hidden xs:inline-flex"}/>
-                    <span>New contact</span>
+                    <span>Contact</span>
                 </Button>
             </DialogTrigger>
             <ContactCreationDialogContent/>
