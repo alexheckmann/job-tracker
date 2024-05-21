@@ -6,9 +6,9 @@ import {BenefitsCard} from "@/app/benefits-card";
 
 export default function Home() {
     return (
-        <section className="container grid lg:grid-cols-2 place-items-center py-20 md:py-32 gap-10">
+        <section className="container grid lg:grid-cols-2 place-items-center py-20 px-4 md:px-8 md:py-32 gap-10">
             <div className="text-center lg:text-start space-y-6 items-center">
-                <main className="text-4xl sm:text-5xl md:text-6xl font-bold max-w-[600px]">
+                <main className="text-4xl sm:text-5xl md:text-6xl font-bold">
                     <h1 className="inline">
                         <span
                             className="inline bg-gradient-to-r from-[#1FC0F1] via-[#0F80C5] to-[#1866B0] text-transparent bg-clip-text">
@@ -49,7 +49,7 @@ export default function Home() {
 
                     {/* Service */}
                     <BenefitsCard
-                        className={"order-2 md:order-4 md:absolute w-72 md:w-[350px] md:-right-[10px] md:bottom-[35px]"}/>
+                        className={"order-2 md:order-4 md:absolute w-72 md:w-[340px] md:-right-[10px] md:bottom-[35px]"}/>
                 </div>
             </div>
 

@@ -11,7 +11,7 @@ export function BenefitsCard({className}: BenefitsCardProps) {
     return (
         <Card
             className={cn("drop-shadow-xl shadow-black/10 max-h-[350px]", className)}>
-            <CardHeader className="space-y-1 flex md:flex-row justify-start items-start gap-4">
+            <CardHeader className="space-y-1 flex md:flex-row justify-start items-start gap-2">
                 <div className="mt-1 bg-primary-foreground p-1 rounded-2xl">
                     <Lightbulb/>
                 </div>
