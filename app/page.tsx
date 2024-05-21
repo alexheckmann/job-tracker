@@ -25,8 +25,9 @@ export default function Home() {
                     </h2>
                 </main>
 
-                <p className="text-xl text-muted-foreground w-4/6 md:w-1/2 lg:w-10/12 mx-auto lg:mx-0">
-                    Effortlessly navigate your job search process by organizing your applications, contacts and notes.
+                <p className="text-xl text-muted-foreground w-4/6 md:w-3/5 lg:w-10/12 mx-auto lg:mx-0">
+                    Effortlessly navigate your job search process by keeping your applications, contacts and notes
+                    organized.
                 </p>
 
                 <SignInButton/>
