@@ -10,7 +10,7 @@ Whether you're actively applying for jobs or passively keeping an eye on the mar
 
 Contributions are welcome. Please fork the repository and create a pull request with your changes.
 
-To keep the service free, please consider [contributing to the costs](https://buy.stripe.com/7sIfZ90OfdgS2Bi9AA).
+To keep the service free, please consider [contributing to the costs](https://buy.stripe.com/bIYaEP9kL5Oq6Ry4gh).
 
 ## Description
 
