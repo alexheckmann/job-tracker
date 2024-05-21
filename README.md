@@ -6,6 +6,12 @@ The application aims to help users navigate their job search by providing an org
 
 Whether you're actively applying for jobs or passively keeping an eye on the market, Pegasus Job Tracker can help you stay organized and on top of your job search.
 
+## Contributing
+
+Contributions are welcome. Please fork the repository and create a pull request with your changes.
+
+To keep the service free, please consider [contributing to the costs](https://buy.stripe.com/7sIfZ90OfdgS2Bi9AA).
+
 ## Description
 
 This project is a full-stack application developed using TypeScript, Next.js, MongoDB, Zustand, shadcn-ui,
@@ -37,7 +43,3 @@ To install the project, follow these steps:
 ## Usage
 
 To run the project, use the command: `npm run build`
-
-## Contributing
-
-Contributions are welcome. Please fork the repository and create a pull request with your changes.
