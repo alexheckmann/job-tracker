@@ -4,6 +4,7 @@ import {Check} from "lucide-react";
 import {HTMLAttributes} from "react";
 import {cn} from "@/lib/utils";
 import {SignInButton} from "@/components/sign-in-button";
+import Link from "next/link";
 
 interface PricingCardProps extends HTMLAttributes<HTMLDivElement> {
 
@@ -17,9 +18,11 @@ export function PricingCard({className}: PricingCardProps) {
             <CardHeader>
                 <CardTitle className="flex item-center justify-between">
                     Free
-                    <Badge variant="secondary" className="text-sm text-primary">
-                        Donations appreciated
-                    </Badge>
+                    <Link href={"/donate"} passHref>
+                        <Badge variant="secondary" className="text-sm text-primary">
+                            Donations appreciated
+                        </Badge>
+                    </Link>
                 </CardTitle>
                 <div>
                     <span className="text-3xl font-bold">$0</span>
