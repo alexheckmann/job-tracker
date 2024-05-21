@@ -13,14 +13,20 @@ import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger
 import {useState} from "react";
 import {SignInButton} from "@/components/sign-in-button";
 
-const navLinks = [
+interface NavLink {
+    path: string;
+    label: string;
+    publicLink?: boolean;
+}
+
+const navLinks: NavLink[] = [
     {path: "/dashboard", label: "Applications"},
     {path: "/contacts", label: "Contacts"},
     // {path: "/notes", label: "Notes"},
     // {path: "/analytics", label: "Analytics"}
 ]
 
-const profileLinks = [
+const profileLinks: NavLink[] = [
     {path: "/settings", label: "Settings"},
     {path: "/feedback", label: "Feedback", publicLink: true},
     {path: "/donate", label: "Donate", publicLink: true}
@@ -62,6 +68,23 @@ export default function Navbar() {
                         {label}
                     </Link>
                 ))}
+
+                {status === "unauthenticated" && profileLinks.map(({path, label, publicLink}) => {
+                    if (publicLink)
+                        return (
+                            <Link
+                                key={path}
+                                href={path}
+                                className={`${
+                                    pathname === path
+                                        ? "text-foreground font-semibold"
+                                        : "text-muted-foreground"
+                                } text-foreground transition-colors font-light w-full h-full px-2 py-4`}
+                            >
+                                {label}
+                            </Link>
+                        )
+                })}
 
             </nav>
             <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
