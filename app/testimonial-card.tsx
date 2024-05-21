@@ -9,7 +9,7 @@ interface TestimonialCardProps extends HTMLAttributes<HTMLDivElement> {
 
 export function TestimonialCard({className}: TestimonialCardProps) {
     return (
-        <Card className={cn("drop-shadow-xl shadow-black/10", className)}>
+        <Card className={cn("drop-shadow-xl shadow-black/10 max-h-[140px]", className)}>
             <CardHeader className="flex flex-row items-center gap-4 pb-2">
                 <Avatar>
                     <AvatarImage src="https://avatars.githubusercontent.com/u/39348705?v=4"/>

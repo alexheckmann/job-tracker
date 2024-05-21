@@ -10,7 +10,7 @@ interface BenefitsCardProps extends HTMLAttributes<HTMLDivElement> {
 export function BenefitsCard({className}: BenefitsCardProps) {
     return (
         <Card
-            className={cn("drop-shadow-xl shadow-black/10", className)}>
+            className={cn("drop-shadow-xl shadow-black/10 max-h-[350px]", className)}>
             <CardHeader className="space-y-1 flex md:flex-row justify-start items-start gap-4">
                 <div className="mt-1 bg-primary-foreground p-1 rounded-2xl">
                     <Lightbulb/>
