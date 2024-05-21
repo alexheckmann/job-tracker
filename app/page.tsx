@@ -11,14 +11,14 @@ export default function Home() {
                 <main className="text-4xl sm:text-5xl md:text-6xl font-bold max-w-[600px]">
                     <h1 className="inline">
                         <span
-                            className="inline bg-gradient-to-r from-[#FFCA00]  to-[#DCB101] text-transparent bg-clip-text">
+                            className="inline bg-gradient-to-r from-[#1FC0F1] via-[#0F80C5] to-[#1866B0] text-transparent bg-clip-text">
                             Streamlining
                         </span>
                         {" your "}
                     </h1>
                     <h2 className="inline">
                         <span
-                            className="inline bg-gradient-to-r from-[#1FC0F1] via-[#0F80C5] to-[#1866B0] text-transparent bg-clip-text">
+                            className="inline bg-gradient-to-r from-[#FFBC00] to-[#FFCA00] text-transparent bg-clip-text">
                                 job search
                         </span>
                         {" process"}
