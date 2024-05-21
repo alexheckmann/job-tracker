@@ -34,13 +34,13 @@ export function PitchCard({className}: PitchCardProps) {
             </CardContent>
 
             <CardFooter className={"gap-2"}>
-                <a rel="noreferrer noopener" href="/donate" target="_blank"
+                <a rel="noreferrer noopener" href="/donate" target="_self"
                    className={buttonVariants({variant: "ghost", size: "sm"})}>
                     <span className="sr-only">Donate</span>
                     <HandHeart className={"w-5 h-5"}/>
                 </a>
 
-                <a rel="noreferrer noopener" href="/feedback" target="_blank"
+                <a rel="noreferrer noopener" href="/feedback" target="_self"
                    className={buttonVariants({variant: "ghost", size: "sm"})}>
                     <span className="sr-only">Feedback</span>
                     <MessagesSquare className={"w-5 h-5"}/>
