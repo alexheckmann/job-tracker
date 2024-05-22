@@ -17,6 +17,12 @@ const filterColumns: FilterColumnOption[] = [
         type: "button",
         label: "HR",
         filterValue: false
+    },
+    {
+        name: "status",
+        type: "select",
+        label: "Status",
+        filterValue: false
     }
 ]
 
