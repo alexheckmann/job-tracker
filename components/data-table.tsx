@@ -94,7 +94,7 @@ export function DataTable<TData, TValue>({
                         )
                     } else if (filterColumnOption.type === "select") {
                         return (
-                            <InputMultiSelect options={ApplicationStatus.options}
+                            <InputMultiSelect key={index} options={ApplicationStatus.options}
                                               onSelectFunction={column?.setFilterValue!}
                             />
                         )
