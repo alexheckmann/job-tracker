@@ -7,10 +7,10 @@ export function formatDate(date: Date): any {
     if (diffInDays < 7) {
         if (isToday(date)) {
             return (
-                <>
-                    <span className={"text-primary text-xl select-none"}>• </span>
+                <div className={"flex flex-row items-center gap-1"}>
+                    <span className={"text-primary text-xl select-none"}>•</span>
                     <span className={""}>Today</span>
-                </>
+                </div>
             );
         } else if (isYesterday(date)) {
             return (
