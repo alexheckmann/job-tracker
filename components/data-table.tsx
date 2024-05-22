@@ -17,13 +17,14 @@ import {cn} from "@/lib/utils";
 import {Input} from "@/components/ui/input";
 import {Toggle} from "@/components/ui/toggle";
 import {Skeleton} from "@/components/ui/skeleton";
+import {ApplicationStatus} from "@/lib/models/job";
+import InputMultiSelect from "@/components/input-multi-select";
 
 export interface FilterColumnOption {
     name: string,
-    type: "button" | "input",
+    type: "button" | "input" | "select",
     label: string,
     filterValue?: string | boolean
-
 }
 
 interface DataTableProps<TData, TValue> {
@@ -91,8 +92,13 @@ export function DataTable<TData, TValue>({
                                 className="max-w-44 sm:max-w-64"
                             />
                         )
+                    } else if (filterColumnOption.type === "select") {
+                        return (
+                            <InputMultiSelect options={ApplicationStatus.options}
+                                              onSelectFunction={column?.setFilterValue!}
+                            />
+                        )
                     }
-
                 })}
 
 

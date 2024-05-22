@@ -9,6 +9,7 @@ interface BooleanStatusIconProps extends HTMLAttributes<HTMLDivElement> {
 /**
  * Component that displays a checkmark if the boolean is true
  * @param bool - the boolean to display
+ * @param className - tailwind classes to apply
  */
 export function BooleanStatusIcon({bool, className}: BooleanStatusIconProps) {
 
