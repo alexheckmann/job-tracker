@@ -167,7 +167,7 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
             return (
                 link &&
                 <LinkHoverTooltip hoverText={"Open job description"}>
-                    <OpenLinkButton href={link} type={"link"}/>
+                    <OpenLinkButton href={link} type={"link"} className={"mx-auto"}/>
                 </LinkHoverTooltip>
             )
         },
@@ -207,7 +207,7 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
             return (
                 isReferral &&
                 <HoverTooltip hoverText={"Submitted by referral"} className={"cursor-default"}>
-                    <BooleanStatusIcon bool={isReferral}/>
+                    <BooleanStatusIcon bool={isReferral} className={"mx-auto"}/>
                 </HoverTooltip>
             )
         },
@@ -236,7 +236,7 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
                 isRecruiter &&
                 <HoverTooltip hoverText={"Application via an external recruitment agency"}
                               className={"cursor-default"}>
-                    <BooleanStatusIcon bool={isRecruiter}/>
+                    <BooleanStatusIcon bool={isRecruiter} className={"mx-auto"}/>
                 </HoverTooltip>
             )
         },

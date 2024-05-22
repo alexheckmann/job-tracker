@@ -94,7 +94,7 @@ export const contactColumns: ColumnDef<Contact>[] = [
             return (
                 linkedin &&
                 <LinkHoverTooltip hoverText={"Open LinkedIn profile"}>
-                    <OpenLinkButton href={linkedin} type={"linkedin"}/>
+                    <OpenLinkButton href={linkedin} type={"linkedin"} className={"mx-auto"}/>
                 </LinkHoverTooltip>
             )
         },
@@ -123,7 +123,7 @@ export const contactColumns: ColumnDef<Contact>[] = [
             return (
                 email &&
                 <LinkHoverTooltip hoverText={`${email}`}>
-                    <OpenLinkButton href={email} type={"email"}/>
+                    <OpenLinkButton href={email} type={"email"} className={"mx-auto"}/>
                 </LinkHoverTooltip>
             )
         },
