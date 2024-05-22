@@ -23,11 +23,11 @@ interface InputMultiSelectProps extends HTMLAttributes<HTMLSelectElement> {
 export default function InputMultiSelect({options, onSelectFunction}: InputMultiSelectProps) {
     const title = "Status"
 
-
+    const [isOpen, setIsOpen] = useState(false)
     const [selectedOptions, setSelectedOptions] = useState<Set<string>>(new Set())
 
     return (
-        <Popover>
+        <Popover open={isOpen} onOpenChange={setIsOpen}>
             <PopoverTrigger asChild>
                 <Button className={cn("gap-2", selectedOptions.size > 0 && "bg-secondary")} variant={"outline"}>
                     {title}
@@ -85,6 +85,7 @@ export default function InputMultiSelect({options, onSelectFunction}: InputMulti
                                             onSelect={() => {
                                                 setSelectedOptions(new Set())
                                                 onSelectFunction(undefined)
+                                                setIsOpen(false)
                                             }}
                                             className="justify-center text-center">
                                             Clear selection
