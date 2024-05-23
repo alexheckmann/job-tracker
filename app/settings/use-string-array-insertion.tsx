@@ -1,4 +1,4 @@
-import {ToastContent} from "@/app/data/toast-content";
+import {ToastContent} from "@/lib/models/toast-content";
 import {useMutation} from "@tanstack/react-query";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
