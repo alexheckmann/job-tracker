@@ -1,5 +1,5 @@
 import {ColumnFilterOption, DataTable} from "@/components/data-table";
-import {contactColumns} from "@/app/data/contact-columns";
+import {contactColumns} from "@/app/contacts/contact-columns";
 import {CardContent} from "@/components/ui/card";
 import {useContactData, useContactEntriesStore} from "@/app/data/use-get-data";
 import {useEffect} from "react";

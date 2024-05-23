@@ -11,7 +11,7 @@ import {formatDate} from "@/lib/formatDate";
 import {OpenLinkButton} from "@/components/open-link-button";
 
 import {Contact} from "@/lib/models/contact";
-import {ContactRowActions} from "@/app/data/contact-row-actions";
+import {ContactRowActions} from "@/app/contacts/contact-row-actions";
 
 /**
  * Truncate a string to a certain length. Used as a workaround for the lack of ellipsis support in the table.
