@@ -5,6 +5,7 @@ import {DataTable, FilterColumnOption} from "@/components/data-table";
 import {jobTrackerColumns} from "@/app/data/job-columns";
 import {useJobData, useJobEntriesStore} from "@/app/data/use-get-data";
 import {useEffect} from "react";
+import {ApplicationStatus} from "@/lib/models/job";
 
 const filterColumns: FilterColumnOption[] = [
     {
@@ -22,7 +23,7 @@ const filterColumns: FilterColumnOption[] = [
         name: "status",
         type: "select",
         label: "Status",
-        filterValue: false
+        initialValues: ApplicationStatus.options
     }
 ]
 

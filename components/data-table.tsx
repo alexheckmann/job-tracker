@@ -17,15 +17,20 @@ import {cn} from "@/lib/utils";
 import {Input} from "@/components/ui/input";
 import {Toggle} from "@/components/ui/toggle";
 import {Skeleton} from "@/components/ui/skeleton";
-import {ApplicationStatus} from "@/lib/models/job";
 import InputMultiSelect from "@/components/input-multi-select";
 
-export interface FilterColumnOption {
+export type FilterColumnOption = {
     name: string,
-    type: "button" | "input" | "select",
     label: string,
-    filterValue?: string | boolean
-}
+} & ({
+    type: "button",
+    filterValue: string | boolean
+} | {
+    type: "input"
+} | {
+    type: "select",
+    initialValues: string[]
+})
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -76,7 +81,7 @@ export function DataTable<TData, TValue>({
                                 variant={"outline"}
                                 onPressedChange={
                                     (pressed) => {
-                                        pressed ? column?.setFilterValue(filterColumnOption.filterValue ?? "") :
+                                        pressed ? column?.setFilterValue(filterColumnOption.filterValue) :
                                             column?.setFilterValue("")
                                     }}>
                                 {filterColumnOption.label}
@@ -94,7 +99,7 @@ export function DataTable<TData, TValue>({
                         )
                     } else if (filterColumnOption.type === "select") {
                         return (
-                            <InputMultiSelect key={index} options={ApplicationStatus.options}
+                            <InputMultiSelect key={index} options={filterColumnOption.initialValues}
                                               onSelectFunction={column?.setFilterValue!}
                             />
                         )
