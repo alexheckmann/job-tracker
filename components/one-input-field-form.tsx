@@ -38,7 +38,6 @@ export function OneInputFieldForm({
         },
     })
 
-
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(async (data) => {
@@ -70,10 +69,10 @@ export function OneInputFieldForm({
                         </FormItem>
                     )}
                 />
-                <SubmitButton className={"sm:w-fit"} showShortcut={false} isPending={isPendingSubmission}
-                              disabled={disabled}>
-                    Add
-                </SubmitButton>
+                <SubmitButton className={"sm:w-fit"} isPending={isPendingSubmission}
+                              normalText={"Add"} loadingText={"Adding"}
+                              normalIcon={null}
+                              disabled={disabled}/>
             </form>
         </Form>
     )

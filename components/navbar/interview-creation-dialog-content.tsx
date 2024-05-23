@@ -55,8 +55,8 @@ export default function InterviewCreationDialogContent() {
                     <InterviewDialogContent form={form}/>
 
                     <DialogFooter>
-                        <SubmitButton
-                            isPending={isAddingInterview}>{isAddingInterview ? "Adding interview" : "Add interview"}</SubmitButton>
+                        <SubmitButton normalText={"Add interview"} loadingText={"Adding interview"} normalIcon={null}
+                                      isPending={isAddingInterview}/>
                     </DialogFooter>
                 </form>
             </Form>

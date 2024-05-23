@@ -53,8 +53,8 @@ export default function ContactEditDialogContent({contact}: ContentEditDialogCon
                     <ContactDialogContent form={form}/>
 
                     <DialogFooter>
-                        <SubmitButton
-                            isPending={isAddingContact}>{isAddingContact ? "Saving contact" : "Save contact"}</SubmitButton>
+                        <SubmitButton normalText={"Save contact"} loadingText={"Saving contact"} normalIcon={null}
+                                      isPending={isAddingContact}/>
                     </DialogFooter>
                 </form>
             </Form>

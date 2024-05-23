@@ -84,7 +84,10 @@ export function FeedbackCreationCard() {
                             <FormTextarea label={"Feedback"} placeholder={"Add your feedback"} field={field}/>
                         )}/>
 
-                        <SubmitButton showShortcut={false}>Submit feedback</SubmitButton>
+                        <SubmitButton normalText={"Submit feedback"}
+                                      loadingText={"Submitting feedback"}
+                                      normalIcon={null}
+                        />
                     </CardContent>
                 </form>
             </Form>

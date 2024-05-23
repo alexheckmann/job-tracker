@@ -59,8 +59,8 @@ export default function ContactCreationDialogContent() {
                     <ContactDialogContent form={form}/>
 
                     <DialogFooter>
-                        <SubmitButton
-                            isPending={isAddingContact}>{isAddingContact ? "Adding contact" : "Add contact"}</SubmitButton>
+                        <SubmitButton normalText={"Add contact"} loadingText={"Adding contact"} normalIcon={null}
+                                      isPending={isAddingContact}/>
                     </DialogFooter>
                 </form>
             </Form>

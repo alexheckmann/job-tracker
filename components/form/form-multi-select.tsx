@@ -81,9 +81,8 @@ const FormSelectWithInputField = () => {
                         </FormItem>
                     )}
                 />
-                <SubmitButton disabled={isLoading} className={"sm:w-fit"} showShortcut={false}>
-                    Add
-                </SubmitButton>
+                <SubmitButton normalText={"Add"} loadingText={"Adding"} normalIcon={null}
+                              disabled={isLoading} className={"sm:w-fit"}/>
             </form>
         </Form>
     );

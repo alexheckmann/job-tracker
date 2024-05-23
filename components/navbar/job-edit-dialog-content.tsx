@@ -54,7 +54,8 @@ export default function JobEditDialogContent({job}: JobEditDialogContentProps) {
 
                     <JobDialogContent form={form}/>
                     <DialogFooter>
-                        <SubmitButton isPending={isAddingJob}>{isAddingJob ? "Saving job" : "Save job"}</SubmitButton>
+                        <SubmitButton isPending={isAddingJob} normalText={"Save job"} loadingText={"Saving job"}
+                                      normalIcon={null}/>
                     </DialogFooter>
                 </form>
             </Form>

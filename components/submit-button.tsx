@@ -6,14 +6,17 @@ import {cn} from "@/lib/utils";
 interface SubmitButtonProps extends HTMLAttributes<HTMLButtonElement> {
     disabled?: boolean;
     isPending?: boolean;
-    showShortcut?: boolean;
+    loadingText: string;
+    normalText: string;
+    normalIcon: any;
 }
 
 export function SubmitButton({
-                                 children,
+                                 loadingText,
+                                 normalText,
+                                 normalIcon,
                                  disabled = false,
                                  isPending = false,
-                                 showShortcut = true,
                                  className,
                                  ...props
                              }: SubmitButtonProps) {
@@ -21,9 +24,10 @@ export function SubmitButton({
     return (
         <Button {...props} type="submit" className={cn("gap-2 sm:w-[140px]", className)}
                 disabled={disabled || isPending}>
-            <span className={cn(isPending && "animate-pulse")}>{children}</span>
-            {isPending && <Loader2 className={"h-4 w-4 animate-spin"}/>
-            }
+            <span className={cn(isPending && "animate-pulse")}>
+                {isPending ? loadingText : normalText}
+            </span>
+            {isPending && <Loader2 className={"h-4 w-4 animate-spin"}/>}
         </Button>
     )
 }
