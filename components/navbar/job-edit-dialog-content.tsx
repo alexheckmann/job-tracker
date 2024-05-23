@@ -6,12 +6,12 @@ import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form} from "@/components/ui/form";
 import {Job, JobSchema} from "@/lib/models/job";
-import {ClipboardPlus} from "lucide-react";
 import {SubmitButton} from "@/components/submit-button";
 import JobDialogContent from "@/components/navbar/job-dialog-content";
 import {useMemo} from "react";
 import {useUpdateJob} from "@/app/data/use-update-data";
 import DialogContentWrapper from "@/components/dialog-content-wrapper";
+import {JobIcon} from "@/components/icons";
 
 
 interface JobEditDialogContentProps {
@@ -44,7 +44,7 @@ export default function JobEditDialogContent({job}: JobEditDialogContentProps) {
 
                     <DialogHeader>
                         <DialogTitle className={"flex flex-row gap-2 justify-center sm:justify-start"}>
-                            <ClipboardPlus className={"h-4 w-4"}/>
+                            <JobIcon/>
                             Edit job
                         </DialogTitle>
                         <DialogDescription>

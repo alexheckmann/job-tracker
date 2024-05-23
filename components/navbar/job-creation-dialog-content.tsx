@@ -7,11 +7,11 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Form} from "@/components/ui/form";
 import {Job, JobSchema} from "@/lib/models/job";
 import {useCreateJob} from "@/app/data/use-create-data";
-import {ClipboardPlus} from "lucide-react";
 import {SubmitButton} from "@/components/submit-button";
 import JobDialogContent from "@/components/navbar/job-dialog-content";
 import DialogContentWrapper from "@/components/dialog-content-wrapper";
 import {useSession} from "next-auth/react";
+import {JobIcon} from "@/components/icons";
 
 export default function JobCreationDialogContent() {
 
@@ -53,7 +53,7 @@ export default function JobCreationDialogContent() {
 
                     <DialogHeader>
                         <DialogTitle className={"flex flex-row gap-2 justify-center sm:justify-start"}>
-                            <ClipboardPlus className={"h-4 w-4"}/>
+                            <JobIcon/>
                             Add job
                         </DialogTitle>
                         <DialogDescription>
