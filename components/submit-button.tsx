@@ -1,7 +1,7 @@
 import {HTMLAttributes} from "react";
 import {Button} from "@/components/ui/button";
-import {Loader2} from "lucide-react";
 import {cn} from "@/lib/utils";
+import {LoadingIcon} from "@/components/icons";
 
 interface SubmitButtonProps extends HTMLAttributes<HTMLButtonElement> {
     disabled?: boolean;
@@ -27,7 +27,7 @@ export function SubmitButton({
             <span className={cn(isPending && "animate-pulse", "select-none")}>
                 {isPending ? loadingText : normalText}
             </span>
-            {isPending ? <Loader2 className={"h-4 w-4 animate-spin"}/> : normalIcon}
+            {isPending ? <LoadingIcon/> : normalIcon}
         </Button>
     )
 }

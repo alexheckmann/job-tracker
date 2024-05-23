@@ -9,9 +9,10 @@ import {
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
-import {Loader2, MoreHorizontal, SquarePen, Trash} from "lucide-react";
+import {MoreHorizontal, SquarePen, Trash} from "lucide-react";
 import {Dialog, DialogTrigger} from "@/components/ui/dialog";
 import JobEditDialogContent from "@/components/navbar/job-edit-dialog-content";
+import {LoadingIcon} from "@/components/icons";
 
 export function JobRowActions({row}: { row: Row<Job> }) {
     const job = row.original
@@ -26,7 +27,7 @@ export function JobRowActions({row}: { row: Row<Job> }) {
                         {isDeletingJob ?
                             <>
                                 <span className="sr-only">Deleting entry</span>
-                                <Loader2 className={"h-4 w-4 animate-spin"}/>
+                                <LoadingIcon/>
                             </>
                             :
                             <>

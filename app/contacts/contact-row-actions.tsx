@@ -9,9 +9,10 @@ import {
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
-import {Loader2, MoreHorizontal, SquarePen, Trash} from "lucide-react";
+import {MoreHorizontal, SquarePen, Trash} from "lucide-react";
 import {Dialog, DialogTrigger} from "@/components/ui/dialog";
 import ContactEditDialogContent from "@/components/navbar/contact-edit-dialog-content";
+import {LoadingIcon} from "@/components/icons";
 
 export function ContactRowActions({row}: { row: Row<Contact> }) {
     const contact = row.original
@@ -26,7 +27,7 @@ export function ContactRowActions({row}: { row: Row<Contact> }) {
                         {isDeletingContact ?
                             <>
                                 <span className="sr-only">Deleting entry</span>
-                                <Loader2 className={"h-4 w-4 animate-spin"}/>
+                                <LoadingIcon/>
                             </>
                             :
                             <>

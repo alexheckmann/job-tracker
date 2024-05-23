@@ -2,9 +2,10 @@
 
 import {Button} from "@/components/ui/button";
 import {signIn, useSession} from "next-auth/react";
-import {ChevronRight, Loader2} from "lucide-react";
+import {ChevronRight} from "lucide-react";
 import {HTMLAttributes, useState} from "react";
 import {cn} from "@/lib/utils";
+import {LoadingIcon} from "@/components/icons";
 
 interface SignInButtonProps extends HTMLAttributes<HTMLButtonElement> {
     variant?: "default" | "outline";
@@ -24,7 +25,7 @@ export function SignInButton({variant, className}: SignInButtonProps) {
                 }}>
             {isLoading ? "Signing in" : "Get started now"}
             {isLoading ?
-                <Loader2 className={"h-4 w-4 animate-spin"}/> :
+                <LoadingIcon/> :
                 <ChevronRight className={"w-5 h-5"}/>
             }
         </Button>
