@@ -21,6 +21,12 @@ const filterColumns: ColumnFilterOption[] = [
         filterValue: false
     },
     {
+        columnName: "isFavorite",
+        type: "button",
+        label: "Starred",
+        filterValue: true
+    },
+    {
         columnName: "status",
         type: "select",
         label: "Status",
