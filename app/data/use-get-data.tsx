@@ -44,6 +44,11 @@ export const useJobEntriesStore = create<ClientStateStore<Job[]>>((set) => ({
     setData: (data) => set({data: data})
 }))
 
+export const useInterviewEntriesStore = create<ClientStateStore<Interview[]>>((set) => ({
+    data: [] as Interview[],
+    setData: (data) => set({data: data})
+}))
+
 export const useContactEntriesStore = create<ClientStateStore<Contact[]>>((set) => ({
     data: [] as Contact[],
     setData: (data) => set({data: data})
