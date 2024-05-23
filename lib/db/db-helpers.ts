@@ -16,7 +16,7 @@ import {Feedback} from "@/lib/models/feedback";
  * @param userId The id of the user associated with the job
  * @returns The created job
  */
-export function createJob(job: Job, userId: string) {
+export function insertJob(job: Job, userId: string) {
     return JobModel.create({...job, user: new mongoose.Types.ObjectId(userId)})
 }
 

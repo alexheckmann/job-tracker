@@ -1,4 +1,4 @@
-import {createJob as insertJob, getJobs} from "@/lib/db/db-helpers";
+import {getJobs, insertJob} from "@/lib/db/db-helpers";
 import {NextRequest, NextResponse} from "next/server";
 import {HttpStatusCode} from "axios";
 import mongoose from "mongoose";
