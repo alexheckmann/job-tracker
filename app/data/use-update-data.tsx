@@ -2,12 +2,12 @@ import {StoreApi, UseBoundStore} from "zustand";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
-import {useContactEntriesStore, useJobEntriesStore} from "@/app/data/use-get-data";
-import {ToastAction} from "@/components/ui/toast";
+import {useContactEntriesStore, useInterviewEntriesStore, useJobEntriesStore} from "@/app/data/use-get-data";
 import {Contact} from "@/lib/models/contact";
 import {Job} from "@/lib/models/job";
 import {ClientStateStore} from "@/lib/models/client-state-store";
 import {ToastContent} from "@/lib/models/toast-content";
+import {Interview} from "@/lib/models/interview";
 
 export function useUpdateData<T extends Record<string, unknown>>(apiEndpoint: string,
                                                                  dataKey: string[],
@@ -81,9 +81,9 @@ export function useUpdateJob(job: Job, setUiState?: (data: any) => void, uiState
         title: "Job updated",
         description: `The job at ${job.company} has been updated.`,
         variant: "default",
-        action: (
-            <ToastAction altText="Retry">Retry</ToastAction>
-        )
+        //action: (
+        //    <ToastAction altText="Retry">Retry</ToastAction>
+        //)
     }
 
     // TODO implement error retry action
@@ -91,12 +91,37 @@ export function useUpdateJob(job: Job, setUiState?: (data: any) => void, uiState
         title: "Failed to update job",
         description: `The job at ${job.company} could not be updated.`,
         variant: "destructive",
-        action: (
-            <ToastAction altText="Retry">Retry</ToastAction>
-        )
+        //action: (
+        //    <ToastAction altText="Retry">Retry</ToastAction>
+        //)
     }
 
     return useUpdateData<Job>('/api/v1/jobs', ['jobs'], useJobEntriesStore, job, successToastContent, errorToastContent, setUiState, uiStateToSet)
+}
+
+export function useUpdateInterview(interview: Interview, setUiState?: (data: any) => void, uiStateToSet?: any) {
+
+    // TODO implement success undo action
+    const successToastContent: ToastContent = {
+        title: "Interview updated",
+        description: `The job at ${interview.company} has been updated.`,
+        variant: "default",
+        //action: (
+        //    <ToastAction altText="Retry">Retry</ToastAction>
+        //)
+    }
+
+    // TODO implement error retry action
+    const errorToastContent: ToastContent = {
+        title: "Failed to update interview",
+        description: `The interview at ${interview.company} could not be updated.`,
+        variant: "destructive",
+        //action: (
+        //    <ToastAction altText="Retry">Retry</ToastAction>
+        //)
+    }
+
+    return useUpdateData<Interview>('/api/v1/interviews', ['interviews'], useInterviewEntriesStore, interview, successToastContent, errorToastContent, setUiState, uiStateToSet)
 }
 
 export function useUpdateContact(contact: Contact, setUiState?: (data: any) => void, uiStateToSet?: any) {
