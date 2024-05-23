@@ -1,26 +1,27 @@
 "use client"
 
 import {CardContent} from "@/components/ui/card";
-import {DataTable, FilterColumnOption} from "@/components/data-table";
+import {ColumnFilterOption, DataTable} from "@/components/data-table";
 import {jobTrackerColumns} from "@/app/data/job-columns";
 import {useJobData, useJobEntriesStore} from "@/app/data/use-get-data";
 import {useEffect} from "react";
 import {ApplicationStatus} from "@/lib/models/job";
+import {useSession} from "next-auth/react";
 
-const filterColumns: FilterColumnOption[] = [
+const filterColumns: ColumnFilterOption[] = [
     {
-        name: "company",
+        columnName: "company",
         type: "input",
         label: "Search for a company..."
     },
     {
-        name: "isRecruiter",
+        columnName: "isRecruiter",
         type: "button",
         label: "HR",
         filterValue: false
     },
     {
-        name: "status",
+        columnName: "status",
         type: "select",
         label: "Status",
         initialValues: ApplicationStatus.options
@@ -44,7 +45,7 @@ export function JobTable() {
                        isLoading={isLoadingJobData}
                        data={jobData}
                        columns={jobTrackerColumns}
-                       filterColumnOptions={filterColumns}/>
+                       columnFilterOptions={filterColumns}/>
 
         </CardContent>
     );

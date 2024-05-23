@@ -19,8 +19,8 @@ import {Toggle} from "@/components/ui/toggle";
 import {Skeleton} from "@/components/ui/skeleton";
 import InputMultiSelect from "@/components/input-multi-select";
 
-export type FilterColumnOption = {
-    name: string,
+export type ColumnFilterOption = {
+    columnName: string,
     label: string,
 } & ({
     type: "button",
@@ -36,7 +36,7 @@ interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[],
     className?: string,
-    filterColumnOptions?: FilterColumnOption[],
+    columnFilterOptions?: ColumnFilterOption[],
     isLoading?: boolean
 }
 
@@ -44,7 +44,7 @@ export function DataTable<TData, TValue>({
                                              columns,
                                              data,
                                              className,
-                                             filterColumnOptions,
+                                             columnFilterOptions,
                                              isLoading
                                          }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = useState<SortingState>([])
@@ -71,36 +71,36 @@ export function DataTable<TData, TValue>({
     return (
         <>
             <div className="flex flex-wrap items-center py-4 gap-2">
-                {filterColumnOptions?.map((filterColumnOption, index) => {
-                    const column = table.getColumn(filterColumnOption.name)
+                {columnFilterOptions?.map((columnFilterOptions, index) => {
+                    const column = table.getColumn(columnFilterOptions.columnName)
 
-                    if (filterColumnOption.type === "button") {
+                    if (columnFilterOptions.type === "button") {
                         return (
                             <Toggle
                                 key={index}
                                 variant={"outline"}
                                 onPressedChange={
                                     (pressed) => {
-                                        pressed ? column?.setFilterValue(filterColumnOption.filterValue) :
+                                        pressed ? column?.setFilterValue(columnFilterOptions.filterValue) :
                                             column?.setFilterValue("")
                                     }}>
-                                {filterColumnOption.label}
+                                {columnFilterOptions.label}
                             </Toggle>
                         )
-                    } else if (filterColumnOption.type === "input") {
+                    } else if (columnFilterOptions.type === "input") {
                         return (
                             <Input
                                 key={index}
-                                placeholder={filterColumnOption.label}
+                                placeholder={columnFilterOptions.label}
                                 value={(column?.getFilterValue() as string) ?? ""}
                                 onChange={(event) => column?.setFilterValue(event.target.value)}
                                 className="max-w-44 sm:max-w-64"
                             />
                         )
-                    } else if (filterColumnOption.type === "select") {
+                    } else if (columnFilterOptions.type === "select") {
                         return (
-                            <InputMultiSelect key={index} label={filterColumnOption.label}
-                                              options={filterColumnOption.initialValues}
+                            <InputMultiSelect key={index} label={columnFilterOptions.label}
+                                              options={columnFilterOptions.initialValues}
                                               onSelectFunction={column?.setFilterValue!}
                             />
                         )
