@@ -2,23 +2,24 @@ import {StoreApi, UseBoundStore} from "zustand";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
-import {useContactEntriesStore, useJobEntriesStore} from "@/app/data/use-get-data";
+import {useContactEntriesStore, useInterviewEntriesStore, useJobEntriesStore} from "@/app/data/use-get-data";
 import {Contact} from "@/lib/models/contact";
 import {Job} from "@/lib/models/job";
 import {ClientStateStore} from "@/lib/models/client-state-store";
 import {ToastContent} from "@/lib/models/toast-content";
+import {Interview} from "@/lib/models/interview";
 
 export interface TypeHasIdAndLastUpdate {
     _id?: any,
     lastUpdate: any
 }
 
-export function useDeleteData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: string,
-                                                                dataKey: string[],
-                                                                useClientState: UseBoundStore<StoreApi<ClientStateStore<T[]>>>,
-                                                                id: any,
-                                                                successToastContent: ToastContent,
-                                                                errorToastContent: ToastContent) {
+export function useDeleteData<T>(apiEndpoint: string,
+                                 dataKey: string[],
+                                 useClientState: UseBoundStore<StoreApi<ClientStateStore<T[]>>>,
+                                 id: any,
+                                 successToastContent: ToastContent,
+                                 errorToastContent: ToastContent) {
     const {data: clientData, setData: setClientData} = useClientState();
     const queryClient = useQueryClient();
 
@@ -35,6 +36,7 @@ export function useDeleteData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: str
         onSuccess: async () => {
             await queryClient.invalidateQueries({queryKey: dataKey});
 
+            // @ts-ignore
             const index = clientData.findIndex(item => item._id === id);
 
             if (index !== -1) {
@@ -85,6 +87,31 @@ export function useDeleteJob(job: Job) {
     }
 
     return useDeleteData<Job>("/api/v1/jobs", ["jobs"], useJobEntriesStore, job._id, successToastContent, errorToastContent);
+}
+
+export function useDeleteInterview(interview: Interview) {
+
+    // TODO implement success undo action
+    const successToastContent: ToastContent = {
+        title: "Interview deleted",
+        description: `The interview at ${interview.company} has been successfully deleted.`,
+        variant: "default",
+        // action: (
+        //    <ToastAction altText="Undo">Undo</ToastAction>
+        //)
+    }
+
+    // TODO implement error retry action
+    const errorToastContent: ToastContent = {
+        title: "Deleting unsuccessful",
+        description: `Please try again to delete the interview at ${interview.company}.`,
+        variant: "destructive",
+        //action: (
+        //    <ToastAction altText="Retry">Retry</ToastAction>
+        //)
+    }
+
+    return useDeleteData<Interview>("/api/v1/interviews", ["interviews"], useInterviewEntriesStore, interview._id, successToastContent, errorToastContent);
 }
 
 
