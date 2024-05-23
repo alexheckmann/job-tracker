@@ -23,8 +23,7 @@ export function useUpdateData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: str
 
     const {mutate: mutateData, isPending} = useMutation({
         mutationFn: async (dataToUpdate: T) => {
-            const id = dataToUpdate._id;
-            return await axios.put<T>(`${apiEndpoint}/${id}`, {...dataToUpdate})
+            return await axios.put<T>(`${apiEndpoint}`, {...dataToUpdate})
                 .then((res) => {
                     return {
                         ...res.data,
