@@ -159,11 +159,11 @@ export default function Navbar() {
                 </SheetContent>
             </Sheet>
 
-            <div className="flex w-full items-center gap-2 md:ml-auto lg:gap-4">
+            <div className="flex w-full items-center gap-2 xs:ml-auto lg:gap-4">
 
                 {isAuthenticated && <JobCreationButton className={"xs:ml-auto"}/>}
-                {isAuthenticated && <ContactCreationButton/>}
                 {isAuthenticated && <InterviewCreationButton/>}
+                {isAuthenticated && <ContactCreationButton/>}
 
                 {/* TODO fix and replace with viable alternative*/}
                 {isAuthenticated ?

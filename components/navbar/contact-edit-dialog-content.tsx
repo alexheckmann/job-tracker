@@ -5,13 +5,13 @@ import {useContactEditDialogStore} from "@/app/data/use-get-data";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form} from "@/components/ui/form";
-import {UserRoundPlus} from "lucide-react";
 import {SubmitButton} from "@/components/submit-button";
 import {Contact, ContactSchema} from "@/lib/models/contact";
 import ContactDialogContent from "@/components/navbar/contact-dialog-content";
 import {useMemo} from "react";
 import {useUpdateContact} from "@/app/data/use-update-data";
 import DialogContentWrapper from "@/components/dialog-content-wrapper";
+import {ContactIcon} from "@/components/icons";
 
 interface ContentEditDialogContentProps {
     contact: Contact;
@@ -27,8 +27,8 @@ export default function ContactEditDialogContent({contact}: ContentEditDialogCon
     })
 
     const {
-        mutateData: insertContact,
-        isPending: isAddingContact
+        mutateData: updateContact,
+        isPending: isUpdatingContact
     } = useUpdateContact(form.getValues(), setIsContactCreationDialogOpen, false)
 
     return (
@@ -36,13 +36,13 @@ export default function ContactEditDialogContent({contact}: ContentEditDialogCon
             <Form {...form}>
                 <form onSubmit={
                     form.handleSubmit((contact: Contact) => {
-                        insertContact(contact)
+                        updateContact(contact)
                     })
                 }>
 
                     <DialogHeader>
                         <DialogTitle className={"flex flex-row gap-2 justify-center sm:justify-start"}>
-                            <UserRoundPlus className={"h-4 w-4"}/>
+                            <ContactIcon/>
                             Edit contact
                         </DialogTitle>
                         <DialogDescription>
@@ -53,8 +53,8 @@ export default function ContactEditDialogContent({contact}: ContentEditDialogCon
                     <ContactDialogContent form={form}/>
 
                     <DialogFooter>
-                        <SubmitButton normalText={"Save contact"} loadingText={"Saving contact"} normalIcon={null}
-                                      isPending={isAddingContact}/>
+                        <SubmitButton normalText={"Update contact"} loadingText={"Updating"} normalIcon={null}
+                                      isPending={isUpdatingContact}/>
                     </DialogFooter>
                 </form>
             </Form>

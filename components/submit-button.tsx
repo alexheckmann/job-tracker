@@ -24,10 +24,10 @@ export function SubmitButton({
     return (
         <Button {...props} type="submit" className={cn("gap-2 sm:w-[140px]", className)}
                 disabled={disabled || isPending}>
-            <span className={cn(isPending && "animate-pulse")}>
+            <span className={cn(isPending && "animate-pulse", "select-none")}>
                 {isPending ? loadingText : normalText}
             </span>
-            {isPending && <Loader2 className={"h-4 w-4 animate-spin"}/>}
+            {isPending ? <Loader2 className={"h-4 w-4 animate-spin"}/> : normalIcon}
         </Button>
     )
 }

@@ -6,12 +6,12 @@ import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form} from "@/components/ui/form";
 import {useCreateContact} from "@/app/data/use-create-data";
-import {UserRoundPlus} from "lucide-react";
 import {SubmitButton} from "@/components/submit-button";
 
 import {Contact, ContactSchema} from "@/lib/models/contact";
 import ContactDialogContent from "@/components/navbar/contact-dialog-content";
 import DialogContentWrapper from "@/components/dialog-content-wrapper";
+import {ContactIcon} from "@/components/icons";
 
 export default function ContactCreationDialogContent() {
 
@@ -48,7 +48,7 @@ export default function ContactCreationDialogContent() {
 
                     <DialogHeader>
                         <DialogTitle className={"flex flex-row gap-2 justify-center sm:justify-start"}>
-                            <UserRoundPlus className={"h-4 w-4"}/>
+                            <ContactIcon/>
                             Add contact
                         </DialogTitle>
                         <DialogDescription>
@@ -59,7 +59,8 @@ export default function ContactCreationDialogContent() {
                     <ContactDialogContent form={form}/>
 
                     <DialogFooter>
-                        <SubmitButton normalText={"Add contact"} loadingText={"Adding contact"} normalIcon={null}
+                        <SubmitButton normalText={"Add"} loadingText={"Adding"}
+                                      normalIcon={<ContactIcon/>}
                                       isPending={isAddingContact}/>
                     </DialogFooter>
                 </form>

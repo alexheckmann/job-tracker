@@ -28,8 +28,8 @@ export default function JobEditDialogContent({job}: JobEditDialogContentProps) {
     })
 
     const {
-        mutateData: insertJob,
-        isPending: isAddingJob
+        mutateData: updateJob,
+        isPending: isUpdatingJob
     } = useUpdateJob(form.getValues(), setIsJobEditDialogOpen, false)
 
 
@@ -38,7 +38,7 @@ export default function JobEditDialogContent({job}: JobEditDialogContentProps) {
             <Form {...form}>
                 <form onSubmit={
                     form.handleSubmit((job: Job) => {
-                        insertJob(job)
+                        updateJob(job)
                     })
                 }>
 
@@ -54,7 +54,7 @@ export default function JobEditDialogContent({job}: JobEditDialogContentProps) {
 
                     <JobDialogContent form={form}/>
                     <DialogFooter>
-                        <SubmitButton isPending={isAddingJob} normalText={"Save job"} loadingText={"Saving job"}
+                        <SubmitButton isPending={isUpdatingJob} normalText={"Update job"} loadingText={"Saving"}
                                       normalIcon={null}/>
                     </DialogFooter>
                 </form>
