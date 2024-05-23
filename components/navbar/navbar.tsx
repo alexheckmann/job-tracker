@@ -12,6 +12,7 @@ import {signOut, useSession} from "next-auth/react";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
 import {useState} from "react";
 import {SignInButton} from "@/components/sign-in-button";
+import {InterviewCreationButton} from "@/components/navbar/interview-creation-button";
 
 interface NavLink {
     path: string;
@@ -22,6 +23,7 @@ interface NavLink {
 const navLinks: NavLink[] = [
     {path: "/dashboard", label: "Applications"},
     {path: "/contacts", label: "Contacts"},
+    {path: "/interviews", label: "Interviews"},
     // {path: "/notes", label: "Notes"},
     // {path: "/analytics", label: "Analytics"}
 ]
@@ -161,6 +163,7 @@ export default function Navbar() {
 
                 {isAuthenticated && <JobCreationButton className={"ml-auto"}/>}
                 {isAuthenticated && <ContactCreationButton/>}
+                {isAuthenticated && <InterviewCreationButton/>}
 
                 {/* TODO fix and replace with viable alternative*/}
                 {isAuthenticated ?
