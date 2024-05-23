@@ -13,7 +13,7 @@ const config = {
     prefix: "",
     theme: {
         screens: {
-            xs: "370px",
+            xs: "390px",
             ...defaultTheme.screens
         },
         container: {
