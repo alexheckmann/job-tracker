@@ -8,7 +8,6 @@ import {Form} from "@/components/ui/form";
 import {Job, JobSchema} from "@/lib/models/job";
 import {useCreateJob} from "@/app/data/use-create-data";
 import {ClipboardPlus} from "lucide-react";
-import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
 import {SubmitButton} from "@/components/submit-button";
 import JobDialogContent from "@/components/navbar/job-dialog-content";
 import DialogContentWrapper from "@/components/dialog-content-wrapper";
@@ -41,12 +40,6 @@ export default function JobCreationDialogContent() {
         mutateData: insertJob,
         isPending: isAddingJob
     } = useCreateJob(form.getValues(), setIsJobCreationDialogOpen, false)
-
-    useCtrlKeyShortcut("m", () => {
-        form.handleSubmit((job: Job) => {
-            insertJob(job)
-        })();
-    })
 
 
     return (

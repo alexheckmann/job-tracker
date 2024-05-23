@@ -7,7 +7,6 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Form} from "@/components/ui/form";
 import {useCreateContact} from "@/app/data/use-create-data";
 import {UserRoundPlus} from "lucide-react";
-import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
 import {SubmitButton} from "@/components/submit-button";
 
 import {Contact, ContactSchema} from "@/lib/models/contact";
@@ -37,12 +36,6 @@ export default function ContactCreationDialogContent() {
         mutateData: insertContact,
         isPending: isAddingContact
     } = useCreateContact(form.getValues(), setIsContactCreationDialogOpen, false)
-
-    useCtrlKeyShortcut("m", () => {
-        form.handleSubmit((contact: Contact) => {
-            insertContact(contact)
-        })();
-    })
 
     return (
         <DialogContentWrapper>

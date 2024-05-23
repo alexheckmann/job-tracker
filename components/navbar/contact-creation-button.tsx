@@ -5,7 +5,6 @@ import {Dialog, DialogTrigger} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 import {UserRoundPlus} from "lucide-react";
 import ContactCreationDialogContent from "@/components/navbar/contact-creation-dialog-content";
-import {useCtrlKeyShortcut} from "@/components/use-ctrl-key-shortcut";
 import {HTMLAttributes} from "react";
 import {cn} from "@/lib/utils";
 
@@ -15,10 +14,6 @@ interface ContactCreationButtonProps extends HTMLAttributes<HTMLButtonElement> {
 
 export function ContactCreationButton({disabled, className, ...props}: ContactCreationButtonProps) {
     const {data: isContactCreationDialogOpen, setData: setIsContactCreationDialogOpen} = useContactCreationDialogStore()
-
-    useCtrlKeyShortcut("i", () => {
-        setIsContactCreationDialogOpen(true)
-    })
 
     return (
         <Dialog open={isContactCreationDialogOpen} onOpenChange={setIsContactCreationDialogOpen}>
