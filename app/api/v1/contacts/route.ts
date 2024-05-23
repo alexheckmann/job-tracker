@@ -1,4 +1,4 @@
-import {getContacts, insertContact} from "@/lib/db/db-helpers";
+import {getContacts, insertContact, updateContact} from "@/lib/db/db-helpers";
 import {NextRequest, NextResponse} from "next/server";
 import {HttpStatusCode} from "axios";
 import mongoose from "mongoose";
@@ -35,3 +35,20 @@ export async function POST(req: NextRequest) {
     }
 }
 
+export async function PUT(req: NextRequest) {
+    const requestedContact = await req.json().then((data) => ({...data, lastUpdate: new Date(data.lastUpdate)}))
+
+    try {
+
+        const session = await getServerSession(authOptions)
+
+        if (session.id.toString() !== requestedContact.user.toString()) {
+            return NextResponse.json({error: "Unauthorized"}, {status: HttpStatusCode.Unauthorized})
+        }
+
+        const updatedContact = await updateContact(requestedContact)
+        return NextResponse.json(updatedContact, {status: HttpStatusCode.Ok});
+    } catch (error) {
+        return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
+    }
+}
