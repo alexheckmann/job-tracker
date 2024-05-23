@@ -12,7 +12,7 @@ export function TestimonialCard({className}: TestimonialCardProps) {
         <Card className={cn("drop-shadow-xl shadow-black/10 max-h-[140px]", className)}>
             <CardHeader className="flex flex-row items-center gap-4 pb-2">
                 <Avatar>
-                    <AvatarImage src="https://avatars.githubusercontent.com/u/39348705?v=4"/>
+                    <AvatarImage alt={"Alex Heckmann"} src="https://avatars.githubusercontent.com/u/39348705?v=4"/>
                     <AvatarFallback>AH</AvatarFallback>
                 </Avatar>
 
