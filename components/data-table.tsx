@@ -13,11 +13,9 @@ import {
 
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table"
 import {useState} from "react";
-import {cn} from "@/lib/utils";
-import {Input} from "@/components/ui/input";
-import {Toggle} from "@/components/ui/toggle";
 import {Skeleton} from "@/components/ui/skeleton";
-import InputMultiSelect from "@/components/input-multi-select";
+import {cn} from "@/lib/utils";
+import {DataTableColumnFilter} from "@/components/data-table-column-filter";
 
 export type ColumnFilterOption = {
     columnName: string,
@@ -71,40 +69,11 @@ export function DataTable<TData, TValue>({
     return (
         <>
             <div className="flex flex-wrap items-center py-4 gap-2">
-                {columnFilterOptions?.map((columnFilterOptions, index) => {
-                    const column = table.getColumn(columnFilterOptions.columnName)
-
-                    if (columnFilterOptions.type === "button") {
-                        return (
-                            <Toggle
-                                key={index}
-                                variant={"outline"}
-                                onPressedChange={
-                                    (pressed) => {
-                                        pressed ? column?.setFilterValue(columnFilterOptions.filterValue) :
-                                            column?.setFilterValue("")
-                                    }}>
-                                {columnFilterOptions.label}
-                            </Toggle>
-                        )
-                    } else if (columnFilterOptions.type === "input") {
-                        return (
-                            <Input
-                                key={index}
-                                placeholder={columnFilterOptions.label}
-                                value={(column?.getFilterValue() as string) ?? ""}
-                                onChange={(event) => column?.setFilterValue(event.target.value)}
-                                className="max-w-44 sm:max-w-64"
-                            />
-                        )
-                    } else if (columnFilterOptions.type === "select") {
-                        return (
-                            <InputMultiSelect key={index} label={columnFilterOptions.label}
-                                              options={columnFilterOptions.initialValues}
-                                              onSelectFunction={column?.setFilterValue!}
-                            />
-                        )
-                    }
+                {columnFilterOptions?.map((columnFilterOption, index) => {
+                    const column = table.getColumn(columnFilterOption.columnName)
+                    return (
+                        <DataTableColumnFilter key={index} column={column} columnFilterOption={columnFilterOption}/>
+                    )
                 })}
 
 
