@@ -161,7 +161,7 @@ export default function Navbar() {
 
             <div className="flex w-full items-center gap-2 md:ml-auto lg:gap-4">
 
-                {isAuthenticated && <JobCreationButton className={"ml-auto"}/>}
+                {isAuthenticated && <JobCreationButton className={"xs:ml-auto"}/>}
                 {isAuthenticated && <ContactCreationButton/>}
                 {isAuthenticated && <InterviewCreationButton/>}
 
