@@ -4,12 +4,26 @@ import {create} from "zustand";
 import {Contact} from "@/lib/models/contact";
 import {Job} from "@/lib/models/job";
 import {ClientStateStore} from "@/lib/models/client-state-store";
+import {Interview} from "@/lib/models/interview";
 
 export function useJobData() {
     return useQuery({
         queryKey: ['jobs'],
         queryFn: async () => {
-            return await axios.get<{ jobs: Job[] }>('/api/v1/jobs').then((res) => res.data.jobs)
+            return await axios.get<{
+                jobs: Job[]
+            }>('/api/v1/jobs').then((res) => res.data.jobs)
+        }
+    });
+}
+
+export function useInterviewData() {
+    return useQuery({
+        queryKey: ['interviews'],
+        queryFn: async () => {
+            return await axios.get<{
+                interviews: Interview[]
+            }>('/api/v1/interviews').then((res) => res.data.interviews)
         }
     });
 }
