@@ -1,4 +1,4 @@
-import {createContact as insertContact, getContacts} from "@/lib/db/db-helpers";
+import {getContacts, insertContact} from "@/lib/db/db-helpers";
 import {NextRequest, NextResponse} from "next/server";
 import {HttpStatusCode} from "axios";
 import mongoose from "mongoose";

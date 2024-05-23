@@ -53,7 +53,7 @@ export function deleteJob(id: string) {
  * @param userId The id of the user associated with the contact
  * @returns The created contact
  */
-export function createContact(contact: Contact, userId: string) {
+export function insertContact(contact: Contact, userId: string) {
     return ContactModel.create({...contact, user: new mongoose.Types.ObjectId(userId)})
 }
 
