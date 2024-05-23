@@ -154,6 +154,9 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
                 </Button>
             )
         },
+        filterFn: (row, id, value) => {
+            return value.includes(row.getValue(id))
+        },
     },
     {
         accessorKey: "link",

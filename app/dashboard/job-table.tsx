@@ -30,6 +30,7 @@ const filterColumns: ColumnFilterOption[] = [
 
 export function JobTable() {
 
+    const {data: session} = useSession()
     const {data: fetchedJobData, isLoading: isLoadingJobData, isFetched: isJobDataFetched} = useJobData()
     const {data: jobData, setData: setJobData} = useJobEntriesStore()
 
@@ -37,7 +38,18 @@ export function JobTable() {
         if (isJobDataFetched) {
             setJobData(fetchedJobData!)
         }
-    }, [isJobDataFetched, fetchedJobData])
+
+        if (!filterColumns.some(columnFilter => columnFilter.columnName === "location")) {
+
+            filterColumns.push({
+                columnName: "location",
+                type: "select",
+                label: "Locations",
+                initialValues: session?.locations!
+            })
+        }
+
+    }, [isJobDataFetched, fetchedJobData, session?.locations])
 
     return (
         <CardContent className={"h-[70dvh] p-5 pt-3 md:p-6"}>
