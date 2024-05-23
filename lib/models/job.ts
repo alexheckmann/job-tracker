@@ -1,4 +1,4 @@
-import {DatabaseObject} from "@/lib/models/database-object";
+import {UserSpecificDatabaseObject} from "@/lib/models/database-object";
 import {z} from "zod";
 
 export const ApplicationStatus = z.enum(["Saved", "Applied", "Interview", "Offered", "Declined"]);
@@ -12,7 +12,7 @@ const jobsMaxLengthConstraints = {
     salary: 16,
     notes: 16384
 }
-export const JobSchema = DatabaseObject.extend({
+export const JobSchema = UserSpecificDatabaseObject.extend({
     role: z.string().min(1).max(jobsMaxLengthConstraints.role),
     company: z.string().min(1).max(jobsMaxLengthConstraints.company),
     status: ApplicationStatus,
@@ -25,7 +25,6 @@ export const JobSchema = DatabaseObject.extend({
     isReferral: z.boolean(),
     notes: z.string().max(jobsMaxLengthConstraints.notes).optional(),
     lastUpdate: z.coerce.date(),
-    user: z.any().optional()
 },);
 
 export type Job = z.infer<typeof JobSchema>;

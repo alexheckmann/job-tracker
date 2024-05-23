@@ -1,4 +1,4 @@
-import {DatabaseObject} from "@/lib/models/database-object";
+import {UserSpecificDatabaseObject} from "@/lib/models/database-object";
 import {z} from "zod";
 
 export const InterviewType = z.enum(["Initial Call", "Technical Interview", "Executive Call", "Team Call"]);
@@ -13,7 +13,7 @@ const interviewMaxLengthConstraints = {
     notes: 16384
 }
 
-export const InterviewSchema = DatabaseObject.extend({
+export const InterviewSchema = UserSpecificDatabaseObject.extend({
     description: z.string().max(interviewMaxLengthConstraints.description),
     date: z.coerce.date(),
     company: z.string().min(1).max(interviewMaxLengthConstraints.company),

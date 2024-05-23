@@ -1,5 +1,5 @@
 import {z} from "zod";
-import {DatabaseObject} from "@/lib/models/database-object";
+import {UserSpecificDatabaseObject} from "@/lib/models/database-object";
 
 const contactsMaxLengthConstraints = {
     name: 128,
@@ -12,7 +12,7 @@ const contactsMaxLengthConstraints = {
     notes: 2048
 }
 
-export const ContactSchema = DatabaseObject.extend({
+export const ContactSchema = UserSpecificDatabaseObject.extend({
     name: z.string().min(1).max(contactsMaxLengthConstraints.name),
     role: z.string().min(1).max(contactsMaxLengthConstraints.role),
     company: z.string().min(1).max(contactsMaxLengthConstraints.company),
@@ -24,7 +24,6 @@ export const ContactSchema = DatabaseObject.extend({
     // isPersonalConnection: z.boolean(),
     lastUpdate: z.coerce.date(),
     status: z.enum(["Saved", "Continuing", "Discontinued"]).optional(),
-    user: z.any().optional()
 });
 
 export type Contact = z.infer<typeof ContactSchema>;
