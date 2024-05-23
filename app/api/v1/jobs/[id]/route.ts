@@ -5,7 +5,6 @@ import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/authOptions";
 
 export async function PUT(req: NextRequest, {params}: { params: { id: string } }) {
-    const {id} = params;
     const requestedJob = await req.json().then((data) => ({...data, lastUpdate: new Date(data.lastUpdate)}))
 
     try {
@@ -16,7 +15,7 @@ export async function PUT(req: NextRequest, {params}: { params: { id: string } }
             return NextResponse.json({error: "Unauthorized"}, {status: HttpStatusCode.Unauthorized})
         }
 
-        const updatedJob = await updateJob(id, requestedJob)
+        const updatedJob = await updateJob(requestedJob)
         return NextResponse.json(updatedJob, {status: HttpStatusCode.Ok});
     } catch (error) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})

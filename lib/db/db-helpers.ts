@@ -32,11 +32,10 @@ export function getJobs(userId: string) {
 
 /**
  * Update a job in the database for a user
- * @param id The id of the job to update
  * @param job The updated job
  * @returns The updated job
  */
-export function updateJob(id: string, job: Partial<Job>) {
+export function updateJob(job: Partial<Job>) {
     return JobModel.findByIdAndUpdate(job._id, job, {new: true}).exec()
 }
 
@@ -105,11 +104,10 @@ export function getContacts(userId: string) {
 
 /**
  * Update a contact in the database for a user
- * @param id The id of the contact to update
  * @param contact The updated contact
  * @returns The updated contact
  */
-export function updateContact(id: string, contact: Partial<Contact>) {
+export function updateContact(contact: Partial<Contact>) {
     return ContactModel.findByIdAndUpdate(contact._id, contact, {new: true}).exec()
 }
 
