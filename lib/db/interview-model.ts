@@ -10,6 +10,7 @@ export const InterviewModelSchema = new Schema<Interview>(
             type: {type: String, required: true},
             link: {type: String},
             notes: {type: String},
+            user: {type: Schema.Types.ObjectId, ref: 'User'}
     }
 )
 
