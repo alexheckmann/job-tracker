@@ -1,4 +1,4 @@
-import {getJobs, insertJob} from "@/lib/db/db-helpers";
+import {getJobs, insertJob, updateJob} from "@/lib/db/db-helpers";
 import {NextRequest, NextResponse} from "next/server";
 import {HttpStatusCode} from "axios";
 import mongoose from "mongoose";
@@ -35,3 +35,20 @@ export async function POST(req: NextRequest) {
     }
 }
 
+export async function PUT(req: NextRequest) {
+    const requestedJob = await req.json().then((data) => ({...data, lastUpdate: new Date(data.lastUpdate)}))
+
+    try {
+
+        const session = await getServerSession(authOptions)
+
+        if (session.id.toString() !== requestedJob.user.toString()) {
+            return NextResponse.json({error: "Unauthorized"}, {status: HttpStatusCode.Unauthorized})
+        }
+
+        const updatedJob = await updateJob(requestedJob)
+        return NextResponse.json(updatedJob, {status: HttpStatusCode.Ok});
+    } catch (error) {
+        return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
+    }
+}
