@@ -6,7 +6,7 @@ import {useContactEntriesStore, useJobEntriesStore} from "@/app/data/use-get-dat
 import {Contact} from "@/lib/models/contact";
 import {Job} from "@/lib/models/job";
 import {ClientStateStore} from "@/lib/models/client-state-store";
-import {ToastContent} from "@/app/data/toast-content";
+import {ToastContent} from "@/lib/models/toast-content";
 
 export interface TypeHasIdAndLastUpdate {
     _id?: any,

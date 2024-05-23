@@ -8,7 +8,7 @@ import {ToastAction} from "@/components/ui/toast";
 import {Contact} from "@/lib/models/contact";
 import {Job} from "@/lib/models/job";
 import {ClientStateStore} from "@/lib/models/client-state-store";
-import {ToastContent} from "@/app/data/toast-content";
+import {ToastContent} from "@/lib/models/toast-content";
 
 export function useUpdateData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: string,
                                                                 dataKey: string[],
