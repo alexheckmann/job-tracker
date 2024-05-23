@@ -13,7 +13,7 @@ import {BooleanStatusIcon} from "@/components/boolean-status-icon";
 import {OpenLinkButton} from "@/components/open-link-button";
 
 import {Job} from "@/lib/models/job";
-import {JobRowActions} from "@/app/data/job-row-actions";
+import {JobRowActions} from "@/app/dashboard/job-row-actions";
 import {FavoriteButton} from "@/components/favorite-button";
 
 // function that returns the first n characters of a string

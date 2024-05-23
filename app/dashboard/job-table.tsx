@@ -2,7 +2,7 @@
 
 import {CardContent} from "@/components/ui/card";
 import {ColumnFilterOption, DataTable} from "@/components/data-table";
-import {jobTrackerColumns} from "@/app/data/job-columns";
+import {jobTrackerColumns} from "@/app/dashboard/job-columns";
 import {useJobData, useJobEntriesStore} from "@/app/data/use-get-data";
 import {useEffect} from "react";
 import {ApplicationStatus} from "@/lib/models/job";
