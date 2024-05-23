@@ -8,6 +8,8 @@ import mongoose from "mongoose";
 import {cache} from "react";
 import {FeedbackModel} from "@/lib/db/feedback-model";
 import {Feedback} from "@/lib/models/feedback";
+import {Interview} from "@/lib/models/interview";
+import {InterviewModel} from "@/lib/db/interview-model";
 
 
 /**
@@ -45,6 +47,42 @@ export function updateJob(id: string, job: Partial<Job>) {
  */
 export function deleteJob(id: string) {
     return JobModel.findByIdAndDelete(id).exec()
+}
+
+/**
+ * Create a interview in the database for a user
+ * @param interview The interview to create
+ * @param userId The id of the user associated with the interview
+ * @returns InterviewModel.create({...interview, user: new mongoose.Types.ObjectId(userId)}) The created interview
+ */
+export function insertInterview(interview: Interview, userId: string) {
+    return InterviewModel.create({...interview, user: new mongoose.Types.ObjectId(userId)})
+}
+
+/**
+ * Get all interviews from the database for a user
+ * @returns JobModel.find<Interview>({user: new mongoose.Types.ObjectId(userId)}).exec() all jobs
+ */
+export function getInterviews(userId: string) {
+    return InterviewModel.find<Interview>({user: new mongoose.Types.ObjectId(userId)}).exec()
+}
+
+/**
+ * Update an interview in the database for a user
+ * @param interview The updated interview
+ * @returns InterviewModel.findByIdAndUpdate(interview._id, interview, {new: true}).exec() The updated interview
+ */
+export function updateInterview(interview: Partial<Interview>) {
+    return InterviewModel.findByIdAndUpdate(interview._id, interview, {new: true}).exec()
+}
+
+/**
+ * Delete an interview from the database for a user
+ * @param id The id of the interview to delete
+ * @returns The deleted interview
+ */
+export function deleteInterview(id: string) {
+    return InterviewModel.findByIdAndDelete(id).exec()
 }
 
 /**
