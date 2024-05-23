@@ -9,7 +9,7 @@ import {ClientStateStore} from "@/lib/models/client-state-store";
 import {ToastContent} from "@/lib/models/toast-content";
 import {Interview} from "@/lib/models/interview";
 
-export function useCreateData<T>(apiEndpoint: string,
+export function useCreateData<T extends Record<string, unknown>>(apiEndpoint: string,
                                  dataKey: string[],
                                  useClientState: UseBoundStore<StoreApi<ClientStateStore<T[]>>>,
                                  successToastContent: ToastContent,

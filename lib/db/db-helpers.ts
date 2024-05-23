@@ -49,7 +49,7 @@ export function deleteJob(id: string) {
 }
 
 /**
- * Create a interview in the database for a user
+ * Create an interview in the database for a user
  * @param interview The interview to create
  * @param userId The id of the user associated with the interview
  * @returns InterviewModel.create({...interview, user: new mongoose.Types.ObjectId(userId)}) The created interview

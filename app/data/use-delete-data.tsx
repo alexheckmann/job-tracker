@@ -9,12 +9,7 @@ import {ClientStateStore} from "@/lib/models/client-state-store";
 import {ToastContent} from "@/lib/models/toast-content";
 import {Interview} from "@/lib/models/interview";
 
-export interface TypeHasIdAndLastUpdate {
-    _id?: any,
-    lastUpdate: any
-}
-
-export function useDeleteData<T>(apiEndpoint: string,
+export function useDeleteData<T extends Record<string, unknown>>(apiEndpoint: string,
                                  dataKey: string[],
                                  useClientState: UseBoundStore<StoreApi<ClientStateStore<T[]>>>,
                                  id: any,

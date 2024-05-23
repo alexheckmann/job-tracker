@@ -7,7 +7,7 @@ import {ClientStateStore} from "@/lib/models/client-state-store";
 import {Interview} from "@/lib/models/interview";
 
 export function useJobData() {
-    return useQuery({
+    return useQuery<Job[]>({
         queryKey: ['jobs'],
         queryFn: async () => {
             return await axios.get<{
@@ -18,7 +18,7 @@ export function useJobData() {
 }
 
 export function useInterviewData() {
-    return useQuery({
+    return useQuery<Interview[]>({
         queryKey: ['interviews'],
         queryFn: async () => {
             return await axios.get<{
@@ -29,7 +29,7 @@ export function useInterviewData() {
 }
 
 export function useContactData() {
-    return useQuery({
+    return useQuery<Contact[]>({
         queryKey: ['contacts'],
         queryFn: async () => {
             return await axios.get<{

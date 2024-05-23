@@ -2,7 +2,6 @@ import {StoreApi, UseBoundStore} from "zustand";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
-import {TypeHasIdAndLastUpdate} from "@/app/data/use-delete-data";
 import {useContactEntriesStore, useJobEntriesStore} from "@/app/data/use-get-data";
 import {ToastAction} from "@/components/ui/toast";
 import {Contact} from "@/lib/models/contact";
@@ -10,14 +9,14 @@ import {Job} from "@/lib/models/job";
 import {ClientStateStore} from "@/lib/models/client-state-store";
 import {ToastContent} from "@/lib/models/toast-content";
 
-export function useUpdateData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: string,
-                                                                dataKey: string[],
-                                                                useClientState: UseBoundStore<StoreApi<ClientStateStore<T[]>>>,
-                                                                dataToUpdate: T,
-                                                                successToastContent: ToastContent,
-                                                                errorToastContent: ToastContent,
-                                                                setUiState?: (data: any) => void,
-                                                                uiStateToSet?: any) {
+export function useUpdateData<T extends Record<string, unknown>>(apiEndpoint: string,
+                                                                 dataKey: string[],
+                                                                 useClientState: UseBoundStore<StoreApi<ClientStateStore<T[]>>>,
+                                                                 dataToUpdate: T,
+                                                                 successToastContent: ToastContent,
+                                                                 errorToastContent: ToastContent,
+                                                                 setUiState?: (data: any) => void,
+                                                                 uiStateToSet?: any) {
     const {data: clientData, setData: setClientData} = useClientState();
     const queryClient = useQueryClient();
 
@@ -25,10 +24,15 @@ export function useUpdateData<T extends TypeHasIdAndLastUpdate>(apiEndpoint: str
         mutationFn: async (dataToUpdate: T) => {
             return await axios.put<T>(`${apiEndpoint}`, {...dataToUpdate})
                 .then((res) => {
-                    return {
-                        ...res.data,
-                        lastUpdate: new Date(res.data.lastUpdate)
+
+                    if (res.data.hasOwnProperty('lastUpdate')) {
+                        // @ts-ignore
+                        res.data.lastUpdate = new Date(res.data.lastUpdate)
+                    } else if (res.data.hasOwnProperty('date')) {
+                        // @ts-ignore
+                        res.data.date = new Date(res.data.date)
                     }
+                    return res.data
                 })
         },
         onMutate: async () => {
