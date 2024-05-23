@@ -16,12 +16,12 @@ import {CheckIcon} from "@radix-ui/react-icons";
 import {ChevronDown} from "lucide-react";
 
 interface InputMultiSelectProps extends HTMLAttributes<HTMLSelectElement> {
+    label: string,
     options: string[],
     onSelectFunction: (updater: any) => void
 }
 
-export default function InputMultiSelect({options, onSelectFunction}: InputMultiSelectProps) {
-    const title = "Status"
+export default function InputMultiSelect({label, options, onSelectFunction}: InputMultiSelectProps) {
 
     const [isOpen, setIsOpen] = useState(false)
     const [selectedOptions, setSelectedOptions] = useState<Set<string>>(new Set())
@@ -30,13 +30,13 @@ export default function InputMultiSelect({options, onSelectFunction}: InputMulti
         <Popover open={isOpen} onOpenChange={setIsOpen}>
             <PopoverTrigger asChild>
                 <Button className={cn("gap-2", selectedOptions.size > 0 && "bg-secondary")} variant={"outline"}>
-                    {title}
+                    {label}
                     <ChevronDown className={"h-4 w-4"}/>
                 </Button>
             </PopoverTrigger>
             <PopoverContent className={"w-[200px] p-0"} align={"start"}>
                 <Command>
-                    <CommandInput placeholder={title}/>
+                    <CommandInput placeholder={label}/>
                     <CommandList>
                         <CommandEmpty>
                             No results found.
