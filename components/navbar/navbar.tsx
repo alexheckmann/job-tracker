@@ -45,7 +45,7 @@ export default function Navbar() {
 
     return (
 
-        <header className="sticky top-0 flex h-14 items-center gap-2 xs:gap-4 border-b bg-background px-4 md:px-8">
+        <header className="sticky top-0 flex h-14 items-center gap-2 border-b bg-background px-4 md:px-8">
             <nav
                 className="hidden bg-background flex-col gap-3 text-lg font-medium md:flex md:flex-row md:items-center md:gap-2 md:text-sm lg:gap-2">
                 <Link
