@@ -1,20 +1,23 @@
 "use client"
 
 import {CardContainer} from "@/components/card-container";
-import {FeedbackCreationCard} from "@/app/feedback/feedback-creation-card";
+import {KeywordsCard} from "@/app/notes/keywords-card";
 
-export default function FeedbackPage() {
+
+export default function NotesPage() {
     return (
-        <div className="grid items-start justify-center gap-6 rounded-lg p-8 lg:grid-cols-2 xl:grid-cols-3">
-            <div className="col-span-2 grid items-start gap-6 lg:col-span-1">
-            </div>
+        <div className="items-start justify-center gap-6 rounded-lg p-8 grid lg:grid-cols-2 xl:grid-cols-3">
             <div className="col-span-2 grid items-start gap-6 lg:col-span-1">
                 <CardContainer>
-                    <FeedbackCreationCard/>
+                    <KeywordsCard/>
                 </CardContainer>
+            </div>
+            <div className="col-span-2 grid items-start gap-6 lg:col-span-1">
+
             </div>
             <div
                 className="col-span-2 grid items-start gap-6 lg:col-span-2 lg:grid-cols-2 xl:col-span-1 xl:grid-cols-1">
+
             </div>
         </div>
     )

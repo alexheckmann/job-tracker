@@ -1,4 +1,4 @@
-import {CalendarPlus, ClipboardPlus, Loader2, UserRoundPlus} from "lucide-react";
+import {CalendarPlus, ClipboardPlus, Copy, Loader2, UserRoundPlus} from "lucide-react";
 import {cn} from "@/lib/utils";
 import {HTMLAttributes} from "react";
 
@@ -29,5 +29,11 @@ export function JobIcon({className}: IconProps) {
 export function ContactIcon({className}: IconProps) {
     return (
         <UserRoundPlus className={cn(defaultIconSize, className)}/>
+    )
+}
+
+export function CopyIcon({className}: IconProps) {
+    return (
+        <Copy className={cn(defaultIconSize, className)}/>
     )
 }
