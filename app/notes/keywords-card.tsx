@@ -91,7 +91,8 @@ export function KeywordsCard() {
                 <OneInputFieldForm existingEntries={keywords} formFieldLabel={"Add keywords"}
                                    submitFunction={submitKeywords} isPendingSubmission={isPendingSubmission}
                                    disabled={status !== "authenticated"}/>
-                <div className={"flex flex-row flex-wrap gap-2 items-start max-h-[240px] overflow-y-auto"}>
+                <div
+                    className={"flex flex-row flex-wrap gap-2 items-start min-h-[200px] content-start max-h-[240px] overflow-y-auto"}>
                     {keywords.map((entry) => (
                         <KeywordsEntry key={entry} entry={entry} removeKeywords={removeKeywords}
                                        isPendingRemoval={isPendingRemoval}/>
