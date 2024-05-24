@@ -8,5 +8,6 @@ declare module "next-auth" {
         id: string,
         roles: string[],
         locations: string[],
+        keywords: string[],
     }
 }

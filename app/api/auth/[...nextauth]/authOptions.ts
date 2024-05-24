@@ -50,6 +50,7 @@ export const authOptions = {
             token.id = user?._id
             token.roles = user?.roles
             token.locations = user?.locations
+            token.keywords = user?.keywords
             return token
         },
         // @ts-ignore
@@ -57,6 +58,7 @@ export const authOptions = {
             session.id = token.id
             session.roles = token.roles
             session.locations = token.locations
+            session.keywords = token.keywords
             return session
         },
     }

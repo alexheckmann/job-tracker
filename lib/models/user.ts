@@ -11,6 +11,7 @@ export const UserSchema = DatabaseObject.extend({
     email: z.string().min(1).max(userMaxLengthConstraints.email),
     roles: z.array(z.string().min(1)).optional(),
     locations: z.array(z.string().min(1)).optional(),
+    keywords: z.array(z.string().min(1)).optional(),
 });
 
 export type User = z.infer<typeof UserSchema>;

@@ -18,6 +18,10 @@ const UserModelSchema = new Schema<User>({
     locations: {
         type: [String],
         required: false
+    },
+    keywords: {
+        type: [String],
+        required: false
     }
 }, {timestamps: true})
 
