@@ -39,7 +39,7 @@ export function LocationsCard() {
                 <OneInputFieldForm existingEntries={locations} type={"locations"} formFieldLabel={"Add location"}
                                    submitFunction={submitLocation} isPendingSubmission={isPendingSubmission}
                                    disabled={status !== "authenticated"}/>
-                <div className={"grid sm:grid-cols-2 gap-4 items-end"}>
+                <div className={"grid sm:grid-cols-2 gap-4 items-end max-h-[104px] overflow-y-auto"}>
                     {locations.map((location) => (
                         <div key={location}
                              className="flex items-center align-middle h-6 space-x-4 justify-between w-full group">

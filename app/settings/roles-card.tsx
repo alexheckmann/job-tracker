@@ -39,7 +39,7 @@ export function RolesCard() {
                 <OneInputFieldForm existingEntries={roles} type={"roles"} formFieldLabel={"Add role"}
                                    submitFunction={submitRole} isPendingSubmission={isPendingSubmission}
                                    disabled={status !== "authenticated"}/>
-                <div className={"grid sm:grid-cols-2 gap-4 items-end"}>
+                <div className={"grid sm:grid-cols-2 gap-4 items-end max-h-[104px] overflow-y-auto"}>
                     {roles.map((role) => (
                         <div key={role}
                              className="flex items-center align-middle h-6 space-x-4 justify-between w-full group">
