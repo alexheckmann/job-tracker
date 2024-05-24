@@ -44,6 +44,7 @@ export function useInsertRole(roles: string[], setRoles: (data: string[]) => voi
         description: "An error occurred while adding the role.",
         variant: "destructive"
     };
+
     const successToastContent: ToastContent = {
         title: "Role added",
         description: "The role was added successfully.",
@@ -59,6 +60,7 @@ export function useInsertLocation(locations: string[], setLocations: (data: stri
         description: "An error occurred while adding the location.",
         variant: "destructive"
     };
+
     const successToastContent: ToastContent = {
         title: "Role added",
         description: "The location was added successfully.",
@@ -66,4 +68,20 @@ export function useInsertLocation(locations: string[], setLocations: (data: stri
     };
 
     return useStringArrayInsertion("/api/v1/locations", locations, setLocations, successToastContent, errorToastContent)
+}
+
+export function useInsertKeywords(keywords: string[], setKeywords: (data: string[]) => void) {
+    const errorToastContent: ToastContent = {
+        title: "Error",
+        description: "An error occurred while adding the search keywords.",
+        variant: "destructive"
+    };
+
+    const successToastContent: ToastContent = {
+        title: "Keywords added",
+        description: "The search keywords were added successfully.",
+        variant: "default"
+    };
+
+    return useStringArrayInsertion("/api/v1/keywords", keywords, setKeywords, successToastContent, errorToastContent)
 }

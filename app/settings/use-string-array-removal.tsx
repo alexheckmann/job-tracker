@@ -44,6 +44,7 @@ export function useRemoveRole(roles: string[], setRoles: (data: string[]) => voi
         description: "An error occurred while removing the role.",
         variant: "destructive"
     };
+
     const successToastContent: ToastContent = {
         title: "Role removed",
         description: "The role was removed successfully.",
@@ -59,6 +60,7 @@ export function useRemoveLocation(locations: string[], setLocations: (data: stri
         description: "An error occurred while removing the location.",
         variant: "destructive"
     };
+
     const successToastContent: ToastContent = {
         title: "Role added",
         description: "The location was removed successfully.",
@@ -66,4 +68,20 @@ export function useRemoveLocation(locations: string[], setLocations: (data: stri
     };
 
     return useStringArrayRemoval("/api/v1/locations", locations, setLocations, successToastContent, errorToastContent)
+}
+
+export function useRemoveKeywords(keywords: string[], setKeywords: (data: string[]) => void) {
+    const errorToastContent: ToastContent = {
+        title: "Error",
+        description: "An error occurred while removing the keywords.",
+        variant: "destructive"
+    };
+
+    const successToastContent: ToastContent = {
+        title: "Keywords removed",
+        description: "The keywords were removed successfully.",
+        variant: "default"
+    };
+
+    return useStringArrayRemoval("/api/v1/keywords", keywords, setKeywords, successToastContent, errorToastContent)
 }
