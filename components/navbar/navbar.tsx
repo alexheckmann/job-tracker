@@ -24,7 +24,7 @@ const navLinks: NavLink[] = [
     {path: "/dashboard", label: "Applications"},
     {path: "/contacts", label: "Contacts"},
     {path: "/interviews", label: "Interviews"},
-    // {path: "/notes", label: "Notes"},
+    {path: "/notes", label: "Notes"},
     // {path: "/analytics", label: "Analytics"}
 ]
 
