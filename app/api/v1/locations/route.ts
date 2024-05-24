@@ -27,7 +27,7 @@ export async function DELETE(req: NextRequest) {
 
         const index = user?.locations?.indexOf(locationToDelete)
         if (index === -1) {
-            return NextResponse.json({error: "Role not found"}, {status: HttpStatusCode.NotFound})
+            return NextResponse.json({error: "Location not found"}, {status: HttpStatusCode.NotFound})
         }
 
         user?.locations!.splice(index!, 1)
