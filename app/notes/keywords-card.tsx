@@ -47,7 +47,7 @@ function KeywordsEntry({entry, removeKeywords, isPendingRemoval}: KeywordsEntryP
 
     return (
         <Badge variant={"outline"} key={entry}
-               className="flex items-center align-middle h-6 space-x-4 px-4 gap-2 justify-between cursor-pointer max-w-[200px]"
+               className="flex items-center align-middle h-6 space-x-4 pl-4 gap-2 justify-between cursor-pointer max-w-[200px] text-nowrap"
                onClick={() => copyToClipboard(entry)}
                onMouseEnter={() => setShowRemoveButton(true)}
                onMouseLeave={() => setShowRemoveButton(false)}
