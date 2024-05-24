@@ -17,7 +17,7 @@ import {JobRowActions} from "@/app/dashboard/job-row-actions";
 import {FavoriteButton} from "@/components/favorite-button";
 
 // function that returns the first n characters of a string
-function truncateString(str: string, num: number) {
+export function truncateString(str: string, num: number) {
     if (str.length <= num) {
         return str
     }

@@ -12,6 +12,7 @@ import {Badge} from "@/components/ui/badge";
 import {toast} from "@/components/ui/use-toast";
 import {CopyIcon} from "@/components/icons";
 import {Button} from "@/components/ui/button";
+import {truncateString} from "@/app/dashboard/job-columns";
 
 
 const rolesCardInfoText = "Save your keywords exactly how you use them on job portals. Some job portals use quotation marks to search for exact phrases."
@@ -38,18 +39,20 @@ interface KeywordsEntryProps extends HTMLAttributes<HTMLDivElement> {
     isPendingRemoval: boolean
 }
 
+const keywordsEntryMaxLength = 24
+
 function KeywordsEntry({entry, removeKeywords, isPendingRemoval}: KeywordsEntryProps) {
 
     const [showRemoveButton, setShowRemoveButton] = useState(false)
 
     return (
         <Badge variant={"outline"} key={entry}
-               className="flex items-center align-middle h-6 space-x-4 px-4 gap-2 justify-between cursor-pointer"
+               className="flex items-center align-middle h-6 space-x-4 px-4 gap-2 justify-between cursor-pointer max-w-[200px]"
                onClick={() => copyToClipboard(entry)}
                onMouseEnter={() => setShowRemoveButton(true)}
                onMouseLeave={() => setShowRemoveButton(false)}
         >
-            {entry}
+            {truncateString(entry, keywordsEntryMaxLength)}
             {showRemoveButton ?
                 <RemoveButton disabled={isPendingRemoval} role={entry}
                               onClick={() => removeKeywords(entry)}/> :
