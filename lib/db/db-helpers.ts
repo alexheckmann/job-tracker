@@ -149,7 +149,14 @@ export const getUserByEmail = cache(async (email: string) => {
  * @param id The id of the user to get
  */
 export function getUserById(id: string) {
-    return UserModel.findById<User>(id).exec()
+    const user = UserModel.findById<User>(id).exec()
+
+    if (!user) {
+        console.log(`User not found: ${id}`)
+        return null
+    }
+
+    return user
 }
 
 /**
