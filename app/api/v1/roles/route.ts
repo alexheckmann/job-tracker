@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
     try {
         const session = await getServerSession(authOptions)
         const user = await getUserById(session.id)
-        user?.roles?.push(newRole)
+        user?.roles ? user?.roles.push(newRole) : user!.roles = [newRole]
         await updateUser(session.id, user!)
         return NextResponse.json(user?.roles, {status: HttpStatusCode.Created})
     } catch (error) {

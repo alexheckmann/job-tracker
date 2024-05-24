@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
     try {
         const session = await getServerSession(authOptions)
         const user = await getUserById(session.id)
-        user?.locations?.push(newLocation)
+        user?.locations ? user?.locations.push(newLocation) : user!.locations = [newLocation]
         await updateUser(session.id, user!)
         return NextResponse.json(user?.locations, {status: HttpStatusCode.Created})
     } catch (error) {
