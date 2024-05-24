@@ -36,7 +36,7 @@ export function RolesCard() {
                 </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-6">
-                <OneInputFieldForm existingEntries={roles} type={"roles"} formFieldLabel={"Add role"}
+                <OneInputFieldForm existingEntries={roles} formFieldLabel={"Add role"}
                                    submitFunction={submitRole} isPendingSubmission={isPendingSubmission}
                                    disabled={status !== "authenticated"}/>
                 <div className={"grid sm:grid-cols-2 gap-4 items-end max-h-[104px] overflow-y-auto"}>

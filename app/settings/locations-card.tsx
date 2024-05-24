@@ -36,7 +36,7 @@ export function LocationsCard() {
                 </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-6">
-                <OneInputFieldForm existingEntries={locations} type={"locations"} formFieldLabel={"Add location"}
+                <OneInputFieldForm existingEntries={locations} formFieldLabel={"Add location"}
                                    submitFunction={submitLocation} isPendingSubmission={isPendingSubmission}
                                    disabled={status !== "authenticated"}/>
                 <div className={"grid sm:grid-cols-2 gap-4 items-end max-h-[104px] overflow-y-auto"}>

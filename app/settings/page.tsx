@@ -1,5 +1,5 @@
 import {RolesCard} from "@/app/settings/roles-card";
-import {CardContainer} from "@/app/notes/card-container";
+import {CardContainer} from "@/components/card-container";
 import {LocationsCard} from "@/app/settings/locations-card";
 
 export default function SettingsPage() {

@@ -16,7 +16,6 @@ const FormSchema = z.object({
 
 interface OneInputFieldFormProps extends HTMLAttributes<HTMLFormElement> {
     existingEntries: string[],
-    type: "roles" | "locations",
     formFieldLabel: string,
     submitFunction: (data: any) => any,
     isPendingSubmission: boolean,
@@ -25,7 +24,6 @@ interface OneInputFieldFormProps extends HTMLAttributes<HTMLFormElement> {
 
 export function OneInputFieldForm({
                                       existingEntries,
-                                      type,
                                       formFieldLabel,
                                       submitFunction,
                                       isPendingSubmission,
@@ -43,9 +41,7 @@ export function OneInputFieldForm({
             <form onSubmit={form.handleSubmit(async (data) => {
                 if (existingEntries.includes(data.value)) {
                     toast({
-                        title: type === "roles" ?
-                            "Role already exists" :
-                            "Location already exists",
+                        title: "Entry already exists",
                         description: "Please enter a different value",
                         variant: "destructive"
                     })
