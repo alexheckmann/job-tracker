@@ -26,8 +26,8 @@ export default function Home() {
                 </main>
 
                 <p className="text-xl text-muted-foreground w-4/6 md:w-3/5 lg:w-10/12 mx-auto lg:mx-0">
-                    Effortlessly navigate your job search process by keeping your applications, contacts and notes
-                    organized.
+                    Effortlessly navigate your job search process by keeping track of your applications, interviews,
+                    contacts and notes.
                 </p>
 
                 <SignInButton/>
