@@ -13,6 +13,7 @@ import {toast} from "@/components/ui/use-toast";
 import {CopyIcon} from "@/components/icons";
 import {Button} from "@/components/ui/button";
 import {truncateString} from "@/app/dashboard/job-columns";
+import {Skeleton} from "@/components/ui/skeleton";
 
 
 const rolesCardInfoText = "Save your keywords exactly how you use them on job portals. Some job portals use quotation marks to search for exact phrases."
@@ -68,6 +69,7 @@ export function KeywordsCard() {
 
     const {data: session, status} = useSession()
     const [keywords, setKeywords] = useState<string[]>([])
+    const isLoading = status !== "authenticated"
 
     useEffect(() => {
         setKeywords(session?.keywords || [])
@@ -93,10 +95,18 @@ export function KeywordsCard() {
                                    disabled={status !== "authenticated"}/>
                 <div
                     className={"flex flex-row flex-wrap gap-2 items-start min-h-[200px] content-start max-h-[240px] overflow-y-auto"}>
-                    {keywords.map((entry) => (
-                        <KeywordsEntry key={entry} entry={entry} removeKeywords={removeKeywords}
-                                       isPendingRemoval={isPendingRemoval}/>
-                    ))}
+                    {isLoading ?
+                        Array.from({length: 12}, (_, i) => i).map((_, i) => {
+                            return (
+                                <Badge className={`w-[90px]`} variant={"outline"}>
+                                    <Skeleton className={"w-full h-4"}/>
+                                </Badge>
+                            )
+                        }) :
+                        keywords.map((entry) => (
+                            <KeywordsEntry key={entry} entry={entry} removeKeywords={removeKeywords}
+                                           isPendingRemoval={isPendingRemoval}/>
+                        ))}
                 </div>
             </CardContent>
         </Card>
