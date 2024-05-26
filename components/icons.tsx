@@ -1,13 +1,16 @@
 import {
+    Calendar,
     CalendarPlus,
     ChevronsUpDown,
     ClipboardPlus,
     Copy,
+    Info,
     Loader2,
     MoreHorizontal,
     SquarePen,
     Trash,
-    UserRoundPlus
+    UserRoundPlus,
+    X
 } from "lucide-react";
 import {cn} from "@/lib/utils";
 import {HTMLAttributes} from "react";
@@ -69,5 +72,23 @@ export function EditIcon({className}: IconProps) {
 export function DeleteIcon({className}: IconProps) {
     return (
         <Trash className={cn(defaultIconSize, className)}/>
+    )
+}
+
+export function RemoveIcon({className}: IconProps) {
+    return (
+        <X className={cn(defaultIconSize, className)}/>
+    )
+}
+
+export function CalendarIcon({className}: IconProps) {
+    return (
+        <Calendar className={cn(defaultIconSize, className)}/>
+    )
+}
+
+export function InfoIcon({className}: IconProps) {
+    return (
+        <Info className={cn(defaultIconSize, className)}/>
     )
 }

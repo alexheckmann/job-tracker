@@ -1,14 +1,14 @@
 import {HoverTooltip} from "@/components/hover-tooltip";
-import {Info} from "lucide-react";
+import {InfoIcon} from "@/components/icons";
 
 interface InfoButtonProps {
     infoText: string
 }
 
-export function InfoButton({infoText}: InfoButtonProps) {
+export function InfoHover({infoText}: InfoButtonProps) {
     return (
         <HoverTooltip hoverText={infoText}>
-            <Info className={"h-4 w-4 text-muted-foreground"}/>
+            <InfoIcon className={"text-muted-foreground"}/>
         </HoverTooltip>
     )
 }

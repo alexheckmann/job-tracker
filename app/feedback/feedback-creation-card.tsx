@@ -2,7 +2,7 @@
 
 import {useSession} from "next-auth/react";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
-import {InfoButton} from "@/components/info-button";
+import {InfoHover} from "@/components/info-hover";
 import {Ratings} from "@/components/rating";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
@@ -57,7 +57,7 @@ export function FeedbackCreationCard() {
                         </CardTitle>
                         <CardDescription className={"inline-flex gap-2 align-middle"}>
                             Any type of feedback is appreciated.
-                            <InfoButton infoText={rolesCardInfoText}/>
+                            <InfoHover infoText={rolesCardInfoText}/>
                         </CardDescription>
                     </CardHeader>
                     <CardContent className="grid gap-4 py-4 align-middle items-center">

@@ -4,7 +4,7 @@ import {useSession} from "next-auth/react";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {OneInputFieldForm} from "@/components/one-input-field-form";
 import {useEffect, useState} from "react";
-import {InfoButton} from "@/components/info-button";
+import {InfoHover} from "@/components/info-hover";
 import {RemoveButton} from "@/app/settings/remove-button";
 import {useInsertRole} from "@/app/settings/use-string-array-insertion";
 import {useRemoveRole} from "@/app/settings/use-string-array-removal";
@@ -32,7 +32,7 @@ export function RolesCard() {
                 </CardTitle>
                 <CardDescription className={"inline-flex gap-2 align-middle"}>
                     The type of roles you are looking for.
-                    <InfoButton infoText={rolesCardInfoText}/>
+                    <InfoHover infoText={rolesCardInfoText}/>
                 </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-6">

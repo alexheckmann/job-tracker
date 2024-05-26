@@ -1,8 +1,7 @@
 import {HTMLAttributes, useState} from "react";
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
-import {Trash, X} from "lucide-react";
-import {LoadingIcon} from "@/components/icons";
+import {DeleteIcon, LoadingIcon, RemoveIcon} from "@/components/icons";
 
 const removeButtonSize = "h-6 w-6"
 const removeButtonIconSize = "h-3 w-3"
@@ -30,14 +29,15 @@ export function RemoveButton({className, onClick, disabled, isLoading}: RemoveBu
             <Button variant="ghost" size="icon" className={cn(removeButtonSize, "text-muted-foreground", className)}
                     disabled={disabled || isLoading}
                     onClick={() => setIsFirstClick(false)}>
-                {isLoading ? <LoadingIcon className={removeButtonIconSize}/> : <X className={removeButtonIconSize}/>}
+                {isLoading ? <LoadingIcon className={removeButtonIconSize}/> :
+                    <RemoveIcon className={removeButtonIconSize}/>}
             </Button> :
             <Button variant="destructive" size="icon" className={cn(removeButtonSize, className)}
                     disabled={disabled || isLoading}
                     onMouseLeave={() => setIsFirstClick(true)}
                     onClick={onClick}>
                 {isLoading ? <LoadingIcon className={removeButtonIconSize}/> :
-                    <Trash className={removeButtonIconSize}/>}
+                    <DeleteIcon className={removeButtonIconSize}/>}
             </Button>
     )
 }

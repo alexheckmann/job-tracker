@@ -8,11 +8,10 @@ import {
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
-import {MoreHorizontal, SquarePen, Trash} from "lucide-react";
 import {Dialog, DialogTrigger} from "@/components/ui/dialog";
 import {Interview} from "@/lib/models/interview";
 import InterviewEditDialogContent from "@/components/navbar/interview-edit-dialog-content";
-import {LoadingIcon} from "@/components/icons";
+import {DeleteIcon, EditIcon, LoadingIcon, OptionsIcon} from "@/components/icons";
 
 export function InterviewRowActions({row}: { row: Row<Interview> }) {
     const interview = row.original
@@ -32,7 +31,7 @@ export function InterviewRowActions({row}: { row: Row<Interview> }) {
                             :
                             <>
                                 <span className="sr-only">Open menu</span>
-                                <MoreHorizontal className="h-4 w-4 text-muted-foreground"/>
+                                <OptionsIcon className="text-muted-foreground"/>
                             </>
                         }
                     </Button>
@@ -43,14 +42,14 @@ export function InterviewRowActions({row}: { row: Row<Interview> }) {
                     {/* TODO implement edit dialog */}
                     <DropdownMenuItem className={"cursor-pointer font-semibold"}>
                         <DialogTrigger className={"flex flex-row gap-2 w-full items-center"}>
-                            <SquarePen className={"h-4 w-4"}/>
+                            <EditIcon/>
                             Edit
                         </DialogTrigger>
                     </DropdownMenuItem>
 
                     <DropdownMenuItem className={"gap-2 cursor-pointer text-destructive font-semibold"}
                                       onClick={() => mutateJobs()}>
-                        <Trash className={"h-4 w-4"}/>
+                        <DeleteIcon/>
                         Delete
                     </DropdownMenuItem>
                 </DropdownMenuContent>

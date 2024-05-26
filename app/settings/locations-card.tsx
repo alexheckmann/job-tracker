@@ -4,7 +4,7 @@ import {useSession} from "next-auth/react";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {OneInputFieldForm} from "@/components/one-input-field-form";
 import {useEffect, useState} from "react";
-import {InfoButton} from "@/components/info-button";
+import {InfoHover} from "@/components/info-hover";
 import {RemoveButton} from "@/app/settings/remove-button";
 import {useInsertLocation} from "@/app/settings/use-string-array-insertion";
 import {useRemoveLocation} from "@/app/settings/use-string-array-removal";
@@ -32,7 +32,7 @@ export function LocationsCard() {
                 </CardTitle>
                 <CardDescription className={"inline-flex gap-2 align-middle"}>
                     The different locations you are applying at.
-                    <InfoButton infoText={locationsCardInfoText}/>
+                    <InfoHover infoText={locationsCardInfoText}/>
                 </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-6">
