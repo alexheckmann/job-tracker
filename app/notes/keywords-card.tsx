@@ -96,13 +96,11 @@ export function KeywordsCard() {
                 <div
                     className={"flex flex-row flex-wrap gap-2 items-start min-h-[200px] content-start max-h-[240px] overflow-y-auto"}>
                     {isLoading ?
-                        Array.from({length: 12}, (_, i) => i).map((_, i) => {
-                            return (
-                                <Badge className={`w-[90px]`} variant={"outline"}>
+                        Array.from({length: 12}, (_, i) => i).map((_, i) => (
+                            <Badge key={i} className={`w-[90px]`} variant={"outline"}>
                                     <Skeleton className={"w-full h-4"}/>
                                 </Badge>
-                            )
-                        }) :
+                        )) :
                         keywords.map((entry) => (
                             <KeywordsEntry key={entry} entry={entry} removeKeywords={removeKeywords}
                                            isPendingRemoval={isPendingRemoval}/>
