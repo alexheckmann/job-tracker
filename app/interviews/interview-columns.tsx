@@ -57,7 +57,7 @@ export const interviewColumns: ColumnDef<Interview>[] = [
         cell: ({row}: { row: Row<Interview> }) => {
             const date = row.getValue<Date>("date")
             return (
-                <HoverTooltip hoverText={`Last updated on ${format(date, "dd/MM/yyyy")}`} asChild>
+                <HoverTooltip hoverText={`${format(date, "dd/MM/yyyy")}`} asChild>
                     <span>{formatDate(date)}</span>
                 </HoverTooltip>
             );
