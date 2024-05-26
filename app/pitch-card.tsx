@@ -1,9 +1,9 @@
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {buttonVariants} from "@/components/ui/button";
-import {HandHeart, Linkedin, MessagesSquare} from "lucide-react";
 import {HTMLAttributes} from "react";
 import {cn} from "@/lib/utils";
 import Logo from "@/components/logo";
+import {DonateIcon, FeedbackIcon, LinkedinIcon} from "@/components/icons";
 
 interface PitchCardProps extends HTMLAttributes<HTMLDivElement> {
 
@@ -37,19 +37,19 @@ export function PitchCard({className}: PitchCardProps) {
                 <a rel="noreferrer noopener" href="/donate" target="_self"
                    className={buttonVariants({variant: "ghost", size: "sm"})}>
                     <span className="sr-only">Donate</span>
-                    <HandHeart className={"w-5 h-5"}/>
+                    <DonateIcon className={"w-5 h-5 text-muted-foreground"}/>
                 </a>
 
                 <a rel="noreferrer noopener" href="/feedback" target="_self"
                    className={buttonVariants({variant: "ghost", size: "sm"})}>
                     <span className="sr-only">Feedback</span>
-                    <MessagesSquare className={"w-5 h-5"}/>
+                    <FeedbackIcon className={"w-5 h-5 text-muted-foreground"}/>
                 </a>
 
                 <a rel="noreferrer noopener" href={LINKEDIN_URL} target="_blank"
                    className={buttonVariants({variant: "ghost", size: "sm"})}>
                     <span className="sr-only">Linkedin icon</span>
-                    <Linkedin size="20"/>
+                    <LinkedinIcon className={"w-5 h-5 text-muted-foreground"}/>
                 </a>
             </CardFooter>
         </Card>

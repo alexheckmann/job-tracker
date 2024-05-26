@@ -1,7 +1,7 @@
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
-import {Linkedin, Mail, SquareArrowOutUpRight} from "lucide-react";
 import {HTMLAttributes, ReactNode} from "react";
+import {ExternalLinkIcon, LinkedinIcon, MailIcon} from "@/components/icons";
 
 interface OpenLinkButtonProps extends HTMLAttributes<HTMLButtonElement> {
     href: string,
@@ -17,16 +17,16 @@ export function OpenLinkButton({href, type, ...props}: OpenLinkButtonProps) {
         case "email":
             href = `mailto://${href}`
             linkTarget = "_self"
-            icon = <Mail className={"h-4 w-4 text-muted-foreground"}/>
+            icon = <MailIcon className={"text-muted-foreground"}/>
             break;
         case "linkedin":
-            icon = <Linkedin className={"h-4 w-4 text-muted-foreground"}/>
+            icon = <LinkedinIcon className={"text-muted-foreground"}/>
             break;
         case "link":
-            icon = <SquareArrowOutUpRight className={"h-4 w-4 text-muted-foreground"}/>
+            icon = <ExternalLinkIcon className={"text-muted-foreground"}/>
             break;
         default:
-            icon = <SquareArrowOutUpRight className={"h-4 w-4 text-muted-foreground"}/>
+            icon = <ExternalLinkIcon className={"text-muted-foreground"}/>
             break;
     }
 

@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/command";
 import {cn} from "@/lib/utils";
 import {CheckIcon} from "@radix-ui/react-icons";
-import {ChevronDown} from "lucide-react";
+import {DownIcon} from "@/components/icons";
 
 interface InputMultiSelectProps extends HTMLAttributes<HTMLSelectElement> {
     label: string,
@@ -31,7 +31,7 @@ export default function InputMultiSelect({label, options, onSelectFunction}: Inp
             <PopoverTrigger asChild>
                 <Button className={cn("gap-2", selectedOptions.size > 0 && "bg-secondary")} variant={"outline"}>
                     {label}
-                    <ChevronDown className={"h-4 w-4"}/>
+                    <DownIcon/>
                 </Button>
             </PopoverTrigger>
             <PopoverContent className={"w-[200px] p-0"} align={"start"}>

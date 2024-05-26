@@ -1,22 +1,33 @@
 import {
     Calendar,
     CalendarPlus,
+    CheckSquare,
+    ChevronDown,
+    ChevronLeft,
+    ChevronRight,
     ChevronsUpDown,
+    ChevronUp,
     ClipboardPlus,
     Copy,
+    HandHeart,
     Info,
+    Linkedin,
     Loader2,
+    LucideIcon,
+    Mail,
+    MessagesSquare,
     MoreHorizontal,
+    SquareArrowOutUpRight,
     SquarePen,
     Trash,
     UserRoundPlus,
-    X
+    X,
+    XSquare
 } from "lucide-react";
 import {cn} from "@/lib/utils";
 import {HTMLAttributes} from "react";
 
-interface IconProps extends HTMLAttributes<HTMLDivElement> {
-
+interface IconProps extends HTMLAttributes<LucideIcon> {
 }
 
 const defaultIconSize = "h-4 w-4"
@@ -90,5 +101,72 @@ export function CalendarIcon({className}: IconProps) {
 export function InfoIcon({className}: IconProps) {
     return (
         <Info className={cn(defaultIconSize, className)}/>
+    )
+}
+
+export function MailIcon({className}: IconProps) {
+    return (
+        <Mail className={cn(defaultIconSize, className)}/>
+    )
+}
+
+export function LinkedinIcon({className}: IconProps) {
+    return (
+        <Linkedin className={cn(defaultIconSize, className)}/>
+    )
+}
+
+export function ExternalLinkIcon({className}: IconProps) {
+    return (
+        <SquareArrowOutUpRight className={cn(defaultIconSize, className)}/>
+    )
+}
+
+export function UpIcon({className}: IconProps) {
+    return (
+        <ChevronUp className={cn(defaultIconSize, className)}/>
+    )
+}
+
+export function DownIcon({className}: IconProps) {
+    return (
+        <ChevronDown className={cn(defaultIconSize, className)}/>
+    )
+}
+
+export function LeftIcon({className}: IconProps) {
+    return (
+        <ChevronLeft className={cn(defaultIconSize, className)}/>
+    )
+
+}
+
+export function RightIcon({className}: IconProps) {
+    return (
+        <ChevronRight className={cn(defaultIconSize, className)}/>
+    )
+}
+
+export function TrueIcon({className}: IconProps) {
+    return (
+        <CheckSquare className={cn(defaultIconSize, className)}/>
+    )
+}
+
+export function FalseIcon({className}: IconProps) {
+    return (
+        <XSquare className={cn(defaultIconSize, className)}/>
+    )
+}
+
+export function FeedbackIcon({className}: IconProps) {
+    return (
+        <MessagesSquare className={cn(defaultIconSize, className)}/>
+    )
+}
+
+export function DonateIcon({className}: IconProps) {
+    return (
+        <HandHeart className={cn(defaultIconSize, className)}/>
     )
 }

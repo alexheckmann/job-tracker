@@ -8,9 +8,9 @@ import {FormDatePicker} from "@/components/form/form-date-picker";
 import {ApplicationStatus, Job} from "@/lib/models/job";
 import {FormSwitch} from "@/components/form/form-switch";
 import {Button} from "@/components/ui/button";
-import {Star} from "lucide-react";
 import {UseFormReturn} from "react-hook-form";
 import {useSession} from "next-auth/react";
+import {Star} from "lucide-react";
 
 interface JobDialogContentProps {
     form: UseFormReturn<Job>;

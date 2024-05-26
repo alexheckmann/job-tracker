@@ -1,6 +1,6 @@
-import {CheckSquare} from "lucide-react";
 import {HTMLAttributes} from "react";
 import {cn} from "@/lib/utils";
+import {TrueIcon} from "@/components/icons";
 
 interface BooleanStatusIconProps extends HTMLAttributes<HTMLDivElement> {
     bool: boolean
@@ -14,6 +14,6 @@ interface BooleanStatusIconProps extends HTMLAttributes<HTMLDivElement> {
 export function BooleanStatusIcon({bool, className}: BooleanStatusIconProps) {
 
     return (
-        bool && <CheckSquare className={cn("h-4 w-4 text-muted-foreground", className)}/>
+        bool && <TrueIcon className={cn("text-muted-foreground", className)}/>
     )
 }
