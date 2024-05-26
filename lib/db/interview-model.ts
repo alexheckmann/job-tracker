@@ -1,6 +1,6 @@
 import {Interview} from "@/lib/models/interview";
 import mongoose, {model, Schema} from "mongoose";
-import {INTERVIEW_COLLECTION_NAME} from "@/lib/db/constants";
+import {INTERVIEW_COLLECTION_NAME, JOB_COLLECTION_NAME, USER_COLLECTION_NAME} from "@/lib/db/constants";
 
 export const InterviewModelSchema = new Schema<Interview>(
     {
@@ -10,7 +10,8 @@ export const InterviewModelSchema = new Schema<Interview>(
             type: {type: String, required: true},
             link: {type: String},
             notes: {type: String},
-            user: {type: Schema.Types.ObjectId, ref: 'User'}
+            user: {type: Schema.Types.ObjectId, ref: USER_COLLECTION_NAME},
+            job: {type: Schema.Types.ObjectId, ref: JOB_COLLECTION_NAME}
     }
 )
 

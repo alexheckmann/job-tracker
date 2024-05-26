@@ -1,6 +1,6 @@
 import mongoose, {model, Schema} from "mongoose";
 import {Job} from "@/lib/models/job";
-import {JOB_COLLECTION_NAME} from "@/lib/db/constants";
+import {JOB_COLLECTION_NAME, USER_COLLECTION_NAME} from "@/lib/db/constants";
 
 export const JobModelSchema = new Schema<Job>(
     {
@@ -16,7 +16,7 @@ export const JobModelSchema = new Schema<Job>(
         isReferral: {type: Boolean, required: true},
         notes: {type: String},
         lastUpdate: {type: Date, required: true},
-            user: {type: Schema.Types.ObjectId, ref: 'User'}
+            user: {type: Schema.Types.ObjectId, ref: USER_COLLECTION_NAME}
     }, {timestamps: true}
 );
 

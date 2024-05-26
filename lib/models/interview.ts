@@ -20,6 +20,7 @@ export const InterviewSchema = UserSpecificDatabaseObject.extend({
     type: InterviewType,
     link: z.string().max(interviewMaxLengthConstraints.link).optional(),
     notes: z.string().max(interviewMaxLengthConstraints.notes).optional(),
-},);
+    job: z.any().optional()
+});
 
 export type Interview = z.infer<typeof InterviewSchema>;

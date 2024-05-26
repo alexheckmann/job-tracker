@@ -1,6 +1,6 @@
 import mongoose, {model, Schema} from "mongoose";
 import {Contact} from "@/lib/models/contact";
-import {CONTACT_COLLECTION_NAME} from "@/lib/db/constants";
+import {CONTACT_COLLECTION_NAME, USER_COLLECTION_NAME} from "@/lib/db/constants";
 
 export const ContactModelSchema = new Schema<Contact>(
     {
@@ -13,7 +13,7 @@ export const ContactModelSchema = new Schema<Contact>(
         location: {type: String, required: true},
         notes: {type: String},
         lastUpdate: {type: Date, required: true},
-            user: {type: Schema.Types.ObjectId, ref: 'User'}
+            user: {type: Schema.Types.ObjectId, ref: USER_COLLECTION_NAME}
     }, {timestamps: true}
 );
 
