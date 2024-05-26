@@ -13,6 +13,7 @@ import {SubmitButton} from "@/components/submit-button";
 import {toast} from "@/components/ui/use-toast";
 import {useEffect} from "react";
 import axios from "axios";
+import {useMutation} from "@tanstack/react-query";
 
 
 const rolesCardInfoText = "Feedback is semi-anonymous: only the rating, the text and your user ID will be used if signed in."
@@ -35,20 +36,34 @@ export function FeedbackCreationCard() {
         form.setValue("userId", session?.id || "anonymous")
     }, [session?.id]);
 
+    const {mutate: submitFeedback, isPending} = useMutation({
+        mutationFn: async (feedback: Feedback) => {
+            return await axios.post<Feedback>("/api/v1/feedback", feedback)
+        },
+        onSuccess: async () => {
+            toast({
+                title: "Feedback submitted",
+                description: "Thank you for your feedback!",
+                variant: "default"
+            })
+
+            form.reset()
+        },
+        onError: () => {
+            toast({
+                title: "Error submitting feedback",
+                description: "An error occurred while submitting your feedback. Please try again later.",
+                variant: "destructive"
+            })
+        }
+    })
+
     return (
         <Card>
             <Form {...form}>
                 <form onSubmit={
                     form.handleSubmit(async (feedback: Feedback) => {
-                            await axios.post("/api/v1/feedback", feedback)
-
-                            toast({
-                                title: "Feedback submitted",
-                                description: "Thank you for your feedback!",
-                                variant: "default"
-                            })
-
-                            form.reset()
+                        submitFeedback(feedback)
                         }
                     )}>
                     <CardHeader>
@@ -84,8 +99,9 @@ export function FeedbackCreationCard() {
                             <FormTextarea label={"Feedback"} placeholder={"Add your feedback"} field={field}/>
                         )}/>
 
-                        <SubmitButton normalText={"Submit feedback"}
-                                      loadingText={"Submitting feedback"}
+                        <SubmitButton isPending={isPending}
+                                      normalText={"Submit feedback"}
+                                      loadingText={"Submitting"}
                                       normalIcon={null}
                         />
                     </CardContent>
