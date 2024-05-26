@@ -9,10 +9,9 @@ import {
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
-import {MoreHorizontal, SquarePen, Trash} from "lucide-react";
 import {Dialog, DialogTrigger} from "@/components/ui/dialog";
 import ContactEditDialogContent from "@/components/navbar/contact-edit-dialog-content";
-import {LoadingIcon} from "@/components/icons";
+import {DeleteIcon, EditIcon, LoadingIcon, OptionsIcon} from "@/components/icons";
 
 export function ContactRowActions({row}: { row: Row<Contact> }) {
     const contact = row.original
@@ -32,7 +31,7 @@ export function ContactRowActions({row}: { row: Row<Contact> }) {
                             :
                             <>
                                 <span className="sr-only">Open menu</span>
-                                <MoreHorizontal className="h-4 w-4 text-muted-foreground"/>
+                                <OptionsIcon className={"text-muted-foreground"}/>
                             </>
                         }
                     </Button>
@@ -43,7 +42,7 @@ export function ContactRowActions({row}: { row: Row<Contact> }) {
 
                     <DropdownMenuItem className={"cursor-pointer font-semibold"}>
                         <DialogTrigger className={"flex flex-row gap-2 w-full items-center"}>
-                            <SquarePen className={"h-4 w-4"}/>
+                            <EditIcon/>
                             Edit
                         </DialogTrigger>
                     </DropdownMenuItem>
@@ -52,7 +51,7 @@ export function ContactRowActions({row}: { row: Row<Contact> }) {
                         className={"gap-2 cursor-pointer text-destructive font-semibold"}
                         onClick={() => mutateContacts()}>
 
-                        <Trash className={"h-4 w-4"}/>
+                        <DeleteIcon/>
                         Delete
                     </DropdownMenuItem>
                 </DropdownMenuContent>

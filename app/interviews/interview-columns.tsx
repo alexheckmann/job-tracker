@@ -1,7 +1,6 @@
 "use client"
 
 import {Column, ColumnDef, Row} from "@tanstack/react-table"
-import {ChevronsUpDown} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {useEffect} from "react";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
@@ -12,6 +11,7 @@ import {OpenLinkButton} from "@/components/open-link-button";
 import {Interview} from "@/lib/models/interview";
 import {InterviewRowActions} from "@/app/interviews/interview-row-actions";
 import {Badge} from "@/components/ui/badge";
+import {SortIcon} from "@/components/icons";
 
 // function that returns the first n characters of a string
 function truncateString(str: string, num: number) {
@@ -31,7 +31,7 @@ export const interviewColumns: ColumnDef<Interview>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Company
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                    <SortIcon className="ml-2"/>
                 </Button>
             )
         },
@@ -50,7 +50,7 @@ export const interviewColumns: ColumnDef<Interview>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Date
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                    <SortIcon className="ml-2"/>
                 </Button>
             )
         },
@@ -73,7 +73,7 @@ export const interviewColumns: ColumnDef<Interview>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Type
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                    <SortIcon className="ml-2"/>
                 </Button>
             )
         },

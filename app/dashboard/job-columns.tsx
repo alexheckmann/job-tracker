@@ -1,7 +1,6 @@
 "use client"
 
 import {Column, ColumnDef, Row} from "@tanstack/react-table"
-import {ChevronsUpDown} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {StatusDropdown} from "@/components/status-dropdown";
 import {useEffect} from "react";
@@ -15,6 +14,7 @@ import {OpenLinkButton} from "@/components/open-link-button";
 import {Job} from "@/lib/models/job";
 import {JobRowActions} from "@/app/dashboard/job-row-actions";
 import {FavoriteButton} from "@/components/favorite-button";
+import {SortIcon} from "@/components/icons";
 
 // function that returns the first n characters of a string
 export function truncateString(str: string, num: number) {
@@ -33,7 +33,7 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    <ChevronsUpDown className="ml-4 h-4 w-4"/>
+                    <SortIcon className="ml-4"/>
                 </Button>
             )
         },
@@ -58,7 +58,7 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Role
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                    <SortIcon className="ml-2"/>
                 </Button>
             )
         },
@@ -73,7 +73,7 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Company
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                    <SortIcon className="ml-2"/>
                 </Button>
             )
         },
@@ -92,7 +92,7 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Updated
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                    <SortIcon className="ml-2"/>
                 </Button>
             )
         },
@@ -115,7 +115,7 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Status
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                    <SortIcon className="ml-2"/>
                 </Button>
             )
         },
@@ -136,7 +136,7 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Job title
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                    <SortIcon className="ml-2"/>
                 </Button>
             )
         },
@@ -150,7 +150,7 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Location
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                    <SortIcon className="ml-2"/>
                 </Button>
             )
         },
@@ -188,7 +188,7 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Salary
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                    <SortIcon className="ml-2"/>
                 </Button>
             )
         },
@@ -203,7 +203,7 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Referral?
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                    <SortIcon className="ml-2"/>
                 </Button>
             )
         },
@@ -231,7 +231,7 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Agency?
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                    <SortIcon className="ml-2"/>
                 </Button>
             )
         },

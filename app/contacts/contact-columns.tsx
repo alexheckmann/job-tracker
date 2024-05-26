@@ -1,7 +1,6 @@
 "use client"
 
 import {Column, ColumnDef, Row} from "@tanstack/react-table"
-import {ChevronsUpDown} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {useEffect} from "react";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
@@ -12,6 +11,7 @@ import {OpenLinkButton} from "@/components/open-link-button";
 
 import {Contact} from "@/lib/models/contact";
 import {ContactRowActions} from "@/app/contacts/contact-row-actions";
+import {SortIcon} from "@/components/icons";
 
 /**
  * Truncate a string to a certain length. Used as a workaround for the lack of ellipsis support in the table.
@@ -36,7 +36,7 @@ export const contactColumns: ColumnDef<Contact>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Name
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                    <SortIcon className="ml-2"/>
                 </Button>
             )
         },
@@ -51,7 +51,7 @@ export const contactColumns: ColumnDef<Contact>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Company
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                    <SortIcon className="ml-2"/>
                 </Button>
             )
         },
@@ -75,7 +75,7 @@ export const contactColumns: ColumnDef<Contact>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Location
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                    <SortIcon className="ml-2"/>
                 </Button>
             )
         },
@@ -177,7 +177,7 @@ export const contactColumns: ColumnDef<Contact>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Updated
-                    <ChevronsUpDown className="ml-2 h-4 w-4"/>
+                    <SortIcon className="ml-2"/>
                 </Button>
             )
         },

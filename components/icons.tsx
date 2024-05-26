@@ -1,4 +1,14 @@
-import {CalendarPlus, ClipboardPlus, Copy, Loader2, UserRoundPlus} from "lucide-react";
+import {
+    CalendarPlus,
+    ChevronsUpDown,
+    ClipboardPlus,
+    Copy,
+    Loader2,
+    MoreHorizontal,
+    SquarePen,
+    Trash,
+    UserRoundPlus
+} from "lucide-react";
 import {cn} from "@/lib/utils";
 import {HTMLAttributes} from "react";
 
@@ -35,5 +45,29 @@ export function ContactIcon({className}: IconProps) {
 export function CopyIcon({className}: IconProps) {
     return (
         <Copy className={cn(defaultIconSize, className)}/>
+    )
+}
+
+export function SortIcon({className}: IconProps) {
+    return (
+        <ChevronsUpDown className={cn(defaultIconSize, className)}/>
+    )
+}
+
+export function OptionsIcon({className}: IconProps) {
+    return (
+        <MoreHorizontal className={cn(defaultIconSize, className)}/>
+    )
+}
+
+export function EditIcon({className}: IconProps) {
+    return (
+        <SquarePen className={cn(defaultIconSize, className)}/>
+    )
+}
+
+export function DeleteIcon({className}: IconProps) {
+    return (
+        <Trash className={cn(defaultIconSize, className)}/>
     )
 }
