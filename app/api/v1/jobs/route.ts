@@ -16,7 +16,7 @@ export async function GET() {
 
     try {
         const session = await getServerSession(authOptions)
-        const results = await getJobs(session.id)
+        const results = await getJobs(session?.user?.id)
         return NextResponse.json({jobs: results}, {status: HttpStatusCode.Ok})
     } catch (error) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
 
     try {
         const session = await getServerSession(authOptions)
-        const createdJob = await insertJob(newJob, session.id)
+        const createdJob = await insertJob(newJob, session?.user?.id)
         return NextResponse.json(createdJob, {status: HttpStatusCode.Created})
     } catch (error) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
@@ -42,7 +42,7 @@ export async function PUT(req: NextRequest) {
 
         const session = await getServerSession(authOptions)
 
-        if (session.id.toString() !== requestedJob.user.toString()) {
+        if (session?.user?.id.toString() !== requestedJob.user.toString()) {
             return NextResponse.json({error: "Unauthorized"}, {status: HttpStatusCode.Unauthorized})
         }
 

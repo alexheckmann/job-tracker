@@ -9,9 +9,9 @@ export async function POST(req: NextRequest) {
 
     try {
         const session = await getServerSession(authOptions)
-        const user = await getUserById(session.id)
+        const user = await getUserById(session?.user?.id)
         user?.locations ? user?.locations.push(newLocation) : user!.locations = [newLocation]
-        await updateUser(session.id, user!)
+        await updateUser(session?.user?.id, user!)
         return NextResponse.json(user?.locations, {status: HttpStatusCode.Created})
     } catch (error) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
@@ -23,7 +23,7 @@ export async function DELETE(req: NextRequest) {
 
     try {
         const session = await getServerSession(authOptions)
-        const user = await getUserById(session.id)
+        const user = await getUserById(session?.user?.id)
 
         const index = user?.locations?.indexOf(locationToDelete)
         if (index === -1) {
@@ -32,7 +32,7 @@ export async function DELETE(req: NextRequest) {
 
         user?.locations!.splice(index!, 1)
 
-        await updateUser(session.id, user!)
+        await updateUser(session?.user?.id, user!)
         return NextResponse.json(user?.locations, {status: HttpStatusCode.Ok})
     } catch (error) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})

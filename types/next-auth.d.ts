@@ -6,10 +6,10 @@ declare module "next-auth" {
      */
     interface Session extends DefaultSession {
         user: {
+            id: string,
             roles: string[],
             locations: string[],
             keywords: string[],
         } & DefaultSession["user"]
-        id: string
     }
 }

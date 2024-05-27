@@ -16,7 +16,7 @@ export async function GET() {
 
     try {
         const session = await getServerSession(authOptions)
-        const results = await getContacts(session.id)
+        const results = await getContacts(session?.user?.id)
         return NextResponse.json({contacts: results}, {status: HttpStatusCode.Ok})
     } catch (error) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
 
     try {
         const session = await getServerSession(authOptions)
-        const createdContact = await insertContact(newContact, session.id)
+        const createdContact = await insertContact(newContact, session?.user?.id)
         return NextResponse.json(createdContact, {status: HttpStatusCode.Created})
     } catch (error) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
@@ -42,7 +42,7 @@ export async function PUT(req: NextRequest) {
 
         const session = await getServerSession(authOptions)
 
-        if (session.id.toString() !== requestedContact.user.toString()) {
+        if (session?.user?.id.toString() !== requestedContact.user.toString()) {
             return NextResponse.json({error: "Unauthorized"}, {status: HttpStatusCode.Unauthorized})
         }
 
