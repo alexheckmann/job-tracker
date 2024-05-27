@@ -24,7 +24,7 @@ export function InterviewTable() {
             setInterviewData(fetchedInterviewData!)
         }
 
-    }, [isJobDataFetched, fetchedInterviewData, session?.user?.locations])
+    }, [isJobDataFetched, fetchedInterviewData])
 
     return (
         <CardContent className={"h-[70dvh] p-5 pt-3 md:p-6"}>
