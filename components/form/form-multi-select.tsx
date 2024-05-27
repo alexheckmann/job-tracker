@@ -25,7 +25,7 @@ const FormSelectWithInputField = () => {
 
     const {data: session} = useSession();
 
-    const options = session?.locations.map((location) => ({
+    const options = session?.user?.locations.map((location) => ({
         label: location,
         value: location
     })) || [];

@@ -21,9 +21,9 @@ export default function JobCreationDialogContent() {
     const form = useForm<Job>({
         resolver: zodResolver(JobSchema),
         defaultValues: {
-            role: session?.user.roles?.[0] || "",
+            role: session?.user?.roles?.[0] || "",
             company: "",
-            location: session?.locations?.[0] || "",
+            location: session?.user?.locations?.[0] || "",
             lastUpdate: new Date(),
             status: "Applied",
             exactTitle: "",

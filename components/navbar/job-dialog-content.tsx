@@ -20,7 +20,7 @@ export default function JobDialogContent({form}: JobDialogContentProps) {
 
     const {data: session} = useSession()
     const roles = session?.user?.roles || []
-    const locations = session?.locations || []
+    const locations = session?.user?.locations || []
 
     return (
         <div className="grid gap-4 py-4">

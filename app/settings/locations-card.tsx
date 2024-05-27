@@ -24,8 +24,8 @@ export function LocationsCard() {
     const {mutateData: removeLocation, isPending: isPendingRemoval} = useRemoveLocation(locations, setLocations)
 
     useEffect(() => {
-        setLocations(session?.locations || [])
-    }, [session?.locations])
+        setLocations(session?.user?.locations || [])
+    }, [session?.user?.locations])
 
     return (
         <Card>

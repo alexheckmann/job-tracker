@@ -55,7 +55,7 @@ export function JobTable() {
             })
         }
 
-    }, [isJobDataFetched, fetchedJobData, session?.locations])
+    }, [isJobDataFetched, fetchedJobData, session?.user?.roles, session?.user?.locations])
 
     return (
         <CardContent className={"h-[70dvh] p-5 pt-3 md:p-6"}>
