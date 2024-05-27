@@ -21,8 +21,8 @@ export function RolesCard() {
     const [roles, setRoles] = useState<string[]>([])
 
     useEffect(() => {
-        setRoles(session?.roles || [])
-    }, [session?.roles])
+        setRoles(session?.user?.roles || [])
+    }, [session?.user?.roles])
 
     const {mutateData: submitRole, isPending: isPendingSubmission} = useInsertRole(roles, setRoles)
     const {mutateData: removeRole, isPending: isPendingRemoval} = useRemoveRole(roles, setRoles)
