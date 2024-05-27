@@ -27,14 +27,14 @@ export function FeedbackCreationCard() {
         defaultValues: {
             rating: 0,
             feedback: "",
-            userId: session?.id || "anonymous"
+            userId: session?.user?.id || "anonymous"
         }
     })
 
     // Set the user ID to the session ID if the session becomes available
     useEffect(() => {
-        form.setValue("userId", session?.id || "anonymous")
-    }, [session?.id]);
+        form.setValue("userId", session?.user?.id || "anonymous")
+    }, [session?.user?.id]);
 
     const {mutate: submitFeedback, isPending} = useMutation({
         mutationFn: async (feedback: Feedback) => {
