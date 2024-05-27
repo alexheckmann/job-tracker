@@ -12,6 +12,12 @@ export const UserSchema = DatabaseObject.extend({
     roles: z.array(z.string().min(1)).optional(),
     locations: z.array(z.string().min(1)).optional(),
     keywords: z.array(z.string().min(1)).optional(),
+    companies: z.array(z.object({
+        location: z.string().min(1),
+        company: z.array(z.object({
+            name: z.string().min(1)
+        })).optional()
+    })).optional()
 });
 
 export type User = z.infer<typeof UserSchema>;

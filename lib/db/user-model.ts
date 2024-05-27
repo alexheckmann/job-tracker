@@ -22,6 +22,24 @@ const UserModelSchema = new Schema<User>({
     keywords: {
         type: [String],
         required: false
+    },
+    companies: {
+        type: [{
+            location: {
+                type: String,
+                required: true
+            },
+            company: {
+                type: [{
+                    name: {
+                        type: String,
+                        required: true
+                    }
+                }],
+                required: false
+            }
+        }],
+        required: false
     }
 }, {timestamps: true})
 
