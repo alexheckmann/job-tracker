@@ -45,13 +45,23 @@ export function JobTable() {
             setJobData(fetchedJobData!)
         }
 
+        if (!filterColumns.some(columnFilter => columnFilter.columnName === "role")) {
+
+            filterColumns.push({
+                columnName: "role",
+                type: "select",
+                label: "Roles",
+                initialValues: session?.user?.roles || []
+            })
+        }
+
         if (!filterColumns.some(columnFilter => columnFilter.columnName === "location")) {
 
             filterColumns.push({
                 columnName: "location",
                 type: "select",
                 label: "Locations",
-                initialValues: session?.locations!
+                initialValues: session?.user?.locations || []
             })
         }
 
