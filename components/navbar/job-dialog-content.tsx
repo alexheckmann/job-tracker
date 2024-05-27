@@ -19,7 +19,7 @@ interface JobDialogContentProps {
 export default function JobDialogContent({form}: JobDialogContentProps) {
 
     const {data: session} = useSession()
-    const roles = session?.roles || []
+    const roles = session?.user?.roles || []
     const locations = session?.locations || []
 
     return (

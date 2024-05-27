@@ -56,7 +56,7 @@ export const authOptions = {
         // @ts-ignore
         session({session, token}) {
             session.id = token.id
-            session.roles = token.roles
+            session.user.roles = token.roles
             session.locations = token.locations
             session.keywords = token.keywords
             return session
