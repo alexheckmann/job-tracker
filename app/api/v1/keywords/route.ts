@@ -11,6 +11,11 @@ export async function POST(req: NextRequest) {
         const session = await getServerSession(authOptions)
         const user = await getUserById(session?.user?.id)
         user?.keywords ? user?.keywords.push(newKeywords) : user!.keywords = [newKeywords]
+        user?.keywords.sort((a, b) => {
+            const aClean = a.replace(/"/g, '');
+            const bClean = b.replace(/"/g, '');
+            return aClean.localeCompare(bClean);
+        })
         await updateUser(session?.user?.id, user!)
         return NextResponse.json(user?.keywords, {status: HttpStatusCode.Created})
     } catch (error) {
