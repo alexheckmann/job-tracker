@@ -58,7 +58,7 @@ export const authOptions = {
             session.id = token.id
             session.user.roles = token.roles
             session.user.locations = token.locations
-            session.keywords = token.keywords
+            session.user.keywords = token.keywords
             return session
         },
     }

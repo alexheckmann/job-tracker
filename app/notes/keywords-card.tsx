@@ -72,8 +72,8 @@ export function KeywordsCard() {
     const isLoading = status !== "authenticated"
 
     useEffect(() => {
-        setKeywords(session?.keywords || [])
-    }, [session?.keywords])
+        setKeywords(session?.user?.keywords || [])
+    }, [session?.user?.keywords])
 
     const {mutateData: submitKeywords, isPending: isPendingSubmission} = useInsertKeywords(keywords, setKeywords)
     const {mutateData: removeKeywords, isPending: isPendingRemoval} = useRemoveKeywords(keywords, setKeywords)
