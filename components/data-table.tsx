@@ -16,6 +16,7 @@ import {useState} from "react";
 import {Skeleton} from "@/components/ui/skeleton";
 import {cn} from "@/lib/utils";
 import {DataTableColumnFilter} from "@/components/data-table-column-filter";
+import getEmptyArray from "@/lib/get-empty-array";
 
 export type ColumnFilterOption = {
     columnName: string,
@@ -121,7 +122,7 @@ export function DataTable<TData, TValue>({
                                     </TableCell>
                                 </TableRow>
                             ) : (
-                                Array.from({length: 12}, (_, i) => i).map((_, i) => (
+                                getEmptyArray(12).map((_, i) => (
                                     <TableRow key={i}>
                                         {columns.map((column) => (
                                             <TableCell key={column.id} style={{width: column.size}}>

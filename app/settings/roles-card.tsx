@@ -9,6 +9,7 @@ import {RemoveButton} from "@/app/settings/remove-button";
 import {useInsertRole} from "@/app/settings/use-string-array-insertion";
 import {useRemoveRole} from "@/app/settings/use-string-array-removal";
 import {Skeleton} from "@/components/ui/skeleton";
+import getEmptyArray from "@/lib/get-empty-array";
 
 
 const rolesCardInfoText = "Grouping applications into role types helps with keeping an overview instead of using the exact job titles."
@@ -44,7 +45,7 @@ export function RolesCard() {
                                    disabled={status !== "authenticated"}/>
                 <div className={"grid sm:grid-cols-2 gap-4 items-end max-h-[104px] overflow-y-auto"}>
                     {isLoading ?
-                        Array.from({length: 4}, (_, i) => i).map((_, i) => (
+                        getEmptyArray(4).map((_, i) => (
                             <Skeleton key={i} className={"w-full h-6"}/>
                         )) :
                         roles.map((role) => (

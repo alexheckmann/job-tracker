@@ -9,6 +9,7 @@ import {RemoveButton} from "@/app/settings/remove-button";
 import {useInsertLocation} from "@/app/settings/use-string-array-insertion";
 import {useRemoveLocation} from "@/app/settings/use-string-array-removal";
 import {Skeleton} from "@/components/ui/skeleton";
+import getEmptyArray from "@/lib/get-empty-array";
 
 
 const locationsCardInfoText = "Grouping locations of the jobs you are applying to can helps with keeping an overview if you are applying to jobs in multiple locations."
@@ -44,7 +45,7 @@ export function LocationsCard() {
                                    disabled={status !== "authenticated"}/>
                 <div className={"grid sm:grid-cols-2 gap-4 items-end max-h-[104px] overflow-y-auto"}>
                     {isLoading ?
-                        Array.from({length: 4}, (_, i) => i).map((_, i) => (
+                        getEmptyArray(4).map((_, i) => (
                             <Skeleton key={i} className={"w-full h-6"}/>
                         )) :
                         locations.map((location) => (

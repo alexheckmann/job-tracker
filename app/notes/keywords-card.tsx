@@ -14,6 +14,7 @@ import {Button} from "@/components/ui/button";
 import {truncateString} from "@/app/dashboard/job-columns";
 import {Skeleton} from "@/components/ui/skeleton";
 import {copyToClipboard} from "@/lib/copy-to-clipboard";
+import getEmptyArray from "@/lib/get-empty-array";
 
 
 const keywordsCardInfoText = "Save your keywords exactly how you use them on job portals. Some job portals use quotation marks to search for exact phrases."
@@ -80,7 +81,7 @@ export function KeywordsCard() {
                 <div
                     className={"flex flex-row flex-wrap gap-2 items-start min-h-[200px] content-start max-h-[240px] overflow-y-auto"}>
                     {isLoading ?
-                        Array.from({length: 12}, (_, i) => i).map((_, i) => (
+                        getEmptyArray(12).map((_, i) => (
                             <Badge key={i} className={`w-[90px]`} variant={"outline"}>
                                     <Skeleton className={"w-full h-4"}/>
                                 </Badge>
