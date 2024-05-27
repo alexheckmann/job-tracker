@@ -9,30 +9,14 @@ import {RemoveButton} from "@/app/settings/remove-button";
 import {useInsertKeywords} from "@/app/settings/use-string-array-insertion";
 import {useRemoveKeywords} from "@/app/settings/use-string-array-removal";
 import {Badge} from "@/components/ui/badge";
-import {toast} from "@/components/ui/use-toast";
 import {CopyIcon} from "@/components/icons";
 import {Button} from "@/components/ui/button";
 import {truncateString} from "@/app/dashboard/job-columns";
 import {Skeleton} from "@/components/ui/skeleton";
+import {copyToClipboard} from "@/lib/copy-to-clipboard";
 
 
-const rolesCardInfoText = "Save your keywords exactly how you use them on job portals. Some job portals use quotation marks to search for exact phrases."
-
-function copyToClipboard(text: string) {
-    navigator.clipboard.writeText(text).then(function () {
-        toast({
-            title: "Copied to clipboard",
-            description: "The text was copied to your clipboard.",
-            variant: "default"
-        })
-    }, function (err) {
-        toast({
-            title: "Error",
-            description: "An error occurred while copying the text to your clipboard.",
-            variant: "destructive"
-        })
-    });
-}
+const keywordsCardInfoText = "Save your keywords exactly how you use them on job portals. Some job portals use quotation marks to search for exact phrases."
 
 interface KeywordsEntryProps extends HTMLAttributes<HTMLDivElement> {
     entry: string,
@@ -86,7 +70,7 @@ export function KeywordsCard() {
                 </CardTitle>
                 <CardDescription className={"inline-flex gap-2 align-middle"}>
                     A list of keywords you use to look for roles.
-                    <InfoHover infoText={rolesCardInfoText}/>
+                    <InfoHover infoText={keywordsCardInfoText}/>
                 </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-6">
