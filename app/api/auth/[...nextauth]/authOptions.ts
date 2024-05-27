@@ -51,6 +51,7 @@ export const authOptions = {
             token.roles = user?.roles
             token.locations = user?.locations
             token.keywords = user?.keywords
+            token.companies = user?.companies
             return token
         },
         // @ts-ignore
@@ -59,6 +60,7 @@ export const authOptions = {
             session.user.roles = token.roles
             session.user.locations = token.locations
             session.user.keywords = token.keywords
+            session.user.companies = token.companies
             return session
         },
     }

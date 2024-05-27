@@ -10,6 +10,12 @@ declare module "next-auth" {
             roles: string[],
             locations: string[],
             keywords: string[],
+            companies: {
+                location: string,
+                company: {
+                    name: string
+                }[]
+            }[]
         } & DefaultSession["user"]
     }
 }
