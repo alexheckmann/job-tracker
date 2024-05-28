@@ -83,7 +83,7 @@ export const interviewColumns: ColumnDef<Interview>[] = [
 
         cell: ({row}: { row: Row<Interview> }) => {
             return (
-                <Badge>{row.getValue("type")}</Badge>
+                <Badge className={"text-nowrap"}>{row.getValue("type")}</Badge>
             );
         },
     },
