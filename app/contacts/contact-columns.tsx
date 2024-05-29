@@ -144,20 +144,20 @@ export const contactColumns: ColumnDef<Contact>[] = [
             )
         },
         cell: ({row}: { row: Row<Contact> }) => {
-            const cellIsNotEmpty = row.getValue("notes") !== "";
+            const notes = row.getValue<string>("notes");
 
             return (
-                cellIsNotEmpty &&
+                notes &&
                 <HoverCard>
                     <HoverCardTrigger asChild>
                         <span
-                            className="whitespace-nowrap truncate max-w-[50px]">{truncateString(row.getValue("notes"), 15)}</span>
+                            className="whitespace-nowrap truncate max-w-[50px]">{truncateString(notes, 15)}</span>
                     </HoverCardTrigger>
                     <HoverCardContent className="w-fit max-w-[250px] md:max-w-[500px] max-h-[50svh] overflow-auto">
                         <div className="flex justify-between space-x-4">
                             <div className="space-y-1">
                                 <p className="text-sm whitespace-pre-wrap">
-                                    {row.getValue("notes")}
+                                    {notes}
                                 </p>
                             </div>
                         </div>

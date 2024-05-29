@@ -6,6 +6,8 @@ import {Form, FormControl, FormField, FormItem, FormLabel} from "@/components/ui
 import {Input} from "@/components/ui/input";
 import {SubmitButton} from "@/components/submit-button";
 import {HTMLAttributes} from "react";
+import {cn} from "@/lib/utils";
+import {Plus} from "lucide-react";
 
 const FormSchema = z.object({
     value: z.string().min(2, {
@@ -16,13 +18,14 @@ const FormSchema = z.object({
 
 interface OneInputFieldFormProps extends HTMLAttributes<HTMLFormElement> {
     existingEntries: string[],
-    formFieldLabel: string,
+    formFieldLabel?: string,
     submitFunction: (data: any) => any,
     isPendingSubmission: boolean,
     disabled?: boolean
 }
 
 export function OneInputFieldForm({
+                                      className,
                                       existingEntries,
                                       formFieldLabel,
                                       submitFunction,
@@ -51,13 +54,13 @@ export function OneInputFieldForm({
                 await submitFunction(data)
                 form.reset()
             })}
-                  className="w-2/3 space-y-6 flex flex-row items-end gap-2">
+                  className={cn("w-2/3 space-y-6 flex flex-row items-end gap-2", className)}>
                 <FormField
                     control={form.control}
                     name="value"
                     render={({field}) => (
                         <FormItem>
-                            <FormLabel>{formFieldLabel}</FormLabel>
+                            {formFieldLabel && <FormLabel>{formFieldLabel}</FormLabel>}
                             <FormControl>
                                 <Input className={"min-w-[140px]"} {...field}
                                        disabled={isPendingSubmission || disabled}/>
@@ -66,8 +69,7 @@ export function OneInputFieldForm({
                     )}
                 />
                 <SubmitButton className={"sm:w-fit"} isPending={isPendingSubmission}
-                              normalText={"Add"} loadingText={"Adding"}
-                              normalIcon={null}
+                              normalIcon={<Plus className={"h-4 w-4"}/>}
                               disabled={disabled}/>
             </form>
         </Form>
