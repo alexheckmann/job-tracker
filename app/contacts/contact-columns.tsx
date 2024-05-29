@@ -6,25 +6,13 @@ import {useEffect} from "react";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
 import {HoverTooltip, LinkHoverTooltip} from "@/components/hover-tooltip";
 import {format} from "date-fns";
-import {formatDate} from "@/lib/formatDate";
+import {formatDate} from "@/lib/format-date";
 import {OpenLinkButton} from "@/components/open-link-button";
 
 import {Contact} from "@/lib/models/contact";
 import {ContactRowActions} from "@/app/contacts/contact-row-actions";
 import {SortIcon} from "@/components/icons";
-
-/**
- * Truncate a string to a certain length. Used as a workaround for the lack of ellipsis support in the table.
- * @param str the string to truncate
- * @param num the number of characters to truncate to
- * @returns the truncated string
- */
-function truncateString(str: string, num: number) {
-    if (str.length <= num) {
-        return str
-    }
-    return str.slice(0, num) + '...'
-}
+import {truncateString} from "@/lib/truncate-string";
 
 export const contactColumns: ColumnDef<Contact>[] = [
     {

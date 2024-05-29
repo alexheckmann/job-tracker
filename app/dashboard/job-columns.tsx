@@ -6,7 +6,7 @@ import {StatusDropdown} from "@/components/status-dropdown";
 import {useEffect} from "react";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
 import {HoverTooltip, LinkHoverTooltip} from "@/components/hover-tooltip";
-import {formatDate} from "@/lib/formatDate";
+import {formatDate} from "@/lib/format-date";
 import {format} from "date-fns";
 import {BooleanStatusIcon} from "@/components/boolean-status-icon";
 import {OpenLinkButton} from "@/components/open-link-button";
@@ -15,14 +15,7 @@ import {Job} from "@/lib/models/job";
 import {JobRowActions} from "@/app/dashboard/job-row-actions";
 import {FavoriteButton} from "@/components/favorite-button";
 import {SortIcon} from "@/components/icons";
-
-// function that returns the first n characters of a string
-export function truncateString(str: string, num: number) {
-    if (str.length <= num) {
-        return str
-    }
-    return str.slice(0, num) + '...'
-}
+import {truncateString} from "@/lib/truncate-string";
 
 export const jobTrackerColumns: ColumnDef<Job>[] = [
     {

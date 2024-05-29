@@ -3,6 +3,6 @@
  * @param size The size of the array to create
  * @returns array An array of the given size
  */
-export default function getEmptyArray(size: number) {
+export function getEmptyArray(size: number) {
     return Array.from({length: size}, (_, i) => i)
 }

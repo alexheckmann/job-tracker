@@ -11,10 +11,10 @@ import {useRemoveKeywords} from "@/app/settings/use-string-array-removal";
 import {Badge} from "@/components/ui/badge";
 import {CopyIcon} from "@/components/icons";
 import {Button} from "@/components/ui/button";
-import {truncateString} from "@/app/dashboard/job-columns";
 import {Skeleton} from "@/components/ui/skeleton";
+import {truncateString} from "@/lib/truncate-string";
 import {copyToClipboard} from "@/lib/copy-to-clipboard";
-import getEmptyArray from "@/lib/get-empty-array";
+import {getEmptyArray} from "@/lib/get-empty-array";
 
 
 const keywordsCardInfoText = "Save your keywords exactly how you use them on job portals. Some job portals use quotation marks to search for exact phrases."

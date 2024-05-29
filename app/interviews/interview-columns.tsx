@@ -5,21 +5,14 @@ import {Button} from "@/components/ui/button";
 import {useEffect} from "react";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
 import {HoverTooltip, LinkHoverTooltip} from "@/components/hover-tooltip";
-import {formatDate} from "@/lib/formatDate";
+import {formatDate} from "@/lib/format-date";
 import {format} from "date-fns";
 import {OpenLinkButton} from "@/components/open-link-button";
 import {Interview} from "@/lib/models/interview";
 import {InterviewRowActions} from "@/app/interviews/interview-row-actions";
 import {Badge} from "@/components/ui/badge";
 import {SortIcon} from "@/components/icons";
-
-// function that returns the first n characters of a string
-function truncateString(str: string, num: number) {
-    if (str.length <= num) {
-        return str
-    }
-    return str.slice(0, num) + '...'
-}
+import {truncateString} from "@/lib/truncate-string";
 
 export const interviewColumns: ColumnDef<Interview>[] = [
     {
