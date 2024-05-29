@@ -10,9 +10,29 @@ import {useRemoveRole} from "@/app/settings/use-string-array-removal";
 import {Skeleton} from "@/components/ui/skeleton";
 import {getEmptyArray} from "@/lib/get-empty-array";
 import AddEntryButton from "@/components/add-entry-button";
+import {cn} from "@/lib/utils";
 
 
 const rolesCardInfoText = "Grouping applications into role types helps with keeping an overview instead of using the exact job titles."
+
+interface RolesEntryProps {
+    role: string,
+    removeRole: (role: string) => void,
+    isPendingRemoval: boolean
+}
+
+function RoleEntry({role, removeRole, isPendingRemoval}: RolesEntryProps) {
+    return (
+        <div className="flex items-center align-middle h-6 space-x-4 justify-between w-full group">
+            <p className={cn("text-sm font-medium text-nowrap truncate hover:text-clip leading-none",
+                isPendingRemoval && "text-muted-foreground")}>
+                {role}
+            </p>
+            <RemoveButton className={"invisible group-hover:visible"} role={role}
+                          onClick={() => removeRole(role)}/>
+        </div>
+    )
+}
 
 export function RolesCard() {
 
@@ -46,17 +66,13 @@ export function RolesCard() {
                             <Skeleton key={i} className={"w-full h-6"}/>
                         )) :
                         roles.map((role) => (
-                            <div key={role}
-                                 className="flex items-center align-middle h-6 space-x-4 justify-between w-full group">
-                                <p className="text-sm font-medium text-nowrap truncate hover:text-clip leading-none">{role}</p>
-                                <RemoveButton className={"invisible group-hover:visible"} role={role}
-                                              onClick={() => removeRole(role)}/>
-                            </div>
+                            <RoleEntry key={role} role={role} removeRole={removeRole}
+                                       isPendingRemoval={isPendingRemoval}/>
                         ))}
                 </div>
                 <AddEntryButton existingEntries={roles}
-                                   submitFunction={submitRole} isPendingSubmission={isPendingSubmission}
-                                   disabled={status !== "authenticated"}/>
+                                submitFunction={submitRole} isPendingSubmission={isPendingSubmission}
+                                disabled={status !== "authenticated"}/>
             </CardContent>
         </Card>
     )
