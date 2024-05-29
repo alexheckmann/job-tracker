@@ -29,14 +29,16 @@ export function RemoveButton({className, onClick, disabled, isLoading}: RemoveBu
             <Button variant="ghost" size="icon" className={cn(removeButtonSize, "text-muted-foreground", className)}
                     disabled={disabled || isLoading}
                     onClick={() => setIsFirstClick(false)}>
-                {isLoading ? <LoadingIcon className={removeButtonIconSize}/> :
+                {isLoading ?
+                    <LoadingIcon className={removeButtonIconSize}/> :
                     <RemoveIcon className={removeButtonIconSize}/>}
             </Button> :
             <Button variant="destructive" size="icon" className={cn(removeButtonSize, className)}
                     disabled={disabled || isLoading}
                     onMouseLeave={() => setIsFirstClick(true)}
                     onClick={onClick}>
-                {isLoading ? <LoadingIcon className={removeButtonIconSize}/> :
+                {isLoading ?
+                    <LoadingIcon className={removeButtonIconSize}/> :
                     <DeleteIcon className={removeButtonIconSize}/>}
             </Button>
     )
