@@ -52,7 +52,7 @@ export default function JobCreationDialogContent() {
                 }>
 
                     <DialogHeader>
-                        <DialogTitle className={"flex flex-row gap-2 justify-center sm:justify-start"}>
+                        <DialogTitle className={"flex flex-row gap-2 items-center justify-center sm:justify-start"}>
                             <JobIcon/>
                             Add job
                         </DialogTitle>
@@ -64,8 +64,8 @@ export default function JobCreationDialogContent() {
                     <JobDialogContent form={form}/>
 
                     <DialogFooter>
-                        <SubmitButton isPending={isAddingJob} normalText={"Add job"} loadingText={"Adding"}
-                                      normalIcon={null}/>
+                        <SubmitButton isPending={isAddingJob} normalText={"Add"} loadingText={"Adding"}
+                                      normalIcon={<JobIcon/>}/>
                     </DialogFooter>
                 </form>
             </Form>

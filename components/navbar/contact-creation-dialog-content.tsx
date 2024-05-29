@@ -47,7 +47,7 @@ export default function ContactCreationDialogContent() {
                 }>
 
                     <DialogHeader>
-                        <DialogTitle className={"flex flex-row gap-2 justify-center sm:justify-start"}>
+                        <DialogTitle className={"flex flex-row gap-2 items-center justify-center sm:justify-start"}>
                             <ContactIcon/>
                             Add contact
                         </DialogTitle>

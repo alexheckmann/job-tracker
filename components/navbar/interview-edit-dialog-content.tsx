@@ -38,7 +38,7 @@ export default function InterviewEditDialogContent({interview}: InterviewEditDia
                     })
                 }>
                     <DialogHeader>
-                        <DialogTitle className={"flex flex-row gap-2 justify-center sm:justify-start"}>
+                        <DialogTitle className={"flex flex-row gap-2 items-center justify-center sm:justify-start"}>
                             <InterviewIcon/>
                             Edit interview
                         </DialogTitle>

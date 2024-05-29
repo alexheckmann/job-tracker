@@ -43,7 +43,7 @@ export default function InterviewCreationDialogContent() {
                 }>
 
                     <DialogHeader>
-                        <DialogTitle className={"flex flex-row gap-2 justify-center sm:justify-start"}>
+                        <DialogTitle className={"flex flex-row gap-2 items-center justify-center sm:justify-start"}>
                             <InterviewIcon/>
                             Add interview
                         </DialogTitle>
@@ -55,7 +55,7 @@ export default function InterviewCreationDialogContent() {
                     <InterviewDialogContent form={form}/>
 
                     <DialogFooter>
-                        <SubmitButton normalText={"Add interview"} loadingText={"Adding"} normalIcon={null}
+                        <SubmitButton normalText={"Add"} loadingText={"Adding"} normalIcon={<InterviewIcon/>}
                                       isPending={isAddingInterview}/>
                     </DialogFooter>
                 </form>

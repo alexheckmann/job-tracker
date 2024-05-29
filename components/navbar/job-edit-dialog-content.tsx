@@ -43,7 +43,7 @@ export default function JobEditDialogContent({job}: JobEditDialogContentProps) {
                 }>
 
                     <DialogHeader>
-                        <DialogTitle className={"flex flex-row gap-2 justify-center sm:justify-start"}>
+                        <DialogTitle className={"flex flex-row gap-2 items-center justify-center sm:justify-start"}>
                             <JobIcon/>
                             Edit job
                         </DialogTitle>
@@ -54,8 +54,8 @@ export default function JobEditDialogContent({job}: JobEditDialogContentProps) {
 
                     <JobDialogContent form={form}/>
                     <DialogFooter>
-                        <SubmitButton isPending={isUpdatingJob} normalText={"Update job"} loadingText={"Saving"}
-                                      normalIcon={null}/>
+                        <SubmitButton isPending={isUpdatingJob} normalText={"Update"} loadingText={"Updating"}
+                                      normalIcon={<JobIcon/>}/>
                     </DialogFooter>
                 </form>
             </Form>

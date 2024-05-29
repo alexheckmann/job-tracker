@@ -41,7 +41,7 @@ export default function ContactEditDialogContent({contact}: ContentEditDialogCon
                 }>
 
                     <DialogHeader>
-                        <DialogTitle className={"flex flex-row gap-2 justify-center sm:justify-start"}>
+                        <DialogTitle className={"flex flex-row gap-2 items-center justify-center sm:justify-start"}>
                             <ContactIcon/>
                             Edit contact
                         </DialogTitle>
@@ -53,7 +53,7 @@ export default function ContactEditDialogContent({contact}: ContentEditDialogCon
                     <ContactDialogContent form={form}/>
 
                     <DialogFooter>
-                        <SubmitButton normalText={"Update contact"} loadingText={"Updating"} normalIcon={null}
+                        <SubmitButton normalText={"Update"} loadingText={"Updating"} normalIcon={<ContactIcon/>}
                                       isPending={isUpdatingContact}/>
                     </DialogFooter>
                 </form>
