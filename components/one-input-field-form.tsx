@@ -16,7 +16,7 @@ const FormSchema = z.object({
 })
 
 
-interface OneInputFieldFormProps extends HTMLAttributes<HTMLFormElement> {
+interface OneInputFieldFormProps extends HTMLAttributes<HTMLInputElement> {
     existingEntries: string[],
     formFieldLabel?: string,
     submitFunction: (data: any) => any,
@@ -30,7 +30,8 @@ export function OneInputFieldForm({
                                       formFieldLabel,
                                       submitFunction,
                                       isPendingSubmission,
-                                      disabled
+                                      disabled,
+                                      onBlur
                                   }: OneInputFieldFormProps) {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
@@ -63,6 +64,11 @@ export function OneInputFieldForm({
                             {formFieldLabel && <FormLabel>{formFieldLabel}</FormLabel>}
                             <FormControl>
                                 <Input className={"min-w-[140px]"} {...field}
+                                       onBlur={(event) => {
+                                           if (field.value.trim() === "") {
+                                               onBlur && onBlur(event)
+                                           }
+                                       }}
                                        disabled={isPendingSubmission || disabled}/>
                             </FormControl>
                         </FormItem>
