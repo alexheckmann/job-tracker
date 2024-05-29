@@ -40,10 +40,7 @@ export function LocationsCard() {
                 </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-6">
-                <OneInputFieldForm existingEntries={locations} formFieldLabel={"Add location"}
-                                   submitFunction={submitLocation} isPendingSubmission={isPendingSubmission}
-                                   disabled={status !== "authenticated"}/>
-                <div className={"grid sm:grid-cols-2 gap-4 items-end max-h-[104px] overflow-y-auto"}>
+                <div className={"grid sm:grid-cols-2 gap-4 items-end content-start h-[104px] overflow-y-auto"}>
                     {isLoading ?
                         getEmptyArray(4).map((_, i) => (
                             <Skeleton key={i} className={"w-full h-6"}/>
@@ -51,12 +48,15 @@ export function LocationsCard() {
                         locations.map((location) => (
                             <div key={location}
                                  className="flex items-center align-middle h-6 space-x-4 justify-between w-full group">
-                                <p className="text-sm font-medium leading-none">{location}</p>
+                                <p className="text-sm font-medium text-nowrap truncate hover:text-clip leading-none">{location}</p>
                                 <RemoveButton className={"invisible group-hover:visible"} role={location}
                                               onClick={() => removeLocation(location)}/>
                             </div>
                         ))}
                 </div>
+                <OneInputFieldForm existingEntries={locations} formFieldLabel={"Add location"}
+                                   submitFunction={submitLocation} isPendingSubmission={isPendingSubmission}
+                                   disabled={status !== "authenticated"}/>
             </CardContent>
         </Card>
     )

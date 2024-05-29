@@ -40,10 +40,7 @@ export function RolesCard() {
                 </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-6">
-                <OneInputFieldForm existingEntries={roles} formFieldLabel={"Add role"}
-                                   submitFunction={submitRole} isPendingSubmission={isPendingSubmission}
-                                   disabled={status !== "authenticated"}/>
-                <div className={"grid sm:grid-cols-2 gap-4 items-end max-h-[104px] overflow-y-auto"}>
+                <div className={"grid sm:grid-cols-2 gap-4 items-end content-start h-[104px] overflow-y-auto"}>
                     {isLoading ?
                         getEmptyArray(4).map((_, i) => (
                             <Skeleton key={i} className={"w-full h-6"}/>
@@ -51,12 +48,15 @@ export function RolesCard() {
                         roles.map((role) => (
                             <div key={role}
                                  className="flex items-center align-middle h-6 space-x-4 justify-between w-full group">
-                                <p className="text-sm font-medium leading-none">{role}</p>
+                                <p className="text-sm font-medium text-nowrap truncate hover:text-clip leading-none">{role}</p>
                                 <RemoveButton className={"invisible group-hover:visible"} role={role}
                                               onClick={() => removeRole(role)}/>
                             </div>
                         ))}
                 </div>
+                <OneInputFieldForm existingEntries={roles} formFieldLabel={"Add role"}
+                                   submitFunction={submitRole} isPendingSubmission={isPendingSubmission}
+                                   disabled={status !== "authenticated"}/>
             </CardContent>
         </Card>
     )
