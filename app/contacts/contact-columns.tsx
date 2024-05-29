@@ -29,10 +29,10 @@ export const contactColumns: ColumnDef<Contact>[] = [
         },
         size: 100,
         cell: ({row}: { row: Row<Contact> }) => {
-            const role = row.getValue<string>("name")
+            const name = row.getValue<string>("name")
             return (
                 <span className={"text-nowrap"}>
-                    {role}
+                    {name}
                 </span>
             )
         }
@@ -106,6 +106,7 @@ export const contactColumns: ColumnDef<Contact>[] = [
         cell: ({row}: { row: Row<Contact> }) => {
             const phoneNumber = row.getValue<string>("phone")
             return (
+                phoneNumber &&
                 <span className={"text-nowrap"}>
                     {phoneNumber}
                 </span>
