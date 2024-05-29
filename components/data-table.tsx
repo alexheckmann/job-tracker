@@ -16,7 +16,7 @@ import {useState} from "react";
 import {Skeleton} from "@/components/ui/skeleton";
 import {cn} from "@/lib/utils";
 import {DataTableColumnFilter} from "@/components/data-table-column-filter";
-import getEmptyArray from "@/lib/get-empty-array";
+import {getEmptyArray} from "@/lib/get-empty-array";
 
 export type ColumnFilterOption = {
     columnName: string,

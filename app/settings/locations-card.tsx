@@ -9,7 +9,7 @@ import {RemoveButton} from "@/app/settings/remove-button";
 import {useInsertLocation} from "@/app/settings/use-string-array-insertion";
 import {useRemoveLocation} from "@/app/settings/use-string-array-removal";
 import {Skeleton} from "@/components/ui/skeleton";
-import getEmptyArray from "@/lib/get-empty-array";
+import {getEmptyArray} from "@/lib/get-empty-array";
 
 
 const locationsCardInfoText = "Grouping locations of the jobs you are applying to can helps with keeping an overview if you are applying to jobs in multiple locations."

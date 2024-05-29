@@ -83,8 +83,8 @@ export function KeywordsCard() {
                     {isLoading ?
                         getEmptyArray(12).map((_, i) => (
                             <Badge key={i} className={`w-[90px]`} variant={"outline"}>
-                                    <Skeleton className={"w-full h-4"}/>
-                                </Badge>
+                                <Skeleton className={"w-full h-4"}/>
+                            </Badge>
                         )) :
                         keywords.map((entry) => (
                             <KeywordsEntry key={entry} entry={entry} removeKeywords={removeKeywords}

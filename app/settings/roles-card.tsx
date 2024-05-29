@@ -9,7 +9,7 @@ import {RemoveButton} from "@/app/settings/remove-button";
 import {useInsertRole} from "@/app/settings/use-string-array-insertion";
 import {useRemoveRole} from "@/app/settings/use-string-array-removal";
 import {Skeleton} from "@/components/ui/skeleton";
-import getEmptyArray from "@/lib/get-empty-array";
+import {getEmptyArray} from "@/lib/get-empty-array";
 
 
 const rolesCardInfoText = "Grouping applications into role types helps with keeping an overview instead of using the exact job titles."
