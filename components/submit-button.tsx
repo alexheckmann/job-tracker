@@ -6,9 +6,9 @@ import {LoadingIcon} from "@/components/icons";
 interface SubmitButtonProps extends HTMLAttributes<HTMLButtonElement> {
     disabled?: boolean;
     isPending?: boolean;
-    loadingText: string;
-    normalText: string;
-    normalIcon: any;
+    loadingText?: string;
+    normalText?: string;
+    normalIcon?: any;
 }
 
 export function SubmitButton({
@@ -22,7 +22,7 @@ export function SubmitButton({
                              }: SubmitButtonProps) {
 
     return (
-        <Button {...props} type="submit" className={cn("gap-2 sm:w-[140px]", className)}
+        <Button {...props} type="submit" className={cn("sm:w-[140px]", normalText && normalIcon && "gap-2", className)}
                 disabled={disabled || isPending}>
             <span className={cn(isPending && "animate-pulse", "select-none")}>
                 {isPending ? loadingText : normalText}
