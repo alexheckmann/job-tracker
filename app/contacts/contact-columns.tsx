@@ -28,7 +28,15 @@ export const contactColumns: ColumnDef<Contact>[] = [
                 </Button>
             )
         },
-        size: 100
+        size: 100,
+        cell: ({row}: { row: Row<Contact> }) => {
+            const role = row.getValue<string>("name")
+            return (
+                <span className={"text-nowrap"}>
+                    {role}
+                </span>
+            )
+        }
     },
     {
         accessorKey: "company",
