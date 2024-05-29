@@ -8,7 +8,6 @@ import {HoverTooltip, LinkHoverTooltip} from "@/components/hover-tooltip";
 import {format} from "date-fns";
 import {formatDate} from "@/lib/format-date";
 import {OpenLinkButton} from "@/components/open-link-button";
-
 import {Contact} from "@/lib/models/contact";
 import {ContactRowActions} from "@/app/contacts/contact-row-actions";
 import {SortIcon} from "@/components/icons";
@@ -101,6 +100,14 @@ export const contactColumns: ColumnDef<Contact>[] = [
             return (
                 <span className={"px-4"}>
                     Number
+                </span>
+            )
+        },
+        cell: ({row}: { row: Row<Contact> }) => {
+            const phoneNumber = row.getValue<string>("phone")
+            return (
+                <span className={"text-nowrap"}>
+                    {phoneNumber}
                 </span>
             )
         },
