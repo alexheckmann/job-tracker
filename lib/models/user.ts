@@ -6,6 +6,15 @@ const userMaxLengthConstraints = {
     email: 256,
 }
 
+export const UserCompaniesSchema = z.object({
+    location: z.string().min(1),
+    company: z.array(z.object({
+        name: z.string().min(1)
+    })).optional()
+});
+
+export type UserCompanies = z.infer<typeof UserCompaniesSchema>;
+
 export const UserSchema = DatabaseObject.extend({
     name: z.string().min(1).max(userMaxLengthConstraints.name),
     email: z.string().min(1).max(userMaxLengthConstraints.email),
