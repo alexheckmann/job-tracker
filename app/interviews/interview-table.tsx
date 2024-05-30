@@ -27,7 +27,7 @@ export function InterviewTable() {
     }, [isJobDataFetched, fetchedInterviewData])
 
     return (
-        <CardContent className={"h-[70dvh] p-5 pt-3 md:p-6"}>
+        <CardContent className={"h-[70dvh] p-5 pt-3 md:px-6 md:pb-6"}>
             <DataTable className={"h-[60dvh] overflow-auto"}
                        isLoading={isLoadingInterviewData}
                        data={interviewData}

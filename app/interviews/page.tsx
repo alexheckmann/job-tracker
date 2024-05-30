@@ -11,7 +11,7 @@ export default function Home() {
 
     return (
         <FullPageCard>
-            <CardHeader className="flex flex-row items-center p-5 pb-0 md:p-6">
+            <CardHeader className="flex flex-row items-center p-5 pb-0 md:px-6 md:pt-6">
                 <div className="grid gap-2">
                     <CardTitle>Interviews</CardTitle>
                     <CardDescription>
