@@ -17,7 +17,16 @@ export async function GET() {
     try {
         const session = await getServerSession(authOptions)
         const results = await getJobs(session?.user?.id)
-        return NextResponse.json({jobs: results}, {status: HttpStatusCode.Ok})
+        const sortedResults = results.sort((a, b) => {
+            // Convert the lastUpdate strings to Date objects for comparison
+            const dateA = new Date(a.lastUpdate);
+            const dateB = new Date(b.lastUpdate);
+
+            // Sort in descending order (most recent first)
+            return dateB.getTime() - dateA.getTime();
+        });
+
+        return NextResponse.json({jobs: sortedResults}, {status: HttpStatusCode.Ok})
     } catch (error) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
     }
