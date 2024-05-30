@@ -37,7 +37,7 @@ export default function InputMultiSelect({label, options, onSelectFunction}: Inp
             <PopoverContent className={"w-[200px] p-0"} align={"start"}>
                 <Command>
                     <CommandInput placeholder={label}/>
-                    <CommandList>
+                    <CommandList className={"max-h-[200px]"}>
                         <CommandEmpty>
                             No results found.
                         </CommandEmpty>
