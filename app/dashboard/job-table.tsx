@@ -3,42 +3,50 @@
 import {CardContent} from "@/components/ui/card";
 import {ColumnFilterOption, DataTable} from "@/components/data-table";
 import {jobTrackerColumns} from "@/app/dashboard/job-columns";
-import {useJobData, useJobEntriesStore} from "@/app/data/use-get-data";
+import {useJobData, useJobEntriesStore, useLocationsStore} from "@/app/data/use-get-data";
 import {useEffect} from "react";
 import {ApplicationStatus} from "@/lib/models/job";
 import {useSession} from "next-auth/react";
 
-const filterColumns: ColumnFilterOption[] = [
-    {
-        columnName: "company",
-        type: "input",
-        label: "Search for a company..."
-    },
-    {
-        columnName: "isRecruiter",
-        type: "button",
-        label: "HR",
-        filterValue: false
-    },
-    {
-        columnName: "isFavorite",
-        type: "button",
-        label: "Starred",
-        filterValue: true
-    },
-    {
-        columnName: "status",
-        type: "select",
-        label: "Status",
-        initialValues: ApplicationStatus.options
-    }
-]
 
 export function JobTable() {
 
     const {data: session} = useSession()
     const {data: fetchedJobData, isLoading: isLoadingJobData, isFetched: isJobDataFetched} = useJobData()
     const {data: jobData, setData: setJobData} = useJobEntriesStore()
+    const {data: locations} = useLocationsStore()
+
+    const filterColumns: ColumnFilterOption[] = [
+        {
+            columnName: "company",
+            type: "input",
+            label: "Search for a company..."
+        },
+        {
+            columnName: "isRecruiter",
+            type: "button",
+            label: "HR",
+            filterValue: false
+        },
+        {
+            columnName: "isFavorite",
+            type: "button",
+            label: "Starred",
+            filterValue: true
+        },
+        {
+            columnName: "status",
+            type: "select",
+            label: "Status",
+            initialValues: ApplicationStatus.options
+        },
+        {
+            columnName: "location",
+            type: "select",
+            label: "Locations",
+            initialValues: locations
+        }
+    ]
 
     useEffect(() => {
         if (isJobDataFetched) {
@@ -55,17 +63,7 @@ export function JobTable() {
             })
         }
 
-        if (!filterColumns.some(columnFilter => columnFilter.columnName === "location")) {
-
-            filterColumns.push({
-                columnName: "location",
-                type: "select",
-                label: "Locations",
-                initialValues: session?.user?.locations || []
-            })
-        }
-
-    }, [isJobDataFetched, fetchedJobData, session?.user?.roles, session?.user?.locations])
+    }, [isJobDataFetched, fetchedJobData, session?.user?.roles])
 
     return (
         <CardContent className={"h-[70dvh] p-5 pt-3 md:p-6"}>

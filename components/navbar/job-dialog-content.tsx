@@ -11,6 +11,7 @@ import {Button} from "@/components/ui/button";
 import {UseFormReturn} from "react-hook-form";
 import {useSession} from "next-auth/react";
 import {Star} from "lucide-react";
+import {useLocationsStore} from "@/app/data/use-get-data";
 
 interface JobDialogContentProps {
     form: UseFormReturn<Job>;
@@ -20,7 +21,7 @@ export default function JobDialogContent({form}: JobDialogContentProps) {
 
     const {data: session} = useSession()
     const roles = session?.user?.roles || []
-    const locations = session?.user?.locations || []
+    const {data: locations} = useLocationsStore()
 
     return (
         <div className="grid gap-4 py-4">

@@ -10,9 +10,10 @@ import {JobCreationButton} from "@/components/navbar/job-creation-button";
 import {ContactCreationButton} from "@/components/navbar/contact-creation-button";
 import {signOut, useSession} from "next-auth/react";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {SignInButton} from "@/components/sign-in-button";
 import {InterviewCreationButton} from "@/components/navbar/interview-creation-button";
+import {useLocationsStore} from "@/app/data/use-get-data";
 
 interface NavLink {
     path: string;
@@ -38,10 +39,17 @@ const profileLinks: NavLink[] = [
 export default function Navbar() {
 
     const pathname = usePathname();
-    const {status} = useSession();
+    const {status, data: session} = useSession();
     const [isSheetOpen, setIsSheetOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const isAuthenticated = status === "authenticated";
+
+    // loading globally available data here since the navbar is always rendered and thus always executes useEffect
+    const {data: locations, setData: setLocations} = useLocationsStore()
+
+    useEffect(() => {
+        setLocations(session?.user?.locations || [])
+    }, [session?.user?.locations])
 
     return (
 

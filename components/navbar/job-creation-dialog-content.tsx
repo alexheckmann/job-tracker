@@ -1,7 +1,7 @@
 "use client"
 
 import {DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
-import {useJobCreationDialogStore} from "@/app/data/use-get-data";
+import {useJobCreationDialogStore, useLocationsStore} from "@/app/data/use-get-data";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form} from "@/components/ui/form";
@@ -17,13 +17,14 @@ export default function JobCreationDialogContent() {
 
     const {setData: setIsJobCreationDialogOpen} = useJobCreationDialogStore()
     const {data: session} = useSession()
+    const {data: locations} = useLocationsStore()
 
     const form = useForm<Job>({
         resolver: zodResolver(JobSchema),
         defaultValues: {
             role: session?.user?.roles?.[0] || "",
             company: "",
-            location: session?.user?.locations?.[0] || "",
+            location: locations[0] || "",
             lastUpdate: new Date(),
             status: "Applied",
             exactTitle: "",
@@ -35,6 +36,10 @@ export default function JobCreationDialogContent() {
             link: ""
         }
     })
+
+    // set location to first location in global state here since the useForm does not update when the global state updates,
+    // hence the location will be empty on first render
+    form.setValue("location", locations[0] || "")
 
     const {
         mutateData: insertJob,

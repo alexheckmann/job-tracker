@@ -2,7 +2,6 @@
 
 import {useSession} from "next-auth/react";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
-import {useEffect, useState} from "react";
 import {InfoHover} from "@/components/info-hover";
 import {RemoveButton} from "@/app/settings/remove-button";
 import {useInsertLocation} from "@/app/settings/use-string-array-insertion";
@@ -10,6 +9,7 @@ import {useRemoveLocation} from "@/app/settings/use-string-array-removal";
 import {Skeleton} from "@/components/ui/skeleton";
 import {getEmptyArray} from "@/lib/get-empty-array";
 import AddEntryButton from "@/components/add-entry-button";
+import {useLocationsStore} from "@/app/data/use-get-data";
 
 
 const locationsCardInfoText = "Grouping locations of the jobs you are applying to can helps with keeping an overview if you are applying to jobs in multiple locations."
@@ -19,14 +19,10 @@ export function LocationsCard() {
     const {data: session, status} = useSession()
     const isLoading = status !== "authenticated"
 
-    const [locations, setLocations] = useState<string[]>([])
+    const {data: locations, setData: setLocations} = useLocationsStore()
 
     const {mutateData: submitLocation, isPending: isPendingSubmission} = useInsertLocation(locations, setLocations)
     const {mutateData: removeLocation, isPending: isPendingRemoval} = useRemoveLocation(locations, setLocations)
-
-    useEffect(() => {
-        setLocations(session?.user?.locations || [])
-    }, [session?.user?.locations])
 
     return (
         <Card>
