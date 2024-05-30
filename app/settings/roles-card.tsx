@@ -2,7 +2,6 @@
 
 import {useSession} from "next-auth/react";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
-import {useEffect, useState} from "react";
 import {InfoHover} from "@/components/info-hover";
 import {RemoveButton} from "@/app/settings/remove-button";
 import {useInsertRole} from "@/app/settings/use-string-array-insertion";
@@ -11,6 +10,7 @@ import {Skeleton} from "@/components/ui/skeleton";
 import {getEmptyArray} from "@/lib/get-empty-array";
 import AddEntryButton from "@/components/add-entry-button";
 import {cn} from "@/lib/utils";
+import {useRolesStore} from "@/app/data/use-get-data";
 
 
 const rolesCardInfoText = "Grouping applications into role types helps with keeping an overview instead of using the exact job titles."
@@ -39,11 +39,7 @@ export function RolesCard() {
     const {data: session, status} = useSession()
     const isLoading = status !== "authenticated"
 
-    const [roles, setRoles] = useState<string[]>([])
-
-    useEffect(() => {
-        setRoles(session?.user?.roles || [])
-    }, [session?.user?.roles])
+    const {data: roles, setData: setRoles} = useRolesStore()
 
     const {mutateData: submitRole, isPending: isPendingSubmission} = useInsertRole(roles, setRoles)
     const {mutateData: removeRole, isPending: isPendingRemoval} = useRemoveRole(roles, setRoles)

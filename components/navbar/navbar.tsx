@@ -13,7 +13,7 @@ import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger
 import {useEffect, useState} from "react";
 import {SignInButton} from "@/components/sign-in-button";
 import {InterviewCreationButton} from "@/components/navbar/interview-creation-button";
-import {useLocationsStore} from "@/app/data/use-get-data";
+import {useLocationsStore, useRolesStore} from "@/app/data/use-get-data";
 
 interface NavLink {
     path: string;
@@ -45,11 +45,13 @@ export default function Navbar() {
     const isAuthenticated = status === "authenticated";
 
     // loading globally available data here since the navbar is always rendered and thus always executes useEffect
-    const {data: locations, setData: setLocations} = useLocationsStore()
+    const {setData: setLocations} = useLocationsStore()
+    const {setData: setRoles} = useRolesStore()
 
     useEffect(() => {
+        setRoles(session?.user?.roles || [])
         setLocations(session?.user?.locations || [])
-    }, [session?.user?.locations])
+    }, [session?.user?.roles, session?.user?.locations])
 
     return (
 

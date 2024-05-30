@@ -84,6 +84,11 @@ export const useContactEditDialogStore = create<ClientStateStore<boolean>>(set =
     setData: (data) => set({data: data})
 }));
 
+export const useRolesStore = create<ClientStateStore<string[]>>(set => ({
+    data: [] as string[],
+    setData: (data) => set({data: data})
+}));
+
 export const useLocationsStore = create<ClientStateStore<string[]>>(set => ({
     data: [] as string[],
     setData: (data) => set({data: data})

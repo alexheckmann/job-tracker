@@ -3,17 +3,16 @@
 import {CardContent} from "@/components/ui/card";
 import {ColumnFilterOption, DataTable} from "@/components/data-table";
 import {jobTrackerColumns} from "@/app/dashboard/job-columns";
-import {useJobData, useJobEntriesStore, useLocationsStore} from "@/app/data/use-get-data";
+import {useJobData, useJobEntriesStore, useLocationsStore, useRolesStore} from "@/app/data/use-get-data";
 import {useEffect} from "react";
 import {ApplicationStatus} from "@/lib/models/job";
-import {useSession} from "next-auth/react";
 
 
 export function JobTable() {
 
-    const {data: session} = useSession()
     const {data: fetchedJobData, isLoading: isLoadingJobData, isFetched: isJobDataFetched} = useJobData()
     const {data: jobData, setData: setJobData} = useJobEntriesStore()
+    const {data: roles} = useRolesStore()
     const {data: locations} = useLocationsStore()
 
     const filterColumns: ColumnFilterOption[] = [
@@ -41,6 +40,12 @@ export function JobTable() {
             initialValues: ApplicationStatus.options
         },
         {
+            columnName: "role",
+            type: "select",
+            label: "Roles",
+            initialValues: roles
+        },
+        {
             columnName: "location",
             type: "select",
             label: "Locations",
@@ -52,18 +57,7 @@ export function JobTable() {
         if (isJobDataFetched) {
             setJobData(fetchedJobData!)
         }
-
-        if (!filterColumns.some(columnFilter => columnFilter.columnName === "role")) {
-
-            filterColumns.push({
-                columnName: "role",
-                type: "select",
-                label: "Roles",
-                initialValues: session?.user?.roles || []
-            })
-        }
-
-    }, [isJobDataFetched, fetchedJobData, session?.user?.roles])
+    }, [isJobDataFetched, fetchedJobData])
 
     return (
         <CardContent className={"h-[70dvh] p-5 pt-3 md:p-6"}>

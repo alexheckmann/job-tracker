@@ -9,9 +9,8 @@ import {ApplicationStatus, Job} from "@/lib/models/job";
 import {FormSwitch} from "@/components/form/form-switch";
 import {Button} from "@/components/ui/button";
 import {UseFormReturn} from "react-hook-form";
-import {useSession} from "next-auth/react";
 import {Star} from "lucide-react";
-import {useLocationsStore} from "@/app/data/use-get-data";
+import {useLocationsStore, useRolesStore} from "@/app/data/use-get-data";
 
 interface JobDialogContentProps {
     form: UseFormReturn<Job>;
@@ -19,8 +18,7 @@ interface JobDialogContentProps {
 
 export default function JobDialogContent({form}: JobDialogContentProps) {
 
-    const {data: session} = useSession()
-    const roles = session?.user?.roles || []
+    const {data: roles} = useRolesStore()
     const {data: locations} = useLocationsStore()
 
     return (
