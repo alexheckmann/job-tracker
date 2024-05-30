@@ -104,7 +104,7 @@ export function useUpdateInterview(interview: Interview, setUiState?: (data: any
     // TODO implement success undo action
     const successToastContent: ToastContent = {
         title: "Interview updated",
-        description: `The job at ${interview.company} has been updated.`,
+        description: `The interview has been updated.`,
         variant: "default",
         //action: (
         //    <ToastAction altText="Retry">Retry</ToastAction>
@@ -114,7 +114,7 @@ export function useUpdateInterview(interview: Interview, setUiState?: (data: any
     // TODO implement error retry action
     const errorToastContent: ToastContent = {
         title: "Failed to update interview",
-        description: `The interview at ${interview.company} could not be updated.`,
+        description: `The interview could not be updated.`,
         variant: "destructive",
         //action: (
         //    <ToastAction altText="Retry">Retry</ToastAction>

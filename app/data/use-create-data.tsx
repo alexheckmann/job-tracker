@@ -90,7 +90,7 @@ export function useCreateInterview(interview: Interview, setUiState?: (data: any
     // TODO implement success undo action
     const successToastContent: ToastContent = {
         title: "Job added",
-        description: `The job at ${interview.company} has been added.`,
+        description: `The interview has been added.`,
         variant: "default",
         //action: (
         //    <ToastAction altText={"Undo"}>Undo</ToastAction>
@@ -100,7 +100,7 @@ export function useCreateInterview(interview: Interview, setUiState?: (data: any
     // TODO implement error retry action
     const errorToastContent: ToastContent = {
         title: "Failed to add interview",
-        description: `The job at ${interview.company} could not be added; please retry.`,
+        description: `The interview could not be added; please retry.`,
         variant: "destructive",
         //action: (
         //    <ToastAction altText={"Retry"}>Retry</ToastAction>
