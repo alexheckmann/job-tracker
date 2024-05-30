@@ -20,7 +20,6 @@ export default function InterviewCreationDialogContent() {
         resolver: zodResolver(InterviewSchema),
         defaultValues: {
             description: "",
-            company: "",
             date: new Date(),
             type: "Initial Call",
             notes: "",

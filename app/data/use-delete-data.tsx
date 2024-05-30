@@ -89,7 +89,7 @@ export function useDeleteInterview(interview: Interview) {
     // TODO implement success undo action
     const successToastContent: ToastContent = {
         title: "Interview deleted",
-        description: `The interview at ${interview.company} has been successfully deleted.`,
+        description: `The interview has been successfully deleted.`,
         variant: "default",
         // action: (
         //    <ToastAction altText="Undo">Undo</ToastAction>
@@ -99,7 +99,7 @@ export function useDeleteInterview(interview: Interview) {
     // TODO implement error retry action
     const errorToastContent: ToastContent = {
         title: "Deleting unsuccessful",
-        description: `Please try again to delete the interview at ${interview.company}.`,
+        description: `Please try again to delete the interview.`,
         variant: "destructive",
         //action: (
         //    <ToastAction altText="Retry">Retry</ToastAction>

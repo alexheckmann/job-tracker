@@ -7,11 +7,22 @@ import {useJobData, useJobEntriesStore, useLocationsStore, useRolesStore} from "
 import {useEffect} from "react";
 import {ApplicationStatus} from "@/lib/models/job";
 
+export function useJobDataWithClientState() {
+    const {data: fetchedJobData, isLoading: isLoadingJobData, isFetched: isJobDataFetched} = useJobData()
+    const {data: jobData, setData: setJobData} = useJobEntriesStore()
+
+    useEffect(() => {
+        if (isJobDataFetched) {
+            setJobData(fetchedJobData!)
+        }
+    }, [isJobDataFetched, fetchedJobData])
+
+    return {data: jobData, isLoading: isLoadingJobData}
+}
 
 export function JobTable() {
 
-    const {data: fetchedJobData, isLoading: isLoadingJobData, isFetched: isJobDataFetched} = useJobData()
-    const {data: jobData, setData: setJobData} = useJobEntriesStore()
+    const {data: jobData, isLoading: isLoadingJobData} = useJobDataWithClientState()
     const {data: roles} = useRolesStore()
     const {data: locations} = useLocationsStore()
 
@@ -52,12 +63,6 @@ export function JobTable() {
             initialValues: locations
         }
     ]
-
-    useEffect(() => {
-        if (isJobDataFetched) {
-            setJobData(fetchedJobData!)
-        }
-    }, [isJobDataFetched, fetchedJobData])
 
     return (
         <CardContent className={"h-[70dvh] p-5 pt-3 md:px-6 md:pb-6"}>

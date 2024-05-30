@@ -63,7 +63,7 @@ export function insertInterview(interview: Interview, userId: string) {
  * @returns JobModel.find<Interview>({user: new mongoose.Types.ObjectId(userId)}).exec() all jobs
  */
 export function getInterviews(userId: string) {
-    return InterviewModel.find<Interview>({user: new mongoose.Types.ObjectId(userId)}).exec()
+    return InterviewModel.find<Interview>({user: new mongoose.Types.ObjectId(userId)}).populate("job", ["_id", "role", "exactTitle", "company"]).exec()
 }
 
 /**
@@ -72,7 +72,7 @@ export function getInterviews(userId: string) {
  * @returns InterviewModel.findByIdAndUpdate(interview._id, interview, {new: true}).exec() The updated interview
  */
 export function updateInterview(interview: Partial<Interview>) {
-    return InterviewModel.findByIdAndUpdate(interview._id, interview, {new: true}).exec()
+    return InterviewModel.findByIdAndUpdate(interview._id, interview, {new: true}).populate("job", ["_id", "role", "exactTitle", "company"]).exec()
 }
 
 /**
