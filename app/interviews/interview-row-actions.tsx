@@ -39,7 +39,6 @@ export function InterviewRowActions({row}: { row: Row<Interview> }) {
                 <DropdownMenuContent align="end">
                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
-                    {/* TODO implement edit dialog */}
                     <DropdownMenuItem className={"cursor-pointer font-semibold"}>
                         <DialogTrigger className={"flex flex-row gap-2 w-full items-center"}>
                             <EditIcon/>
