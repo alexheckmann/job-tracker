@@ -26,6 +26,7 @@ export default function ContactEditDialogContent({contact}: ContentEditDialogCon
         defaultValues: contact
     })
 
+    // reset form when the contact changes to update the form values
     useEffect(() => {
         form.reset(contact)
     }, [contact._id]);

@@ -3,7 +3,7 @@ import DialogContentWrapper from "@/components/dialog-content-wrapper";
 import {useInterviewEditDialogStore} from "@/app/data/use-get-data";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {useMemo} from "react";
+import {useEffect} from "react";
 import {useUpdateInterview} from "@/app/data/use-update-data";
 import {Form} from "@/components/ui/form";
 import {DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
@@ -21,8 +21,13 @@ export default function InterviewEditDialogContent({interview}: InterviewEditDia
 
     const form = useForm<Interview>({
         resolver: zodResolver(InterviewSchema),
-        defaultValues: useMemo(() => interview, [interview])
+        defaultValues: interview
     })
+
+    // reset form when the interview changes to update the form values
+    useEffect(() => {
+        form.reset(interview)
+    }, [interview._id]);
 
     const {
         mutateData: updateInterview,

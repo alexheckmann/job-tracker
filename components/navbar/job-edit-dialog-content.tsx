@@ -27,6 +27,7 @@ export default function JobEditDialogContent({job}: JobEditDialogContentProps) {
         defaultValues: job
     })
 
+    // reset form when the job changes to update the form values
     useEffect(() => {
         form.reset(job)
     }, [job._id]);
