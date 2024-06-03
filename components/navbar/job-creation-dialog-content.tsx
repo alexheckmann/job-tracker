@@ -11,6 +11,7 @@ import {SubmitButton} from "@/components/submit-button";
 import JobDialogContent from "@/components/navbar/job-dialog-content";
 import DialogContentWrapper from "@/components/dialog-content-wrapper";
 import {JobIcon} from "@/components/icons";
+import {useEffect} from "react";
 
 export default function JobCreationDialogContent() {
 
@@ -38,8 +39,10 @@ export default function JobCreationDialogContent() {
 
     // set location to first entry in global state here since the useForm does not update when the global state updates,
     // hence the location will be empty on first render
-    form.setValue("role", roles[0] || "")
-    form.setValue("location", locations[0] || "")
+    useEffect(() => {
+        form.setValue("role", roles[0] || "")
+        form.setValue("location", locations[0] || "")
+    }, [roles[0], locations[0]]);
 
     const {
         mutateData: insertJob,
