@@ -3,7 +3,6 @@
 import {Column, ColumnDef, Row} from "@tanstack/react-table"
 import {Button} from "@/components/ui/button";
 import {StatusDropdown} from "@/components/status-dropdown";
-import {useEffect} from "react";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
 import {HoverTooltip, LinkHoverTooltip} from "@/components/hover-tooltip";
 import {formatDate} from "@/lib/format-date";
@@ -82,11 +81,6 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
     {
         accessorKey: "lastUpdate",
         header: ({column}: { column: Column<Job> }) => {
-            // eslint-disable-next-line react-hooks/rules-of-hooks
-            useEffect(() => {
-                column.toggleSorting(column.getIsSorted() !== "asc")
-            }, []);
-
             return (
                 <Button
                     variant="ghost"
