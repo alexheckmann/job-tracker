@@ -8,7 +8,7 @@ import {Form} from "@/components/ui/form";
 import {SubmitButton} from "@/components/submit-button";
 import {Contact, ContactSchema} from "@/lib/models/contact";
 import ContactDialogContent from "@/components/navbar/contact-dialog-content";
-import {useMemo} from "react";
+import {useEffect} from "react";
 import {useUpdateContact} from "@/app/data/use-update-data";
 import DialogContentWrapper from "@/components/dialog-content-wrapper";
 import {ContactIcon} from "@/components/icons";
@@ -23,8 +23,12 @@ export default function ContactEditDialogContent({contact}: ContentEditDialogCon
 
     const form = useForm<Contact>({
         resolver: zodResolver(ContactSchema),
-        defaultValues: useMemo(() => contact, [contact])
+        defaultValues: contact
     })
+
+    useEffect(() => {
+        form.reset(contact)
+    }, [contact._id]);
 
     const {
         mutateData: updateContact,
