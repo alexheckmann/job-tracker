@@ -8,7 +8,7 @@ import {Form} from "@/components/ui/form";
 import {Job, JobSchema} from "@/lib/models/job";
 import {SubmitButton} from "@/components/submit-button";
 import JobDialogContent from "@/components/navbar/job-dialog-content";
-import {useMemo} from "react";
+import {useEffect} from "react";
 import {useUpdateJob} from "@/app/data/use-update-data";
 import DialogContentWrapper from "@/components/dialog-content-wrapper";
 import {JobIcon} from "@/components/icons";
@@ -24,8 +24,12 @@ export default function JobEditDialogContent({job}: JobEditDialogContentProps) {
 
     const form = useForm<Job>({
         resolver: zodResolver(JobSchema),
-        defaultValues: useMemo(() => job, [job])
+        defaultValues: job
     })
+
+    useEffect(() => {
+        form.reset(job)
+    }, [job._id]);
 
     const {
         mutateData: updateJob,
