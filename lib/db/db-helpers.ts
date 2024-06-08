@@ -99,7 +99,7 @@ export function insertContact(contact: Contact, userId: string) {
  * @returns All contacts
  */
 export function getContacts(userId: string) {
-    return ContactModel.find<Contact>({user: new mongoose.Types.ObjectId(userId)}).exec()
+    return ContactModel.find<Contact>({user: new mongoose.Types.ObjectId(userId)}).sort({lastUpdate: -1}).exec()
 }
 
 /**
