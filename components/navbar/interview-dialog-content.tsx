@@ -108,6 +108,10 @@ export default function InterviewDialogContent({form}: ContactDialogContentProps
                 )}/>
             </div>
 
+            <FormField control={form.control} name={"notes"} render={({field}) => (
+                <FormTextarea className={"h-[250px]"} label={"Notes"} placeholder={"Add your notes"} field={field}/>
+            )}/>
+
             <div className={"grid grid-cols-2 gap-4 items-end"}>
 
                 <FormField control={form.control} name={"type"} render={({field}) => (
@@ -122,11 +126,6 @@ export default function InterviewDialogContent({form}: ContactDialogContentProps
                 )}/>
 
             </div>
-
-
-            <FormField control={form.control} name={"notes"} render={({field}) => (
-                <FormTextarea className={"h-[600px]"} label={"Notes"} placeholder={"Add your notes"} field={field}/>
-            )}/>
 
         </div>
     )
