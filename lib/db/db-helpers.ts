@@ -27,7 +27,7 @@ export function insertJob(job: Job, userId: string) {
  * @returns JobModel.find<Job>({user: new mongoose.Types.ObjectId(userId)}).exec() all jobs
  */
 export function getJobs(userId: string) {
-    return JobModel.find<Job>({user: new mongoose.Types.ObjectId(userId)}).exec()
+    return JobModel.find<Job>({user: new mongoose.Types.ObjectId(userId)}).sort({lastUpdate: -1}).exec()
 }
 
 /**
