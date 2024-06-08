@@ -63,10 +63,6 @@ export const interviewColumns: ColumnDef<Interview>[] = [
         header: ({column}: {
             column: Column<Interview>
         }) => {
-            // eslint-disable-next-line react-hooks/rules-of-hooks
-            useEffect(() => {
-                column.toggleSorting(column.getIsSorted() !== "asc")
-            }, []);
 
             return (
                 <Button

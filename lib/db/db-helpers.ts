@@ -63,7 +63,7 @@ export function insertInterview(interview: Interview, userId: string) {
  * @returns JobModel.find<Interview>({user: new mongoose.Types.ObjectId(userId)}).exec() all jobs
  */
 export function getInterviews(userId: string) {
-    return InterviewModel.find<Interview>({user: new mongoose.Types.ObjectId(userId)}).populate("job", ["_id", "role", "exactTitle", "company"]).exec()
+    return InterviewModel.find<Interview>({user: new mongoose.Types.ObjectId(userId)}).populate("job", ["_id", "role", "exactTitle", "company", "link"]).sort({date: -1}).exec()
 }
 
 /**
