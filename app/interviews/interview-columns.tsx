@@ -2,7 +2,6 @@
 
 import {Column, ColumnDef, Row} from "@tanstack/react-table"
 import {Button} from "@/components/ui/button";
-import {useEffect} from "react";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
 import {HoverTooltip, LinkHoverTooltip} from "@/components/hover-tooltip";
 import {formatDate} from "@/lib/format-date";
@@ -55,6 +54,20 @@ export const interviewColumns: ColumnDef<Interview>[] = [
 
             return (
                 <span>{jobLabel}</span>
+            );
+        }
+    },
+    {
+        id: "Job description",
+        cell: ({row}: {
+            row: Row<Interview>
+        }) => {
+            const job = row.getValue<Job>("job")
+            return (
+                job.link &&
+                <LinkHoverTooltip hoverText={"Open job description"}>
+                    <OpenLinkButton href={job.link} type={"link"} className={"mx-auto"}/>
+                </LinkHoverTooltip>
             );
         }
     },

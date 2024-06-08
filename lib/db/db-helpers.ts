@@ -72,7 +72,7 @@ export function getInterviews(userId: string) {
  * @returns InterviewModel.findByIdAndUpdate(interview._id, interview, {new: true}).exec() The updated interview
  */
 export function updateInterview(interview: Partial<Interview>) {
-    return InterviewModel.findByIdAndUpdate(interview._id, interview, {new: true}).populate("job", ["_id", "role", "exactTitle", "company"]).exec()
+    return InterviewModel.findByIdAndUpdate(interview._id, interview, {new: true}).populate("job", ["_id", "role", "exactTitle", "company", "link"]).exec()
 }
 
 /**
