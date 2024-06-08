@@ -142,7 +142,7 @@ export const interviewColumns: ColumnDef<Interview>[] = [
 
             return (
                 link &&
-                <LinkHoverTooltip hoverText={"Open job description"}>
+                <LinkHoverTooltip hoverText={"Open interview link"}>
                     <OpenLinkButton href={link} type={"link"} className={"mx-auto"}/>
                 </LinkHoverTooltip>
             )
