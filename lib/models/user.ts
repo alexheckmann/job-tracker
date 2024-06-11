@@ -21,6 +21,7 @@ export const UserSchema = DatabaseObject.extend({
     roles: z.array(z.string().min(1)).optional(),
     locations: z.array(z.string().min(1)).optional(),
     keywords: z.array(z.string().min(1)).optional(),
+    encryptedKey: z.string().optional(),
     companies: z.array(z.object({
         location: z.string().min(1),
         company: z.array(z.object({

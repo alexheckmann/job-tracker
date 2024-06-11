@@ -23,6 +23,10 @@ const UserModelSchema = new Schema<User>({
         type: [String],
         required: false
     },
+    encryptedKey: {
+        type: String,
+        required: false
+    },
     companies: {
         type: [{
             location: {
