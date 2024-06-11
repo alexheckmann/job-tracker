@@ -1,7 +1,7 @@
 /**
  * Transforms the string properties of an object using the provided callback to either encrypt or decrypt the data.
  * Currently handles the following cases:
- * - Single string properties
+ * - Single, non-empty string properties
  * - Array of string properties
  * - Excluded properties
  * - Non-string properties
