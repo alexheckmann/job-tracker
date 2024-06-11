@@ -11,7 +11,8 @@ declare module "next-auth" {
             roles: string[],
             locations: string[],
             keywords: string[],
-            companies: UserCompanies[]
+            companies: UserCompanies[],
+            encryptedKey: string
         } & DefaultSession["user"]
     }
 }
