@@ -25,7 +25,6 @@ export const authOptions = {
                 }
 
                 const existingUser = await getUserByEmail(email)
-                console.log(account.providerAccountId)
 
                 if (existingUser) {
                     return {...existingUser, id: existingUser._id}
