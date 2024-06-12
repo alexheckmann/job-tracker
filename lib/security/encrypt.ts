@@ -10,6 +10,7 @@ import {
     EXCLUDE_USER_PROPS
 } from "@/lib/security/exclude-props";
 import {Contact} from "@/lib/models/contact";
+import {Interview} from "@/lib/models/interview";
 
 /**
  * Encrypts string data using aes-256-cbc.
@@ -35,6 +36,7 @@ const cachedEncrypt = cache(encrypt)
  * @param key The key to use for encryption
  * @param iv The initialization vector to use for encryption
  * @param excludeProps The properties to exclude from encryption
+ * @returns obj The encrypted object
  */
 export function encryptObject<T extends Record<string, unknown>>(obj: T, key: Buffer, iv: Buffer, excludeProps: string[] = []): T {
     return transformObjectStringProperties<T>(obj,
@@ -47,6 +49,7 @@ export function encryptObject<T extends Record<string, unknown>>(obj: T, key: Bu
  * @param user The user to encrypt
  * @param key The key to use for encryption
  * @param iv The initialization vector to use for encryption
+ * @returns user The encrypted user
  */
 export function encryptUser(user: User, key: Buffer, iv: Buffer): User {
     return encryptObject<User>(user, key, iv, EXCLUDE_USER_PROPS);
@@ -57,9 +60,21 @@ export function encryptUser(user: User, key: Buffer, iv: Buffer): User {
  * @param job The job to encrypt
  * @param key The key to use for encryption
  * @param iv The initialization vector to use for encryption
+ * @returns job The encrypted job
  */
 export function encryptJob(job: Job, key: Buffer, iv: Buffer): Job {
     return encryptObject<Job>(job, key, iv, EXCLUDE_JOB_PROPS);
+}
+
+/**
+ * Encrypts the interview object using the provided key and initialization vector.
+ * @param interview The interview to encrypt
+ * @param key The key to use for encryption
+ * @param iv The initialization vector to use for encryption
+ * @returns interview The encrypted interview
+ */
+export function encryptInterview(interview: Interview, key: Buffer, iv: Buffer): Interview {
+    return encryptObject<Interview>(interview, key, iv, EXCLUDE_JOB_PROPS);
 }
 
 /**
@@ -67,6 +82,7 @@ export function encryptJob(job: Job, key: Buffer, iv: Buffer): Job {
  * @param contact The contact to encrypt
  * @param key The key to use for encryption
  * @param iv The initialization vector to use for encryption
+ * @returns contact The encrypted contact
  */
 export function encryptContact(contact: Contact, key: Buffer, iv: Buffer): Contact {
     return encryptObject<Contact>(contact, key, iv, EXCLUDE_CONTACT_PROPS);
