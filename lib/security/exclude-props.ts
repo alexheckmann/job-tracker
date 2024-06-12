@@ -6,4 +6,4 @@ export const EXCLUDE_CONTACT_PROPS = []
 
 export const EXCLUDE_USER_PROPS = []
 
-export const EXCLUDE_INTERVIEW_PROPS = []
+export const EXCLUDE_INTERVIEW_PROPS = ["type"]

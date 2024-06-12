@@ -82,7 +82,6 @@ export async function PUT(req: NextRequest) {
             .then((contact) => decryptContact(contact, decryptedKey, getInitializationVector(session?.googleId)))
         return NextResponse.json(updatedContact, {status: HttpStatusCode.Ok});
     } catch (error) {
-        console.log(error)
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
     }
 }

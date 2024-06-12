@@ -63,8 +63,8 @@ export async function PUT(req: NextRequest) {
     try {
         const session = await getServerSession(authOptions)
 
-        // overwrite the lastUpdate field with a date object to avoid a Mongoose validation error,
-        // since the serializer usually converts the date to a string
+        // overwrite the lastUpdate field with a date object to avoid a validation error
+        // overwrite user with an ObjectId to avoid an encryption error
         const requestedJob = await req.json()
             .then((data) => ({...data, lastUpdate: new Date(data.lastUpdate), user: getMongooseIdObject(data.user)}))
 

@@ -5,6 +5,7 @@ import crypto from "crypto";
 import {transformObjectStringProperties} from "@/lib/security/transformObjectStringProperties";
 import {
     EXCLUDE_CONTACT_PROPS,
+    EXCLUDE_INTERVIEW_PROPS,
     EXCLUDE_JOB_PROPS,
     EXCLUDE_OBJECT_PROPS,
     EXCLUDE_USER_PROPS
@@ -74,7 +75,7 @@ export function encryptJob(job: Job, key: Buffer, iv: Buffer): Job {
  * @returns interview The encrypted interview
  */
 export function encryptInterview(interview: Interview, key: Buffer, iv: Buffer): Interview {
-    return encryptObject<Interview>(interview, key, iv, EXCLUDE_JOB_PROPS);
+    return encryptObject<Interview>(interview, key, iv, EXCLUDE_INTERVIEW_PROPS);
 }
 
 /**
