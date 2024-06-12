@@ -3,7 +3,13 @@ import {Job} from "@/lib/models/job";
 import {cache} from "react";
 import {transformObjectStringProperties} from "@/lib/security/transformObjectStringProperties";
 import {User} from "@/lib/models/user";
-import {EXCLUDE_JOB_PROPS, EXCLUDE_OBJECT_PROPS, EXCLUDE_USER_PROPS} from "@/lib/security/exclude-props";
+import {
+    EXCLUDE_CONTACT_PROPS,
+    EXCLUDE_JOB_PROPS,
+    EXCLUDE_OBJECT_PROPS,
+    EXCLUDE_USER_PROPS
+} from "@/lib/security/exclude-props";
+import {Contact} from "@/lib/models/contact";
 
 /**
  * Decrypts string data using aes-256-cbc.
@@ -54,4 +60,8 @@ export function decryptUser(user: User, key: Buffer, iv: Buffer): User {
  */
 export function decryptJob(job: Job, key: Buffer, iv: Buffer): Job {
     return decryptObject<Job>(job, key, iv, EXCLUDE_JOB_PROPS);
+}
+
+export function decryptContact(contact: Contact, key: Buffer, iv: Buffer): Contact {
+    return decryptObject<Contact>(contact, key, iv, EXCLUDE_CONTACT_PROPS);
 }

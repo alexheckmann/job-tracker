@@ -20,12 +20,12 @@ export async function GET() {
         }
 
         const decryptedKey = decryptKey(session?.user?.encryptedKey, session?.googleId)
-        const results = await getJobs(session?.user?.id).then((jobs) => jobs.map((job) => {
-            // @ts-ignore
-            const jobObject = job.toObject()
-            return decryptJob(jobObject, decryptedKey, getInitializationVector(session?.googleId))
-        }))
-
+        const results = await getJobs(session?.user?.id)
+            .then((jobs) => jobs.map((job) => {
+                // @ts-ignore
+                const jobObject = job.toObject()
+                return decryptJob(jobObject, decryptedKey, getInitializationVector(session?.googleId))
+            }))
 
         return NextResponse.json({jobs: results}, {status: HttpStatusCode.Ok})
     } catch (error) {

@@ -3,7 +3,13 @@ import {User} from "@/lib/models/user";
 import {Job} from "@/lib/models/job";
 import crypto from "crypto";
 import {transformObjectStringProperties} from "@/lib/security/transformObjectStringProperties";
-import {EXCLUDE_JOB_PROPS, EXCLUDE_OBJECT_PROPS, EXCLUDE_USER_PROPS} from "@/lib/security/exclude-props";
+import {
+    EXCLUDE_CONTACT_PROPS,
+    EXCLUDE_JOB_PROPS,
+    EXCLUDE_OBJECT_PROPS,
+    EXCLUDE_USER_PROPS
+} from "@/lib/security/exclude-props";
+import {Contact} from "@/lib/models/contact";
 
 /**
  * Encrypts string data using aes-256-cbc.
@@ -54,4 +60,14 @@ export function encryptUser(user: User, key: Buffer, iv: Buffer): User {
  */
 export function encryptJob(job: Job, key: Buffer, iv: Buffer): Job {
     return encryptObject<Job>(job, key, iv, EXCLUDE_JOB_PROPS);
+}
+
+/**
+ * Encrypts the contact object using the provided key and initialization vector.
+ * @param contact The contact to encrypt
+ * @param key The key to use for encryption
+ * @param iv The initialization vector to use for encryption
+ */
+export function encryptContact(contact: Contact, key: Buffer, iv: Buffer): Contact {
+    return encryptObject<Contact>(contact, key, iv, EXCLUDE_CONTACT_PROPS);
 }
