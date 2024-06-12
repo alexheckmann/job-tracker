@@ -11,6 +11,22 @@ import {Feedback} from "@/lib/models/feedback";
 import {Interview} from "@/lib/models/interview";
 import {InterviewModel} from "@/lib/db/interview-model";
 
+/**
+ * Get a mongoose object id from a string
+ * @param id The string id
+ * @returns A mongoose object id
+ */
+function createMongooseIdObject(id: string): mongoose.Types.ObjectId {
+    return new mongoose.Types.ObjectId(id)
+}
+
+/**
+ * Cache the createMongooseIdObject function to avoid re-creating the object id.
+ * This function is used to create a mongoose id object from a string.
+ * @param id The string id
+ * @returns id A mongoose id object
+ */
+export const getMongooseIdObject: (id: string) => mongoose.Types.ObjectId = cache(createMongooseIdObject)
 
 /**
  * Create a job in the database for a user
@@ -19,15 +35,16 @@ import {InterviewModel} from "@/lib/db/interview-model";
  * @returns The created job
  */
 export function insertJob(job: Job, userId: string) {
-    return JobModel.create({...job, user: new mongoose.Types.ObjectId(userId)})
+    return JobModel.create({...job, user: getMongooseIdObject(userId)})
 }
 
 /**
  * Get all jobs from the database for a user
- * @returns JobModel.find<Job>({user: new mongoose.Types.ObjectId(userId)}).exec() all jobs
+ * @param userId The id of the user to get jobs for
+ * @returns jobs all jobs
  */
 export function getJobs(userId: string) {
-    return JobModel.find<Job>({user: new mongoose.Types.ObjectId(userId)}).sort({lastUpdate: -1}).exec()
+    return JobModel.find<Job>({user: getMongooseIdObject(userId)}).sort({lastUpdate: -1}).exec()
 }
 
 /**
@@ -42,7 +59,7 @@ export function updateJob(job: Partial<Job>) {
 /**
  * Delete a job from the database for a user
  * @param id The id of the job to delete
- * @returns The deleted job
+ * @returns job The deleted job
  */
 export function deleteJob(id: string) {
     return JobModel.findByIdAndDelete(id).exec()
@@ -52,10 +69,10 @@ export function deleteJob(id: string) {
  * Create an interview in the database for a user
  * @param interview The interview to create
  * @param userId The id of the user associated with the interview
- * @returns InterviewModel.create({...interview, user: new mongoose.Types.ObjectId(userId)}) The created interview
+ * @returns interview The created interview
  */
 export function insertInterview(interview: Interview, userId: string) {
-    return InterviewModel.create({...interview, user: new mongoose.Types.ObjectId(userId)})
+    return InterviewModel.create({...interview, user: getMongooseIdObject(userId)})
 }
 
 /**
@@ -63,13 +80,13 @@ export function insertInterview(interview: Interview, userId: string) {
  * @returns JobModel.find<Interview>({user: new mongoose.Types.ObjectId(userId)}).exec() all jobs
  */
 export function getInterviews(userId: string) {
-    return InterviewModel.find<Interview>({user: new mongoose.Types.ObjectId(userId)}).populate("job", ["_id", "role", "exactTitle", "company", "link"]).sort({date: -1}).exec()
+    return InterviewModel.find<Interview>({user: getMongooseIdObject(userId)}).populate("job", ["_id", "role", "exactTitle", "company", "link"]).sort({date: -1}).exec()
 }
 
 /**
  * Update an interview in the database for a user
  * @param interview The updated interview
- * @returns InterviewModel.findByIdAndUpdate(interview._id, interview, {new: true}).exec() The updated interview
+ * @returns interview The updated interview
  */
 export function updateInterview(interview: Partial<Interview>) {
     return InterviewModel.findByIdAndUpdate(interview._id, interview, {new: true}).populate("job", ["_id", "role", "exactTitle", "company", "link"]).exec()
@@ -78,7 +95,7 @@ export function updateInterview(interview: Partial<Interview>) {
 /**
  * Delete an interview from the database for a user
  * @param id The id of the interview to delete
- * @returns The deleted interview
+ * @returns interview The deleted interview
  */
 export function deleteInterview(id: string) {
     return InterviewModel.findByIdAndDelete(id).exec()
@@ -91,21 +108,21 @@ export function deleteInterview(id: string) {
  * @returns The created contact
  */
 export function insertContact(contact: Contact, userId: string) {
-    return ContactModel.create({...contact, user: new mongoose.Types.ObjectId(userId)})
+    return ContactModel.create({...contact, user: getMongooseIdObject(userId)})
 }
 
 /**
  * Get all contacts from the database for a user
- * @returns All contacts
+ * @returns contacts All contacts
  */
 export function getContacts(userId: string) {
-    return ContactModel.find<Contact>({user: new mongoose.Types.ObjectId(userId)}).sort({lastUpdate: -1}).exec()
+    return ContactModel.find<Contact>({user: getMongooseIdObject(userId)}).sort({lastUpdate: -1}).exec()
 }
 
 /**
  * Update a contact in the database for a user
  * @param contact The updated contact
- * @returns The updated contact
+ * @returns contact The updated contact
  */
 export function updateContact(contact: Partial<Contact>) {
     return ContactModel.findByIdAndUpdate(contact._id, contact, {new: true}).exec()
@@ -114,7 +131,7 @@ export function updateContact(contact: Partial<Contact>) {
 /**
  * Delete a contact from the database for a user
  * @param id The id of the contact to delete
- * @returns The deleted contact
+ * @returns contact The deleted contact
  */
 export function deleteContact(id: string) {
     return ContactModel.findByIdAndDelete(id).exec()
@@ -123,6 +140,7 @@ export function deleteContact(id: string) {
 /**
  * Create a user in the database
  * @param user The user to create
+ * @returns user The created user
  */
 export function createUser(user: User) {
     return UserModel.create<User>(user)
@@ -130,7 +148,8 @@ export function createUser(user: User) {
 
 /**
  * Get the user with the given email from the database. This function is not cached.
- * @returns UserModel.findOne<User>({email}).exec() the user with the given email
+ * @param email The email of the user to get
+ * @returns user the user with the given email
  */
 export function uncachedGetUserByEmail(email: string) {
     return UserModel.findOne<User>({email}).exec()
@@ -138,15 +157,17 @@ export function uncachedGetUserByEmail(email: string) {
 
 /**
  * Get the user with the given email from the database. This function is cached.
+ * @param email The email of the user to get
  * @returns uncachedGetUserByEmail(email) the user with the given email
  */
-export const getUserByEmail = cache(async (email: string) => {
+export const getUserByEmail: (email: string) => Promise<User | null> = cache(async (email: string) => {
     return await uncachedGetUserByEmail(email)
 })
 
 /**
  * Get the user with the given id from the database
  * @param id The id of the user to get
+ * @returns user The user with the given id
  */
 export function getUserById(id: string) {
     const user = UserModel.findById<User>(id).exec()
@@ -168,6 +189,12 @@ export function updateUser(id: string, user: Partial<User>) {
     return UserModel.findByIdAndUpdate<User>(id, user, {new: true}).exec()
 }
 
+/**
+ * Create a feedback in the database
+ * @param rating The rating
+ * @param feedback The feedback
+ * @param userId The id of the user associated with the feedback. Empty string if the user is not logged in.
+ */
 export function createFeedback(rating: number, feedback: string, userId: string) {
     return FeedbackModel.create<Feedback>({rating, feedback, userId})
 }
