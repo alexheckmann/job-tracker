@@ -3,6 +3,7 @@ import {User} from "@/lib/models/user";
 import {Job} from "@/lib/models/job";
 import crypto from "crypto";
 import {transformObjectStringProperties} from "@/lib/security/transformObjectStringProperties";
+import {EXCLUDE_JOB_PROPS, EXCLUDE_OBJECT_PROPS, EXCLUDE_USER_PROPS} from "@/lib/security/exclude-props";
 
 /**
  * Encrypts string data using aes-256-cbc.
@@ -30,7 +31,9 @@ const cachedEncrypt = cache(encrypt)
  * @param excludeProps The properties to exclude from encryption
  */
 export function encryptObject<T extends Record<string, unknown>>(obj: T, key: Buffer, iv: Buffer, excludeProps: string[] = []): T {
-    return transformObjectStringProperties<T>(obj, (data: string) => cachedEncrypt(data, key, iv), excludeProps);
+    return transformObjectStringProperties<T>(obj,
+        (data: string) => cachedEncrypt(data, key, iv),
+        [...excludeProps, ...EXCLUDE_OBJECT_PROPS]);
 }
 
 /**
@@ -38,10 +41,9 @@ export function encryptObject<T extends Record<string, unknown>>(obj: T, key: Bu
  * @param user The user to encrypt
  * @param key The key to use for encryption
  * @param iv The initialization vector to use for encryption
- * @param excludeProps The properties to exclude from encryption
  */
-export function encryptUser(user: User, key: Buffer, iv: Buffer, excludeProps: string[] = []): User {
-    return encryptObject<User>(user, key, iv, excludeProps);
+export function encryptUser(user: User, key: Buffer, iv: Buffer): User {
+    return encryptObject<User>(user, key, iv, EXCLUDE_USER_PROPS);
 }
 
 /**
@@ -49,8 +51,7 @@ export function encryptUser(user: User, key: Buffer, iv: Buffer, excludeProps: s
  * @param job The job to encrypt
  * @param key The key to use for encryption
  * @param iv The initialization vector to use for encryption
- * @param excludeProps The properties to exclude from encryption
  */
-export function encryptJob(job: Job, key: Buffer, iv: Buffer, excludeProps: string[] = []): Job {
-    return encryptObject<Job>(job, key, iv, excludeProps);
+export function encryptJob(job: Job, key: Buffer, iv: Buffer): Job {
+    return encryptObject<Job>(job, key, iv, EXCLUDE_JOB_PROPS);
 }
