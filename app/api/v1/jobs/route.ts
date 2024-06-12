@@ -1,8 +1,7 @@
-import {getJobs, insertJob, updateJob} from "@/lib/db/db-helpers";
+import {getJobs, getMongooseIdObject, insertJob, updateJob} from "@/lib/db/db-helpers";
 import {NextRequest, NextResponse} from "next/server";
 import {HttpStatusCode} from "axios";
 import {getServerSession} from "next-auth";
-
 import {authOptions} from "@/app/api/auth/[...nextauth]/authOptions";
 import {decryptJob} from "@/lib/security/decrypt";
 import {encryptJob} from "@/lib/security/encrypt";
@@ -66,7 +65,8 @@ export async function PUT(req: NextRequest) {
 
         // overwrite the lastUpdate field with a date object to avoid a Mongoose validation error,
         // since the serializer usually converts the date to a string
-        const requestedJob = await req.json().then((data) => ({...data, lastUpdate: new Date(data.lastUpdate)}))
+        const requestedJob = await req.json()
+            .then((data) => ({...data, lastUpdate: new Date(data.lastUpdate), user: getMongooseIdObject(data.user)}))
 
         if (!session || session?.user?.id.toString() !== requestedJob.user.toString()) {
             return NextResponse.json({error: "Unauthorized"}, {status: HttpStatusCode.Unauthorized})

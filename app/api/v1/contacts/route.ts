@@ -1,8 +1,7 @@
-import {getContacts, insertContact, updateContact} from "@/lib/db/db-helpers";
+import {getContacts, getMongooseIdObject, insertContact, updateContact} from "@/lib/db/db-helpers";
 import {NextRequest, NextResponse} from "next/server";
 import {HttpStatusCode} from "axios";
 import {getServerSession} from "next-auth";
-
 import {authOptions} from "@/app/api/auth/[...nextauth]/authOptions";
 import {decryptKey} from "@/lib/security/decryptKey";
 import {decryptContact} from "@/lib/security/decrypt";
@@ -64,9 +63,10 @@ export async function PUT(req: NextRequest) {
     try {
         const session = await getServerSession(authOptions)
 
-        // overwrite the lastUpdate field with a date object to avoid a Mongoose validation error,
-        // since the serializer usually converts the date to a string
-        const requestedContact = await req.json().then((data) => ({...data, lastUpdate: new Date(data.lastUpdate)}))
+        // overwrite the lastUpdate string with a date object to avoid a validation error
+        // overwrite user with an ObjectId to avoid an encryption error
+        const requestedContact = await req.json()
+            .then((data) => ({...data, lastUpdate: new Date(data.lastUpdate), user: getMongooseIdObject(data.user)}))
 
         if (!session || session?.user?.id.toString() !== requestedContact.user.toString()) {
             return NextResponse.json({error: "Unauthorized"}, {status: HttpStatusCode.Unauthorized})
