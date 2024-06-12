@@ -5,6 +5,8 @@ import {createUser, getUserByEmail} from "@/lib/db/db-helpers";
 import {generateKey} from "@/lib/security/generateKey";
 import {encrypt} from "@/lib/security/encrypt";
 import {getInitializationVector} from "@/lib/security/getInitializationVector";
+import {decryptKey} from "@/lib/security/decryptKey";
+import {decryptUser} from "@/lib/security/decrypt";
 
 export const authOptions = {
     providers: [
@@ -25,9 +27,14 @@ export const authOptions = {
                 }
 
                 const existingUser = await getUserByEmail(email)
+                    // @ts-ignore
+                    .then((user) => user?.toObject())
 
                 if (existingUser) {
-                    return {...existingUser, id: existingUser._id}
+                    const decryptedKey = decryptKey(existingUser.encryptedKey!, account.providerAccountId)
+                    const decryptedUser = decryptUser(existingUser, decryptedKey, getInitializationVector(account.providerAccountId))
+
+                    return {...decryptedUser, id: decryptedUser._id}
                 }
 
                 try {
@@ -61,6 +68,12 @@ export const authOptions = {
             // not the most performant way to do this, but necessary since no other way to get userid was found.
             // the problem is that token.sub is the google user id (?), not the user id in the database
             const user = await getUserByEmail(token.email)
+                // @ts-ignore
+                .then((user) => user?.toObject())
+                .then((user) => {
+                    const decryptedKey = decryptKey(user.encryptedKey, token.sub)
+                    return decryptUser(user, decryptedKey, getInitializationVector(token.sub))
+                })
             // passing the user id to the token, so it can be used in the session
             token.id = user?._id
             token.roles = user?.roles

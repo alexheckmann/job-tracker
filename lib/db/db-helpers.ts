@@ -10,6 +10,7 @@ import {FeedbackModel} from "@/lib/db/feedback-model";
 import {Feedback} from "@/lib/models/feedback";
 import {Interview} from "@/lib/models/interview";
 import {InterviewModel} from "@/lib/db/interview-model";
+import {decryptUser} from "@/lib/security/decrypt";
 
 /**
  * Get a mongoose object id from a string
@@ -174,10 +175,16 @@ export function getUserById(id: string) {
 
     if (!user) {
         console.log(`User not found: ${id}`)
-        return null
     }
 
     return user
+}
+
+export function getUserByIdDecrypted(id: string, key: Buffer, iv: Buffer) {
+    return getUserById(id)
+        // @ts-ignore
+        .then((user) => user!.toObject())
+        .then((user) => decryptUser(user, key, iv))
 }
 
 /**
