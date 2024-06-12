@@ -10,12 +10,12 @@ import {authOptions} from "@/app/api/auth/[...nextauth]/authOptions";
 
 export async function GET() {
 
-    if (mongoose.connection.readyState !== mongoose.STATES.connected) {
-        await mongooseConnection
-    }
-
     try {
         const session = await getServerSession(authOptions)
+
+        if (!session) {
+            return NextResponse.json({error: "Unauthorized"}, {status: HttpStatusCode.Unauthorized})
+        }
         const results = await getContacts(session?.user?.id)
         return NextResponse.json({contacts: results}, {status: HttpStatusCode.Ok})
     } catch (error) {
@@ -28,6 +28,11 @@ export async function POST(req: NextRequest) {
 
     try {
         const session = await getServerSession(authOptions)
+
+        if (!session) {
+            return NextResponse.json({error: "Unauthorized"}, {status: HttpStatusCode.Unauthorized})
+        }
+
         const createdContact = await insertContact(newContact, session?.user?.id)
         return NextResponse.json(createdContact, {status: HttpStatusCode.Created})
     } catch (error) {
@@ -42,7 +47,7 @@ export async function PUT(req: NextRequest) {
 
         const session = await getServerSession(authOptions)
 
-        if (session?.user?.id.toString() !== requestedContact.user.toString()) {
+        if (!session || session?.user?.id.toString() !== requestedContact.user.toString()) {
             return NextResponse.json({error: "Unauthorized"}, {status: HttpStatusCode.Unauthorized})
         }
 
