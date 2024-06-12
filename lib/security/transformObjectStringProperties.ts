@@ -24,12 +24,12 @@ export function transformObjectStringProperties<T extends Record<string, unknown
             } else if (typeof obj[prop] === 'string' && obj[prop] !== '') {
                 // @ts-ignore
                 transformedObject[prop] = callback(obj[prop]);
-            } else if (Array.isArray(obj[prop]) && (obj[prop] as any[]).every((item: any) => typeof item === 'string')) {
+            } else if (Array.isArray(obj[prop]) && !!obj[prop] && (obj[prop] as any[]).every((item: any) => typeof item === 'string')) {
                 transformedObject[prop] = (obj[prop] as string[]).map((item: string) => callback(item)) as T[Extract<keyof T, string>];
-            } else if (typeof obj[prop] === 'object' && obj[prop] !== null) {
+            } else if (typeof obj[prop] === 'object' && Object.prototype.toString.call(obj[prop]) === '[object Object]' && obj[prop] !== null) {
                 // @ts-ignore
                 transformedObject[prop] = transformObjectStringProperties(obj[prop], callback, excludeProps);
-            } else if (Array.isArray(obj[prop]) && (obj[prop] as any[]).every((item: any) => typeof item === 'object' && item !== null)) {
+            } else if (Array.isArray(obj[prop]) && !!obj[prop] && (obj[prop] as any[]).every((item: any) => typeof item === 'object' && item !== null)) {
                 transformedObject[prop] = (obj[prop] as any[]).map((item: any) => transformObjectStringProperties(item, callback, excludeProps)) as T[Extract<keyof T, string>];
             } else {
                 transformedObject[prop] = obj[prop];
