@@ -1,8 +1,6 @@
 import {getJobs, insertJob, updateJob} from "@/lib/db/db-helpers";
 import {NextRequest, NextResponse} from "next/server";
 import {HttpStatusCode} from "axios";
-import mongoose from "mongoose";
-import mongooseConnection from "@/lib/db/mongoose-connection";
 import {getServerSession} from "next-auth";
 
 import {authOptions} from "@/app/api/auth/[...nextauth]/authOptions";
@@ -13,10 +11,6 @@ import {getInitializationVector} from "@/lib/security/getInitializationVector";
 
 
 export async function GET() {
-
-    if (mongoose.connection.readyState !== mongoose.STATES.connected) {
-        await mongooseConnection
-    }
 
     try {
         const session = await getServerSession(authOptions)
