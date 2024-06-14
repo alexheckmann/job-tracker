@@ -1,7 +1,7 @@
 import {UserSpecificDatabaseObject} from "@/lib/models/database-object";
 import {z} from "zod";
 
-export const InterviewType = z.enum(["Initial Call", "Technical Interview", "Executive Call", "Team Call"]);
+export const InterviewType = z.enum(["Initial Call", "Pre-Screen Test", "Technical Interview", "Executive Call", "Team Call"]);
 
 const interviewMaxLengthConstraints = {
     role: 128,
