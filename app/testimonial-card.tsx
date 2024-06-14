@@ -23,7 +23,7 @@ export function TestimonialCard({className}: TestimonialCardProps) {
             </CardHeader>
 
             <CardContent>
-                It helped me, so let me help you.
+                Tailored for your needs.
             </CardContent>
         </Card>
     );

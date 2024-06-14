@@ -5,12 +5,18 @@ import {HTMLAttributes} from "react";
 import {cn} from "@/lib/utils";
 import {SignInButton} from "@/components/sign-in-button";
 import Link from "next/link";
+import {DonateIcon} from "@/components/icons";
 
 interface PricingCardProps extends HTMLAttributes<HTMLDivElement> {
 
 }
 
-const benefits = ["Organize applications", "All your notes in one place", "Sign up using Google"];
+const benefits = [
+    "Track your applications",
+    "All your notes in one place",
+    "Sign up using Google",
+    "Encrypted data storage",
+];
 
 export function PricingCard({className}: PricingCardProps) {
     return (
@@ -19,13 +25,14 @@ export function PricingCard({className}: PricingCardProps) {
                 <CardTitle className="flex item-center justify-between">
                     Free
                     <Link href={"/donate"} passHref>
-                        <Badge variant="secondary" className="text-sm text-primary">
-                            Donations appreciated
+                        <Badge variant="secondary" className="text-sm text-primary gap-2">
+                            <DonateIcon/>
+                            Tipping appreciated
                         </Badge>
                     </Link>
                 </CardTitle>
                 <div>
-                    <span className="text-3xl font-bold">$0</span>
+                    <span className="text-3xl font-bold">0€</span>
                     <span className="text-muted-foreground"> /month</span>
                 </div>
 
