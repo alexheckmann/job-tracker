@@ -4,14 +4,18 @@ import {CardContent} from "@/components/ui/card";
 import {ColumnFilterOption, DataTable} from "@/components/data-table";
 import {useInterviewData, useInterviewEntriesStore} from "@/app/data/use-get-data";
 import {useEffect} from "react";
-import {useSession} from "next-auth/react";
 import {interviewColumns} from "@/app/interviews/interview-columns";
 
-const filterColumns: ColumnFilterOption[] = []
+const filterColumnOptions: ColumnFilterOption[] = [
+    {
+        columnName: "job",
+        type: "input",
+        label: "Search for a role..."
+    }
+]
 
 export function InterviewTable() {
 
-    const {data: session} = useSession()
     const {
         data: fetchedInterviewData,
         isLoading: isLoadingInterviewData,
@@ -32,7 +36,7 @@ export function InterviewTable() {
                        isLoading={isLoadingInterviewData}
                        data={interviewData}
                        columns={interviewColumns}
-                       columnFilterOptions={filterColumns}/>
+                       columnFilterOptions={filterColumnOptions}/>
 
         </CardContent>
     );

@@ -55,6 +55,11 @@ export const interviewColumns: ColumnDef<Interview>[] = [
             return (
                 <span>{jobLabel}</span>
             );
+        },
+        filterFn: (row, id, value) => {
+            const job = row.getValue<Job>("job")
+            const jobLabel = job ? (job?.exactTitle ? `${job?.exactTitle} - ${job?.company}` : `${job?.role} - ${job?.company}`) : ""
+            return jobLabel.toLowerCase().includes(value.toLowerCase())
         }
     },
     {
