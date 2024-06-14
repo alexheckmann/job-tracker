@@ -19,7 +19,7 @@ interface ContactDialogContentProps {
 }
 
 function getJobLabel(job?: Job): string {
-    return (job?.exactTitle ? `${job?.exactTitle} - ${job?.company}` : `${job?.role} - ${job?.company}`) ?? ""
+    return job ? (job?.exactTitle ? `${job?.exactTitle} - ${job?.company}` : `${job?.role} - ${job?.company}`) : ""
 }
 
 export default function InterviewDialogContent({form}: ContactDialogContentProps) {
