@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
             .then((user) => user.toObject())
             .then((user) => decryptUser(user!, decryptedKey, getInitializationVector(session.googleId)))
 
-        user?.locations ? user?.locations.push(newLocation) : user!.locations = [newLocation]
+        user?.locations!.push(newLocation)
 
         const encryptedUser = encryptUser(user!, decryptedKey, getInitializationVector(session.googleId))
         await updateUser(session?.user?.id, encryptedUser)
@@ -47,9 +47,7 @@ export async function DELETE(req: NextRequest) {
             return NextResponse.json({error: "Unauthorized"}, {status: HttpStatusCode.Unauthorized})
         }
 
-        const decryptedKey = decryptKey(session.user.encryptedKey, session.googleId)
-
-        const user = await getUserByIdDecrypted(session?.user?.id, decryptedKey, getInitializationVector(session.googleId))
+        const user = await getUserByIdDecrypted(session?.user?.id, session.user.encryptedKey, session.googleId)
 
         const index = user?.locations?.indexOf(locationToDelete)
         if (index === -1) {
@@ -58,7 +56,7 @@ export async function DELETE(req: NextRequest) {
 
         user?.locations!.splice(index!, 1)
 
-        const encryptedUser: User = encryptUser(user!, decryptedKey, getInitializationVector(session.googleId))
+        const encryptedUser: User = encryptUser(user!, decryptKey(session.user.encryptedKey, session.googleId), getInitializationVector(session.googleId))
         await updateUser(session?.user?.id, encryptedUser)
         return NextResponse.json(user?.locations, {status: HttpStatusCode.Ok})
     } catch (error) {

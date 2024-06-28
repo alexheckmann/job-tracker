@@ -11,6 +11,8 @@ import {Feedback} from "@/lib/models/feedback";
 import {Interview} from "@/lib/models/interview";
 import {InterviewModel} from "@/lib/db/interview-model";
 import {decryptUser} from "@/lib/security/decrypt";
+import {decryptKey} from "@/lib/security/decryptKey";
+import {getInitializationVector} from "@/lib/security/getInitializationVector";
 
 /**
  * Get a mongoose object id from a string
@@ -180,11 +182,13 @@ export function getUserById(id: string) {
     return user
 }
 
-export function getUserByIdDecrypted(id: string, key: Buffer, iv: Buffer) {
+export function getUserByIdDecrypted(id: string, encryptedKey: string, googleId: string) {
+    const decryptedKey = decryptKey(encryptedKey, googleId)
+
     return getUserById(id)
         // @ts-ignore
         .then((user) => user!.toObject())
-        .then((user) => decryptUser(user, key, iv))
+        .then((user) => decryptUser(user, decryptedKey, getInitializationVector(googleId)))
 }
 
 /**

@@ -18,12 +18,11 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({error: "Unauthorized"}, {status: HttpStatusCode.Unauthorized})
         }
 
-        const decryptedKey = decryptKey(session.user.encryptedKey, session.googleId)
-        const user = await getUserByIdDecrypted(session?.user?.id, decryptedKey, getInitializationVector(session.googleId))
+        const user = await getUserByIdDecrypted(session?.user?.id, session.user.encryptedKey, session.googleId)
 
-        user?.roles ? user?.roles.push(newRole) : user!.roles = [newRole]
+        user?.roles!.push(newRole)
 
-        const encryptedUser = encryptUser(user!, decryptedKey, getInitializationVector(session.googleId))
+        const encryptedUser: User = encryptUser(user!, decryptKey(session.user.encryptedKey, session.googleId), getInitializationVector(session.googleId))
         await updateUser(session?.user?.id, encryptedUser)
         return NextResponse.json(user?.roles, {status: HttpStatusCode.Created})
     } catch (error) {
@@ -41,9 +40,7 @@ export async function DELETE(req: NextRequest) {
             return NextResponse.json({error: "Unauthorized"}, {status: HttpStatusCode.Unauthorized})
         }
 
-        const decryptedKey = decryptKey(session.user.encryptedKey, session.googleId)
-
-        const user = await getUserByIdDecrypted(session?.user?.id, decryptedKey, getInitializationVector(session.googleId))
+        const user = await getUserByIdDecrypted(session?.user?.id, session.user.encryptedKey, session.googleId)
 
         const index = user?.roles?.indexOf(roleToDelete)
         if (index === -1) {
@@ -52,7 +49,7 @@ export async function DELETE(req: NextRequest) {
 
         user?.roles!.splice(index!, 1)
 
-        const encryptedUser: User = encryptUser(user!, decryptedKey, getInitializationVector(session.googleId))
+        const encryptedUser: User = encryptUser(user!, decryptKey(session.user.encryptedKey, session.googleId), getInitializationVector(session.googleId))
         await updateUser(session?.user?.id, encryptedUser)
         return NextResponse.json(user?.roles, {status: HttpStatusCode.Ok})
     } catch (error) {
