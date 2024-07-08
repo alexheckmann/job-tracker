@@ -1,5 +1,5 @@
 import {DefaultSession} from "next-auth"
-import {UserCompaniesList} from "@/lib/models/user";
+import {BookmarkedCompaniesByLocation} from "@/lib/models/user";
 
 declare module "next-auth" {
     /**
@@ -11,7 +11,8 @@ declare module "next-auth" {
             roles: string[],
             locations: string[],
             keywords: string[],
-            companies: UserCompaniesList[],
+            companiesByLocation: BookmarkedCompaniesByLocation[],
+            agenciesByLocation: BookmarkedCompaniesByLocation[],
             encryptedKey: string
         } & DefaultSession["user"]
     }

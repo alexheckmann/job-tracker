@@ -146,6 +146,12 @@ export function deleteContact(id: string) {
  * @returns user The created user
  */
 export function createUser(user: User) {
+    user.companiesByLocation = [{location: "Worldwide", companies: []}]
+    user.agenciesByLocation = [{location: "Worldwide", companies: []}]
+    user.roles = []
+    user.locations = []
+    user.keywords = []
+
     return UserModel.create<User>(user)
 }
 

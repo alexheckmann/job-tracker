@@ -1,16 +1,16 @@
 import {z} from "zod";
 import {DatabaseObject} from "@/lib/models/database-object";
 
-const UserCompanySchema = z.object({
-    name: z.string().min(1),
+const BookmarkedCompanySchema = z.object({
+    companyName: z.string().min(1),
     isFavorite: z.boolean()
 });
 
-export type UserCompany = z.infer<typeof UserCompanySchema>;
+export type BookmarkedCompany = z.infer<typeof BookmarkedCompanySchema>;
 
-export const UserCompaniesListSchema = z.object({
+export const BookmarkedCompaniesByLocationSchema = z.object({
     location: z.string().min(1),
-    company: z.array(UserCompanySchema).optional(),
+    companies: z.array(BookmarkedCompanySchema).optional(),
 });
 
 const userMaxLengthConstraints = {
@@ -18,7 +18,7 @@ const userMaxLengthConstraints = {
     email: 256,
 }
 
-export type UserCompaniesList = z.infer<typeof UserCompaniesListSchema>;
+export type BookmarkedCompaniesByLocation = z.infer<typeof BookmarkedCompaniesByLocationSchema>;
 
 export const UserSchema = DatabaseObject.extend({
     name: z.string().min(1).max(userMaxLengthConstraints.name),
@@ -27,7 +27,8 @@ export const UserSchema = DatabaseObject.extend({
     locations: z.array(z.string().min(1)).optional(),
     keywords: z.array(z.string().min(1)).optional(),
     encryptedKey: z.string().optional(),
-    companies: z.array(UserCompaniesListSchema).optional()
+    companiesByLocation: z.array(BookmarkedCompaniesByLocationSchema).optional(),
+    agenciesByLocation: z.array(BookmarkedCompaniesByLocationSchema).optional()
 });
 
 export type User = z.infer<typeof UserSchema>;

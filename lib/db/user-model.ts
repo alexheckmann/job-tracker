@@ -27,16 +27,20 @@ const UserModelSchema = new Schema<User>({
         type: String,
         required: false
     },
-    companies: {
+    companiesByLocation: {
         type: [{
             location: {
                 type: String,
                 required: true
             },
-            company: {
+            companies: {
                 type: [{
-                    name: {
+                    companyName: {
                         type: String,
+                        required: true
+                    },
+                    isFavorite: {
+                        type: Boolean,
                         required: true
                     }
                 }],
@@ -44,7 +48,29 @@ const UserModelSchema = new Schema<User>({
             }
         }],
         required: false
-    }
+    },
+    agenciesByLocation: {
+        type: [{
+            location: {
+                type: String,
+                required: true
+            },
+            companies: {
+                type: [{
+                    companyName: {
+                        type: String,
+                        required: true
+                    },
+                    isFavorite: {
+                        type: Boolean,
+                        required: true
+                    }
+                }],
+                required: false
+            }
+        }],
+        required: false
+    },
 }, {timestamps: true})
 
 export const UserModel = mongoose.models[USER_COLLECTION_NAME] || model(USER_COLLECTION_NAME, UserModelSchema)
