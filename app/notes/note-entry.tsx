@@ -29,7 +29,7 @@ export function NoteEntry({entry, removeEntryFunction, isPendingRemoval}: Keywor
             {showRemoveButton ?
                 <RemoveButton disabled={isPendingRemoval} role={entry}
                               onClick={() => removeEntryFunction(entry)}/> :
-                <Button variant="ghost" size="icon" className={"h-6 w-6"}>
+                <Button variant="ghost" size="icon" className={"h-6 w-6"} tabIndex={-1}>
                     <CopyIcon className={"h-3 w-3 text-muted-foreground"}/>
                 </Button>
             }
