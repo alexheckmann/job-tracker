@@ -54,6 +54,9 @@ export const jobTrackerColumns: ColumnDef<Job>[] = [
                 </Button>
             )
         },
+        filterFn: (row, id, value) => {
+            return value.includes(row.getValue(id))
+        },
         size: 100,
         cell: ({row}: { row: Row<Job> }) => {
             const role = row.getValue<string>("role")
