@@ -4,9 +4,9 @@ import {z} from "zod";
 export const ApplicationStatus = z.enum(["Saved", "Applied", "Interview", "Offered", "Declined"]);
 
 const jobsMaxLengthConstraints = {
-    role: 128,
-    company: 128,
-    exactTitle: 128,
+    role: 256,
+    company: 256,
+    exactTitle: 256,
     location: 256,
     link: 256,
     salary: 16,
