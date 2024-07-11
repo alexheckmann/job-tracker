@@ -12,6 +12,7 @@ import {encryptBookmarkedCompany} from "@/lib/security/encrypt";
 import {decryptKey} from "@/lib/security/decryptKey";
 import {getInitializationVector} from "@/lib/security/getInitializationVector";
 import {decryptBookmarkedCompany} from "@/lib/security/decrypt";
+import {DeleteRequest, DeleteRequestSchema} from "@/lib/models/delete-request";
 
 export async function GET() {
     const session = await getServerSession(authOptions)
@@ -76,16 +77,21 @@ export async function POST(req: NextRequest) {
 export async function DELETE(req: NextRequest) {
     const session = await getServerSession(authOptions)
 
-    const {id, userId} = await req.json()
+    const deleteRequest: DeleteRequest = await req.json()
+
+    const validatedDeleteRequest = DeleteRequestSchema.safeParse(deleteRequest)
+    if (!validatedDeleteRequest.success) {
+        return NextResponse.json({error: validatedDeleteRequest.error}, {status: HttpStatusCode.BadRequest})
+    }
 
     try {
-        if (session.user.id.toString() !== userId) {
+        if (!session || session.user.id.toString() !== validatedDeleteRequest.data.userId) {
             return NextResponse.json({error: "Unauthorized"}, {status: HttpStatusCode.Unauthorized})
         }
 
-        await deleteBookmarkedCompany(id)
+        await deleteBookmarkedCompany(validatedDeleteRequest.data.id)
 
-        return NextResponse.json({status: HttpStatusCode.NoContent})
+        return NextResponse.json({deletedId: validatedDeleteRequest.data.id}, {status: HttpStatusCode.Ok})
     } catch (error) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
     }
