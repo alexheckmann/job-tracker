@@ -9,6 +9,14 @@ import {BookmarkedCompany} from "@/lib/models/bookmarked-company";
  * @returns bookmarkedCompany The inserted bookmarked company as a promise
  */
 export function insertBookmarkedCompany(bookmarkedCompany: BookmarkedCompany, userId: string) {
-    return BookmarkedCompanyModel.create({...bookmarkedCompany, user: getMongooseIdObject(userId)})
+    return BookmarkedCompanyModel.create<BookmarkedCompany>({...bookmarkedCompany, user: getMongooseIdObject(userId)})
 }
 
+/**
+ * Get all bookmarked companies from the database for a user
+ * @param userId The id of the user to get jobs for
+ * @returns jobs all jobs
+ */
+export function getBookmarkedCompanies(userId: string) {
+    return BookmarkedCompanyModel.find<BookmarkedCompany>({user: getMongooseIdObject(userId)}).exec()
+}
