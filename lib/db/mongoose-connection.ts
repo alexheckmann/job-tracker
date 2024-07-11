@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import {DB_NAME} from "@/lib/db/constants";
+import {DB_NAME} from "@/lib/db/db-constants";
 
 const mongoosePromise = mongoose.connect(process.env.MONGODB_URI || "", {
     dbName: DB_NAME,
