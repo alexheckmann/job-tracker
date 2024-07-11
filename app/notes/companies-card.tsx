@@ -14,8 +14,6 @@ import {Plus} from "lucide-react";
 import {FormInput} from "@/components/form/form-input";
 import {FormSwitch} from "@/components/form/form-switch";
 import {SubmitButton} from "@/components/submit-button";
-import {useMutation} from "@tanstack/react-query";
-import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
 import {BookmarkedCompany} from "@/lib/models/bookmarked-company";
 import {useBookmarkedCompaniesData} from "@/app/data/use-get-data";
@@ -24,6 +22,7 @@ import {useRemoveCompany} from "@/app/notes/use-remove-company";
 import {getCompanyLocations} from "@/app/notes/get-company-locations";
 import {getFilteredCompanies} from "@/app/notes/get-filtered-companies";
 import {useBookmarkedCompanyForm} from "@/app/notes/use-bookmarked-company-form";
+import {useAddCompany} from "@/app/notes/use-add-company";
 
 const companiesCardInfoText = "Save your keywords exactly how you use them on job portals. Some job portals use quotation marks to search for exact phrases."
 
@@ -57,33 +56,29 @@ export function CompaniesCard() {
 
     const form = useBookmarkedCompanyForm(locations[0] ?? "Worldwide")
 
-    const {mutate: addCompany, isPending: isAdding} = useMutation({
-        mutationFn: async (data: BookmarkedCompany) => {
-            return await axios.post<BookmarkedCompany>("/api/v1/companies", data)
-                .then((res) => res.data)
-        },
+    function onAddSuccessCallback(data: BookmarkedCompany) {
+        const updatedCompaniesToBeDisplayed = getFilteredCompanies([data, ...displayedCompanies], data.location)
+        setDisplayedCompanies(updatedCompaniesToBeDisplayed)
+        form.reset({...form.getValues(), companyName: "", isFavorite: false})
+        toast({
+            title: "Company added",
+            description: `${data.companyName} was added to your notes.`,
+            variant: "default"
+        })
+    }
 
-        onSuccess: (data: BookmarkedCompany): void => {
+    function onAddErrorCallback() {
+        toast({
+            title: "Error",
+            description: "An error occurred while adding the company.",
+            variant: "destructive"
+        })
+    }
 
-            toast({
-                title: "Company added",
-                description: `${data.companyName} was added to your notes.`,
-                variant: "default"
-            })
-
-            const updatedCompaniesToBeDisplayed = getFilteredCompanies([data, ...displayedCompanies], data.location)
-            setDisplayedCompanies(updatedCompaniesToBeDisplayed)
-
-            form.reset({...form.getValues(), companyName: "", isFavorite: false})
-        },
-        onError: () => {
-            toast({
-                title: "Error",
-                description: "An error occurred while adding the company.",
-                variant: "destructive"
-            })
-        }
-    })
+    const {
+        mutate: addCompany,
+        isPending: isAdding
+    } = useAddCompany("company", ["companies"], onAddSuccessCallback, onAddErrorCallback)
 
     function onRemoveSuccessCallback(data: DeleteResponse) {
         const updatedCompaniesToBeDisplayed = displayedCompanies.filter((entry: BookmarkedCompany) => entry._id !== data.deletedId)
