@@ -42,7 +42,7 @@ export function useContactData() {
 
 export function useBookmarkedCompaniesData() {
     return useQuery<BookmarkedCompany[]>({
-        queryKey: ['bookmarkedCompanies'],
+        queryKey: ['companies'],
         queryFn: async () => {
             return await axios.get<{
                 bookmarkedCompanies: BookmarkedCompany[]
