@@ -12,6 +12,7 @@ import {
 } from "@/lib/security/exclude-props";
 import {Contact} from "@/lib/models/contact";
 import {Interview} from "@/lib/models/interview";
+import {BookmarkedCompany} from "@/lib/models/bookmarked-company";
 
 /**
  * Decrypts string data using aes-256-cbc.
@@ -87,4 +88,15 @@ export function decryptInterview(interview: Interview, key: Buffer, iv: Buffer):
  */
 export function decryptContact(contact: Contact, key: Buffer, iv: Buffer): Contact {
     return decryptObject<Contact>(contact, key, iv, EXCLUDE_CONTACT_PROPS);
+}
+
+/**
+ * Decrypts a bookmarked company using the provided key and initialization vector.
+ * @param bookmarkedCompany The bookmarked company to decrypt
+ * @param key The key to use for decryption
+ * @param iv The initialization vector to use for decryption
+ * @returns bookmarkedCompany The decrypted bookmarked company
+ */
+export function decryptBookmarkedCompany(bookmarkedCompany: BookmarkedCompany, key: Buffer, iv: Buffer): BookmarkedCompany {
+    return decryptObject<BookmarkedCompany>(bookmarkedCompany, key, iv, []);
 }
