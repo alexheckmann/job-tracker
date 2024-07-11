@@ -79,8 +79,6 @@ export const authOptions = {
             token.roles = user?.roles
             token.locations = user?.locations
             token.keywords = user?.keywords
-            token.companiesByLocation = user?.companiesByLocation
-            token.agenciesByLocation = user?.companiesByLocation
             token.encryptedKey = user?.encryptedKey
             return token
         },
@@ -90,8 +88,6 @@ export const authOptions = {
             session.user.roles = token.roles
             session.user.locations = token.locations
             session.user.keywords = token.keywords
-            session.user.companiesByLocation = token.companiesByLocation
-            session.user.agenciesByLocation = token.agenciesByLocation
             session.user.encryptedKey = token.encryptedKey
             session.googleId = token.sub
             return session
