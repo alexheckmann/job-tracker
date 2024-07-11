@@ -29,7 +29,7 @@ export async function GET() {
                 bookmarkedCompanies.map((bookmarkedCompany: BookmarkedCompany) =>
                     decryptBookmarkedCompany(bookmarkedCompany, decryptedKey, getInitializationVector(session?.googleId))))
 
-        return NextResponse.json(results, {status: HttpStatusCode.Ok})
+        return NextResponse.json({bookmarkedCompanies: results}, {status: HttpStatusCode.Ok})
     } catch (error) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
     }

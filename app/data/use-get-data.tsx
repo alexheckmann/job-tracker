@@ -5,6 +5,7 @@ import {Contact} from "@/lib/models/contact";
 import {Job} from "@/lib/models/job";
 import {ClientStateStore} from "@/lib/models/client-state-store";
 import {Interview} from "@/lib/models/interview";
+import {BookmarkedCompany} from "@/lib/models/bookmarked-company";
 
 export function useJobData() {
     return useQuery<Job[]>({
@@ -35,6 +36,17 @@ export function useContactData() {
             return await axios.get<{
                 contacts: Contact[]
             }>('/api/v1/contacts').then((res) => res.data.contacts)
+        }
+    });
+}
+
+export function useBookmarkedCompaniesData() {
+    return useQuery<BookmarkedCompany[]>({
+        queryKey: ['bookmarkedCompanies'],
+        queryFn: async () => {
+            return await axios.get<{
+                bookmarkedCompanies: BookmarkedCompany[]
+            }>('/api/v1/companies').then((res) => res.data.bookmarkedCompanies)
         }
     });
 }
