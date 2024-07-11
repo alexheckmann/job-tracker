@@ -91,6 +91,13 @@ export function encryptContact(contact: Contact, key: Buffer, iv: Buffer): Conta
     return encryptObject<Contact>(contact, key, iv, EXCLUDE_CONTACT_PROPS);
 }
 
+/**
+ * Encrypts the bookmarked company object using the provided key and initialization vector.
+ * @param bookmarkedCompany The bookmarked company to encrypt
+ * @param key The key to use for encryption
+ * @param iv The initialization vector to use for encryption
+ * @returns bookmarkedCompany The encrypted bookmarked company
+ */
 export function encryptBookmarkedCompany(bookmarkedCompany: BookmarkedCompany, key: Buffer, iv: Buffer): BookmarkedCompany {
     return encryptObject<BookmarkedCompany>(bookmarkedCompany, key, iv, EXCLUDE_COMPANY_PROPS);
 }
