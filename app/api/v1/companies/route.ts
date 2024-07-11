@@ -9,6 +9,32 @@ import {decryptKey} from "@/lib/security/decryptKey";
 import {getInitializationVector} from "@/lib/security/getInitializationVector";
 import {decryptBookmarkedCompany} from "@/lib/security/decrypt";
 
+export async function GET() {
+    const session = await getServerSession(authOptions)
+
+    try {
+
+        if (!session) {
+            return NextResponse.json({error: "Unauthorized"}, {status: HttpStatusCode.Unauthorized})
+        }
+
+        const decryptedKey = decryptKey(session?.user?.encryptedKey, session?.googleId)
+
+        const results = await getBookmarkedCompanies(session.user.id)
+            // convert the jobs to plain objects instead of Mongoose documents
+            .then((bookmarkedCompanies: BookmarkedCompany[]) =>
+                bookmarkedCompanies.map((bookmarkedCompany: any) => bookmarkedCompany.toObject()))
+            // decrypt the jobs before sending them back to the client so that the client can read the data
+            .then((bookmarkedCompanies: BookmarkedCompany[]) =>
+                bookmarkedCompanies.map((bookmarkedCompany: BookmarkedCompany) =>
+                    decryptBookmarkedCompany(bookmarkedCompany, decryptedKey, getInitializationVector(session?.googleId))))
+
+        return NextResponse.json(results, {status: HttpStatusCode.Ok})
+    } catch (error) {
+        return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
+    }
+}
+
 export async function POST(req: NextRequest) {
     const session = await getServerSession(authOptions)
 
