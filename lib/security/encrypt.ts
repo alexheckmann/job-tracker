@@ -4,6 +4,7 @@ import {Job} from "@/lib/models/job";
 import crypto from "crypto";
 import {transformObjectStringProperties} from "@/lib/security/transformObjectStringProperties";
 import {
+    EXCLUDE_COMPANY_PROPS,
     EXCLUDE_CONTACT_PROPS,
     EXCLUDE_INTERVIEW_PROPS,
     EXCLUDE_JOB_PROPS,
@@ -12,6 +13,7 @@ import {
 } from "@/lib/security/exclude-props";
 import {Contact} from "@/lib/models/contact";
 import {Interview} from "@/lib/models/interview";
+import {BookmarkedCompany} from "@/lib/models/bookmarked-company";
 
 /**
  * Encrypts string data using aes-256-cbc.
@@ -87,4 +89,8 @@ export function encryptInterview(interview: Interview, key: Buffer, iv: Buffer):
  */
 export function encryptContact(contact: Contact, key: Buffer, iv: Buffer): Contact {
     return encryptObject<Contact>(contact, key, iv, EXCLUDE_CONTACT_PROPS);
+}
+
+export function encryptBookmarkedCompany(bookmarkedCompany: BookmarkedCompany, key: Buffer, iv: Buffer): BookmarkedCompany {
+    return encryptObject<BookmarkedCompany>(bookmarkedCompany, key, iv, EXCLUDE_COMPANY_PROPS);
 }
