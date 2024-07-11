@@ -2,6 +2,7 @@
 
 import {CardContainer} from "@/components/card-container";
 import {KeywordsCard} from "@/app/notes/keywords-card";
+import {CompaniesCard} from "@/app/notes/companies-card";
 
 
 export default function NotesPage() {
@@ -13,7 +14,12 @@ export default function NotesPage() {
                 </CardContainer>
             </div>
             <div className="col-span-2 grid items-start gap-6 lg:col-span-1">
-
+                <CardContainer>
+                    <CompaniesCard/>
+                </CardContainer>
+                {/* TODO agencies */}
+                {/* TODO upskilling card */}
+                {/* TODO notes in general */}
             </div>
             <div
                 className="col-span-2 grid items-start gap-6 lg:col-span-2 lg:grid-cols-2 xl:col-span-1 xl:grid-cols-1">
