@@ -1,4 +1,4 @@
-import {getJobs, getMongooseIdObject, insertJob, updateJob} from "@/lib/db/db-helpers";
+import {getMongooseIdObject} from "@/lib/db/db-helpers";
 import {NextRequest, NextResponse} from "next/server";
 import {HttpStatusCode} from "axios";
 import {getServerSession} from "next-auth";
@@ -7,6 +7,7 @@ import {decryptJob} from "@/lib/security/decrypt";
 import {encryptJob} from "@/lib/security/encrypt";
 import {decryptKey} from "@/lib/security/decryptKey";
 import {getInitializationVector} from "@/lib/security/getInitializationVector";
+import {getJobs, insertJob, updateJob} from "@/lib/db/job-model-helpers";
 
 
 export async function GET() {

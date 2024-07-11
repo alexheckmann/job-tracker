@@ -1,6 +1,6 @@
 import mongoose, {model, Schema} from "mongoose";
 import {Job} from "@/lib/models/job";
-import {JOB_COLLECTION_NAME, USER_COLLECTION_NAME} from "@/lib/db/constants";
+import {JOB_COLLECTION_NAME, USER_COLLECTION_NAME} from "@/lib/db/db-constants";
 
 export const JobModelSchema = new Schema<Job>(
     {
