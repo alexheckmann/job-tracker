@@ -1,7 +1,7 @@
 import {NextRequest, NextResponse} from "next/server";
-import {createFeedback} from "@/lib/db/db-helpers";
 import {HttpStatusCode} from "axios";
 import {Feedback} from "@/lib/models/feedback";
+import {createFeedback} from "@/lib/db/feedback-model-helpers";
 
 export async function POST(req: NextRequest) {
     const newFeedback: Feedback = await req.json()

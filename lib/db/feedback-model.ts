@@ -1,5 +1,5 @@
 import mongoose, {model, Schema} from "mongoose";
-import {FEEDBACK_COLLECTION_NAME} from "@/lib/db/constants";
+import {FEEDBACK_COLLECTION_NAME} from "@/lib/db/db-constants";
 import {Feedback} from "@/lib/models/feedback";
 
 const FeedbackModelSchema = new Schema<Feedback>({
