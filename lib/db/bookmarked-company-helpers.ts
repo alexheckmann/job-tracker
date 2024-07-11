@@ -20,3 +20,12 @@ export function insertBookmarkedCompany(bookmarkedCompany: BookmarkedCompany, us
 export function getBookmarkedCompanies(userId: string) {
     return BookmarkedCompanyModel.find<BookmarkedCompany>({user: getMongooseIdObject(userId)}).exec()
 }
+
+/**
+ * Delete a bookmarked company in the database for a user
+ * @param id The id of the bookmarked company to delete
+ * @returns The updated bookmarked company
+ */
+export function deleteBookmarkedCompany(id: string) {
+    return BookmarkedCompanyModel.findByIdAndDelete(id).exec()
+}
