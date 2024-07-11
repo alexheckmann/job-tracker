@@ -1,12 +1,12 @@
 import {NextRequest, NextResponse} from "next/server";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/authOptions";
-import {getUserByIdDecrypted, updateUser} from "@/lib/db/db-helpers";
 import {HttpStatusCode} from "axios";
 import {User} from "@/lib/models/user";
 import {encryptUser} from "@/lib/security/encrypt";
 import {getInitializationVector} from "@/lib/security/getInitializationVector";
 import {decryptKey} from "@/lib/security/decryptKey";
+import {getUserByIdDecrypted, updateUser} from "@/lib/db/user-model-helpers";
 
 export async function POST(req: NextRequest) {
     const newRole = await req.json().then((data) => data.value)

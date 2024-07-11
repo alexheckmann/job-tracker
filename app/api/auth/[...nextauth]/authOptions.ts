@@ -1,12 +1,12 @@
 import GoogleProvider from "next-auth/providers/google";
 import mongoose from "mongoose";
 import mongooseConnection from "@/lib/db/mongoose-connection";
-import {createUser, getUserByEmail} from "@/lib/db/db-helpers";
 import {generateKey} from "@/lib/security/generateKey";
 import {encrypt} from "@/lib/security/encrypt";
 import {getInitializationVector} from "@/lib/security/getInitializationVector";
 import {decryptKey} from "@/lib/security/decryptKey";
 import {decryptUser} from "@/lib/security/decrypt";
+import {createUser, getUserByEmail} from "@/lib/db/user-model-helpers";
 
 export const authOptions = {
     providers: [

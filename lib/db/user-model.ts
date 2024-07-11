@@ -1,5 +1,5 @@
 import mongoose, {model, Schema} from "mongoose";
-import {USER_COLLECTION_NAME} from "@/lib/db/constants";
+import {USER_COLLECTION_NAME} from "@/lib/db/db-constants";
 import {User} from "@/lib/models/user";
 
 const UserModelSchema = new Schema<User>({
@@ -26,51 +26,7 @@ const UserModelSchema = new Schema<User>({
     encryptedKey: {
         type: String,
         required: false
-    },
-    companiesByLocation: {
-        type: [{
-            location: {
-                type: String,
-                required: true
-            },
-            companies: {
-                type: [{
-                    companyName: {
-                        type: String,
-                        required: true
-                    },
-                    isFavorite: {
-                        type: Boolean,
-                        required: true
-                    }
-                }],
-                required: false
-            }
-        }],
-        required: false
-    },
-    agenciesByLocation: {
-        type: [{
-            location: {
-                type: String,
-                required: true
-            },
-            companies: {
-                type: [{
-                    companyName: {
-                        type: String,
-                        required: true
-                    },
-                    isFavorite: {
-                        type: Boolean,
-                        required: true
-                    }
-                }],
-                required: false
-            }
-        }],
-        required: false
-    },
+    }
 }, {timestamps: true})
 
 export const UserModel = mongoose.models[USER_COLLECTION_NAME] || model(USER_COLLECTION_NAME, UserModelSchema)
