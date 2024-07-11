@@ -1,4 +1,4 @@
-import {getInterviews, getMongooseIdObject, insertInterview, updateInterview} from "@/lib/db/db-helpers";
+import {getMongooseIdObject} from "@/lib/db/db-helpers";
 import {NextRequest, NextResponse} from "next/server";
 import {HttpStatusCode} from "axios";
 import {getServerSession} from "next-auth";
@@ -7,6 +7,7 @@ import {decryptKey} from "@/lib/security/decryptKey";
 import {decryptInterview} from "@/lib/security/decrypt";
 import {getInitializationVector} from "@/lib/security/getInitializationVector";
 import {encryptInterview} from "@/lib/security/encrypt";
+import {getInterviews, insertInterview, updateInterview} from "@/lib/db/interview-model-helpers";
 
 
 export async function GET() {
