@@ -3,7 +3,11 @@ import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/authOptions";
 import {HttpStatusCode} from "axios";
 import {BookmarkedCompany, BookmarkedCompanySchema} from "@/lib/models/bookmarked-company";
-import {getBookmarkedCompanies, insertBookmarkedCompany} from "@/lib/db/bookmarked-company-helpers";
+import {
+    deleteBookmarkedCompany,
+    getBookmarkedCompanies,
+    insertBookmarkedCompany
+} from "@/lib/db/bookmarked-company-helpers";
 import {encryptBookmarkedCompany} from "@/lib/security/encrypt";
 import {decryptKey} from "@/lib/security/decryptKey";
 import {getInitializationVector} from "@/lib/security/getInitializationVector";
@@ -64,6 +68,24 @@ export async function POST(req: NextRequest) {
 
 
         return NextResponse.json(createdBookmarkedCompany, {status: HttpStatusCode.Created})
+    } catch (error) {
+        return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
+    }
+}
+
+export async function DELETE(req: NextRequest) {
+    const session = await getServerSession(authOptions)
+
+    const {id, userId} = await req.json()
+
+    try {
+        if (session.user.id.toString() !== userId) {
+            return NextResponse.json({error: "Unauthorized"}, {status: HttpStatusCode.Unauthorized})
+        }
+
+        await deleteBookmarkedCompany(id)
+
+        return NextResponse.json({status: HttpStatusCode.NoContent})
     } catch (error) {
         return NextResponse.json({error}, {status: HttpStatusCode.InternalServerError})
     }
