@@ -15,7 +15,7 @@ export function useAddCompany(companyType: "company" | "agency",
                 .then((res) => res.data)
         },
 
-        onSuccess: async (data: BookmarkedCompany): void => {
+        onSuccess: async (data: BookmarkedCompany): Promise<void> => {
             onAddSuccessCallback(data)
             await queryClient.invalidateQueries({queryKey: dataKey})
         },
