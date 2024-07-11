@@ -9,6 +9,7 @@ import {
     ChevronUp,
     ClipboardPlus,
     Copy,
+    Earth,
     HandHeart,
     Info,
     Linkedin,
@@ -168,5 +169,11 @@ export function FeedbackIcon({className}: IconProps) {
 export function DonateIcon({className}: IconProps) {
     return (
         <HandHeart className={cn(defaultIconSize, className)}/>
+    )
+}
+
+export function GlobalIcon({className}: IconProps) {
+    return (
+        <Earth className={cn(defaultIconSize, className)}/>
     )
 }
