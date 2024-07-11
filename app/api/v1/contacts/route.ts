@@ -1,4 +1,4 @@
-import {getContacts, getMongooseIdObject, insertContact, updateContact} from "@/lib/db/db-helpers";
+import {getMongooseIdObject} from "@/lib/db/db-helpers";
 import {NextRequest, NextResponse} from "next/server";
 import {HttpStatusCode} from "axios";
 import {getServerSession} from "next-auth";
@@ -7,6 +7,7 @@ import {decryptKey} from "@/lib/security/decryptKey";
 import {decryptContact} from "@/lib/security/decrypt";
 import {getInitializationVector} from "@/lib/security/getInitializationVector";
 import {encryptContact} from "@/lib/security/encrypt";
+import {getContacts, insertContact, updateContact} from "@/lib/db/contact-model-helpers";
 
 
 export async function GET() {

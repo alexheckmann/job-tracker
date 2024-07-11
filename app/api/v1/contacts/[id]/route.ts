@@ -1,6 +1,6 @@
 import {NextRequest, NextResponse} from "next/server";
-import {deleteContact} from "@/lib/db/db-helpers";
 import {HttpStatusCode} from "axios";
+import {deleteContact} from "@/lib/db/contact-model-helpers";
 
 
 export async function DELETE(req: NextRequest, {params}: { params: { id: string } }) {

@@ -1,6 +1,6 @@
 import mongoose, {model, Schema} from "mongoose";
 import {Contact} from "@/lib/models/contact";
-import {CONTACT_COLLECTION_NAME, USER_COLLECTION_NAME} from "@/lib/db/constants";
+import {CONTACT_COLLECTION_NAME, USER_COLLECTION_NAME} from "@/lib/db/db-constants";
 
 export const ContactModelSchema = new Schema<Contact>(
     {
