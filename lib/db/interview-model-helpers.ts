@@ -1,6 +1,8 @@
 import {InterviewModel} from "@/lib/db/interview-model";
 import {Interview} from "@/lib/models/interview";
 import {getMongooseIdObject} from "@/lib/db/db-helpers";
+// import JobModel so that mongoose dependency is initialized
+import "@/lib/db/job-model"
 
 /**
  * Create an interview in the database for a user
