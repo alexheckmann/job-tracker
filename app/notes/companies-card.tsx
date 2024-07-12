@@ -130,7 +130,7 @@ export function CompaniesCard() {
                             name="location"
                             defaultValue={locations[0]}
                             render={({field}) => (
-                                <div className={cn("flex flex-col gap-2")}>
+                                <div className={cn("flex flex-col gap-2 mb-6")}>
                                     <FormItem>
                                         <FormLabel>Location</FormLabel>
                                         <Select disabled={isLoadingSession}
@@ -177,13 +177,13 @@ export function CompaniesCard() {
                             }
                         </div>
                         {isFormHidden ?
-                            <Button variant={"ghost"} className={"w-fit gap-2"}
+                            <Button variant={"ghost"} className={"w-fit gap-2 mt-6"}
                                     onClick={() => setIsFormHidden(false)}
                                     disabled={isLoadingSession}>
                                 <Plus className={"h-4 w-4"}/>
                                 Add entry
                             </Button> :
-                            <div className={"flex flex-row gap-4 items-center"}>
+                            <div className={"flex flex-row gap-4 items-center mt-6"}>
                                 <FormField control={form.control} name="companyName" render={({field}) => (
                                     <FormInput placeholder={"Name of the company"} className={"pb-4"} required
                                                field={field}/>
