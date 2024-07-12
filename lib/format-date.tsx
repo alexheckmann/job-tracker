@@ -1,6 +1,12 @@
 import {differenceInDays, format, formatDistanceToNowStrict, isToday, isYesterday} from "date-fns";
+import {ReactNode} from "react";
 
-export function formatDate(date: Date): any {
+/**
+ * Format a date to a human-readable string
+ * @param date The date to format
+ * @returns formattedDate The formatted date as a React node
+ */
+export function formatDate(date: Date): ReactNode {
     const now = new Date();
     const diffInDays = differenceInDays(now, date);
 
