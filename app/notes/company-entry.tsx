@@ -13,8 +13,6 @@ interface CompanyEntryProps extends HTMLAttributes<HTMLDivElement> {
     isPendingRemoval: boolean
 }
 
-const companyEntryMaxLength: number = 24
-
 export function CompanyEntry({entry, removeEntryFunction, isPendingRemoval}: CompanyEntryProps) {
 
     const [showRemoveButton, setShowRemoveButton] = useState(false)
