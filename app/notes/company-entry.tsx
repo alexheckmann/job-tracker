@@ -19,13 +19,13 @@ export function CompanyEntry({entry, removeEntryFunction, isPendingRemoval}: Com
 
     return (
         <Badge variant={"outline"} key={entry.companyName}
-               className={cn("flex items-center align-middle h-6 gap-2 justify-between cursor-pointer max-w-[200px] text-nowrap", entry.isFavorite && "border-ternary")}
+               className={cn("flex items-center align-middle h-6 gap-2 justify-between cursor-pointer max-w-[250px] text-nowrap", entry.isFavorite && "border-ternary")}
                onClick={() => copyToClipboard(entry.companyName)}
                onMouseEnter={() => setShowRemoveButton(true)}
                onMouseLeave={() => setShowRemoveButton(false)}
         >
             {entry.location === "Worldwide" && <GlobalIcon className={"h-3 w-3 text-muted-foreground"}/>}
-            <span className={"space-x-0 max-w-[180px] truncate"}>
+            <span className={"max-w-[170px] truncate"}>
                 {entry.companyName}
             </span>
             {showRemoveButton ?
