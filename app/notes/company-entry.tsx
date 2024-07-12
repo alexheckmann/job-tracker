@@ -25,7 +25,7 @@ export function CompanyEntry({entry, removeEntryFunction, isPendingRemoval}: Com
                onMouseLeave={() => setShowRemoveButton(false)}
         >
             {entry.location === "Worldwide" && <GlobalIcon className={"h-3 w-3 text-muted-foreground"}/>}
-            <span className={"max-w-[170px] truncate"}>
+            <span className={"max-w-[170px] truncate"} title={entry.companyName}>
                 {entry.companyName}
             </span>
             {showRemoveButton ?
