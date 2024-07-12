@@ -22,7 +22,7 @@ export function NoteEntry({entry, removeEntryFunction, isPendingRemoval}: Keywor
                onMouseEnter={() => setShowRemoveButton(true)}
                onMouseLeave={() => setShowRemoveButton(false)}
         >
-            <span className={"max-w-[180px] truncate"}>
+            <span className={"max-w-[180px] truncate"} title={entry}>
                 {entry}
             </span>
             {showRemoveButton ?
