@@ -158,7 +158,7 @@ export function CompaniesCard() {
                             )}
                         />
                         <div
-                            className={"flex flex-row flex-wrap gap-2 items-start h-[240px] content-start overflow-y-auto pt-6"}>
+                            className={"flex flex-row flex-wrap gap-2 items-start h-[240px] content-start overflow-y-auto"}>
                             {isLoadingBookmarkedCompanies ?
                                 getEmptyArray(12).map((_, i) => (
                                     <Badge key={i} className={`w-[90px]`} variant={"outline"}>
