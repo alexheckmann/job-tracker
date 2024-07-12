@@ -48,7 +48,7 @@ export function CompaniesCard() {
             const locations: string[] = getCompanyLocations(displayedCompanies, session?.user?.locations ?? []);
             setLocations(locations)
 
-            const companiesToDisplay = getFilteredCompanies(fetchedBookmarkedCompanies!, locations[0])
+            const companiesToDisplay = getFilteredCompanies(fetchedBookmarkedCompanies!, form.getValues("location") ?? locations[0])
             setDisplayedCompanies(companiesToDisplay)
             setAllCompanies(fetchedBookmarkedCompanies!)
         }
@@ -118,6 +118,11 @@ export function CompaniesCard() {
             <CardContent className="grid gap-6">
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(async (data: BookmarkedCompany) => {
+                        // only add company if there is not already a company with the same name and location
+                        if (displayedCompanies.some((entry: BookmarkedCompany) => entry.companyName === data.companyName && entry.location === data.location)) {
+                            form.reset({...form.getValues(), companyName: "", isFavorite: false})
+                            return
+                        }
                         addCompany(data)
                     })}>
                         <FormField
