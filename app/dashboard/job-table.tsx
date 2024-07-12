@@ -33,12 +33,6 @@ export function JobTable() {
             label: "Search for a company..."
         },
         {
-            columnName: "isRecruiter",
-            type: "button",
-            label: "HR",
-            filterValue: false
-        },
-        {
             columnName: "isFavorite",
             type: "button",
             label: "Starred",
