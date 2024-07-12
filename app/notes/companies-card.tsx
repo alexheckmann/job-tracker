@@ -167,7 +167,7 @@ export function CompaniesCard() {
                                 )) :
                                 displayedCompanies.length > 0 ?
                                     displayedCompanies.map((entry: BookmarkedCompany) => (
-                                        <CompanyEntry key={entry.companyName + entry.location} entry={entry}
+                                        <CompanyEntry key={entry._id} entry={entry}
                                                       removeEntryFunction={removeCompany}
                                                       isPendingRemoval={isPendingRemoval}/>
                                     )) :
