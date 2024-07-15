@@ -1,5 +1,7 @@
 import {FeedbackModel} from "@/lib/db/feedback-model";
 import {Feedback} from "@/lib/models/feedback";
+// import models so that mongoose dependencies are initialized
+import "@/lib/db/import-models"
 
 /**
  * Create a feedback in the database

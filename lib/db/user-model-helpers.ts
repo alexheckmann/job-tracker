@@ -4,6 +4,8 @@ import {cache} from "react";
 import {decryptKey} from "@/lib/security/decryptKey";
 import {decryptUser} from "@/lib/security/decrypt";
 import {getInitializationVector} from "@/lib/security/getInitializationVector";
+// import models so that mongoose dependencies are initialized
+import "@/lib/db/import-models"
 
 /**
  * Create a user in the database

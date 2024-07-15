@@ -1,6 +1,8 @@
 import {ContactModel} from "@/lib/db/contact-model";
 import {Contact} from "@/lib/models/contact";
 import {getMongooseIdObject} from "@/lib/db/db-helpers";
+// import models so that mongoose dependencies are initialized
+import "@/lib/db/import-models"
 
 /**
  * Create a contact in the database for a user

@@ -1,6 +1,8 @@
 import {Job} from "@/lib/models/job";
 import {JobModel} from "@/lib/db/job-model";
 import {getMongooseIdObject} from "@/lib/db/db-helpers";
+// import models so that mongoose dependencies are initialized
+import "@/lib/db/import-models"
 
 /**
  * Create a job in the database for a user

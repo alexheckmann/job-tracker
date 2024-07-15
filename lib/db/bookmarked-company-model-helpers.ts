@@ -1,6 +1,8 @@
 import {BookmarkedCompanyModel} from "@/lib/db/bookmarked-company-model";
 import {getMongooseIdObject} from "@/lib/db/db-helpers";
 import {BookmarkedCompany} from "@/lib/models/bookmarked-company";
+// import models so that mongoose dependencies are initialized
+import "@/lib/db/import-models"
 
 /**
  * Inserts a bookmarked company into the database
