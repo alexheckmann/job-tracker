@@ -6,13 +6,13 @@ import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
 import {Button} from "@/components/ui/button";
 import Logo from "@/components/logo";
 import {usePathname} from "next/navigation";
-import {JobCreationButton} from "@/components/navbar/job-creation-button";
-import {ContactCreationButton} from "@/components/navbar/contact-creation-button";
+import {JobCreationButton} from "@/app/dashboard/job-creation-button";
+import {ContactCreationButton} from "@/app/contacts/contact-creation-button";
 import {signOut, useSession} from "next-auth/react";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
 import {useEffect, useState} from "react";
 import {SignInButton} from "@/components/sign-in-button";
-import {InterviewCreationButton} from "@/components/navbar/interview-creation-button";
+import {InterviewCreationButton} from "@/app/interviews/interview-creation-button";
 import {useLocationsStore, useRolesStore} from "@/app/data/use-get-data";
 
 interface NavLink {
