@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
 import {Dialog, DialogTrigger} from "@/components/ui/dialog";
-import JobEditDialogContent from "@/components/navbar/job-edit-dialog-content";
+import JobEditDialog from "@/app/dashboard/job-edit-dialog";
 import {DeleteIcon, EditIcon, LoadingIcon, OptionsIcon} from "@/components/icons";
 
 export function JobRowActions({row}: { row: Row<Job> }) {
@@ -52,7 +52,7 @@ export function JobRowActions({row}: { row: Row<Job> }) {
                         Delete
                     </DropdownMenuItem>
                 </DropdownMenuContent>
-                <JobEditDialogContent job={job}/>
+                <JobEditDialog job={job}/>
             </Dialog>
         </DropdownMenu>
     )

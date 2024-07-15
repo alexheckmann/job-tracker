@@ -8,12 +8,12 @@ import {Form} from "@/components/ui/form";
 import {Job, JobSchema} from "@/lib/models/job";
 import {useCreateJob} from "@/app/data/use-create-data";
 import {SubmitButton} from "@/components/submit-button";
-import JobDialogContent from "@/components/navbar/job-dialog-content";
+import JobDialogContent from "@/app/dashboard/job-dialog-content";
 import DialogContentWrapper from "@/components/dialog-content-wrapper";
 import {JobIcon} from "@/components/icons";
 import {useEffect} from "react";
 
-export default function JobCreationDialogContent() {
+export default function JobCreationDialog() {
 
     const {setData: setIsJobCreationDialogOpen} = useJobCreationDialogStore()
     const {data: roles} = useRolesStore()

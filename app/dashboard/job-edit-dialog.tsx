@@ -7,18 +7,18 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Form} from "@/components/ui/form";
 import {Job, JobSchema} from "@/lib/models/job";
 import {SubmitButton} from "@/components/submit-button";
-import JobDialogContent from "@/components/navbar/job-dialog-content";
+import JobDialogContent from "@/app/dashboard/job-dialog-content";
 import {useEffect} from "react";
 import {useUpdateJob} from "@/app/data/use-update-data";
 import DialogContentWrapper from "@/components/dialog-content-wrapper";
 import {JobIcon} from "@/components/icons";
 
 
-interface JobEditDialogContentProps {
+interface JobEditDialogProps {
     job: Job
 }
 
-export default function JobEditDialogContent({job}: JobEditDialogContentProps) {
+export default function JobEditDialog({job}: JobEditDialogProps) {
 
     const {setData: setIsJobEditDialogOpen} = useJobEditDialogStore()
 

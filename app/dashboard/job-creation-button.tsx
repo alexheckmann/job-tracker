@@ -3,7 +3,7 @@
 import {useJobCreationDialogStore} from "@/app/data/use-get-data";
 import {Dialog, DialogTrigger} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
-import JobCreationDialogContent from "@/components/navbar/job-creation-dialog-content";
+import JobCreationDialog from "@/app/dashboard/job-creation-dialog";
 import {HTMLAttributes} from "react";
 import {cn} from "@/lib/utils";
 import {JobIcon} from "@/components/icons";
@@ -23,7 +23,7 @@ export function JobCreationButton({disabled, className, ...props}: JobCreationBu
                     <span>Job</span>
                 </Button>
             </DialogTrigger>
-            <JobCreationDialogContent/>
+            <JobCreationDialog/>
         </Dialog>
     );
 }
