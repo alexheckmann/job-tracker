@@ -1,6 +1,6 @@
 "use client"
 
-import Navbar from "@/components/navbar/navbar";
+import Navbar from "@/components/navbar";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {ReactNode} from "react";
 import {Toaster} from "@/components/ui/toaster";
