@@ -8,7 +8,7 @@ import {useUpdateInterview} from "@/app/data/use-update-data";
 import {Form} from "@/components/ui/form";
 import {DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {InterviewIcon} from "@/components/icons";
-import InterviewDialogContent from "@/components/navbar/interview-dialog-content";
+import InterviewDialogContent from "@/app/interviews/interview-dialog-content";
 import {SubmitButton} from "@/components/submit-button";
 
 interface InterviewEditDialogContentProps {

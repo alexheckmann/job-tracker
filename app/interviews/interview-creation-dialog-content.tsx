@@ -9,7 +9,7 @@ import {useCreateInterview} from "@/app/data/use-create-data";
 import {SubmitButton} from "@/components/submit-button";
 import DialogContentWrapper from "@/components/dialog-content-wrapper";
 import {Interview, InterviewSchema} from "@/lib/models/interview";
-import InterviewDialogContent from "@/components/navbar/interview-dialog-content";
+import InterviewDialogContent from "@/app/interviews/interview-dialog-content";
 import {InterviewIcon} from "@/components/icons";
 
 export default function InterviewCreationDialogContent() {

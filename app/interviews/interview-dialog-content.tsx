@@ -14,7 +14,7 @@ import {useState} from "react";
 import {useJobDataWithClientState} from "@/app/dashboard/job-table";
 import {Job} from "@/lib/models/job";
 
-interface ContactDialogContentProps {
+interface InterviewDialogContentProps {
     form: UseFormReturn<Interview>;
 }
 
@@ -22,7 +22,7 @@ function getJobLabel(job?: Job): string {
     return job ? (job?.exactTitle ? `${job?.exactTitle} - ${job?.company}` : `${job?.role} - ${job?.company}`) : ""
 }
 
-export default function InterviewDialogContent({form}: ContactDialogContentProps) {
+export default function InterviewDialogContent({form}: InterviewDialogContentProps) {
     const [isJobFieldOpen, setIsJobFieldOpen] = useState(false)
     const [jobLabelValue, setJobLabelValue] = useState(getJobLabel(form.getValues("job")) ?? "")
     const {data: jobs} = useJobDataWithClientState()

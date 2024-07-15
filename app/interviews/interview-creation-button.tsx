@@ -5,7 +5,7 @@ import {Dialog, DialogTrigger} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 import {HTMLAttributes} from "react";
 import {cn} from "@/lib/utils";
-import InterviewCreationDialogContent from "@/components/navbar/interview-creation-dialog-content";
+import InterviewCreationDialogContent from "@/app/interviews/interview-creation-dialog-content";
 import {InterviewIcon} from "@/components/icons";
 
 interface JobCreationButtonProps extends HTMLAttributes<HTMLButtonElement> {

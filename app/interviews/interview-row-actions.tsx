@@ -10,7 +10,7 @@ import {
 import {Button} from "@/components/ui/button";
 import {Dialog, DialogTrigger} from "@/components/ui/dialog";
 import {Interview} from "@/lib/models/interview";
-import InterviewEditDialogContent from "@/components/navbar/interview-edit-dialog-content";
+import InterviewEditDialogContent from "@/app/interviews/interview-edit-dialog-content";
 import {DeleteIcon, EditIcon, LoadingIcon, OptionsIcon} from "@/components/icons";
 
 export function InterviewRowActions({row}: { row: Row<Interview> }) {
