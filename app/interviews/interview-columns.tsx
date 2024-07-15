@@ -97,30 +97,23 @@ export const interviewColumns: ColumnDef<Interview>[] = [
             row: Row<Interview>
         }) => {
             const date: Date = row.getValue<Date>("date")
-
-            return (
-                <HoverTooltip hoverText={`${format(date, "dd/MM/yyyy")}`} asChild>
-                    <span>{formatDate(date)}</span>
-                </HoverTooltip>
-            );
-
-        },
-    },
-    {
-        id: "Interview time",
-        cell: ({row}: {
-            row: Row<Interview>
-        }) => {
+            const formattedDate = format(date, "dd/MM/yyyy")
             const startTime: string | undefined = row.original.startTime
             const endTime: string | undefined = row.original.endTime
 
             return (
-                startTime &&
-                <span>
-                    {startTime && endTime ? `${startTime} - ${endTime}` : startTime}
-                </span>
-            )
-        }
+                <div className={"flex flew-row flex-wrap align-middle items-center gap-1"}>
+                    <HoverTooltip hoverText={`${formattedDate}`} asChild>
+                        <span>{formatDate(date)}</span>
+                    </HoverTooltip>
+                    {startTime &&
+                        <span>
+                            {startTime && endTime ? `${startTime} - ${endTime}` : startTime}
+                        </span>}
+                </div>
+            );
+
+        },
     },
     {
         accessorKey: "type",
