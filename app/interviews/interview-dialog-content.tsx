@@ -111,12 +111,12 @@ export default function InterviewDialogContent({form}: InterviewDialogContentPro
             <div className={"grid grid-cols-2 gap-4 items-end"}>
 
                 <FormField control={form.control} name={"startTime"} render={({field}) => (
-                    <FormInput labelName={"Start time"} type={"time"}
+                    <FormInput labelName={"Start time"} type={"time"} className={"w-full"}
                                field={field}/>
                 )}/>
 
                 <FormField control={form.control} name={"endTime"} render={({field}) => (
-                    <FormInput labelName={"End time"} type={"time"}
+                    <FormInput labelName={"End time"} type={"time"} className={"w-full"}
                                field={field}/>
                 )}/>
 
