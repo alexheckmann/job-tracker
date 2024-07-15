@@ -67,9 +67,9 @@ export const interviewColumns: ColumnDef<Interview>[] = [
         cell: ({row}: {
             row: Row<Interview>
         }) => {
-            const job = row.getValue<Job>("job")
+            const job: Job = row.getValue<Job>("job")
             return (
-                job.link &&
+                job?.link &&
                 <LinkHoverTooltip hoverText={"Open job description"}>
                     <OpenLinkButton href={job.link} type={"link"} className={"mx-auto"}/>
                 </LinkHoverTooltip>
