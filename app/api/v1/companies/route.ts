@@ -7,7 +7,7 @@ import {
     deleteBookmarkedCompany,
     getBookmarkedCompanies,
     insertBookmarkedCompany
-} from "@/lib/db/bookmarked-company-helpers";
+} from "@/lib/db/bookmarked-company-model-helpers";
 import {encryptBookmarkedCompany} from "@/lib/security/encrypt";
 import {decryptKey} from "@/lib/security/decryptKey";
 import {getInitializationVector} from "@/lib/security/getInitializationVector";
