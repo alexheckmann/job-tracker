@@ -6,6 +6,8 @@ export const InterviewModelSchema = new Schema<Interview>(
     {
             description: {type: String, required: true},
             date: {type: Date, required: true},
+        startTime: {type: String},
+        endTime: {type: String},
             type: {type: String, required: true},
             link: {type: String},
             notes: {type: String},

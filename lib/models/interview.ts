@@ -17,6 +17,8 @@ export const InterviewSchema = UserSpecificDatabaseObject.extend({
     description: z.string().max(interviewMaxLengthConstraints.description),
     date: z.coerce.date(),
     type: InterviewType,
+    startTime: z.string().optional(),
+    endTime: z.string().optional(),
     link: z.string().max(interviewMaxLengthConstraints.link).optional(),
     notes: z.string().max(interviewMaxLengthConstraints.notes).optional(),
     job: z.any().optional()

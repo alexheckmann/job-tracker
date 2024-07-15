@@ -1,6 +1,6 @@
 import {FormControl, FormItem, FormLabel} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
-import {HTMLAttributes, ReactElement} from "react";
+import {HTMLAttributes, HTMLInputTypeAttribute, ReactElement} from "react";
 import {ConditionalWrapper} from "@/components/conditional-wrapper";
 
 interface FormInputProps extends HTMLAttributes<HTMLInputElement> {
@@ -9,7 +9,8 @@ interface FormInputProps extends HTMLAttributes<HTMLInputElement> {
     field: any,
     placeholder?: string,
     maxLength?: number,
-    minLength?: number
+    minLength?: number,
+    type?: HTMLInputTypeAttribute
 }
 
 
@@ -21,6 +22,7 @@ export function FormInput({
                               placeholder,
                               minLength,
                               maxLength,
+                              type,
                               ...props
                           }: FormInputProps) {
 
@@ -42,7 +44,7 @@ export function FormInput({
                 </div>
             )}>
                 <FormControl>
-                    <Input {...props} placeholder={placeholder} {...field}/>
+                    <Input {...props} type={type} placeholder={placeholder} {...field}/>
                 </FormControl>
             </ConditionalWrapper>
         </FormItem>

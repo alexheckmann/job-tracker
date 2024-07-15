@@ -50,9 +50,10 @@ export const interviewColumns: ColumnDef<Interview>[] = [
             row: Row<Interview>
         }) => {
             const job = row.getValue<Job>("job")
-            const jobLabel = job ? (job?.exactTitle ? `${job?.exactTitle} - ${job?.company}` : `${job?.role} - ${job?.company}`) : ""
+            const jobLabel = job?.exactTitle ? `${job?.exactTitle} - ${job?.company}` : `${job?.role} - ${job?.company}`
 
             return (
+                job &&
                 <span>{jobLabel}</span>
             );
         },
@@ -95,7 +96,8 @@ export const interviewColumns: ColumnDef<Interview>[] = [
         cell: ({row}: {
             row: Row<Interview>
         }) => {
-            const date = row.getValue<Date>("date")
+            const date: Date = row.getValue<Date>("date")
+
             return (
                 <HoverTooltip hoverText={`${format(date, "dd/MM/yyyy")}`} asChild>
                     <span>{formatDate(date)}</span>
@@ -103,6 +105,22 @@ export const interviewColumns: ColumnDef<Interview>[] = [
             );
 
         },
+    },
+    {
+        id: "Interview time",
+        cell: ({row}: {
+            row: Row<Interview>
+        }) => {
+            const startTime: string | undefined = row.original.startTime
+            const endTime: string | undefined = row.original.endTime
+
+            return (
+                startTime &&
+                <span>
+                    {startTime && endTime ? `${startTime} - ${endTime}` : startTime}
+                </span>
+            )
+        }
     },
     {
         accessorKey: "type",
