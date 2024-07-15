@@ -9,11 +9,11 @@ import {useCreateContact} from "@/app/data/use-create-data";
 import {SubmitButton} from "@/components/submit-button";
 
 import {Contact, ContactSchema} from "@/lib/models/contact";
-import ContactDialogContent from "@/components/navbar/contact-dialog-content";
+import ContactDialogContent from "@/app/contacts/contact-dialog-content";
 import DialogContentWrapper from "@/components/dialog-content-wrapper";
 import {ContactIcon} from "@/components/icons";
 
-export default function ContactCreationDialogContent() {
+export default function ContactCreationDialog() {
 
     const {setData: setIsContactCreationDialogOpen} = useContactCreationDialogStore()
 

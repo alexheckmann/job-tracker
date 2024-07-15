@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
 import {Dialog, DialogTrigger} from "@/components/ui/dialog";
-import ContactEditDialogContent from "@/components/navbar/contact-edit-dialog-content";
+import ContactEditDialog from "@/app/contacts/contact-edit-dialog";
 import {DeleteIcon, EditIcon, LoadingIcon, OptionsIcon} from "@/components/icons";
 
 export function ContactRowActions({row}: { row: Row<Contact> }) {
@@ -55,7 +55,7 @@ export function ContactRowActions({row}: { row: Row<Contact> }) {
                         Delete
                     </DropdownMenuItem>
                 </DropdownMenuContent>
-                <ContactEditDialogContent contact={contact}/>
+                <ContactEditDialog contact={contact}/>
             </Dialog>
         </DropdownMenu>
     )

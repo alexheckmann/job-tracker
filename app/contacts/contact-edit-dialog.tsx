@@ -7,17 +7,17 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Form} from "@/components/ui/form";
 import {SubmitButton} from "@/components/submit-button";
 import {Contact, ContactSchema} from "@/lib/models/contact";
-import ContactDialogContent from "@/components/navbar/contact-dialog-content";
+import ContactDialogContent from "@/app/contacts/contact-dialog-content";
 import {useEffect} from "react";
 import {useUpdateContact} from "@/app/data/use-update-data";
 import DialogContentWrapper from "@/components/dialog-content-wrapper";
 import {ContactIcon} from "@/components/icons";
 
-interface ContentEditDialogContentProps {
+interface ContentEditDialogProps {
     contact: Contact;
 }
 
-export default function ContactEditDialogContent({contact}: ContentEditDialogContentProps) {
+export default function ContactEditDialog({contact}: ContentEditDialogProps) {
 
     const {setData: setIsContactCreationDialogOpen} = useContactEditDialogStore()
 
